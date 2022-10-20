@@ -59,19 +59,18 @@ namespace UnityTemplateProjects
         CameraState m_TargetCameraState = new CameraState();
         CameraState m_InterpolatingCameraState = new CameraState();
 
-        [Header("Movement Settings")]
-        [Tooltip("Exponential boost factor on translation, controllable by mouse wheel.")]
+        [Header("Movement Settings")] [Tooltip("Exponential boost factor on translation, controllable by mouse wheel.")]
         public float boost = 3.5f;
 
         [Tooltip("Time it takes to interpolate camera position 99% of the way to the target."), Range(0.001f, 1f)]
         public float positionLerpTime = 0.2f;
 
-        [Header("Rotation Settings")]
-        [Tooltip("Multiplier for the sensitivity of the rotation.")]
+        [Header("Rotation Settings")] [Tooltip("Multiplier for the sensitivity of the rotation.")]
         public float mouseSensitivity = 60.0f;
 
         [Tooltip("X = Change in mouse position.\nY = Multiplicative factor for camera rotation.")]
-        public AnimationCurve mouseSensitivityCurve = new AnimationCurve(new Keyframe(0f, 0.5f, 0f, 5f), new Keyframe(1f, 2.5f, 0f, 0f));
+        public AnimationCurve mouseSensitivityCurve =
+            new AnimationCurve(new Keyframe(0f, 0.5f, 0f, 5f), new Keyframe(1f, 2.5f, 0f, 0f));
 
         [Tooltip("Time it takes to interpolate camera rotation 99% of the way to the target."), Range(0.001f, 1f)]
         public float rotationLerpTime = 0.01f;
@@ -141,22 +140,27 @@ namespace UnityTemplateProjects
             {
                 direction += Vector3.forward;
             }
+
             if (Input.GetKey(KeyCode.S))
             {
                 direction += Vector3.back;
             }
+
             if (Input.GetKey(KeyCode.A))
             {
                 direction += Vector3.left;
             }
+
             if (Input.GetKey(KeyCode.D))
             {
                 direction += Vector3.right;
             }
+
             if (Input.GetKey(KeyCode.Q))
             {
                 direction += Vector3.down;
             }
+
             if (Input.GetKey(KeyCode.E))
             {
                 direction += Vector3.up;

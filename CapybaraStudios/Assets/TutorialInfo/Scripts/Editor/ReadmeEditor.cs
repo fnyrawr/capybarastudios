@@ -87,10 +87,12 @@ public class ReadmeEditor : Editor
             {
                 GUILayout.Label(section.heading, HeadingStyle);
             }
+
             if (!string.IsNullOrEmpty(section.text))
             {
                 GUILayout.Label(section.text, BodyStyle);
             }
+
             if (!string.IsNullOrEmpty(section.linkText))
             {
                 if (LinkLabel(new GUIContent(section.linkText)))
@@ -98,22 +100,39 @@ public class ReadmeEditor : Editor
                     Application.OpenURL(section.url);
                 }
             }
+
             GUILayout.Space(kSpace);
         }
     }
 
     bool m_Initialized;
 
-    GUIStyle LinkStyle { get { return m_LinkStyle; } }
+    GUIStyle LinkStyle
+    {
+        get { return m_LinkStyle; }
+    }
+
     [SerializeField] GUIStyle m_LinkStyle;
 
-    GUIStyle TitleStyle { get { return m_TitleStyle; } }
+    GUIStyle TitleStyle
+    {
+        get { return m_TitleStyle; }
+    }
+
     [SerializeField] GUIStyle m_TitleStyle;
 
-    GUIStyle HeadingStyle { get { return m_HeadingStyle; } }
+    GUIStyle HeadingStyle
+    {
+        get { return m_HeadingStyle; }
+    }
+
     [SerializeField] GUIStyle m_HeadingStyle;
 
-    GUIStyle BodyStyle { get { return m_BodyStyle; } }
+    GUIStyle BodyStyle
+    {
+        get { return m_BodyStyle; }
+    }
+
     [SerializeField] GUIStyle m_BodyStyle;
 
     void Init()
