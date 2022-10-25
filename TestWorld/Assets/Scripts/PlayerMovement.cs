@@ -5,13 +5,18 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private CharacterController controller;
+
     //movement
     private Vector3 playerVelocity;
+
     private bool isGrounded;
+
     //crouching
     private bool crouching = false;
     private bool lerpCrouch;
+
     private float crouchTimer = 0;
+
     //sprinting
     private bool sprinting = false;
 
@@ -20,10 +25,14 @@ public class PlayerMovement : MonoBehaviour
     public float jumpHeight = 2f;
     public float gravity = -40f;
 
+
+    private Animator _animator;
+
     // Start is called before the first frame update
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        _animator = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -47,6 +56,8 @@ public class PlayerMovement : MonoBehaviour
                 crouchTimer = 0f;
             }
         }
+
+        _animator.SetBool("isFalling", !isGrounded);
     }
 
     public void ProcessMove(Vector2 input)
@@ -55,6 +66,15 @@ public class PlayerMovement : MonoBehaviour
         moveDirection.x = input.x;
         //translate vertical mocement to forwards/backwards movement
         moveDirection.z = input.y;
+        if (input.y != 0)
+        {
+            _animator.SetBool("isWalking", true);
+        }
+        else
+        {
+            _animator.SetBool("isWalking", false);
+        }
+
         controller.Move(transform.TransformDirection(moveDirection) * speed * Time.deltaTime);
 
         //constant downward (gravity)
@@ -63,6 +83,7 @@ public class PlayerMovement : MonoBehaviour
         {
             playerVelocity.y = -2f;
         }
+
         controller.Move(playerVelocity * Time.deltaTime);
     }
 
@@ -77,6 +98,7 @@ public class PlayerMovement : MonoBehaviour
     public void Crouch()
     {
         crouching = !crouching;
+        _animator.SetBool("isCrouched", crouching);
         crouchTimer = 0;
         lerpCrouch = true;
     }
@@ -84,6 +106,7 @@ public class PlayerMovement : MonoBehaviour
     public void Sprint()
     {
         sprinting = !sprinting;
+        _animator.SetBool("isSprinting", sprinting);
         if (sprinting)
             speed = 15f;
         else
