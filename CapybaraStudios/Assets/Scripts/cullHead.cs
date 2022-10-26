@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class occludeHead : MonoBehaviour
+public class cullHead : MonoBehaviour
 {
     public GameObject head;
 
