@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -22,29 +24,29 @@ public class PlayerMovement : MonoBehaviour
 
     //movement
     public float speed = 7f;
+    public float sprintingSpeed = 15f;
     public float jumpHeight = 2f;
     public float gravity = -40f;
 
 
     private Animator _animator;
-    private int isWalkingHash;
-    private int isCrouchingHash;
-    private int isSprintingHash;
-    private int isFallingHash;
-    private int sidewaysHash;
-    private int forwardBackwardHash;
+    private int _isCrouchingHash;
+    private int _isFallingHash;
+    private int _sidewaysHash;
+    private int _forwardBackwardHash;
+    public float _animationTransitionSpeed = 3.0f;
+    private float _velocityX = 0;
+    private float _velocityZ = 0;
 
     // Start is called before the first frame update
     void Start()
     {
         controller = GetComponent<CharacterController>();
         _animator = GetComponentInChildren<Animator>();
-        isWalkingHash = Animator.StringToHash("isWalking");
-        isCrouchingHash = Animator.StringToHash("isCrouched");
-        isSprintingHash = Animator.StringToHash("isSprinting");
-        isFallingHash = Animator.StringToHash("isFalling");
-        sidewaysHash = Animator.StringToHash("movementSideways");
-        forwardBackwardHash = Animator.StringToHash("movementForwards");
+        _isCrouchingHash = Animator.StringToHash("isCrouched");
+        _isFallingHash = Animator.StringToHash("isFalling");
+        _sidewaysHash = Animator.StringToHash("movementSideways");
+        _forwardBackwardHash = Animator.StringToHash("movementForwards");
     }
 
     // Update is called once per frame
@@ -69,7 +71,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        _animator.SetBool(isFallingHash, !isGrounded);
+        _animator.SetBool(_isFallingHash, !isGrounded);
     }
 
     public void ProcessMove(Vector2 input)
@@ -78,14 +80,10 @@ public class PlayerMovement : MonoBehaviour
         moveDirection.x = input.x;
         //translate vertical mocement to forwards/backwards movement
         moveDirection.z = input.y;
-
-        //_animator.SetBool(isWalkingHash, input.y != 0);
-        _animator.SetBool(isWalkingHash, input != Vector2.zero);
-        _animator.SetFloat(sidewaysHash, input.x);
-        _animator.SetFloat(forwardBackwardHash, input.y);
-
-
-        controller.Move(transform.TransformDirection(moveDirection) * speed * Time.deltaTime);
+        //if player walks backwards speed can only be speed, else also sprintingSpeed
+        var actualSpeed = input.y < 0 ? speed : sprinting ? sprintingSpeed : speed;
+        controller.Move(actualSpeed * Time.deltaTime *
+                        transform.TransformDirection(moveDirection));
 
         //constant downward (gravity)
         playerVelocity.y += gravity * Time.deltaTime;
@@ -95,6 +93,40 @@ public class PlayerMovement : MonoBehaviour
         }
 
         controller.Move(playerVelocity * Time.deltaTime);
+
+
+        //general animation controlling
+        var s = sprinting ? 4 : 1;
+        if (input.x > 0 && _velocityX < input.x || input.x < 0 && _velocityX > input.x)
+        {
+            _velocityX += input.x * Time.deltaTime * _animationTransitionSpeed;
+        }
+        else if (input.x == 0 && _velocityX != 0)
+        {
+            if (Math.Abs(_velocityX) < 0.1)
+            {
+                _velocityX =
+                    0; //resetting velocity if its really small to prevent it from gittering the character around
+            }
+            else _velocityX += (_velocityX < 0 ? 1 : -1) * Time.deltaTime * _animationTransitionSpeed;
+        }
+
+        if (input.y > 0 && _velocityZ < input.y || input.y < 0 && _velocityZ > input.y)
+        {
+            _velocityZ += input.y * Time.deltaTime * _animationTransitionSpeed;
+        }
+        else if (input.y == 0 && _velocityZ != 0)
+        {
+            if (Math.Abs(_velocityZ) < 0.1)
+            {
+                _velocityZ =
+                    0; //resetting velocity if its really small to prevent it from gittering the character around
+            }
+            else _velocityZ += (_velocityZ < 0 ? 1 : -1) * Time.deltaTime * _animationTransitionSpeed;
+        }
+
+        _animator.SetFloat(_sidewaysHash, _velocityX * s);
+        _animator.SetFloat(_forwardBackwardHash, _velocityZ * s);
     }
 
     public void Jump()
@@ -108,18 +140,13 @@ public class PlayerMovement : MonoBehaviour
     public void Crouch()
     {
         crouching = !crouching;
-        _animator.SetBool(isCrouchingHash, crouching);
+        _animator.SetBool(_isCrouchingHash, crouching);
         crouchTimer = 0;
-        lerpCrouch = true;
+        //lerpCrouch = true;
     }
 
     public void Sprint()
     {
         sprinting = !sprinting;
-        _animator.SetBool(isSprintingHash, sprinting);
-        if (sprinting)
-            speed = 15f;
-        else
-            speed = 6f;
     }
 }
