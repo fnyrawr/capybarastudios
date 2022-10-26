@@ -1,16 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GunScript : MonoBehaviour
 {
-    public float damage = 10f;
+    public float damage = 10;
     public float range = 100f;
+    public int ammo = 30;
 
-    public Camera camera;
+    public new Camera camera;
 
     public GameObject hitmarker;
     public float distance;
+
+    //HUD
+    public TextMeshProUGUI ammoText;
+
 
 
     void Update()
@@ -22,21 +28,41 @@ public class GunScript : MonoBehaviour
     {
         Debug.Log("Shoot!");
 
-        RaycastHit hit;
+        ammo--;
+        ammoText.text = ammo.ToString();
+        if (ammo == 0)
+        {
+            ammo = 30;
+            ammoText.text = ammo.ToString();
+        }
 
-        if (Physics.Raycast(camera.transform.position, camera.transform.forward, out hit, range))
+        if (Physics.Raycast(camera.transform.position, camera.transform.forward, out RaycastHit hit, range))
         {
             Debug.Log(hit.transform.name);
-            if (hit.collider.tag == "Enemy")
+
+            GameObject collisionObject = hit.collider.gameObject;
+
+            if (collisionObject.CompareTag("Head") || collisionObject.CompareTag("Body") || collisionObject.CompareTag("Limbs"))
             {
+                //does object have stats?
+                if (collisionObject.GetComponent<PlayerStats>() == null) return;
+                //deal damage
+                float hitMultiplier = 1;
+                if (collisionObject.CompareTag("Head")) hitMultiplier = 3;
+                if (collisionObject.CompareTag("Limbs")) hitMultiplier = 0.75f;
+                int finalDamage = (int)(damage * hitMultiplier);
+                collisionObject.GetComponent<PlayerStats>().TakeDamage(finalDamage);
+
+                //Hitmarker
                 HitShow();
-                Invoke("HitDisable", 0.2f);
+                Invoke(nameof(HitDisable), 0.2f);
             }
         }
-        else {
+        else
+        {
             Debug.Log("Not hit");
         }
-            
+
 
 
 
