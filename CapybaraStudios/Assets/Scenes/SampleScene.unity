@@ -232,6 +232,7 @@ GameObject:
   - component: {fileID: 240367156}
   - component: {fileID: 240367155}
   - component: {fileID: 240367154}
+  - component: {fileID: 240367157}
   m_Layer: 0
   m_Name: Cylinder (1)
   m_TagString: Limbs
@@ -318,6 +319,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 240367152}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &240367157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 240367152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f8cc1c6d1698de4e9d78c99f56a62ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerHealth: 100
+  damageText: {fileID: 1155882640}
 --- !u!1 &249460535
 GameObject:
   m_ObjectHideFlags: 0
@@ -885,6 +900,7 @@ GameObject:
   - component: {fileID: 432480561}
   - component: {fileID: 432480560}
   - component: {fileID: 432480559}
+  - component: {fileID: 432480562}
   m_Layer: 0
   m_Name: Cylinder (2)
   m_TagString: Limbs
@@ -971,6 +987,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 432480557}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &432480562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 432480557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f8cc1c6d1698de4e9d78c99f56a62ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerHealth: 100
+  damageText: {fileID: 1155882640}
 --- !u!1 &693745034
 GameObject:
   m_ObjectHideFlags: 0
@@ -1382,6 +1412,7 @@ GameObject:
   - component: {fileID: 983249854}
   - component: {fileID: 983249853}
   - component: {fileID: 983249852}
+  - component: {fileID: 983249855}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Limbs
@@ -1468,6 +1499,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 983249850}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &983249855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 983249850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f8cc1c6d1698de4e9d78c99f56a62ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerHealth: 100
+  damageText: {fileID: 1155882640}
 --- !u!1001 &1000447119
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2497,6 +2542,7 @@ GameObject:
   - component: {fileID: 1493367250}
   - component: {fileID: 1493367249}
   - component: {fileID: 1493367248}
+  - component: {fileID: 1493367251}
   m_Layer: 0
   m_Name: Cylinder (3)
   m_TagString: Limbs
@@ -2583,6 +2629,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1493367246}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1493367251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1493367246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f8cc1c6d1698de4e9d78c99f56a62ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerHealth: 100
+  damageText: {fileID: 1155882640}
 --- !u!4 &1514493282 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 415809114545771437, guid: 9270a55e10e86f645b4779bc776f4687, type: 3}
@@ -2887,6 +2947,7 @@ GameObject:
   - component: {fileID: 1947824562}
   - component: {fileID: 1947824561}
   - component: {fileID: 1947824560}
+  - component: {fileID: 1947824563}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Body
@@ -2973,6 +3034,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1947824558}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1947824563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1947824558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f8cc1c6d1698de4e9d78c99f56a62ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerHealth: 100
+  damageText: {fileID: 1155882640}
 --- !u!4 &2016332196 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 415809114545771437, guid: 9270a55e10e86f645b4779bc776f4687, type: 3}
@@ -3087,6 +3162,7 @@ GameObject:
   - component: {fileID: 2033821868}
   - component: {fileID: 2033821867}
   - component: {fileID: 2033821866}
+  - component: {fileID: 2033821869}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Head
@@ -3172,6 +3248,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2033821864}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &2033821869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2033821864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f8cc1c6d1698de4e9d78c99f56a62ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerHealth: 100
+  damageText: {fileID: 1155882640}
 --- !u!1001 &2042330708
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3243,7 +3333,7 @@ GameObject:
   - component: {fileID: 2052713022}
   m_Layer: 0
   m_Name: Cylinder (5)
-  m_TagString: Enemy
+  m_TagString: Body
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
