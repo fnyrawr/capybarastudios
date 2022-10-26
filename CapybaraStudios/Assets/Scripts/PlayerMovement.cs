@@ -27,12 +27,24 @@ public class PlayerMovement : MonoBehaviour
 
 
     private Animator _animator;
+    private int isWalkingHash;
+    private int isCrouchingHash;
+    private int isSprintingHash;
+    private int isFallingHash;
+    private int sidewaysHash;
+    private int forwardBackwardHash;
 
     // Start is called before the first frame update
     void Start()
     {
         controller = GetComponent<CharacterController>();
         _animator = GetComponentInChildren<Animator>();
+        isWalkingHash = Animator.StringToHash("isWalking");
+        isCrouchingHash = Animator.StringToHash("isCrouched");
+        isSprintingHash = Animator.StringToHash("isSprinting");
+        isFallingHash = Animator.StringToHash("isFalling");
+        sidewaysHash = Animator.StringToHash("movementSideways");
+        forwardBackwardHash = Animator.StringToHash("movementForwards");
     }
 
     // Update is called once per frame
@@ -57,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        _animator.SetBool("isFalling", !isGrounded);
+        _animator.SetBool(isFallingHash, !isGrounded);
     }
 
     public void ProcessMove(Vector2 input)
@@ -66,14 +78,12 @@ public class PlayerMovement : MonoBehaviour
         moveDirection.x = input.x;
         //translate vertical mocement to forwards/backwards movement
         moveDirection.z = input.y;
-        if (input.y != 0)
-        {
-            _animator.SetBool("isWalking", true);
-        }
-        else
-        {
-            _animator.SetBool("isWalking", false);
-        }
+
+        //_animator.SetBool(isWalkingHash, input.y != 0);
+        _animator.SetBool(isWalkingHash, input != Vector2.zero);
+        _animator.SetFloat(sidewaysHash, input.x);
+        _animator.SetFloat(forwardBackwardHash, input.y);
+
 
         controller.Move(transform.TransformDirection(moveDirection) * speed * Time.deltaTime);
 
@@ -98,7 +108,7 @@ public class PlayerMovement : MonoBehaviour
     public void Crouch()
     {
         crouching = !crouching;
-        _animator.SetBool("isCrouched", crouching);
+        _animator.SetBool(isCrouchingHash, crouching);
         crouchTimer = 0;
         lerpCrouch = true;
     }
@@ -106,7 +116,7 @@ public class PlayerMovement : MonoBehaviour
     public void Sprint()
     {
         sprinting = !sprinting;
-        _animator.SetBool("isSprinting", sprinting);
+        _animator.SetBool(isSprintingHash, sprinting);
         if (sprinting)
             speed = 15f;
         else
