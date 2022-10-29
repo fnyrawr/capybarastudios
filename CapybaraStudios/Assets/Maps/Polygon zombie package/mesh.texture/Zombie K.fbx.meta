@@ -1,0 +1,231 @@
+fileFormatVersion: 2
+guid: 373041783e64b364a8e05febf6f6baee
+timeCreated: 1519568905
+licenseType: Store
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Bone.011
+    100002: Bone.012
+    100004: Bone.012_end
+    100006: Bone.013
+    100008: Bone.013_end
+    100010: Bone.016
+    100012: Bone.016_end
+    100014: Bone.019
+    100016: Bone.019_end
+    100018: Bone.022
+    100020: Bone.022_end
+    100022: Bone.025
+    100024: Bone.025_end
+    100026: Bone.027
+    100028: Bone.028
+    100030: Bone.028_end
+    100032: Bone.030
+    100034: Bone.031
+    100036: Bone.031_end
+    100038: Bone.033
+    100040: Bone.034
+    100042: Bone.034_end
+    100044: Bone.036
+    100046: Bone.037
+    100048: Bone.037_end
+    100050: Bone.049
+    100052: Bone.049_end
+    100054: Bone.050
+    100056: Bone.050_end
+    100058: finger right hand.001
+    100060: finger right hand.003
+    100062: finger right hand.005
+    100064: finger right hand.007
+    100066: finger right hand.009
+    100068: food
+    100070: food.001
+    100072: hand left
+    100074: hand left.001
+    100076: hand left.002
+    100078: hand left.003
+    100080: hand left.004
+    100082: hand right
+    100084: hand right.001
+    100086: hand right.002
+    100088: hand right.003
+    100090: hand right.004
+    100092: Hat
+    100094: head
+    100096: head_end
+    100098: mouth
+    100100: mouth_end
+    100102: neck
+    100104: pelvis left
+    100106: pelvis right
+    100108: under arm left
+    100110: under arm right
+    100112: under lag
+    100114: Under_chest
+    100116: unter leg
+    100118: up arm left
+    100120: up arm right
+    100122: up leg
+    100124: up leg.002
+    100126: Upper chest
+    100128: upper chest right
+    100130: Upper_chest_left
+    100132: Zombie
+    100134: //RootNode
+    100136: Zombie_rig
+    400000: Bone.011
+    400002: Bone.012
+    400004: Bone.012_end
+    400006: Bone.013
+    400008: Bone.013_end
+    400010: Bone.016
+    400012: Bone.016_end
+    400014: Bone.019
+    400016: Bone.019_end
+    400018: Bone.022
+    400020: Bone.022_end
+    400022: Bone.025
+    400024: Bone.025_end
+    400026: Bone.027
+    400028: Bone.028
+    400030: Bone.028_end
+    400032: Bone.030
+    400034: Bone.031
+    400036: Bone.031_end
+    400038: Bone.033
+    400040: Bone.034
+    400042: Bone.034_end
+    400044: Bone.036
+    400046: Bone.037
+    400048: Bone.037_end
+    400050: Bone.049
+    400052: Bone.049_end
+    400054: Bone.050
+    400056: Bone.050_end
+    400058: finger right hand.001
+    400060: finger right hand.003
+    400062: finger right hand.005
+    400064: finger right hand.007
+    400066: finger right hand.009
+    400068: food
+    400070: food.001
+    400072: hand left
+    400074: hand left.001
+    400076: hand left.002
+    400078: hand left.003
+    400080: hand left.004
+    400082: hand right
+    400084: hand right.001
+    400086: hand right.002
+    400088: hand right.003
+    400090: hand right.004
+    400092: Hat
+    400094: head
+    400096: head_end
+    400098: mouth
+    400100: mouth_end
+    400102: neck
+    400104: pelvis left
+    400106: pelvis right
+    400108: under arm left
+    400110: under arm right
+    400112: under lag
+    400114: Under_chest
+    400116: unter leg
+    400118: up arm left
+    400120: up arm right
+    400122: up leg
+    400124: up leg.002
+    400126: Upper chest
+    400128: upper chest right
+    400130: Upper_chest_left
+    400132: Zombie
+    400134: //RootNode
+    400136: Zombie_rig
+    2100000: Material
+    4300000: Zombie
+    4300002: Hat
+    9500000: //RootNode
+    13700000: Hat
+    13700002: Zombie
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
