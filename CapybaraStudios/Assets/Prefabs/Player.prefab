@@ -16,6 +16,8 @@ GameObject:
   - component: {fileID: 3127117371373944538}
   - component: {fileID: 7996259068999767870}
   - component: {fileID: 7093896637625278889}
+  - component: {fileID: 2307294343637413951}
+  - component: {fileID: 1217757710389983721}
   - component: {fileID: 5897243222840628282}
   m_Layer: 0
   m_Name: Player
@@ -149,6 +151,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHealth: 100
   damageText: {fileID: 0}
+--- !u!114 &2307294343637413951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1045325879944349373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10ee60cfe6ade1949b6f3106a37b4f2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: 4
+  showRay: 1
+  mask:
+    serializedVersion: 2
+    m_Bits: 64
+--- !u!114 &1217757710389983721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1045325879944349373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96a0f7ca1af761b4db3eb80cf1000a8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tooltipText: {fileID: 0}
 --- !u!64 &5897243222840628282
 MeshCollider:
   m_ObjectHideFlags: 0

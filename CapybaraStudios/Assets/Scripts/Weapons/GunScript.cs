@@ -29,11 +29,11 @@ public class GunScript : MonoBehaviour
         Debug.Log("Shoot!");
 
         ammo--;
-        ammoText.text = ammo.ToString();
+        ammoText.text = ammo.ToString() + " / 30";
         if (ammo == 0)
         {
             ammo = 30;
-            ammoText.text = ammo.ToString();
+            ammoText.text = ammo.ToString() + " / 30";
         }
 
         if (Physics.Raycast(camera.transform.position, camera.transform.forward, out RaycastHit hit, range))

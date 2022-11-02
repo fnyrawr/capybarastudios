@@ -6,8 +6,8 @@ using UnityEngine.InputSystem;
 public class InputManager : MonoBehaviour
 {
     private PlayerInput playerInput;
-    private PlayerInput.WalkingActions walking;
-    private PlayerInput.ShootingActions shooting;
+    public PlayerInput.WalkingActions walking;
+    public PlayerInput.ShootingActions shooting;
 
     private PlayerMovement movement;
     private GunScript gun; 
