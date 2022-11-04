@@ -10,7 +10,7 @@ public class InputManager : MonoBehaviour
     public PlayerInput.ShootingActions shooting;
 
     private PlayerMovement movement;
-    private GunScript gun; 
+    //private GunScript gun; 
     private PlayerLook look;
 
     void Awake()
@@ -21,14 +21,14 @@ public class InputManager : MonoBehaviour
 
         movement = GetComponent<PlayerMovement>();
         look = GetComponent<PlayerLook>();
-        gun = GetComponent<GunScript>();
+        //gun = GetComponent<GunScript>();
         //
         walking.Jump.performed += ctx => movement.Jump();
 
         walking.Crouch.performed += ctx => movement.Crouch();
         walking.Sprint.performed += ctx => movement.Sprint();
 
-        shooting.Shoot.performed += ctx => gun.Shoot();
+        //shooting.Shoot.performed += ctx => gun.Shoot();
     }
 
     // Update is called once per frame
@@ -46,11 +46,11 @@ public class InputManager : MonoBehaviour
     private void OnEnable()
     {
         walking.Enable();
-        shooting.Enable();
+        //shooting.Enable();
     }
     private void OnDisable()
     {
         walking.Disable();
-        shooting.Disable();
+        //shooting.Disable();
     }
 }

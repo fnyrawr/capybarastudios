@@ -39,12 +39,19 @@ public class PlayerMovement : NetworkBehaviour
     private float _velocityZ = 0;
 
     //Networking 
+    [SerializeField]
+    private NetworkVariable<Vector3> networkPosition = new NetworkVariable<Vector3>();
 
-    private NetworkVariable<Vector3> position = new NetworkVariable<Vector3>();
+    [SerializeField]
+    private NetworkVariable<Vector3> networkVelocity = new NetworkVariable<Vector3>();
 
-    private Transform old;
+    //[SerializeField]
+    //private NetworkVariable<PlayerState> networkState = new NetworkVariable<PlayerState>();
+
+    private Vector3 oldInputPosition;
+    private Vector3 oldVelocity;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         controller = GetComponent<CharacterController>();
         _animator = GetComponentInChildren<Animator>();
@@ -54,13 +61,9 @@ public class PlayerMovement : NetworkBehaviour
         _forwardBackwardHash = Animator.StringToHash("movementForwards");
     }
 
-    private void UpdateServer() {
-        transform.position = position.Value;
-    }
-
-    private void UpdateClient() {
-        Transform t = null;
-
+    void Update()
+    {
+        ClientMove();
         isGrounded = controller.isGrounded;
 
         if (lerpCrouch)
@@ -82,47 +85,55 @@ public class PlayerMovement : NetworkBehaviour
 
         _animator.SetBool(_isFallingHash, !isGrounded);
 
-        if(!transform.Equals(old)) {
-            old = transform;
-            UpdateClientPositionServerRpc(transform.position);
+    }
+
+    private void ClientMove() {
+        if(networkPosition.Value != Vector3.zero) {
+            controller.Move(networkPosition.Value);
+        }
+        if(networkVelocity.Value != Vector3.zero) {
+            controller.Move(networkVelocity.Value);
         }
     }
+
+    private void ClientVisuals() {
+
+    }
+
     [ServerRpc]
-    public void UpdateClientPositionServerRpc(Vector3 vec) {
-        position.Value = vec;
+    public void UpdateClientPositionAndVelocityServerRpc(Vector3 pos, Vector3 vel) {
+        networkPosition.Value = pos;
+        networkVelocity.Value = vel;
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if(IsServer) {
-            UpdateServer();
-        }
-
-        if(IsClient && IsOwner) {
-            UpdateClient();
-        }
-    }
 
     public void ProcessMove(Vector2 input)
     {
+        if(!(IsClient && IsOwner)) return; 
         Vector3 moveDirection = Vector3.zero;
         moveDirection.x = input.x;
         //translate vertical mocement to forwards/backwards movement
         moveDirection.z = input.y;
         //if player walks backwards speed can only be speed, else also sprintingSpeed
         var actualSpeed = input.y < 0 ? speed : sprinting ? sprintingSpeed : speed;
-        controller.Move(actualSpeed * Time.deltaTime *
-                        transform.TransformDirection(moveDirection));
+        Vector3 inputPosition = actualSpeed * Time.deltaTime * transform.TransformDirection(moveDirection);
 
         //constant downward (gravity)
-        playerVelocity.y += gravity * Time.deltaTime;
-        if (isGrounded && playerVelocity.y < 0)
+        Vector3 velocity = Vector3.zero;
+        velocity.y += gravity * Time.deltaTime;
+        if (isGrounded && velocity.y < 0)
         {
-            playerVelocity.y = -2f;
+            velocity.y = -2f;
         }
+        velocity *= Time.deltaTime;
 
-        controller.Move(playerVelocity * Time.deltaTime);
+        // update on Server
+        if(oldInputPosition != inputPosition || velocity != oldVelocity) {
+            oldInputPosition = inputPosition;
+            oldVelocity = velocity;
+            UpdateClientPositionAndVelocityServerRpc(inputPosition, velocity);
+        }
 
 
         //general animation controlling
