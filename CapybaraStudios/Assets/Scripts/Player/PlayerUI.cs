@@ -17,6 +17,6 @@ public class PlayerUI : MonoBehaviour
     // Update is called once per frame
     public void UpdateText(string tooltipMessage)
     {
-        tooltipText.text = tooltipMessage;
+    //       tooltipText.text = tooltipMessage;
     }
 }

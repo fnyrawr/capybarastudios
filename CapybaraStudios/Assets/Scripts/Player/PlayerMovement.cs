@@ -3,8 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-
-public class PlayerMovement : MonoBehaviour
+using Unity.Netcode;
+public class PlayerMovement : NetworkBehaviour
 {
     private CharacterController controller;
 
@@ -38,6 +38,11 @@ public class PlayerMovement : MonoBehaviour
     private float _velocityX = 0;
     private float _velocityZ = 0;
 
+    //Networking 
+
+    private NetworkVariable<Vector3> position = new NetworkVariable<Vector3>();
+
+    private Transform old;
     // Start is called before the first frame update
     void Start()
     {
@@ -49,9 +54,13 @@ public class PlayerMovement : MonoBehaviour
         _forwardBackwardHash = Animator.StringToHash("movementForwards");
     }
 
-    // Update is called once per frame
-    void Update()
-    {
+    private void UpdateServer() {
+        transform.position = position.Value;
+    }
+
+    private void UpdateClient() {
+        Transform t = null;
+
         isGrounded = controller.isGrounded;
 
         if (lerpCrouch)
@@ -72,6 +81,27 @@ public class PlayerMovement : MonoBehaviour
         }
 
         _animator.SetBool(_isFallingHash, !isGrounded);
+
+        if(!transform.Equals(old)) {
+            old = transform;
+            UpdateClientPositionServerRpc(transform.position);
+        }
+    }
+    [ServerRpc]
+    public void UpdateClientPositionServerRpc(Vector3 vec) {
+        position.Value = vec;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if(IsServer) {
+            UpdateServer();
+        }
+
+        if(IsClient && IsOwner) {
+            UpdateClient();
+        }
     }
 
     public void ProcessMove(Vector2 input)
