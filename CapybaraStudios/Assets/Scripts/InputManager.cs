@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
-public class InputManager : MonoBehaviour
+using Unity.Netcode;
+public class InputManager : NetworkBehaviour
 {
     private PlayerInput playerInput;
     public PlayerInput.WalkingActions walking;
@@ -13,21 +13,20 @@ public class InputManager : MonoBehaviour
     //private GunScript gun; 
     private PlayerLook look;
 
-    void Awake()
+    public void Awake()
     {
-        playerInput = new PlayerInput();
-        walking = playerInput.Walking;
-        shooting = playerInput.Shooting;
+            playerInput = new PlayerInput();
+            walking = playerInput.Walking;
+            shooting = playerInput.Shooting;
 
-        movement = GetComponent<PlayerMovement>();
-        look = GetComponent<PlayerLook>();
+            movement = GetComponent<PlayerMovement>();
+            look = GetComponent<PlayerLook>();
         //gun = GetComponent<GunScript>();
         //
-        walking.Jump.performed += ctx => movement.Jump();
+            walking.Jump.performed += ctx => movement.Jump();
 
-        walking.Crouch.performed += ctx => movement.Crouch();
-        walking.Sprint.performed += ctx => movement.Sprint();
-
+            walking.Crouch.performed += ctx => movement.Crouch();
+            walking.Sprint.performed += ctx => movement.Sprint();
         //shooting.Shoot.performed += ctx => gun.Shoot();
     }
 

@@ -12,7 +12,6 @@ public class PlayersManager : NetworkSingleton<PlayersManager> {
         }
     }
     private void Start() {
-        Debug.Log("aaa");
         NetworkManager.Singleton.OnClientConnectedCallback += (id) => {
             if(NetworkManager.Singleton.IsServer) {
                 players.Value++;

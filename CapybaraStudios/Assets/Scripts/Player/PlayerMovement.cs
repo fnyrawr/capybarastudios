@@ -7,10 +7,6 @@ using Unity.Netcode;
 public class PlayerMovement : NetworkBehaviour
 {
     private CharacterController controller;
-
-    //movement
-    private Vector3 playerVelocity;
-
     private bool isGrounded;
 
     //crouching
@@ -89,10 +85,10 @@ public class PlayerMovement : NetworkBehaviour
 
     private void ClientMove() {
         if(networkPosition.Value != Vector3.zero) {
-            controller.Move(networkPosition.Value);
+            controller.Move(networkPosition.Value * Time.deltaTime);
         }
         if(networkVelocity.Value != Vector3.zero) {
-            controller.Move(networkVelocity.Value);
+            controller.Move(networkVelocity.Value * Time.deltaTime);
         }
     }
 
@@ -117,7 +113,7 @@ public class PlayerMovement : NetworkBehaviour
         moveDirection.z = input.y;
         //if player walks backwards speed can only be speed, else also sprintingSpeed
         var actualSpeed = input.y < 0 ? speed : sprinting ? sprintingSpeed : speed;
-        Vector3 inputPosition = actualSpeed * Time.deltaTime * transform.TransformDirection(moveDirection);
+        Vector3 inputPosition = actualSpeed * transform.TransformDirection(moveDirection);
 
         //constant downward (gravity)
         Vector3 velocity = Vector3.zero;
@@ -126,13 +122,11 @@ public class PlayerMovement : NetworkBehaviour
         {
             velocity.y = -2f;
         }
-        velocity *= Time.deltaTime;
-
         // update on Server
         if(oldInputPosition != inputPosition || velocity != oldVelocity) {
             oldInputPosition = inputPosition;
             oldVelocity = velocity;
-            UpdateClientPositionAndVelocityServerRpc(inputPosition, velocity);
+            UpdateClientPositionAndVelocityServerRpc(oldInputPosition, oldVelocity);
         }
 
 
@@ -172,14 +166,17 @@ public class PlayerMovement : NetworkBehaviour
 
     public void Jump()
     {
+        if(!(IsClient && IsOwner)) return; 
         if (isGrounded)
         {
-            playerVelocity.y = Mathf.Sqrt(jumpHeight * -3.0f * gravity);
+            oldVelocity.y = Mathf.Sqrt(jumpHeight * -3.0f * gravity);
+            UpdateClientPositionAndVelocityServerRpc(oldInputPosition, oldVelocity);
         }
     }
 
     public void Crouch()
     {
+        if(!(IsClient && IsOwner)) return; 
         crouching = !crouching;
         _animator.SetBool(_isCrouchingHash, crouching);
         crouchTimer = 0;
@@ -188,6 +185,7 @@ public class PlayerMovement : NetworkBehaviour
 
     public void Sprint()
     {
+        if(!(IsClient && IsOwner)) return; 
         sprinting = !sprinting;
     }
 }
