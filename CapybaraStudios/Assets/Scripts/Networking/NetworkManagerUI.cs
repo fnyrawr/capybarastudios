@@ -21,6 +21,5 @@ public class NetworkManagerUI : MonoBehaviour
     }
     private void Update() {
         playersInGameText.text = "Players in Game: " + PlayersManager.Instance.PlayersInGame;
-        Debug.Log(PlayersManager.Instance.PlayersInGame);
     }
 }

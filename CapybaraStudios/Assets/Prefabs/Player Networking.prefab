@@ -255,17 +255,29 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1926258008755530184, guid: 782cedb4a7988d34894e3ffa2c2df173, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2307294343637413951, guid: 782cedb4a7988d34894e3ffa2c2df173, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3127117371373944538, guid: 782cedb4a7988d34894e3ffa2c2df173, type: 3}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5957610238547453526, guid: 782cedb4a7988d34894e3ffa2c2df173, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6010630212206913520, guid: 782cedb4a7988d34894e3ffa2c2df173, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7093896637625278889, guid: 782cedb4a7988d34894e3ffa2c2df173, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7466709212651640878, guid: 782cedb4a7988d34894e3ffa2c2df173, type: 3}
       propertyPath: m_RootOrder
@@ -319,6 +331,14 @@ PrefabInstance:
       propertyPath: item
       value: 
       objectReference: {fileID: 7838432924976891802, guid: d849b494e8d35b644ae945dbfe260f00, type: 3}
+    - target: {fileID: 9039156554174917313, guid: 782cedb4a7988d34894e3ffa2c2df173, type: 3}
+      propertyPath: name
+      value: 
+      objectReference: {fileID: 7131024331867118075}
+    - target: {fileID: 9039156554174917313, guid: 782cedb4a7988d34894e3ffa2c2df173, type: 3}
+      propertyPath: speed
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 9039156554174917313, guid: 782cedb4a7988d34894e3ffa2c2df173, type: 3}
       propertyPath: m_Enabled
       value: 1

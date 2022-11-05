@@ -4,65 +4,61 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using Unity.Netcode;
+using TMPro;
 public class PlayerMovement : NetworkBehaviour
 {
     private CharacterController controller;
     private bool isGrounded;
 
+    private float velocity;
     //crouching
     private bool crouching = false;
     private bool lerpCrouch;
 
     private float crouchTimer = 0;
 
-    //sprinting
-    private bool sprinting = false;
-
     //movement
     public float speed = 7f;
+    //sprinting
+    private bool sprinting = false;
     public float sprintingSpeed = 15f;
     public float jumpHeight = 2f;
     public float gravity = -40f;
 
 
-    private Animator _animator;
+    /*private Animator _animator;
     private int _isCrouchingHash;
     private int _isFallingHash;
     private int _sidewaysHash;
     private int _forwardBackwardHash;
     public float _animationTransitionSpeed = 3.0f;
     private float _velocityX = 0;
-    private float _velocityZ = 0;
+    private float _velocityZ = 0; */
 
     //Networking 
     [SerializeField]
     private NetworkVariable<Vector3> networkPosition = new NetworkVariable<Vector3>();
-
-    [SerializeField]
-    private NetworkVariable<Vector3> networkVelocity = new NetworkVariable<Vector3>();
-
     //[SerializeField]
     //private NetworkVariable<PlayerState> networkState = new NetworkVariable<PlayerState>();
 
     private Vector3 oldInputPosition;
-    private Vector3 oldVelocity;
     // Start is called before the first frame update
     void Awake()
     {
         controller = GetComponent<CharacterController>();
-        _animator = GetComponentInChildren<Animator>();
+        /*_animator = GetComponentInChildren<Animator>();
         _isCrouchingHash = Animator.StringToHash("isCrouched");
         _isFallingHash = Animator.StringToHash("isFalling");
         _sidewaysHash = Animator.StringToHash("movementSideways");
-        _forwardBackwardHash = Animator.StringToHash("movementForwards");
+        _forwardBackwardHash = Animator.StringToHash("movementForwards");*/
     }
-
     void Update()
-    {
-        ClientMove();
+    {   
         isGrounded = controller.isGrounded;
+        ClientMove();
+        
 
-        if (lerpCrouch)
+        /*if (lerpCrouch)
         {
             crouchTimer += Time.deltaTime;
             float p = crouchTimer / 1;
@@ -79,16 +75,13 @@ public class PlayerMovement : NetworkBehaviour
             }
         }
 
-        _animator.SetBool(_isFallingHash, !isGrounded);
+        _animator.SetBool(_isFallingHash, !isGrounded);*/
 
     }
 
     private void ClientMove() {
         if(networkPosition.Value != Vector3.zero) {
             controller.Move(networkPosition.Value * Time.deltaTime);
-        }
-        if(networkVelocity.Value != Vector3.zero) {
-            controller.Move(networkVelocity.Value * Time.deltaTime);
         }
     }
 
@@ -97,9 +90,8 @@ public class PlayerMovement : NetworkBehaviour
     }
 
     [ServerRpc]
-    public void UpdateClientPositionAndVelocityServerRpc(Vector3 pos, Vector3 vel) {
+    public void UpdateClientPositionServerRpc(Vector3 pos) {
         networkPosition.Value = pos;
-        networkVelocity.Value = vel;
     }
 
     // Update is called once per frame
@@ -116,22 +108,21 @@ public class PlayerMovement : NetworkBehaviour
         Vector3 inputPosition = actualSpeed * transform.TransformDirection(moveDirection);
 
         //constant downward (gravity)
-        Vector3 velocity = Vector3.zero;
-        velocity.y += gravity * Time.deltaTime;
-        if (isGrounded && velocity.y < 0)
+        velocity += gravity  * Time.deltaTime;
+        if (isGrounded && velocity < 0)
         {
-            velocity.y = -2f;
+            velocity = -2f;
         }
         // update on Server
-        if(oldInputPosition != inputPosition || velocity != oldVelocity) {
+        inputPosition = new Vector3(inputPosition.x, velocity, inputPosition.z);
+        if(oldInputPosition != inputPosition) {
             oldInputPosition = inputPosition;
-            oldVelocity = velocity;
-            UpdateClientPositionAndVelocityServerRpc(oldInputPosition, oldVelocity);
+            UpdateClientPositionServerRpc(oldInputPosition);
         }
 
 
         //general animation controlling
-        var s = sprinting ? 4 : 1;
+        /*var s = sprinting ? 4 : 1;
         if (input.x > 0 && _velocityX < input.x || input.x < 0 && _velocityX > input.x)
         {
             _velocityX += input.x * Time.deltaTime * _animationTransitionSpeed;
@@ -161,7 +152,7 @@ public class PlayerMovement : NetworkBehaviour
         }
 
         _animator.SetFloat(_sidewaysHash, _velocityX * s);
-        _animator.SetFloat(_forwardBackwardHash, _velocityZ * s);
+        _animator.SetFloat(_forwardBackwardHash, _velocityZ * s);*/
     }
 
     public void Jump()
@@ -169,17 +160,17 @@ public class PlayerMovement : NetworkBehaviour
         if(!(IsClient && IsOwner)) return; 
         if (isGrounded)
         {
-            oldVelocity.y = Mathf.Sqrt(jumpHeight * -3.0f * gravity);
-            UpdateClientPositionAndVelocityServerRpc(oldInputPosition, oldVelocity);
+            velocity = Mathf.Sqrt(jumpHeight * -3.0f * gravity);
+            UpdateClientPositionServerRpc(new Vector3(oldInputPosition.x, velocity, oldInputPosition.z));
         }
     }
 
     public void Crouch()
     {
         if(!(IsClient && IsOwner)) return; 
-        crouching = !crouching;
+        /*crouching = !crouching;
         _animator.SetBool(_isCrouchingHash, crouching);
-        crouchTimer = 0;
+        crouchTimer = 0;*/
         //lerpCrouch = true;
     }
 
