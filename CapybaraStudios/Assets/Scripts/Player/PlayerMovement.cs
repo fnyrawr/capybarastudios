@@ -9,8 +9,6 @@ public class PlayerMovement : NetworkBehaviour
 {
     private CharacterController controller;
     private bool isGrounded;
-
-    private float velocity;
     //crouching
     private bool crouching = false;
     private bool lerpCrouch;
@@ -26,38 +24,40 @@ public class PlayerMovement : NetworkBehaviour
     public float gravity = -40f;
 
 
-    /*private Animator _animator;
+    private Animator _animator;
     private int _isCrouchingHash;
     private int _isFallingHash;
     private int _sidewaysHash;
     private int _forwardBackwardHash;
     public float _animationTransitionSpeed = 3.0f;
-    private float _velocityX = 0;
-    private float _velocityZ = 0; */
 
     //Networking 
     [SerializeField]
     private NetworkVariable<Vector3> networkPosition = new NetworkVariable<Vector3>();
+    [SerializeField]
+    private NetworkVariable<Vector3> networkVelocity = new NetworkVariable<Vector3>();
     //[SerializeField]
     //private NetworkVariable<PlayerState> networkState = new NetworkVariable<PlayerState>();
 
     private Vector3 oldInputPosition;
+    private float oldVelocity;
+    private Vector3 oldAnimationVelocity;
+    //private PlayerState playerState;
     // Start is called before the first frame update
     void Awake()
     {
         controller = GetComponent<CharacterController>();
-        /*_animator = GetComponentInChildren<Animator>();
+        _animator = GetComponentInChildren<Animator>();
         _isCrouchingHash = Animator.StringToHash("isCrouched");
         _isFallingHash = Animator.StringToHash("isFalling");
         _sidewaysHash = Animator.StringToHash("movementSideways");
-        _forwardBackwardHash = Animator.StringToHash("movementForwards");*/
+        _forwardBackwardHash = Animator.StringToHash("movementForwards");
     }
     void Update()
     {   
-        isGrounded = controller.isGrounded;
+        if(IsClient && IsOwner) isGrounded = controller.isGrounded;
         ClientMove();
-        
-
+        ClientVisuals();
         /*if (lerpCrouch)
         {
             crouchTimer += Time.deltaTime;
@@ -81,19 +81,25 @@ public class PlayerMovement : NetworkBehaviour
 
     private void ClientMove() {
         if(networkPosition.Value != Vector3.zero) {
-            controller.Move(networkPosition.Value * Time.deltaTime);
+            controller.Move(networkPosition.Value * Time.fixedDeltaTime);
         }
     }
 
     private void ClientVisuals() {
-
+        if(networkVelocity.Value != Vector3.zero) {
+            _animator.SetFloat(_sidewaysHash, networkVelocity.Value.x);
+            _animator.SetFloat(_forwardBackwardHash, networkVelocity.Value.z);
+        }
     }
 
     [ServerRpc]
     public void UpdateClientPositionServerRpc(Vector3 pos) {
         networkPosition.Value = pos;
     }
-
+    [ServerRpc]
+    public void UpdateAnimationServerRpc(Vector3 vel) {
+        networkVelocity.Value = vel;
+    }
     // Update is called once per frame
 
     public void ProcessMove(Vector2 input)
@@ -108,51 +114,55 @@ public class PlayerMovement : NetworkBehaviour
         Vector3 inputPosition = actualSpeed * transform.TransformDirection(moveDirection);
 
         //constant downward (gravity)
-        velocity += gravity  * Time.deltaTime;
-        if (isGrounded && velocity < 0)
+        oldVelocity += gravity  * Time.deltaTime;
+        if (isGrounded && oldVelocity< 0)
         {
-            velocity = -2f;
+            oldVelocity = -2f;
         }
         // update on Server
-        inputPosition = new Vector3(inputPosition.x, velocity, inputPosition.z);
+        inputPosition = new Vector3(inputPosition.x, oldVelocity, inputPosition.z);
         if(oldInputPosition != inputPosition) {
             oldInputPosition = inputPosition;
-            UpdateClientPositionServerRpc(oldInputPosition);
+            UpdateClientPositionServerRpc(inputPosition);
         }
 
 
         //general animation controlling
-        /*var s = sprinting ? 4 : 1;
-        if (input.x > 0 && _velocityX < input.x || input.x < 0 && _velocityX > input.x)
+        Vector3 animationVelocity = oldAnimationVelocity;
+        //das kann in eine Funktion
+        if (input.x > 0 && animationVelocity.x < input.x || input.x < 0 && animationVelocity.x > input.x)
         {
-            _velocityX += input.x * Time.deltaTime * _animationTransitionSpeed;
+            animationVelocity.x += input.x * Time.deltaTime * _animationTransitionSpeed;
         }
-        else if (input.x == 0 && _velocityX != 0)
+        else if (input.x == 0 && animationVelocity.x != 0)
         {
-            if (Math.Abs(_velocityX) < 0.1)
+            if (Math.Abs(animationVelocity.x ) < 0.1)
             {
-                _velocityX =
-                    0; //resetting velocity if its really small to prevent it from gittering the character around
+                //resetting velocity if its really small to prevent
+                //it from gittering the character around
+                animationVelocity.x  = 0;
             }
-            else _velocityX += (_velocityX < 0 ? 1 : -1) * Time.deltaTime * _animationTransitionSpeed;
+            else animationVelocity.x += (animationVelocity.x < 0 ? 1 : -1) * Time.deltaTime * _animationTransitionSpeed;
         }
 
-        if (input.y > 0 && _velocityZ < input.y || input.y < 0 && _velocityZ > input.y)
+        if (input.y > 0 && animationVelocity.z < input.y || input.y < 0 && animationVelocity.z > input.y)
         {
-            _velocityZ += input.y * Time.deltaTime * _animationTransitionSpeed;
+            animationVelocity.z+= input.y * Time.deltaTime * _animationTransitionSpeed;
         }
-        else if (input.y == 0 && _velocityZ != 0)
+        else if (input.y == 0 && animationVelocity.z != 0)
         {
-            if (Math.Abs(_velocityZ) < 0.1)
+            if (Math.Abs(animationVelocity.z) < 0.1)
             {
-                _velocityZ =
-                    0; //resetting velocity if its really small to prevent it from gittering the character around
+                //resetting velocity if its really small to prevent
+                //it from gittering the character around
+                animationVelocity.z = 0; 
             }
-            else _velocityZ += (_velocityZ < 0 ? 1 : -1) * Time.deltaTime * _animationTransitionSpeed;
+            else animationVelocity.z += (animationVelocity.z < 0 ? 1 : -1) * Time.deltaTime * _animationTransitionSpeed;
         }
-
-        _animator.SetFloat(_sidewaysHash, _velocityX * s);
-        _animator.SetFloat(_forwardBackwardHash, _velocityZ * s);*/
+        if(animationVelocity != oldAnimationVelocity) {
+            oldAnimationVelocity = animationVelocity;
+            UpdateAnimationServerRpc(animationVelocity * (sprinting ? 4 : 1));
+        }
     }
 
     public void Jump()
@@ -160,8 +170,8 @@ public class PlayerMovement : NetworkBehaviour
         if(!(IsClient && IsOwner)) return; 
         if (isGrounded)
         {
-            velocity = Mathf.Sqrt(jumpHeight * -3.0f * gravity);
-            UpdateClientPositionServerRpc(new Vector3(oldInputPosition.x, velocity, oldInputPosition.z));
+            oldVelocity = Mathf.Sqrt(jumpHeight * -3.0f * gravity);
+            UpdateClientPositionServerRpc(new Vector3(oldInputPosition.x, oldVelocity, oldInputPosition.z));
         }
     }
 

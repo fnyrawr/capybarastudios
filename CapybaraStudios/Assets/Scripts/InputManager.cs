@@ -14,14 +14,14 @@ public class InputManager : NetworkBehaviour
     private PlayerLook look;
 
     public override void OnNetworkSpawn()
-        {
+    {
             if (!IsClient || !IsOwner)
             {
                 enabled = false;
                 // dont need to do anything else if not the owner
                 return;
             }
-        }
+    }
 
     public void Awake()
     {
