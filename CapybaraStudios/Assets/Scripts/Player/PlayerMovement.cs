@@ -8,12 +8,11 @@ using TMPro;
 public class PlayerMovement : NetworkBehaviour
 {
     private CharacterController controller;
-    private bool isGrounded;
     //crouching
-    private bool crouching = false;
+    /*private bool crouching = false;
     private bool lerpCrouch;
 
-    private float crouchTimer = 0;
+    private float crouchTimer = 0;*/
 
     //movement
     public float speed = 7f;
@@ -36,12 +35,21 @@ public class PlayerMovement : NetworkBehaviour
     private NetworkVariable<Vector3> networkPosition = new NetworkVariable<Vector3>();
     [SerializeField]
     private NetworkVariable<Vector3> networkVelocity = new NetworkVariable<Vector3>();
+    [SerializeField]
+    private NetworkVariable<bool> networkGrounding = new NetworkVariable<bool>();
+    [SerializeField]
+    private NetworkVariable<bool> networkCrouching = new NetworkVariable<bool>();
+
+    //[SerializeField]
+    //private NetworkVariable<CrouchingState> networkCrouching = new NetworkVariable<CrouchingState>();
     //[SerializeField]
     //private NetworkVariable<PlayerState> networkState = new NetworkVariable<PlayerState>();
 
     private Vector3 oldInputPosition;
     private float oldVelocity;
     private Vector3 oldAnimationVelocity;
+    private bool oldCrouchingState;
+    private bool oldGroundedState;
     //private PlayerState playerState;
     // Start is called before the first frame update
     void Awake()
@@ -55,33 +63,18 @@ public class PlayerMovement : NetworkBehaviour
     }
     void Update()
     {   
-        if(IsClient && IsOwner) isGrounded = controller.isGrounded;
-        ClientMove();
-        ClientVisuals();
-        /*if (lerpCrouch)
-        {
-            crouchTimer += Time.deltaTime;
-            float p = crouchTimer / 1;
-            p *= p;
-            if (crouching)
-                controller.height = Mathf.Lerp(controller.height, 1, p);
-            else
-                controller.height = Mathf.Lerp(controller.height, 2, p);
-
-            if (p > 1)
-            {
-                lerpCrouch = false;
-                crouchTimer = 0f;
+        if(IsClient && IsOwner) {
+            if(oldGroundedState != controller.isGrounded) {
+                UpdateGroundingStateServerRpc(controller.isGrounded);
             }
         }
 
-        _animator.SetBool(_isFallingHash, !isGrounded);*/
-
+        ClientMove();
+        ClientVisuals();
     }
-
     private void ClientMove() {
         if(networkPosition.Value != Vector3.zero) {
-            controller.Move(networkPosition.Value * Time.fixedDeltaTime);
+            controller.Move(networkPosition.Value * Time.deltaTime);
         }
     }
 
@@ -89,6 +82,14 @@ public class PlayerMovement : NetworkBehaviour
         if(networkVelocity.Value != Vector3.zero) {
             _animator.SetFloat(_sidewaysHash, networkVelocity.Value.x);
             _animator.SetFloat(_forwardBackwardHash, networkVelocity.Value.z);
+        }
+        if(oldGroundedState != networkGrounding.Value) {
+            oldGroundedState = networkGrounding.Value;
+            _animator.SetBool(_isFallingHash, !oldGroundedState);
+        }
+        if(oldCrouchingState != networkCrouching.Value) {
+            oldCrouchingState = networkCrouching.Value;
+            _animator.SetBool(_isCrouchingHash, oldCrouchingState);
         }
     }
 
@@ -100,6 +101,16 @@ public class PlayerMovement : NetworkBehaviour
     public void UpdateAnimationServerRpc(Vector3 vel) {
         networkVelocity.Value = vel;
     }
+    [ServerRpc]
+    public void UpdateGroundingStateServerRpc(bool b) {
+        networkGrounding.Value = b;
+    }
+
+    [ServerRpc]
+    public void UpdateCrouchingStateServerRpc(bool crouchingState) {
+        networkCrouching.Value = crouchingState;
+    }
+
     // Update is called once per frame
 
     public void ProcessMove(Vector2 input)
@@ -115,7 +126,7 @@ public class PlayerMovement : NetworkBehaviour
 
         //constant downward (gravity)
         oldVelocity += gravity  * Time.deltaTime;
-        if (isGrounded && oldVelocity< 0)
+        if (oldGroundedState && oldVelocity< 0)
         {
             oldVelocity = -2f;
         }
@@ -168,7 +179,7 @@ public class PlayerMovement : NetworkBehaviour
     public void Jump()
     {
         if(!(IsClient && IsOwner)) return; 
-        if (isGrounded)
+        if (oldGroundedState)
         {
             oldVelocity = Mathf.Sqrt(jumpHeight * -3.0f * gravity);
             UpdateClientPositionServerRpc(new Vector3(oldInputPosition.x, oldVelocity, oldInputPosition.z));
@@ -178,10 +189,7 @@ public class PlayerMovement : NetworkBehaviour
     public void Crouch()
     {
         if(!(IsClient && IsOwner)) return; 
-        /*crouching = !crouching;
-        _animator.SetBool(_isCrouchingHash, crouching);
-        crouchTimer = 0;*/
-        //lerpCrouch = true;
+        UpdateCrouchingStateServerRpc(!oldCrouchingState);
     }
 
     public void Sprint()
