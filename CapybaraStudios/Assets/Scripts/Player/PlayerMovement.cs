@@ -37,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
     public float _animationTransitionSpeed = 3.0f;
     private float _velocityX = 0;
     private float _velocityZ = 0;
+    private bool isJumping;
 
     // Start is called before the first frame update
     void Start()
@@ -52,7 +53,29 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (controller.isGrounded)
+        {
+            _animator.SetBool("isFalling", false);
+        }
+        else
+        {
+            isJumping = false;
+            if (isGrounded) //if the player was grounded in the previous update but nor now, meaning he jumped now
+            {
+                isJumping = true;
+                _animator.SetBool("isFalling", false);
+            }
+            else if ((isJumping && controller.velocity.y < 0) || controller.velocity.y < -2)
+            {
+                isJumping = false;
+                _animator.SetBool("isFalling", true);
+            }
+
+            _animator.SetBool("isJumping", isJumping);
+        }
+
         isGrounded = controller.isGrounded;
+        _animator.SetBool("isGrounded", isGrounded);
 
         if (lerpCrouch)
         {
@@ -70,8 +93,6 @@ public class PlayerMovement : MonoBehaviour
                 crouchTimer = 0f;
             }
         }
-
-        _animator.SetBool(_isFallingHash, !isGrounded);
     }
 
     public void ProcessMove(Vector2 input)
