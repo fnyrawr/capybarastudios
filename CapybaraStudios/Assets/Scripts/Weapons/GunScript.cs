@@ -17,16 +17,15 @@ public class GunScript : MonoBehaviour
     //HUD
     public TextMeshProUGUI ammoText;
 
-
+    private int controllerMask = ~(1 << 15);
 
     void Update()
     {
-        
     }
 
     public void Shoot()
     {
-        Debug.Log("Shoot!");
+        //Debug.Log("Shoot!");
 
         ammo--;
         ammoText.text = ammo.ToString() + " / 30";
@@ -36,13 +35,15 @@ public class GunScript : MonoBehaviour
             ammoText.text = ammo.ToString() + " / 30";
         }
 
-        if (Physics.Raycast(camera.transform.position, camera.transform.forward, out RaycastHit hit, range))
+        if (Physics.Raycast(camera.transform.position, camera.transform.forward, out RaycastHit hit, range,
+                controllerMask))
         {
             Debug.Log(hit.transform.name);
 
             GameObject collisionObject = hit.collider.gameObject;
 
-            if (collisionObject.CompareTag("Head") || collisionObject.CompareTag("Body") || collisionObject.CompareTag("Limbs"))
+            if (collisionObject.CompareTag("Head") || collisionObject.CompareTag("Body") ||
+                collisionObject.CompareTag("Limbs"))
             {
                 //does object have stats?
                 if (collisionObject.GetComponent<PlayerStats>() == null) return;
@@ -62,17 +63,14 @@ public class GunScript : MonoBehaviour
         {
             Debug.Log("Not hit");
         }
-
-
-
-
-
     }
+
 
     public void HitShow()
     {
         hitmarker.SetActive(true);
     }
+
     public void HitDisable()
     {
         hitmarker.SetActive(false);
