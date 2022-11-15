@@ -51,7 +51,6 @@ public class PlayerMovement : NetworkBehaviour
     private bool oldCrouchingState;
     private bool oldGroundedState;
     //private PlayerState playerState;
-    // Start is called before the first frame update
     void Awake()
     {
         controller = GetComponent<CharacterController>();
@@ -68,14 +67,18 @@ public class PlayerMovement : NetworkBehaviour
                 UpdateGroundingStateServerRpc(controller.isGrounded);
             }
         }
-
-        ClientMove();
-        ClientVisuals();
+        Debug.Log(IsOwner);
+        //if(!IsOwner) ClientMove();
+        //ClientVisuals();
     }
     private void ClientMove() {
         if(networkPosition.Value != Vector3.zero) {
-            controller.Move(networkPosition.Value * Time.deltaTime);
+            Move(networkPosition.Value);
         }
+    }
+    //[ClientRpc]
+    private void Move(Vector3 pos) {
+        controller.Move(pos * Time.deltaTime);
     }
 
     private void ClientVisuals() {
@@ -134,7 +137,8 @@ public class PlayerMovement : NetworkBehaviour
         inputPosition = new Vector3(inputPosition.x, oldVelocity, inputPosition.z);
         if(oldInputPosition != inputPosition) {
             oldInputPosition = inputPosition;
-            UpdateClientPositionServerRpc(inputPosition);
+            Move(inputPosition);
+            //UpdateClientPositionServerRpc(inputPosition);
         }
 
 

@@ -15,7 +15,7 @@ public class InputManager : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
-            if (!IsClient || !IsOwner)
+            if (!IsOwner)
             {
                 enabled = false;
                 // dont need to do anything else if not the owner
