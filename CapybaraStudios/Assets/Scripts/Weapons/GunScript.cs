@@ -1,10 +1,19 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Animations.Rigging;
 
 public class GunScript : MonoBehaviour
 {
+    public Transform gunSlot;
+    public TwoBoneIKConstraint rightTarget;
+    public TwoBoneIKConstraint leftTarget;
+    public RigBuilder rigBuilder;
+
+
+    private bool hasGun = false;
     public float damage = 10;
     public float range = 100f;
     public int ammo = 30;
@@ -74,5 +83,31 @@ public class GunScript : MonoBehaviour
     public void HitDisable()
     {
         hitmarker.SetActive(false);
+    }
+
+    public void ditchGun()
+    {
+        if (hasGun)
+        {
+            var oldGun = gunSlot.GetChild(0);
+            oldGun.SetParent(null);
+            oldGun.GetComponent<Rigidbody>().isKinematic = false;
+            oldGun.GetComponent<BoxCollider>().enabled = true;
+            Debug.Log(oldGun.name + " ditched");
+        }
+    }
+
+    public void pickUp(GameObject gun)
+    {
+        ditchGun();
+        Debug.Log(gun.name + " aquired");
+        hasGun = true;
+        gun.GetComponent<Rigidbody>().isKinematic = true;
+        gun.GetComponent<BoxCollider>().enabled = false;
+        gun.transform.SetParent(gunSlot);
+        leftTarget.data.target = gun.transform.Find("ref_left_hand_target");
+        rigBuilder.Build();
+        gun.transform.localRotation = Quaternion.Euler(0, 0, 0);
+        gun.transform.localPosition = new Vector3(0, 0, 0);
     }
 }

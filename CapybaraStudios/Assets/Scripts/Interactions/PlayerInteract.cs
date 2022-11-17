@@ -5,12 +5,9 @@ using UnityEngine;
 public class PlayerInteract : MonoBehaviour
 {
     private Camera cam;
-    [SerializeField]
-    private float distance = 3.0f;
-    [SerializeField]
-    private bool showRay = true;
-    [SerializeField]
-    private LayerMask mask;
+    [SerializeField] private float distance = 3.0f;
+    [SerializeField] private bool showRay = true;
+    [SerializeField] private LayerMask mask;
 
     private PlayerUI playerUI;
     private InputManager inputManager;
@@ -25,7 +22,7 @@ public class PlayerInteract : MonoBehaviour
     void Update()
     {
         playerUI.UpdateText(string.Empty);
-        
+
         //shoot frontal ray at the center of the screen
         Ray ray = new(cam.transform.position, cam.transform.forward);
         if (showRay) Debug.DrawRay(ray.origin, ray.direction * distance);
@@ -40,7 +37,7 @@ public class PlayerInteract : MonoBehaviour
         //on E press
         if (inputManager.walking.Interact.triggered)
         {
-            interactable.BaseInteract();
+            interactable.BaseInteract(gameObject);
         }
     }
 }

@@ -10,6 +10,8 @@ public class PlayerLook : MonoBehaviour
     public Camera camera;
     public float xSensitivity = 30f;
     public float ySensitivity = 30f;
+    public Transform target;
+    public Transform targetPoint;
 
     private void Start()
     {
@@ -24,7 +26,9 @@ public class PlayerLook : MonoBehaviour
         xRotation -= (mouseY * Time.deltaTime) * ySensitivity;
         xRotation = Mathf.Clamp(xRotation, -80f, 80f);
         //apply to camera
-        camera.transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
+        //camera.transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
+        target.localRotation = Quaternion.Euler(xRotation, 0, 0);
+        camera.transform.LookAt(targetPoint);
         //rotate Player for left and right
         transform.Rotate(Vector3.up * (mouseX * Time.deltaTime) * xSensitivity);
     }
