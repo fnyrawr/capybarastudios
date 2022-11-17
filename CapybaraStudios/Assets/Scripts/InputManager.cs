@@ -10,7 +10,7 @@ public class InputManager : MonoBehaviour
     public PlayerInput.ShootingActions shooting;
 
     private PlayerMovement movement;
-    private GunScript gun; 
+    private GunScript gun;
     private PlayerLook look;
 
     void Awake()
@@ -48,6 +48,7 @@ public class InputManager : MonoBehaviour
         walking.Enable();
         shooting.Enable();
     }
+
     private void OnDisable()
     {
         walking.Disable();

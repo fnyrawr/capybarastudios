@@ -29,6 +29,8 @@ public class PlayerMovement : MonoBehaviour
     public float gravity = -40f;
 
 
+    public Transform Target;
+
     private Animator _animator;
     private int _isCrouchingHash;
     private int _isFallingHash;
@@ -83,9 +85,9 @@ public class PlayerMovement : MonoBehaviour
             float p = crouchTimer / 1;
             p *= p;
             if (crouching)
-                controller.height = Mathf.Lerp(controller.height, 1, p);
+                Target.localPosition = Vector3.down * 0.41f;
             else
-                controller.height = Mathf.Lerp(controller.height, 2, p);
+                Target.localPosition = Vector3.zero;
 
             if (p > 1)
             {
@@ -163,7 +165,7 @@ public class PlayerMovement : MonoBehaviour
         crouching = !crouching;
         _animator.SetBool(_isCrouchingHash, crouching);
         crouchTimer = 0;
-        //lerpCrouch = true;
+        lerpCrouch = true;
     }
 
     public void Sprint()

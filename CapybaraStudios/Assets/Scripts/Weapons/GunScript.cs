@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -90,12 +91,8 @@ public class GunScript : MonoBehaviour
         gun.GetComponent<BoxCollider>().enabled = false;
         gun.transform.SetParent(gunSlot);
         leftTarget.data.target = gun.transform.Find("ref_left_hand_target");
-        rightTarget.data.target = gun.transform.Find("ref_right_hand_target");
         rigBuilder.Build();
-        gun.transform.rotation = gunSlot.rotation;
-        gun.transform.position = gunSlot.position;
-        //gunSlot.localPosition = new Vector3(-0.00344f, 0.00779f, 1e-05f);
-        //gunSlot.localRotation = Quaternion.Euler(-51.944f, -83.576f, 113.28f);
+        gun.transform.localRotation = Quaternion.Euler(0, 0, 0);
+        gun.transform.localPosition = new Vector3(0, 0, 0);
     }
-
 }

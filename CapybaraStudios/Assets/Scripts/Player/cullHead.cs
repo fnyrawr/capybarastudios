@@ -9,6 +9,6 @@ public class cullHead : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        head.layer = 11;
+        head.layer = 15;
     }
 }
