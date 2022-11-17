@@ -13,6 +13,7 @@ public class GunScript : MonoBehaviour
     public RigBuilder rigBuilder;
 
 
+    private bool hasGun = false;
     public float damage = 10;
     public float range = 100f;
     public int ammo = 30;
@@ -84,9 +85,23 @@ public class GunScript : MonoBehaviour
         hitmarker.SetActive(false);
     }
 
+    public void ditchGun()
+    {
+        if (hasGun)
+        {
+            var oldGun = gunSlot.GetChild(0);
+            oldGun.SetParent(null);
+            oldGun.GetComponent<Rigidbody>().isKinematic = false;
+            oldGun.GetComponent<BoxCollider>().enabled = true;
+            Debug.Log(oldGun.name + " ditched");
+        }
+    }
+
     public void pickUp(GameObject gun)
     {
+        ditchGun();
         Debug.Log(gun.name + " aquired");
+        hasGun = true;
         gun.GetComponent<Rigidbody>().isKinematic = true;
         gun.GetComponent<BoxCollider>().enabled = false;
         gun.transform.SetParent(gunSlot);
