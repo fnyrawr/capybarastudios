@@ -1325,7 +1325,7 @@ GameObject:
   - component: {fileID: 367808997}
   m_Layer: 0
   m_Name: Sphere
-  m_TagString: Body
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8645,7 +8645,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6011646632410406596, guid: 782cedb4a7988d34894e3ffa2c2df173, type: 3}
       propertyPath: fireRate
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6011646632410406596, guid: 782cedb4a7988d34894e3ffa2c2df173, type: 3}
       propertyPath: reloadTime
