@@ -304,6 +304,33 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "EquipPrimary",
+                    "type": "Button",
+                    "id": "ea755602-7dfe-49e4-8ebe-439c8aae69dd",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "EquipSecondary",
+                    "type": "Button",
+                    "id": "543b4ed2-fb98-4e0a-916e-1ed7e883bee7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "EquipKnife",
+                    "type": "Button",
+                    "id": "9bea999f-2061-4549-a939-efbf5a0cce3a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -337,6 +364,12 @@
                     "processors": "",
                     "groups": "",
                     "action": "Reload",
+                    "id": "fea2b218-4f5f-448e-988b-fa958de46dc5",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "EquipPrimary",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -348,6 +381,23 @@
                     "processors": "",
                     "groups": "",
                     "action": "Reload",
+                    "id": "437d4ce2-a267-440d-a1a6-23b7b8a8c76b",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "EquipSecondary",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "54d9dab5-a200-4c7a-863a-98379d0b452d",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "EquipKnife",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

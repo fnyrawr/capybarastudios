@@ -41,6 +41,10 @@ public class InputManager : MonoBehaviour
         shooting.Shoot.canceled += ctx => StopFiring();
 
         shooting.Reload.performed += ctx => gun.Reload();
+        shooting.Shoot.performed += ctx => gun.Shoot();
+        shooting.EquipPrimary.performed += ctx => gun.EquipPrimary();
+        shooting.EquipPrimary.performed += ctx => gun.EquipSecondary();
+        shooting.EquipPrimary.performed += ctx => gun.EquipKnife();
     }
 
     // Update is called once per frame
