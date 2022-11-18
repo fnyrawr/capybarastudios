@@ -18,12 +18,12 @@ public class GunScript : MonoBehaviour
 
     //Gun stats
     public int damage;
-    public float spread, range, reloadTime, fireRate;
+    public float spread, range, reloadTime, fireRate, timeBetweenShooting;
     public int magazineSize, bulletsPerTap;
     public bool rapidFireEnabled;
 
     int bulletsLeft, bulletsShot;
-    bool reloading;
+    bool reloading, readyToShoot;
 
     //hitmarker
     public GameObject hitmarker;
@@ -54,11 +54,11 @@ public class GunScript : MonoBehaviour
     {
         if (reloading) Debug.Log("Reloading");
         if (bulletsLeft <= 0) Debug.Log("no Bullets left");
-        if (reloading || bulletsLeft <= 0) return;
+        if (!readyToShoot || reloading || bulletsLeft <= 0) return;
 
         Debug.Log("Shoot!");
 
-        bulletsShot = bulletsPerTap;
+        readyToShoot = false;
 
         //Spread
         float x = UnityEngine.Random.Range(-spread, spread);
@@ -103,6 +103,21 @@ public class GunScript : MonoBehaviour
         //magazine
         bulletsLeft--;
         bulletsShot--;
+        if (bulletsShot > 0 && bulletsLeft > 0)
+        {
+            Shoot();
+            return;
+        }
+
+        Invoke("ResetShot", timeBetweenShooting);
+
+        bulletsShot = bulletsPerTap;
+    }
+
+    //shoot cooldown
+    private void ResetShot()
+    {
+        readyToShoot = true;
     }
 
     //rapid fire

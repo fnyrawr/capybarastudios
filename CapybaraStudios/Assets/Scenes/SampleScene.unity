@@ -8641,11 +8641,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6011646632410406596, guid: 782cedb4a7988d34894e3ffa2c2df173, type: 3}
       propertyPath: spread
-      value: 0.02
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 6011646632410406596, guid: 782cedb4a7988d34894e3ffa2c2df173, type: 3}
       propertyPath: fireRate
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6011646632410406596, guid: 782cedb4a7988d34894e3ffa2c2df173, type: 3}
       propertyPath: reloadTime
@@ -8657,7 +8657,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6011646632410406596, guid: 782cedb4a7988d34894e3ffa2c2df173, type: 3}
       propertyPath: bulletsPerTap
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6011646632410406596, guid: 782cedb4a7988d34894e3ffa2c2df173, type: 3}
       propertyPath: allowButtonHold
