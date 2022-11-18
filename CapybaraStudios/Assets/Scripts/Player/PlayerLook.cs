@@ -17,26 +17,28 @@ public class PlayerLook : MonoBehaviour
     [SerializeField]
     private float sprintingFOV = 1.1f;
     private float elapsedTime = 0f, elapsedcTime = 0f;
-    private float height = 0f;
+    private float height = 0f, currheight;
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         height = camera.transform.position.y;
+        currheight = height;
     }
 
     void FixedUpdate() {
         if(elapsedTime <= 1) {
             elapsedTime += Time.deltaTime;
             float percentage = elapsedTime / 0.5f;
-            if(sprinting) camera.fieldOfView = Mathf.Lerp(baseFOV, baseFOV * sprintingFOV, Mathf.SmoothStep(0,1, percentage));
+            if(sprinting) camera.fieldOfView = Mathf.Lerp(camera.fieldOfView, baseFOV * sprintingFOV, Mathf.SmoothStep(0,1, percentage));
             else camera.fieldOfView = Mathf.Lerp(camera.fieldOfView, baseFOV, Mathf.SmoothStep(0,1, percentage));
         }
 
         if(elapsedcTime <= 1) {
             elapsedcTime += Time.deltaTime;
             float percentage = elapsedTime / 0.3f;
-            if(crouching) camera.transform.localPosition = new Vector3(0, Mathf.Lerp(height, height-0.7f , Mathf.SmoothStep(0,1, percentage)), 0);
-            else camera.transform.localPosition = new Vector3(0, Mathf.Lerp(height-0.7f, height , Mathf.SmoothStep(0,1, percentage)), 0);
+            if(crouching) currheight = Mathf.Lerp(currheight, height - 0.5f, Mathf.SmoothStep(0,1, percentage));
+            else currheight = Mathf.Lerp(currheight, height , Mathf.SmoothStep(0,1, percentage));
+            camera.transform.localPosition = new Vector3(0, currheight, 0);
         }
     }
 

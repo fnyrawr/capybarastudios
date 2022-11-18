@@ -317,6 +317,33 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""EquipPrimary"",
+                    ""type"": ""Button"",
+                    ""id"": ""ea755602-7dfe-49e4-8ebe-439c8aae69dd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""EquipSecondary"",
+                    ""type"": ""Button"",
+                    ""id"": ""543b4ed2-fb98-4e0a-916e-1ed7e883bee7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""EquipKnife"",
+                    ""type"": ""Button"",
+                    ""id"": ""9bea999f-2061-4549-a939-efbf5a0cce3a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -339,6 +366,39 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fea2b218-4f5f-448e-988b-fa958de46dc5"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EquipPrimary"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""437d4ce2-a267-440d-a1a6-23b7b8a8c76b"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EquipSecondary"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""54d9dab5-a200-4c7a-863a-98379d0b452d"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EquipKnife"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -874,6 +934,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         // Shooting
         m_Shooting = asset.FindActionMap("Shooting", throwIfNotFound: true);
         m_Shooting_Shoot = m_Shooting.FindAction("Shoot", throwIfNotFound: true);
+        m_Shooting_EquipPrimary = m_Shooting.FindAction("EquipPrimary", throwIfNotFound: true);
+        m_Shooting_EquipSecondary = m_Shooting.FindAction("EquipSecondary", throwIfNotFound: true);
+        m_Shooting_EquipKnife = m_Shooting.FindAction("EquipKnife", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1019,11 +1082,17 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Shooting;
     private IShootingActions m_ShootingActionsCallbackInterface;
     private readonly InputAction m_Shooting_Shoot;
+    private readonly InputAction m_Shooting_EquipPrimary;
+    private readonly InputAction m_Shooting_EquipSecondary;
+    private readonly InputAction m_Shooting_EquipKnife;
     public struct ShootingActions
     {
         private @PlayerInput m_Wrapper;
         public ShootingActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Shoot => m_Wrapper.m_Shooting_Shoot;
+        public InputAction @EquipPrimary => m_Wrapper.m_Shooting_EquipPrimary;
+        public InputAction @EquipSecondary => m_Wrapper.m_Shooting_EquipSecondary;
+        public InputAction @EquipKnife => m_Wrapper.m_Shooting_EquipKnife;
         public InputActionMap Get() { return m_Wrapper.m_Shooting; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1036,6 +1105,15 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Shoot.started -= m_Wrapper.m_ShootingActionsCallbackInterface.OnShoot;
                 @Shoot.performed -= m_Wrapper.m_ShootingActionsCallbackInterface.OnShoot;
                 @Shoot.canceled -= m_Wrapper.m_ShootingActionsCallbackInterface.OnShoot;
+                @EquipPrimary.started -= m_Wrapper.m_ShootingActionsCallbackInterface.OnEquipPrimary;
+                @EquipPrimary.performed -= m_Wrapper.m_ShootingActionsCallbackInterface.OnEquipPrimary;
+                @EquipPrimary.canceled -= m_Wrapper.m_ShootingActionsCallbackInterface.OnEquipPrimary;
+                @EquipSecondary.started -= m_Wrapper.m_ShootingActionsCallbackInterface.OnEquipSecondary;
+                @EquipSecondary.performed -= m_Wrapper.m_ShootingActionsCallbackInterface.OnEquipSecondary;
+                @EquipSecondary.canceled -= m_Wrapper.m_ShootingActionsCallbackInterface.OnEquipSecondary;
+                @EquipKnife.started -= m_Wrapper.m_ShootingActionsCallbackInterface.OnEquipKnife;
+                @EquipKnife.performed -= m_Wrapper.m_ShootingActionsCallbackInterface.OnEquipKnife;
+                @EquipKnife.canceled -= m_Wrapper.m_ShootingActionsCallbackInterface.OnEquipKnife;
             }
             m_Wrapper.m_ShootingActionsCallbackInterface = instance;
             if (instance != null)
@@ -1043,6 +1121,15 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Shoot.started += instance.OnShoot;
                 @Shoot.performed += instance.OnShoot;
                 @Shoot.canceled += instance.OnShoot;
+                @EquipPrimary.started += instance.OnEquipPrimary;
+                @EquipPrimary.performed += instance.OnEquipPrimary;
+                @EquipPrimary.canceled += instance.OnEquipPrimary;
+                @EquipSecondary.started += instance.OnEquipSecondary;
+                @EquipSecondary.performed += instance.OnEquipSecondary;
+                @EquipSecondary.canceled += instance.OnEquipSecondary;
+                @EquipKnife.started += instance.OnEquipKnife;
+                @EquipKnife.performed += instance.OnEquipKnife;
+                @EquipKnife.canceled += instance.OnEquipKnife;
             }
         }
     }
@@ -1164,6 +1251,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     public interface IShootingActions
     {
         void OnShoot(InputAction.CallbackContext context);
+        void OnEquipPrimary(InputAction.CallbackContext context);
+        void OnEquipSecondary(InputAction.CallbackContext context);
+        void OnEquipKnife(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
