@@ -5,7 +5,8 @@ using UnityEngine;
 public class PickUp : Interactable
 {
     public GameObject button;
-
+    public bool isPrimary;
+    public bool isSecondary;
     // Start is called before the first frame update
     void Start()
     {

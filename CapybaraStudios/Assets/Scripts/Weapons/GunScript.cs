@@ -11,6 +11,8 @@ public class GunScript : MonoBehaviour
     public TwoBoneIKConstraint rightTarget;
     public TwoBoneIKConstraint leftTarget;
     public RigBuilder rigBuilder;
+    private bool hasPrimary = false;
+    private bool hasSecondary = false;
 
     private bool hasGun = false;
 
@@ -192,5 +194,15 @@ public class GunScript : MonoBehaviour
         rigBuilder.Build();
         gun.transform.localRotation = Quaternion.Euler(0, 0, 0);
         gun.transform.localPosition = new Vector3(0, 0, 0);
+    }
+
+    public void EquipKnife() {
+
+    }
+    public void EquipPrimary() {
+        
+    }
+    public void EquipSecondary() {
+        
     }
 }
