@@ -293,6 +293,15 @@
                     "id": "19b2281c-4ede-463d-bd55-61e23bfce5c5",
                     "expectedControlType": "Button",
                     "processors": "",
+                    "interactions": "Hold(duration=1.401298E-45,pressPoint=0.1)",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Reload",
+                    "type": "Button",
+                    "id": "0bf1b139-9d55-418a-ac32-a37969d253a3",
+                    "expectedControlType": "Button",
+                    "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 }
@@ -317,6 +326,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b1777068-7c38-4742-95f5-1c4665802381",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Reload",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0583bec6-b6fe-4c3a-b743-ff0dc8d7435c",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Reload",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

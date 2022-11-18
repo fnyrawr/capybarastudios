@@ -315,6 +315,15 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""id"": ""19b2281c-4ede-463d-bd55-61e23bfce5c5"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
+                    ""interactions"": ""Hold(duration=1.401298E-45,pressPoint=0.1)"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Reload"",
+                    ""type"": ""Button"",
+                    ""id"": ""0bf1b139-9d55-418a-ac32-a37969d253a3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
                 }
@@ -339,6 +348,28 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b1777068-7c38-4742-95f5-1c4665802381"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0583bec6-b6fe-4c3a-b743-ff0dc8d7435c"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reload"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -874,6 +905,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         // Shooting
         m_Shooting = asset.FindActionMap("Shooting", throwIfNotFound: true);
         m_Shooting_Shoot = m_Shooting.FindAction("Shoot", throwIfNotFound: true);
+        m_Shooting_Reload = m_Shooting.FindAction("Reload", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1019,11 +1051,13 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Shooting;
     private IShootingActions m_ShootingActionsCallbackInterface;
     private readonly InputAction m_Shooting_Shoot;
+    private readonly InputAction m_Shooting_Reload;
     public struct ShootingActions
     {
         private @PlayerInput m_Wrapper;
         public ShootingActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Shoot => m_Wrapper.m_Shooting_Shoot;
+        public InputAction @Reload => m_Wrapper.m_Shooting_Reload;
         public InputActionMap Get() { return m_Wrapper.m_Shooting; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1036,6 +1070,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Shoot.started -= m_Wrapper.m_ShootingActionsCallbackInterface.OnShoot;
                 @Shoot.performed -= m_Wrapper.m_ShootingActionsCallbackInterface.OnShoot;
                 @Shoot.canceled -= m_Wrapper.m_ShootingActionsCallbackInterface.OnShoot;
+                @Reload.started -= m_Wrapper.m_ShootingActionsCallbackInterface.OnReload;
+                @Reload.performed -= m_Wrapper.m_ShootingActionsCallbackInterface.OnReload;
+                @Reload.canceled -= m_Wrapper.m_ShootingActionsCallbackInterface.OnReload;
             }
             m_Wrapper.m_ShootingActionsCallbackInterface = instance;
             if (instance != null)
@@ -1043,6 +1080,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Shoot.started += instance.OnShoot;
                 @Shoot.performed += instance.OnShoot;
                 @Shoot.canceled += instance.OnShoot;
+                @Reload.started += instance.OnReload;
+                @Reload.performed += instance.OnReload;
+                @Reload.canceled += instance.OnReload;
             }
         }
     }
@@ -1164,6 +1204,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     public interface IShootingActions
     {
         void OnShoot(InputAction.CallbackContext context);
+        void OnReload(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

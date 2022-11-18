@@ -2401,12 +2401,18 @@ MonoBehaviour:
   rightTarget: {fileID: 0}
   leftTarget: {fileID: 1875160266}
   rigBuilder: {fileID: 2078246585}
-  damage: 10
-  range: 100
-  ammo: 30
   camera: {fileID: 372541008}
+  damage: 0
+  timeBetweenShooting: 0
+  spread: 0
+  range: 100
+  reloadTime: 0
+  timeBetweenShots: 0
+  magazineSize: 0
+  bulletsPerTap: 0
+  allowButtonHold: 0
   hitmarker: {fileID: 1702363629}
-  distance: 0
+  bulletHoleGraphic: {fileID: 0}
   ammoText: {fileID: 101310942}
 --- !u!114 &569172498
 MonoBehaviour:
@@ -2425,6 +2431,8 @@ MonoBehaviour:
   ySensitivity: 30
   target: {fileID: 0}
   targetPoint: {fileID: 0}
+  baseFOV: 0
+  sprintingFOV: 1.1
 --- !u!114 &569172499
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6370,6 +6378,11 @@ Transform:
   m_Father: {fileID: 1108630435}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1580690156 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6011646632410406603, guid: 782cedb4a7988d34894e3ffa2c2df173, type: 3}
+  m_PrefabInstance: {fileID: 6011646632813835457}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1597840903
 GameObject:
   m_ObjectHideFlags: 0
@@ -6456,6 +6469,37 @@ MonoBehaviour:
       x: 1
       y: 1
       z: 1
+--- !u!1 &1608466901
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1608466902}
+  m_Layer: 15
+  m_Name: Gun
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1608466902
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1608466901}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1580690156}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1650914633
 GameObject:
   m_ObjectHideFlags: 0
@@ -8453,6 +8497,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1651020372061225318, guid: 1ff6f0c54fc932c43beab542d947e13c, type: 3}
+      propertyPath: baseFOV
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1651020372061225318, guid: 1ff6f0c54fc932c43beab542d947e13c, type: 3}
       propertyPath: targetPoint
       value: 
       objectReference: {fileID: 0}
@@ -8524,6 +8572,42 @@ PrefabInstance:
     - target: {fileID: 6011646632410406593, guid: 782cedb4a7988d34894e3ffa2c2df173, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6011646632410406593, guid: 782cedb4a7988d34894e3ffa2c2df173, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6011646632410406596, guid: 782cedb4a7988d34894e3ffa2c2df173, type: 3}
+      propertyPath: spread
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 6011646632410406596, guid: 782cedb4a7988d34894e3ffa2c2df173, type: 3}
+      propertyPath: reloadTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6011646632410406596, guid: 782cedb4a7988d34894e3ffa2c2df173, type: 3}
+      propertyPath: magazineSize
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 6011646632410406596, guid: 782cedb4a7988d34894e3ffa2c2df173, type: 3}
+      propertyPath: bulletsPerTap
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6011646632410406596, guid: 782cedb4a7988d34894e3ffa2c2df173, type: 3}
+      propertyPath: allowButtonHold
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6011646632410406596, guid: 782cedb4a7988d34894e3ffa2c2df173, type: 3}
+      propertyPath: bulletHoleGraphic
+      value: 
+      objectReference: {fileID: 2987797164400997647, guid: cdd64dc8e7f243b49829c5817ce597bb, type: 3}
+    - target: {fileID: 6011646632410406596, guid: 782cedb4a7988d34894e3ffa2c2df173, type: 3}
+      propertyPath: timeBetweenShooting
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 6011646632410406599, guid: 782cedb4a7988d34894e3ffa2c2df173, type: 3}
+      propertyPath: baseFOV
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 6011646632410406603, guid: 782cedb4a7988d34894e3ffa2c2df173, type: 3}
       propertyPath: m_RootOrder

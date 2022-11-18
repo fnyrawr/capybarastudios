@@ -12,39 +12,64 @@ public class GunScript : MonoBehaviour
     public TwoBoneIKConstraint leftTarget;
     public RigBuilder rigBuilder;
 
-
     private bool hasGun = false;
-    public float damage = 10;
-    public float range = 100f;
-    public int ammo = 30;
 
     public new Camera camera;
 
+    //Gun stats
+    public int damage;
+    public float timeBetweenShooting, spread, range, reloadTime, timeBetweenShots;
+    public int magazineSize, bulletsPerTap;
+    public bool allowButtonHold;
+    int bulletsLeft, bulletsShot;
+
+    bool shooting, readyToShoot, reloading;
+
+    //hitmarker
     public GameObject hitmarker;
-    public float distance;
+
+    //bullet hole
+    public GameObject bulletHoleGraphic;
 
     //HUD
     public TextMeshProUGUI ammoText;
 
+
+
     private int controllerMask = ~(1 << 15);
+
+    private void Awake()
+    {
+        bulletsLeft = magazineSize;
+        readyToShoot = true;
+    }
 
     void Update()
     {
+        //update ammo
+        ammoText.SetText(bulletsLeft + " / " + magazineSize);
     }
 
     public void Shoot()
     {
-        //Debug.Log("Shoot!");
+        if (!readyToShoot) Debug.Log("not ready to shoot");
+        if (!shooting) Debug.Log("not shooting");
+        if (reloading) Debug.Log("Reloading");
+        if (bulletsLeft <= 0) Debug.Log("no Bullets left");
+        if (!readyToShoot || reloading || bulletsLeft <= 0) return;
 
-        ammo--;
-        ammoText.text = ammo.ToString() + " / 30";
-        if (ammo == 0)
-        {
-            ammo = 30;
-            ammoText.text = ammo.ToString() + " / 30";
-        }
+        Debug.Log("Shoot!");
 
-        if (Physics.Raycast(camera.transform.position, camera.transform.forward, out RaycastHit hit, range,
+        bulletsShot = bulletsPerTap;
+
+        //Spread
+        float x = UnityEngine.Random.Range(-spread, spread);
+        float y = UnityEngine.Random.Range(-spread, spread);
+        //Calculate Direction with Spread
+        Vector3 direction = camera.transform.forward + new Vector3(x, y, 0);
+
+        //hit and damage calc
+        if (Physics.Raycast(camera.transform.position, direction, out RaycastHit hit, range,
                 controllerMask))
         {
             Debug.Log(hit.transform.name);
@@ -72,19 +97,54 @@ public class GunScript : MonoBehaviour
         {
             Debug.Log("Not hit");
         }
+
+        //bullet hole
+        Instantiate(bulletHoleGraphic, hit.point, Quaternion.Euler(0, 180, 0));
+
+        //magazine
+        bulletsLeft--;
+        bulletsShot--;
+
+        Invoke("ResetShot", timeBetweenShooting);
+
+        if (bulletsShot > 0 && bulletsLeft > 0)
+        {
+            Invoke("Shoot", timeBetweenShots);
+        }
+
     }
 
 
+//fire speed
+    private void ResetShot()
+    {
+        readyToShoot = true;
+    }
+
+    //reload
+    public void Reload()
+    {
+        Debug.Log("Reload");
+        reloading = true;
+        Invoke("ReloadFinished", reloadTime);
+    }
+    private void ReloadFinished()
+    {
+        bulletsLeft = magazineSize;
+        reloading = false;
+    }
+
+    //hitmarker show and disable
     public void HitShow()
     {
         hitmarker.SetActive(true);
     }
-
     public void HitDisable()
     {
         hitmarker.SetActive(false);
     }
 
+    //gun pickup and discard
     public void ditchGun()
     {
         if (hasGun)

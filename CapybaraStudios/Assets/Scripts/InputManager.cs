@@ -35,6 +35,7 @@ public class InputManager : MonoBehaviour
         }; 
 
         shooting.Shoot.performed += ctx => gun.Shoot();
+        shooting.Reload.performed += ctx => gun.Reload();
     }
 
     // Update is called once per frame
