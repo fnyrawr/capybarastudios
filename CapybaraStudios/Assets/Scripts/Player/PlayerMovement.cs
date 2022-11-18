@@ -142,12 +142,14 @@ public class PlayerMovement : MonoBehaviour
 
     public void Crouch()
     {
+        if(sprinting) return;
         crouching = !crouching;
         _animator.SetBool(_isCrouchingHash, crouching);
     }
 
     public void Sprint()
     {
+        if(crouching) return;
         sprinting = !sprinting;
     }
 }
