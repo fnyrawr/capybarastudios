@@ -13,6 +13,8 @@ public class InputManager : MonoBehaviour
     private GunScript gun;
     private PlayerLook look;
 
+    Coroutine fireCoroutine;
+
     void Awake()
     {
         playerInput = new PlayerInput();
@@ -32,9 +34,12 @@ public class InputManager : MonoBehaviour
         walking.Sprint.performed += ctx => {
             movement.Sprint();
             look.Sprint();
-        }; 
+        };
 
-        shooting.Shoot.performed += ctx => gun.Shoot();
+        //shooting.Shoot.performed += ctx => gun.Shoot();
+        shooting.Shoot.started += ctx => StartFiring();
+        shooting.Shoot.canceled += ctx => StopFiring();
+
         shooting.Reload.performed += ctx => gun.Reload();
     }
 
@@ -50,6 +55,7 @@ public class InputManager : MonoBehaviour
         look.ProcessLook(walking.LookAround.ReadValue<Vector2>());
     }
 
+    //walking
     private void OnEnable()
     {
         walking.Enable();
@@ -61,4 +67,18 @@ public class InputManager : MonoBehaviour
         walking.Disable();
         shooting.Disable();
     }
+
+    //For Rapid Fire
+    void StartFiring()
+    {
+        fireCoroutine = StartCoroutine(gun.RapidFire());
+    }
+    void StopFiring()
+    {
+        if (fireCoroutine != null)
+        {
+            StopCoroutine(fireCoroutine);
+        }
+    }
+
 }

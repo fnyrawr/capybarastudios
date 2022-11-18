@@ -18,12 +18,12 @@ public class GunScript : MonoBehaviour
 
     //Gun stats
     public int damage;
-    public float timeBetweenShooting, spread, range, reloadTime, timeBetweenShots;
+    public float timeBetweenShooting, spread, range, reloadTime, fireRate;
     public int magazineSize, bulletsPerTap;
     public bool allowButtonHold;
     int bulletsLeft, bulletsShot;
 
-    bool shooting, readyToShoot, reloading;
+    bool readyToShoot, reloading;
 
     //hitmarker
     public GameObject hitmarker;
@@ -35,13 +35,13 @@ public class GunScript : MonoBehaviour
     public TextMeshProUGUI ammoText;
 
 
-
+    private WaitForSeconds rapidFireWait;
     private int controllerMask = ~(1 << 15);
 
     private void Awake()
     {
         bulletsLeft = magazineSize;
-        readyToShoot = true;
+        rapidFireWait = new WaitForSeconds(1 / fireRate);
     }
 
     void Update()
@@ -52,11 +52,9 @@ public class GunScript : MonoBehaviour
 
     public void Shoot()
     {
-        if (!readyToShoot) Debug.Log("not ready to shoot");
-        if (!shooting) Debug.Log("not shooting");
         if (reloading) Debug.Log("Reloading");
         if (bulletsLeft <= 0) Debug.Log("no Bullets left");
-        if (!readyToShoot || reloading || bulletsLeft <= 0) return;
+        if (reloading || bulletsLeft <= 0) return;
 
         Debug.Log("Shoot!");
 
@@ -99,26 +97,22 @@ public class GunScript : MonoBehaviour
         }
 
         //bullet hole
-        Instantiate(bulletHoleGraphic, hit.point, Quaternion.Euler(0, 180, 0));
+        GameObject bulletHoleClone = Instantiate(bulletHoleGraphic, hit.point, Quaternion.Euler(0, 180, 0));
+        Destroy(bulletHoleClone, 10f);
 
         //magazine
         bulletsLeft--;
         bulletsShot--;
-
-        Invoke("ResetShot", timeBetweenShooting);
-
-        if (bulletsShot > 0 && bulletsLeft > 0)
-        {
-            Invoke("Shoot", timeBetweenShots);
-        }
-
     }
 
-
-//fire speed
-    private void ResetShot()
+    //rapid fire
+    public IEnumerator RapidFire()
     {
-        readyToShoot = true;
+        while (true)
+        {
+            Shoot();
+            yield return rapidFireWait;
+        }
     }
 
     //reload
