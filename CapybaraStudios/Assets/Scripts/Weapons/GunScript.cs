@@ -43,6 +43,7 @@ public class GunScript : MonoBehaviour
     private void Awake()
     {
         bulletsLeft = magazineSize;
+        readyToShoot = true;
         rapidFireWait = new WaitForSeconds(1 / fireRate);
     }
 
@@ -56,6 +57,7 @@ public class GunScript : MonoBehaviour
     {
         if (reloading) Debug.Log("Reloading");
         if (bulletsLeft <= 0) Debug.Log("no Bullets left");
+        if (!readyToShoot) Debug.Log("weapon on cooldown");
         if (!readyToShoot || reloading || bulletsLeft <= 0) return;
 
         Debug.Log("Shoot!");
@@ -80,17 +82,19 @@ public class GunScript : MonoBehaviour
                 collisionObject.CompareTag("Limbs"))
             {
                 //does object have stats?
-                if (collisionObject.GetComponent<PlayerStats>() == null) return;
-                //deal damage
-                float hitMultiplier = 1;
-                if (collisionObject.CompareTag("Head")) hitMultiplier = 3;
-                if (collisionObject.CompareTag("Limbs")) hitMultiplier = 0.75f;
-                int finalDamage = (int)(damage * hitMultiplier);
-                collisionObject.GetComponent<PlayerStats>().TakeDamage(finalDamage);
+                if (collisionObject.GetComponent<PlayerStats>() != null)
+                {
+                    //deal damage
+                    float hitMultiplier = 1;
+                    if (collisionObject.CompareTag("Head")) hitMultiplier = 3;
+                    if (collisionObject.CompareTag("Limbs")) hitMultiplier = 0.75f;
+                    int finalDamage = (int)(damage * hitMultiplier);
+                    collisionObject.GetComponent<PlayerStats>().TakeDamage(finalDamage);
 
-                //Hitmarker
-                HitShow();
-                Invoke(nameof(HitDisable), 0.2f);
+                    //Hitmarker
+                    HitShow();
+                    Invoke(nameof(HitDisable), 0.2f);
+                }
             }
         }
         else
@@ -107,6 +111,7 @@ public class GunScript : MonoBehaviour
         bulletsShot--;
         if (bulletsShot > 0 && bulletsLeft > 0)
         {
+            readyToShoot = true;
             Shoot();
             return;
         }
@@ -144,6 +149,7 @@ public class GunScript : MonoBehaviour
     {
         Debug.Log("Reload");
         reloading = true;
+        readyToShoot = true;
         Invoke("ReloadFinished", reloadTime);
     }
     private void ReloadFinished()

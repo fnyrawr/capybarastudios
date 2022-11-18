@@ -315,7 +315,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""id"": ""19b2281c-4ede-463d-bd55-61e23bfce5c5"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Hold(duration=1.401298E-45,pressPoint=0.1)"",
+                    ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {

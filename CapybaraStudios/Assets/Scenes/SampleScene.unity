@@ -2350,6 +2350,7 @@ MonoBehaviour:
   range: 100
   reloadTime: 0
   fireRate: 0
+  timeBetweenShooting: 0
   magazineSize: 0
   bulletsPerTap: 0
   rapidFireEnabled: 0
@@ -6471,7 +6472,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1580690156}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1650914633
 GameObject:
@@ -8649,11 +8650,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6011646632410406596, guid: 782cedb4a7988d34894e3ffa2c2df173, type: 3}
       propertyPath: spread
-      value: 0.1
+      value: 0.03
       objectReference: {fileID: 0}
     - target: {fileID: 6011646632410406596, guid: 782cedb4a7988d34894e3ffa2c2df173, type: 3}
       propertyPath: fireRate
-      value: 1
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6011646632410406596, guid: 782cedb4a7988d34894e3ffa2c2df173, type: 3}
       propertyPath: reloadTime
@@ -8661,11 +8662,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6011646632410406596, guid: 782cedb4a7988d34894e3ffa2c2df173, type: 3}
       propertyPath: magazineSize
-      value: 30
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6011646632410406596, guid: 782cedb4a7988d34894e3ffa2c2df173, type: 3}
       propertyPath: bulletsPerTap
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6011646632410406596, guid: 782cedb4a7988d34894e3ffa2c2df173, type: 3}
       propertyPath: allowButtonHold
@@ -8673,7 +8674,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6011646632410406596, guid: 782cedb4a7988d34894e3ffa2c2df173, type: 3}
       propertyPath: rapidFireEnabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6011646632410406596, guid: 782cedb4a7988d34894e3ffa2c2df173, type: 3}
       propertyPath: bulletHoleGraphic
@@ -8681,7 +8682,7 @@ PrefabInstance:
       objectReference: {fileID: 2987797164400997647, guid: cdd64dc8e7f243b49829c5817ce597bb, type: 3}
     - target: {fileID: 6011646632410406596, guid: 782cedb4a7988d34894e3ffa2c2df173, type: 3}
       propertyPath: timeBetweenShooting
-      value: 0.05
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6011646632410406599, guid: 782cedb4a7988d34894e3ffa2c2df173, type: 3}
       propertyPath: baseFOV

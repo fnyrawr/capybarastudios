@@ -293,7 +293,7 @@
                     "id": "19b2281c-4ede-463d-bd55-61e23bfce5c5",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Hold(duration=1.401298E-45,pressPoint=0.1)",
+                    "interactions": "",
                     "initialStateCheck": false
                 },
                 {
@@ -364,12 +364,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "Reload",
-                    "id": "fea2b218-4f5f-448e-988b-fa958de46dc5",
-                    "path": "<Keyboard>/1",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "EquipPrimary",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -381,12 +375,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "Reload",
-                    "id": "437d4ce2-a267-440d-a1a6-23b7b8a8c76b",
-                    "path": "<Keyboard>/2",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "EquipSecondary",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
