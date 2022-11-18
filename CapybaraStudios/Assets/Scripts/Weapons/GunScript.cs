@@ -18,12 +18,12 @@ public class GunScript : MonoBehaviour
 
     //Gun stats
     public int damage;
-    public float timeBetweenShooting, spread, range, reloadTime, fireRate;
+    public float spread, range, reloadTime, fireRate;
     public int magazineSize, bulletsPerTap;
-    public bool allowButtonHold;
-    int bulletsLeft, bulletsShot;
+    public bool rapidFireEnabled;
 
-    bool readyToShoot, reloading;
+    int bulletsLeft, bulletsShot;
+    bool reloading;
 
     //hitmarker
     public GameObject hitmarker;
@@ -108,10 +108,17 @@ public class GunScript : MonoBehaviour
     //rapid fire
     public IEnumerator RapidFire()
     {
-        while (true)
+        if (rapidFireEnabled)
         {
+            while (true)
+            {
+                Shoot();
+                yield return rapidFireWait;
+            }
+        }
+        else {
             Shoot();
-            yield return rapidFireWait;
+            yield return null;
         }
     }
 
@@ -128,6 +135,9 @@ public class GunScript : MonoBehaviour
         reloading = false;
     }
 
+
+
+
     //hitmarker show and disable
     public void HitShow()
     {
@@ -137,6 +147,10 @@ public class GunScript : MonoBehaviour
     {
         hitmarker.SetActive(false);
     }
+
+
+
+
 
     //gun pickup and discard
     public void ditchGun()
