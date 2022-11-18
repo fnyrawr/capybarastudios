@@ -7,7 +7,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private CharacterController controller;
-
+    private Camera camera;
     //movement
     private Vector3 playerVelocity;
 
@@ -15,9 +15,6 @@ public class PlayerMovement : MonoBehaviour
 
     //crouching
     private bool crouching = false;
-    private bool lerpCrouch;
-
-    private float crouchTimer = 0;
 
     //sprinting
     private bool sprinting = false;
@@ -78,23 +75,6 @@ public class PlayerMovement : MonoBehaviour
 
         isGrounded = controller.isGrounded;
         _animator.SetBool("isGrounded", isGrounded);
-
-        if (lerpCrouch)
-        {
-            crouchTimer += Time.deltaTime;
-            float p = crouchTimer / 1;
-            p *= p;
-            if (crouching)
-                Target.localPosition = Vector3.down * 0.41f;
-            else
-                Target.localPosition = Vector3.zero;
-
-            if (p > 1)
-            {
-                lerpCrouch = false;
-                crouchTimer = 0f;
-            }
-        }
     }
 
     public void ProcessMove(Vector2 input)
@@ -164,8 +144,6 @@ public class PlayerMovement : MonoBehaviour
     {
         crouching = !crouching;
         _animator.SetBool(_isCrouchingHash, crouching);
-        crouchTimer = 0;
-        lerpCrouch = true;
     }
 
     public void Sprint()

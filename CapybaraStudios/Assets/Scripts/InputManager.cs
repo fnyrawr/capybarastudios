@@ -26,7 +26,10 @@ public class InputManager : MonoBehaviour
         walking.Jump.performed += ctx => movement.Jump();
 
         walking.Crouch.performed += ctx => movement.Crouch();
-        walking.Sprint.performed += ctx => movement.Sprint();
+        walking.Sprint.performed += ctx => {
+            movement.Sprint();
+            look.Sprint();
+        }; 
 
         shooting.Shoot.performed += ctx => gun.Shoot();
     }

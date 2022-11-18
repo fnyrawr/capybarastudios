@@ -12,10 +12,24 @@ public class PlayerLook : MonoBehaviour
     public float ySensitivity = 30f;
     public Transform target;
     public Transform targetPoint;
-
+    private bool sprinting = false;
+    [SerializeField]
+    private float baseFOV;
+    [SerializeField]
+    private float sprintingFOV = 1.1f;
+    private float elapsedTime = 0f;
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    void FixedUpdate() {
+        elapsedTime += Time.deltaTime;
+        if(elapsedTime <= 1) {
+            float percentage = elapsedTime / 0.5f;
+            if(sprinting) camera.fieldOfView = Mathf.Lerp(baseFOV, baseFOV * sprintingFOV, Mathf.SmoothStep(0,1, percentage));
+            else camera.fieldOfView = Mathf.Lerp(camera.fieldOfView, baseFOV, Mathf.SmoothStep(0,1, percentage));
+        }
     }
 
     public void ProcessLook(Vector2 input)
@@ -31,5 +45,12 @@ public class PlayerLook : MonoBehaviour
         camera.transform.LookAt(targetPoint);
         //rotate Player for left and right
         transform.Rotate(Vector3.up * (mouseX * Time.deltaTime) * xSensitivity);
+    }
+
+    public void Sprint()
+    {
+        Debug.Log("sprint");
+        sprinting = !sprinting;
+        elapsedTime = 0;
     }
 }
