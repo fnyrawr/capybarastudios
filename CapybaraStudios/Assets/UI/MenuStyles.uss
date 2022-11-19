@@ -13,10 +13,11 @@
     border-bottom-color: rgba(0, 0, 0, 0);
     -unity-font-definition: none;
     transition-duration: 0.2s;
+    color: rgba(255, 255, 255, 255);
 }
 
 .menu-button:hover {
-    color: rgba(255, 255, 255, 255);
+    color: rgb(255, 255, 255);
     font-size: 40px;
     rotate: -10deg;
     transition-duration: 0.3s;
