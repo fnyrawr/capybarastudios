@@ -15,8 +15,16 @@ public class MenuController : MonoBehaviour
     [SerializeField]
     private VisualTreeAsset _playButtonTemplate; //
     private VisualElement _playButtons; //
-    private Button _playButton;
 
+    //for mute:
+    [Header("Mute Button")]
+    [SerializeField]
+    private Sprite _mutedSprite;
+    [SerializeField]
+    private Sprite _unmutedSprite;
+    private bool _muted;
+
+    private Button _playButton;
     private Button _settingsButton;
     private Button _exitButton;
     private Button _muteButton;
@@ -41,19 +49,15 @@ public class MenuController : MonoBehaviour
         _playButton.clicked += PlayButtonClicked; // () => { DoSomething(); };
         _exitButton.clicked += ExitButtonClicked;
         
-        //backButton.clicked += BackButtonOnClicked;
-
-        //
-        //_playButtons = _playButtonTemplate.CloneTree();
-        
-        
-        
+        //for mute:
+        _muteButton = _doc.rootVisualElement.Q<Button>("MuteButton");
+        _muteButton.clicked += MuteButtonOnClicked;
     }
 
     private void PlayButtonClicked()
     {
 
-        Debug.Log("a");
+        //Debug.Log("a");
         _buttonsWrapper.Clear();
         _buttonsWrapper.Add(_playButtonTemplate.CloneTree());
         var backButton = _doc.rootVisualElement.Q<Button>("BackButton");
@@ -75,6 +79,18 @@ public class MenuController : MonoBehaviour
         Application.Quit();
     }
 
+    private void MuteButtonOnClicked()
+    {
+        _muted = !_muted;
+        //First grab the image
+        var bg = _muteButton.style.backgroundImage;
+        //Assign a new Sprite
+        bg.value = Background.FromSprite(_muted? _mutedSprite : _unmutedSprite);
+        _muteButton.style.backgroundImage = bg;
+
+        //mutes only the menu:
+        AudioListener.volume = _muted ? 0 : 1;
+    }
 
 
     // Start is called before the first frame update
