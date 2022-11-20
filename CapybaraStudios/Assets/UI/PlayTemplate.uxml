@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/MenuStyles.uss?fileID=7433441132597879392&amp;guid=a03f6df90bdd04875a57120deb87c5d6&amp;type=3#MenuStyles" />
+    <ui:VisualElement name="Wrapper">
+        <ui:Button text="Singleplayer" display-tooltip-when-elided="true" name="SingleplayerButton" class="menu-button" />
+        <ui:Button text="Multiplayer" display-tooltip-when-elided="true" name="MultiplayerButton" class="menu-button" />
+        <ui:Button text="Back" display-tooltip-when-elided="true" name="BackButton" class="menu-button" />
+    </ui:VisualElement>
+</ui:UXML>
