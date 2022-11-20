@@ -12,7 +12,7 @@ public class InputManager : MonoBehaviour
     private PlayerMovement movement;
     private GunScript gun;
     private PlayerLook look;
-
+    private GrapplingGun hook;
     Coroutine fireCoroutine;
 
     void Awake()
@@ -24,6 +24,7 @@ public class InputManager : MonoBehaviour
         movement = GetComponent<PlayerMovement>();
         look = GetComponent<PlayerLook>();
         gun = GetComponent<GunScript>();
+        hook = GetComponentInChildren<GrapplingGun>();
         //
         walking.Jump.performed += ctx => movement.Jump();
 
@@ -36,6 +37,8 @@ public class InputManager : MonoBehaviour
             look.Sprint();
         };
 
+        walking.Grappling.started += ctx => hook.Hook();
+        walking.Grappling.canceled += ctx => hook.StopHook();
         //shooting.Shoot.performed += ctx => gun.Shoot();
         shooting.Shoot.started += ctx => StartFiring();
         shooting.Shoot.canceled += ctx => StopFiring();

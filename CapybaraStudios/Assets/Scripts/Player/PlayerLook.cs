@@ -54,7 +54,7 @@ public class PlayerLook : MonoBehaviour
         target.localRotation = Quaternion.Euler(xRotation, 0, 0);
         camera.transform.LookAt(targetPoint);
         //rotate Player for left and right
-        transform.Rotate(Vector3.up * (mouseX * Time.deltaTime) * xSensitivity);
+        //transform.Rotate(Vector3.up * (mouseX * Time.deltaTime) * xSensitivity);
     }
 
     public void Sprint()

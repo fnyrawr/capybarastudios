@@ -80,6 +80,15 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Grappling"",
+                    ""type"": ""Button"",
+                    ""id"": ""d8c3270b-d88f-44e8-9ce5-8d5c95bb2472"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -300,6 +309,17 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""58a85ada-5ddc-4dd2-8897-f33e36e363bb"",
+                    ""path"": ""<Keyboard>/p"",
+                    ""interactions"": ""Hold"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Grappling"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -940,6 +960,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_Walking_Crouch = m_Walking.FindAction("Crouch", throwIfNotFound: true);
         m_Walking_Sprint = m_Walking.FindAction("Sprint", throwIfNotFound: true);
         m_Walking_Interact = m_Walking.FindAction("Interact", throwIfNotFound: true);
+        m_Walking_Grappling = m_Walking.FindAction("Grappling", throwIfNotFound: true);
         // Shooting
         m_Shooting = asset.FindActionMap("Shooting", throwIfNotFound: true);
         m_Shooting_Shoot = m_Shooting.FindAction("Shoot", throwIfNotFound: true);
@@ -1024,6 +1045,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_Walking_Crouch;
     private readonly InputAction m_Walking_Sprint;
     private readonly InputAction m_Walking_Interact;
+    private readonly InputAction m_Walking_Grappling;
     public struct WalkingActions
     {
         private @PlayerInput m_Wrapper;
@@ -1034,6 +1056,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         public InputAction @Crouch => m_Wrapper.m_Walking_Crouch;
         public InputAction @Sprint => m_Wrapper.m_Walking_Sprint;
         public InputAction @Interact => m_Wrapper.m_Walking_Interact;
+        public InputAction @Grappling => m_Wrapper.m_Walking_Grappling;
         public InputActionMap Get() { return m_Wrapper.m_Walking; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1061,6 +1084,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Interact.started -= m_Wrapper.m_WalkingActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_WalkingActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_WalkingActionsCallbackInterface.OnInteract;
+                @Grappling.started -= m_Wrapper.m_WalkingActionsCallbackInterface.OnGrappling;
+                @Grappling.performed -= m_Wrapper.m_WalkingActionsCallbackInterface.OnGrappling;
+                @Grappling.canceled -= m_Wrapper.m_WalkingActionsCallbackInterface.OnGrappling;
             }
             m_Wrapper.m_WalkingActionsCallbackInterface = instance;
             if (instance != null)
@@ -1083,6 +1109,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
+                @Grappling.started += instance.OnGrappling;
+                @Grappling.performed += instance.OnGrappling;
+                @Grappling.canceled += instance.OnGrappling;
             }
         }
     }
@@ -1265,6 +1294,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         void OnCrouch(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnGrappling(InputAction.CallbackContext context);
     }
     public interface IShootingActions
     {

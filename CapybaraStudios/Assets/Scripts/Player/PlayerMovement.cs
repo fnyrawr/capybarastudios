@@ -9,10 +9,7 @@ public class PlayerMovement : MonoBehaviour
     private CharacterController controller;
     private Camera camera;
     //movement
-    private Vector3 playerVelocity;
-
-    private bool isGrounded;
-
+    private float playerVelocity;
     //crouching
     private bool crouching = false;
 
@@ -24,8 +21,10 @@ public class PlayerMovement : MonoBehaviour
     public float sprintingSpeed = 15f;
     public float jumpHeight = 2f;
     public float gravity = -40f;
-
-
+    //hook
+    [NonSerialized] public bool hooked;
+    
+    
     public Transform Target;
 
     private Animator _animator;
@@ -52,6 +51,14 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+            //constant downward (gravity)
+        playerVelocity += (gravity * Time.deltaTime);
+        if (controller.isGrounded && playerVelocity < 0)
+        {
+            playerVelocity = -2f;
+        }
+        controller.Move(new Vector3(0, playerVelocity * Time.deltaTime,0));
+
         if (controller.isGrounded)
         {
             _animator.SetBool("isFalling", false);
@@ -59,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             isJumping = false;
-            if (isGrounded) //if the player was grounded in the previous update but nor now, meaning he jumped now
+            if (controller.isGrounded) //if the player was grounded in the previous update but nor now, meaning he jumped now
             {
                 isJumping = true;
                 _animator.SetBool("isFalling", false);
@@ -72,32 +79,19 @@ public class PlayerMovement : MonoBehaviour
 
             _animator.SetBool("isJumping", isJumping);
         }
-
-        isGrounded = controller.isGrounded;
-        _animator.SetBool("isGrounded", isGrounded);
+        _animator.SetBool("isGrounded", controller.isGrounded);
     }
 
     public void ProcessMove(Vector2 input)
     {
+        if(hooked) return;
         Vector3 moveDirection = Vector3.zero;
         moveDirection.x = input.x;
         //translate vertical mocement to forwards/backwards movement
         moveDirection.z = input.y;
         //if player walks backwards speed can only be speed, else also sprintingSpeed
         var actualSpeed = input.y < 0 ? speed : sprinting ? sprintingSpeed : speed;
-        controller.Move(actualSpeed * Time.deltaTime *
-                        transform.TransformDirection(moveDirection));
-
-        //constant downward (gravity)
-        playerVelocity.y += gravity * Time.deltaTime;
-        if (isGrounded && playerVelocity.y < 0)
-        {
-            playerVelocity.y = -2f;
-        }
-
-        controller.Move(playerVelocity * Time.deltaTime);
-
-
+        controller.Move(actualSpeed * Time.deltaTime * transform.TransformDirection(moveDirection));
         //general animation controlling
         var s = sprinting ? 4 : 1;
         if (input.x > 0 && _velocityX < input.x || input.x < 0 && _velocityX > input.x)
@@ -134,9 +128,9 @@ public class PlayerMovement : MonoBehaviour
 
     public void Jump()
     {
-        if (isGrounded)
+        if (controller.isGrounded)
         {
-            playerVelocity.y = Mathf.Sqrt(jumpHeight * -3.0f * gravity);
+            playerVelocity = Mathf.Sqrt(jumpHeight * -3.0f * gravity);
         }
     }
 

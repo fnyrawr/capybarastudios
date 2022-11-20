@@ -58,6 +58,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Grappling",
+                    "type": "Button",
+                    "id": "d8c3270b-d88f-44e8-9ce5-8d5c95bb2472",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -278,6 +287,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "58a85ada-5ddc-4dd2-8897-f33e36e363bb",
+                    "path": "<Keyboard>/p",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Grappling",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
