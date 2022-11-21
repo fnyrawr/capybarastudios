@@ -8,7 +8,6 @@ using UnityEngine.Animations.Rigging;
 public class GunScript : MonoBehaviour
 {
     public Transform gunSlot;
-    public TwoBoneIKConstraint rightTarget;
     public TwoBoneIKConstraint leftTarget;
     public RigBuilder rigBuilder;
     private bool hasPrimary = false;
@@ -196,7 +195,8 @@ public class GunScript : MonoBehaviour
         gun.GetComponent<Rigidbody>().isKinematic = true;
         gun.GetComponent<BoxCollider>().enabled = false;
         gun.transform.SetParent(gunSlot);
-        leftTarget.data.target = gun.transform.Find("ref_left_hand_target");
+        var temp = gun.transform.Find("ref_left_hand_target");
+        leftTarget.data.target = temp ? temp : null;
         rigBuilder.Build();
         gun.transform.localRotation = Quaternion.Euler(0, 0, 0);
         gun.transform.localPosition = new Vector3(0, 0, 0);
