@@ -2,14 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PickUp : Interactable
+public class Weapon : Interactable
 {
-    public GameObject button;
-    public bool isPrimary;
-    public bool isSecondary;
+    public int weaponType;
+
+    //rifile = 1
+    //pistol = 2
+    //knife = 3
     // Start is called before the first frame update
     void Start()
     {
+        message = "Pick up [E]";
     }
 
     // Update is called once per frame

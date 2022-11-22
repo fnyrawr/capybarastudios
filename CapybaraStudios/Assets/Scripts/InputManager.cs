@@ -27,11 +27,13 @@ public class InputManager : MonoBehaviour
         //
         walking.Jump.performed += ctx => movement.Jump();
 
-        walking.Crouch.performed += ctx => {
+        walking.Crouch.performed += ctx =>
+        {
             movement.Crouch();
             look.Crouch();
-        }; 
-        walking.Sprint.performed += ctx => {
+        };
+        walking.Sprint.performed += ctx =>
+        {
             movement.Sprint();
             look.Sprint();
         };
@@ -78,6 +80,7 @@ public class InputManager : MonoBehaviour
     {
         fireCoroutine = StartCoroutine(gun.RapidFire());
     }
+
     void StopFiring()
     {
         if (fireCoroutine != null)
@@ -85,5 +88,4 @@ public class InputManager : MonoBehaviour
             StopCoroutine(fireCoroutine);
         }
     }
-
 }

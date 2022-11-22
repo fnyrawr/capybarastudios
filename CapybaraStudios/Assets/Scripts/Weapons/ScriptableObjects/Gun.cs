@@ -5,7 +5,7 @@ using System;
 using TMPro;
 using UnityEngine.Animations.Rigging;
 
-[CreateAssetMenu(fileName ="New Gun", menuName ="Gun")]
+[CreateAssetMenu(fileName = "New Gun", menuName = "Gun")]
 public class Gun : ScriptableObject
 {
     public new Camera camera;
@@ -110,8 +110,6 @@ public class Gun : ScriptableObject
 
         //Invoke("ResetShot", timeBetweenShooting);
 
-      
-
 
         //
 
@@ -150,6 +148,7 @@ public class Gun : ScriptableObject
         readyToShoot = true;
         //Invoke("ReloadFinished", reloadTime);
     }
+
     private void ReloadFinished()
     {
         bulletsLeft = magazineSize;
@@ -157,13 +156,12 @@ public class Gun : ScriptableObject
     }
 
 
-
-
     //hitmarker show and disable
     public void HitShow()
     {
         hitmarker.SetActive(true);
     }
+
     public void HitDisable()
     {
         hitmarker.SetActive(false);

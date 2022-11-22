@@ -21,10 +21,10 @@ public class animationState : MonoBehaviour
     void changeWeapon(string newWeapon)
     {
         if (newWeapon == weaponType) return;
-        var newW= animator.GetLayerIndex(newWeapon);
+        var newW = animator.GetLayerIndex(newWeapon);
         var oldW = animator.GetLayerIndex(weaponType);
-        animator.SetLayerWeight(newW,1);
-        animator.SetLayerWeight(oldW,0);
+        animator.SetLayerWeight(newW, 1);
+        animator.SetLayerWeight(oldW, 0);
         weaponType = newWeapon;
     }
 }

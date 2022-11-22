@@ -39,6 +39,10 @@ public class GunScript : MonoBehaviour
     private WaitForSeconds rapidFireWait;
     private int controllerMask = ~(1 << 15);
 
+    public Animator animator;
+    public GameObject[] Weapons = new GameObject[4];
+    public int selectedWeapon = 0;
+
     private void Awake()
     {
         bulletsLeft = magazineSize;
@@ -137,7 +141,8 @@ public class GunScript : MonoBehaviour
                 yield return rapidFireWait;
             }
         }
-        else {
+        else
+        {
             Shoot();
             yield return null;
         }
@@ -151,6 +156,7 @@ public class GunScript : MonoBehaviour
         readyToShoot = true;
         Invoke("ReloadFinished", reloadTime);
     }
+
     private void ReloadFinished()
     {
         bulletsLeft = magazineSize;
@@ -158,26 +164,22 @@ public class GunScript : MonoBehaviour
     }
 
 
-
-
     //hitmarker show and disable
     public void HitShow()
     {
         hitmarker.SetActive(true);
     }
+
     public void HitDisable()
     {
         hitmarker.SetActive(false);
     }
 
 
-
-
-
     //gun pickup and discard
-    public void ditchGun()
+    public void ditchGun(int weaponType)
     {
-        if (hasGun)
+        if (Weapons[weaponType])
         {
             var oldGun = gunSlot.GetChild(0);
             oldGun.SetParent(null);
@@ -189,26 +191,51 @@ public class GunScript : MonoBehaviour
 
     public void pickUp(GameObject gun)
     {
-        ditchGun();
         Debug.Log(gun.name + " aquired");
-        hasGun = true;
+        var weaponType = gun.GetComponent<Weapon>().weaponType;
+        ditchGun(weaponType);
         gun.GetComponent<Rigidbody>().isKinematic = true;
         gun.GetComponent<BoxCollider>().enabled = false;
-        gun.transform.SetParent(gunSlot);
-        var temp = gun.transform.Find("ref_left_hand_target");
+        Weapons[weaponType] = gun;
+        changeWeapon(weaponType);
+    }
+
+    public void hideGun()
+    {
+        try
+        {
+            var gun = gunSlot.GetChild(0);
+            gun.SetParent(null);
+            gun.gameObject.SetActive(false);
+        }
+        catch (UnityException e)
+        {
+        }
+    }
+
+    public void changeWeapon(int weaponType)
+    {
+        hideGun();
+        selectedWeapon = weaponType;
+        animator.SetInteger("weaponType", weaponType);
+        Weapons[weaponType].transform.SetParent(gunSlot);
+        gunSlot.GetChild(0).gameObject.SetActive(true);
+        var temp = Weapons[weaponType].transform.Find("ref_left_hand_target");
         leftTarget.data.target = temp ? temp : null;
         rigBuilder.Build();
-        gun.transform.localRotation = Quaternion.Euler(0, 0, 0);
-        gun.transform.localPosition = new Vector3(0, 0, 0);
+        Weapons[weaponType].transform.localRotation = Quaternion.Euler(0, 0, 0);
+        Weapons[weaponType].transform.localPosition = new Vector3(0, 0, 0);
     }
 
-    public void EquipKnife() {
+    public void EquipKnife()
+    {
+    }
 
+    public void EquipPrimary()
+    {
     }
-    public void EquipPrimary() {
-        
-    }
-    public void EquipSecondary() {
-        
+
+    public void EquipSecondary()
+    {
     }
 }

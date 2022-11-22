@@ -7,7 +7,9 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private CharacterController controller;
+
     private Camera camera;
+
     //movement
     private Vector3 playerVelocity;
 
@@ -142,14 +144,14 @@ public class PlayerMovement : MonoBehaviour
 
     public void Crouch()
     {
-        if(sprinting) return;
+        if (sprinting) return;
         crouching = !crouching;
         _animator.SetBool(_isCrouchingHash, crouching);
     }
 
     public void Sprint()
     {
-        if(crouching) return;
+        if (crouching) return;
         sprinting = !sprinting;
     }
 }
