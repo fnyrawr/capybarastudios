@@ -3863,6 +3863,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &2008389618 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2683844301580364481, guid: 219113d5ecb909542859ea45569e71ee, type: 3}
+  m_PrefabInstance: {fileID: 1826038556645919013}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2013610510
 GameObject:
   m_ObjectHideFlags: 0
@@ -4395,6 +4400,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8192357582531077093, guid: 7d791ce83ceac9f4896a9b1222c5d24c, type: 3}
+      propertyPath: weaponType
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d791ce83ceac9f4896a9b1222c5d24c, type: 3}
 --- !u!1001 &415809113421211241
@@ -4465,6 +4474,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 345428251294760006, guid: 219113d5ecb909542859ea45569e71ee, type: 3}
+      propertyPath: Weapons.Array.size
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 345428251294760009, guid: 219113d5ecb909542859ea45569e71ee, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -4508,6 +4521,22 @@ PrefabInstance:
     - target: {fileID: 345428251294760009, guid: 219113d5ecb909542859ea45569e71ee, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1826038555344119281, guid: 219113d5ecb909542859ea45569e71ee, type: 3}
+      propertyPath: m_Data.m_UpAxis
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1826038555344119281, guid: 219113d5ecb909542859ea45569e71ee, type: 3}
+      propertyPath: m_Data.m_AimAxis
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1826038555344119281, guid: 219113d5ecb909542859ea45569e71ee, type: 3}
+      propertyPath: m_Data.m_ConstrainedObject
+      value: 
+      objectReference: {fileID: 2008389618}
+    - target: {fileID: 1826038555344119287, guid: 219113d5ecb909542859ea45569e71ee, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1826038556649917979, guid: 219113d5ecb909542859ea45569e71ee, type: 3}
       propertyPath: m_Data.m_ConstrainedObject
@@ -4569,6 +4598,14 @@ PrefabInstance:
     - target: {fileID: 7816448150523043393, guid: ff23f72474dc317438674a80aa8f8dfe, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8887314444471694321, guid: ff23f72474dc317438674a80aa8f8dfe, type: 3}
+      propertyPath: message
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8887314444471694321, guid: ff23f72474dc317438674a80aa8f8dfe, type: 3}
+      propertyPath: weaponType
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff23f72474dc317438674a80aa8f8dfe, type: 3}
