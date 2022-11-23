@@ -1,14 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 using TMPro;
-using UnityEngine.Animations.Rigging;
 
-[CreateAssetMenu(fileName = "New Gun", menuName = "Gun")]
-public class Gun : ScriptableObject
+public class SpecificWeaponScript : MonoBehaviour
 {
-    /*
     public new Camera camera;
 
     //Gun stats
@@ -43,7 +39,7 @@ public class Gun : ScriptableObject
     void Update()
     {
         //update ammo
-        ammoText.SetText(bulletsLeft + " / " + magazineSize);
+        //ammoText.SetText(bulletsLeft + " / " + magazineSize);
     }
 
     public void Shoot()
@@ -58,10 +54,11 @@ public class Gun : ScriptableObject
         readyToShoot = false;
 
         //Spread
-        float x = UnityEngine.Random.Range(-spread, spread);
-        float y = UnityEngine.Random.Range(-spread, spread);
+        float x = Random.Range(-spread, spread);
+        float y = Random.Range(-spread, spread);
+        float z = Random.Range(-spread, spread);
         //Calculate Direction with Spread
-        Vector3 direction = camera.transform.forward + new Vector3(x, y, 0);
+        Vector3 direction = camera.transform.forward + new Vector3(x, y, z);
 
         //hit and damage calc
         if (Physics.Raycast(camera.transform.position, direction, out RaycastHit hit, range,
@@ -86,7 +83,7 @@ public class Gun : ScriptableObject
 
                     //Hitmarker
                     HitShow();
-                    //Invoke(nameof(HitDisable), 0.2f);
+                    Invoke(nameof(HitDisable), 0.2f);
                 }
             }
         }
@@ -102,6 +99,7 @@ public class Gun : ScriptableObject
         //magazine
         bulletsLeft--;
         bulletsShot--;
+        ammoText.SetText(bulletsLeft + " / " + magazineSize);
         if (bulletsShot > 0 && bulletsLeft > 0)
         {
             readyToShoot = true;
@@ -109,10 +107,7 @@ public class Gun : ScriptableObject
             return;
         }
 
-        //Invoke("ResetShot", timeBetweenShooting);
-
-
-        //
+        Invoke("ResetShot", timeBetweenShooting);
 
         bulletsShot = bulletsPerTap;
     }
@@ -147,15 +142,15 @@ public class Gun : ScriptableObject
         Debug.Log("Reload");
         reloading = true;
         readyToShoot = true;
-        //Invoke("ReloadFinished", reloadTime);
+        Invoke("ReloadFinished", reloadTime);
     }
 
     private void ReloadFinished()
     {
         bulletsLeft = magazineSize;
+        ammoText.SetText(bulletsLeft + " / " + magazineSize);
         reloading = false;
     }
-
 
     //hitmarker show and disable
     public void HitShow()
@@ -167,5 +162,4 @@ public class Gun : ScriptableObject
     {
         hitmarker.SetActive(false);
     }
-    */
 }

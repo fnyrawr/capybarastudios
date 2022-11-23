@@ -12,6 +12,7 @@ public class InputManager : MonoBehaviour
     private PlayerMovement movement;
     private GunScript gun;
     private PlayerLook look;
+    private SpecificWeaponScript specifcWeapon;
 
     Coroutine fireCoroutine;
 
@@ -24,7 +25,14 @@ public class InputManager : MonoBehaviour
         movement = GetComponent<PlayerMovement>();
         look = GetComponent<PlayerLook>();
         gun = GetComponent<GunScript>();
+        if (GetComponentInChildren<SpecificWeaponScript>() != null)
+        {
+            specifcWeapon = GetComponentInChildren<SpecificWeaponScript>();
+            Debug.Log("SpecificWeaponScript gefunden");
+        }
+            
         //
+
         walking.Jump.performed += ctx => movement.Jump();
 
         walking.Crouch.performed += ctx =>
@@ -38,12 +46,13 @@ public class InputManager : MonoBehaviour
             look.Sprint();
         };
 
-        //shooting.Shoot.performed += ctx => gun.Shoot();
         shooting.Shoot.started += ctx => StartFiring();
         shooting.Shoot.canceled += ctx => StopFiring();
 
-        shooting.Reload.performed += ctx => gun.Reload();
-        shooting.Shoot.performed += ctx => gun.Shoot();
+        //shooting.Reload.performed += ctx => gun.Reload();
+        //shooting.Shoot.performed += ctx => gun.Shoot();
+        shooting.Reload.performed += ctx => specifcWeapon.Reload();
+        shooting.Shoot.performed += ctx => specifcWeapon.Shoot();
 
         shooting.EquipPrimary.performed += ctx => gun.EquipPrimary();
         shooting.EquipPrimary.performed += ctx => gun.EquipSecondary();
@@ -78,7 +87,8 @@ public class InputManager : MonoBehaviour
     //For Rapid Fire
     void StartFiring()
     {
-        fireCoroutine = StartCoroutine(gun.RapidFire());
+        //fireCoroutine = StartCoroutine(gun.RapidFire());
+        fireCoroutine = StartCoroutine(specifcWeapon.RapidFire());
     }
 
     void StopFiring()
