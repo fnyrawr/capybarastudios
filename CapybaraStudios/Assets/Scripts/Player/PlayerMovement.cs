@@ -7,7 +7,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private CharacterController controller;
-
+    [SerializeField] InputManager _input;
     private Camera camera;
 
     //movement
@@ -53,14 +53,10 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-            //constant downward (gravity)
-        playerVelocity += (gravity * Time.deltaTime);
-        if (controller.isGrounded && playerVelocity < 0)
-        {
-            playerVelocity = -2f;
-        }
-        controller.Move(new Vector3(0, playerVelocity * Time.deltaTime,0));
-
+        ProcessMovement(_input.MoveInput);
+        Crouch();
+        Sprint();
+        Jump();
         if (controller.isGrounded)
         {
             _animator.SetBool("isFalling", false);
@@ -83,10 +79,8 @@ public class PlayerMovement : MonoBehaviour
         }
         _animator.SetBool("isGrounded", controller.isGrounded);
     }
-
-    public void ProcessMove(Vector2 input)
+    public void ProcessMovement(Vector2 input)
     {
-        if(hooked) return;
         Vector3 moveDirection = Vector3.zero;
         moveDirection.x = input.x;
         //translate vertical mocement to forwards/backwards movement
@@ -94,6 +88,15 @@ public class PlayerMovement : MonoBehaviour
         //if player walks backwards speed can only be speed, else also sprintingSpeed
         var actualSpeed = input.y < 0 ? speed : sprinting ? sprintingSpeed : speed;
         controller.Move(actualSpeed * Time.deltaTime * transform.TransformDirection(moveDirection));
+
+        //constant downward (gravity)
+        playerVelocity += (gravity * Time.deltaTime);
+        if (controller.isGrounded && playerVelocity < 0)
+        {
+            playerVelocity = -2f;
+        }
+        controller.Move(new Vector3(0, playerVelocity * Time.deltaTime, 0));
+        
         //general animation controlling
         var s = sprinting ? 4 : 1;
         if (input.x > 0 && _velocityX < input.x || input.x < 0 && _velocityX > input.x)
@@ -130,7 +133,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Jump()
     {
-        if (controller.isGrounded)
+        if (controller.isGrounded && _input.JumpInput)
         {
             playerVelocity = Mathf.Sqrt(jumpHeight * -3.0f * gravity);
         }
@@ -139,13 +142,13 @@ public class PlayerMovement : MonoBehaviour
     public void Crouch()
     {
         if (sprinting) return;
-        crouching = !crouching;
+        crouching = _input.CrouchInput;
         _animator.SetBool(_isCrouchingHash, crouching);
     }
 
     public void Sprint()
     {
         if (crouching) return;
-        sprinting = !sprinting;
+        sprinting = _input.SprintInput;
     }
 }

@@ -114,8 +114,8 @@ GameObject:
   m_Component:
   - component: {fileID: 345428251294760009}
   - component: {fileID: 345428251294760010}
-  - component: {fileID: 345428251294760011}
   - component: {fileID: 345428251294760004}
+  - component: {fileID: 345428251294760011}
   - component: {fileID: 345428251294760005}
   - component: {fileID: 345428251294760006}
   - component: {fileID: 345428251294760007}
@@ -165,24 +165,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1.225, z: 0}
---- !u!114 &345428251294760011
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 345428251294760003}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e28f94d14e9915e4aa928284f2b04e39, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 7
-  sprintingSpeed: 15
-  jumpHeight: 2
-  gravity: -40
-  Target: {fileID: 5771476182261601894}
-  _animationTransitionSpeed: 3
 --- !u!114 &345428251294760004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,6 +177,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e1bd1417aa7705428937fd1c202ca8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &345428251294760011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 345428251294760003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e28f94d14e9915e4aa928284f2b04e39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _input: {fileID: 0}
+  speed: 7
+  sprintingSpeed: 15
+  jumpHeight: 2
+  gravity: -40
+  Target: {fileID: 5771476182261601894}
+  _animationTransitionSpeed: 3
 --- !u!114 &345428251294760005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,6 +215,7 @@ MonoBehaviour:
   targetPoint: {fileID: 7238598028142296363}
   baseFOV: 60
   sprintingFOV: 1.15
+  _input: {fileID: 0}
 --- !u!114 &345428251294760006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,18 +232,6 @@ MonoBehaviour:
   leftTarget: {fileID: 1826038555967572468}
   rigBuilder: {fileID: 2654305491134493395}
   camera: {fileID: 345428251545214733}
-  damage: 10
-  spread: 0.03
-  range: 100
-  reloadTime: 1
-  fireRate: 20
-  timeBetweenShooting: 0
-  magazineSize: 50
-  bulletsPerTap: 1
-  rapidFireEnabled: 1
-  hitmarker: {fileID: 345428252260990251}
-  bulletHoleGraphic: {fileID: 2987797164400997647, guid: cdd64dc8e7f243b49829c5817ce597bb, type: 3}
-  ammoText: {fileID: 345428252897685917}
   animator: {fileID: 5459488074489135431}
   Weapons:
   - {fileID: 0}
