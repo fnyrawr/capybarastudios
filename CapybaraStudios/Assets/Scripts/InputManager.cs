@@ -31,7 +31,8 @@ public class InputManager : MonoBehaviour
         walking.Crouch.performed += ctx => {
             movement.Crouch();
             look.Crouch();
-        }; 
+        };
+        
         walking.Sprint.performed += ctx => {
             movement.Sprint();
             look.Sprint();
@@ -51,18 +52,13 @@ public class InputManager : MonoBehaviour
         shooting.EquipPrimary.performed += ctx => gun.EquipKnife();
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    private void Update()
     {
-        //move with PlayerMovement by the value of the movement action
         movement.ProcessMove(walking.Movement.ReadValue<Vector2>());
-    }
-
-    private void LateUpdate()
-    {
         look.ProcessLook(walking.LookAround.ReadValue<Vector2>());
     }
-
+    private void LateUpdate() {
+    }
     //walking
     private void OnEnable()
     {
