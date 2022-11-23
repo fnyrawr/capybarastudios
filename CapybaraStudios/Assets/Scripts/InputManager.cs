@@ -43,7 +43,6 @@ public class InputManager : MonoBehaviour
             look.Crouch();
         };
         
-        walking.Sprint.performed += ctx => {
         walking.Sprint.performed += ctx =>
         {
             movement.Sprint();
