@@ -28,9 +28,11 @@ public class SpecificWeaponScript : MonoBehaviour
 
     private WaitForSeconds rapidFireWait;
     private int controllerMask = ~(1 << 15);
-
+    private Animator _animator;
+    
     private void Awake()
     {
+        _animator = transform.parent.parent.GetChild(0).GetComponent<Animator>();
         bulletsLeft = magazineSize;
         readyToShoot = true;
         rapidFireWait = new WaitForSeconds(1 / fireRate);
@@ -50,7 +52,7 @@ public class SpecificWeaponScript : MonoBehaviour
         if (!readyToShoot || reloading || bulletsLeft <= 0) return;
 
         Debug.Log("Shoot!");
-
+        _animator.Play("Firing Rifle",1);
         readyToShoot = false;
 
         //Spread
