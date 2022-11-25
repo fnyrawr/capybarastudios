@@ -11,7 +11,10 @@ public class GrapplingGun : MonoBehaviour
     // Start is called before the first frame update
     private Vector3 hookPos;
     private bool hooked;
-    [SerializeField] private int hookSpeed = 30;
+    private float hookSpeed = 0;
+    private Vector3 hookDir;
+    [SerializeField] float speedMin = 25f;
+    [SerializeField] float speedMax = 60f;
     void Awake()
     {
         playerCam = transform.parent.GetComponentInChildren<Camera>();
@@ -41,10 +44,17 @@ public class GrapplingGun : MonoBehaviour
     public void StopHook() {
         hooked = false;
         playerMovement.hooked = false;
+        playerMovement.midAirMomentum = hookSpeed * hookDir;
     }
 
     private void HandleHookMovement() {
-        Vector3 dir = (hookPos - transform.parent.transform.position).normalized;
-        playerController.Move(dir * Time.deltaTime * hookSpeed);
+        hookDir = (hookPos - transform.parent.transform.position).normalized;
+        hookSpeed = Mathf.Clamp(Vector3.Distance(transform.position, hookPos), speedMin, speedMax);
+        playerController.Move(hookDir * Time.deltaTime * hookSpeed);
+
+        float closestDistance = 3f; //set to different value if player shouldnt perma grapple to wall
+        if(Vector3.Distance(transform.position, hookPos) <= closestDistance) {
+            hookSpeed = 0f;
+        }
     }
 }

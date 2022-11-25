@@ -39,12 +39,10 @@ public class InputManager : MonoBehaviour
 
         walking.Grappling.started += ctx => hook.Hook();
         walking.Grappling.canceled += ctx => hook.StopHook();
-        //shooting.Shoot.performed += ctx => gun.Shoot();
+
         shooting.Shoot.started += ctx => StartFiring();
         shooting.Shoot.canceled += ctx => StopFiring();
 
-        //shooting.Reload.performed += ctx => gun.Reload();
-        //shooting.Shoot.performed += ctx => gun.Shoot();
         shooting.Reload.performed += ctx => specifcWeapon.Reload();
         shooting.Shoot.performed += ctx => specifcWeapon.Shoot();
 
