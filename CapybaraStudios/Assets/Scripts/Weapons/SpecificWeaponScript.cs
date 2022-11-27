@@ -52,7 +52,7 @@ public class SpecificWeaponScript : MonoBehaviour
         if (!readyToShoot || reloading || bulletsLeft <= 0) return;
 
         Debug.Log("Shoot!");
-        _animator.Play("Firing Rifle",1);
+        _animator.SetTrigger("shoot");
         readyToShoot = false;
 
         //Spread
