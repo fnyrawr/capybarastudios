@@ -17,6 +17,8 @@ public class GunScript : MonoBehaviour
 
     public WeaponAnimationController weaponAnimator;
     public GameObject[] Weapons = new GameObject[4];
+
+    public GameObject[] AllWeapons = new GameObject[4];
     public GameObject[] PrimaryWeapons = new GameObject[4];
     public int selectedWeapon = 0;
     public int selectedPrimaryWeapon = 0;
@@ -82,12 +84,12 @@ public class GunScript : MonoBehaviour
 
     public void EquipWeapon(int index)
     {
-        foreach (var item in Weapons)
+        foreach (var item in AllWeapons)
         {
             item.SetActive(false);
         }
-        Weapons[index].SetActive(true);
-        selectedWeapon = index;
+        AllWeapons[index].SetActive(true);
+        //selectedWeapon = index;
     }
 
     public void EquipPrimary(int index)

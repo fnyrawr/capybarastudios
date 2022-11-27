@@ -30,10 +30,8 @@ public class InputManager : MonoBehaviour
         shooting = playerInput.Shooting;
         gun = GetComponent<GunScript>();
         hook = GetComponentInChildren<GrapplingGun>();
-        if (GetComponentInChildren<SpecificWeaponScript>() != null)
-        {
-            updateWeaponScript();
-        }
+        updateWeaponScript();
+        
 
         walking.Grappling.started += ctx => hook.Hook();
         walking.Grappling.canceled += ctx => hook.StopHook();
@@ -132,8 +130,11 @@ public class InputManager : MonoBehaviour
 
     public void updateWeaponScript()
     {
-        specificWeapon = GetComponentInChildren<SpecificWeaponScript>();
-        specificWeapon.ShowAmmo();
-        Debug.Log("SpecificWeaponScript gefunden");
+        if (GetComponentInChildren<SpecificWeaponScript>() != null)
+        {
+            specificWeapon = GetComponentInChildren<SpecificWeaponScript>();
+            specificWeapon.ShowAmmo();
+            Debug.Log("SpecificWeaponScript gefunden");
+        }
     }
 }
