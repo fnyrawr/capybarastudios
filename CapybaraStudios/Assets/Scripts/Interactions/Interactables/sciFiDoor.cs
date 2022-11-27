@@ -20,9 +20,9 @@ public class sciFiDoor : Interactable
         
     }
 
-    protected override void Interact()
+    protected override void Interact(GameObject player)
     {
-        Debug.Log("Interacted with " + button.name);
+        Debug.Log(player.name + "interacted with " + gameObject.name);
         var buttonRenderer = button.GetComponent<Renderer>();
         if(buttonRenderer.material.color.Equals(Color.red)) {
             buttonRenderer.material.SetColor("_Color", Color.green);

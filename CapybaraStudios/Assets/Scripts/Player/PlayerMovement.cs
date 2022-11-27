@@ -8,6 +8,8 @@ public class PlayerMovement : MonoBehaviour
 {
     private CharacterController controller;
 
+    private Camera camera;
+
     //movement
     private Vector3 playerVelocity;
 
@@ -15,9 +17,6 @@ public class PlayerMovement : MonoBehaviour
 
     //crouching
     private bool crouching = false;
-    private bool lerpCrouch;
-
-    private float crouchTimer = 0;
 
     //sprinting
     private bool sprinting = false;
@@ -28,6 +27,8 @@ public class PlayerMovement : MonoBehaviour
     public float jumpHeight = 2f;
     public float gravity = -40f;
 
+
+    public Transform Target;
 
     private Animator _animator;
     private int _isCrouchingHash;
@@ -76,23 +77,6 @@ public class PlayerMovement : MonoBehaviour
 
         isGrounded = controller.isGrounded;
         _animator.SetBool("isGrounded", isGrounded);
-
-        if (lerpCrouch)
-        {
-            crouchTimer += Time.deltaTime;
-            float p = crouchTimer / 1;
-            p *= p;
-            if (crouching)
-                controller.height = Mathf.Lerp(controller.height, 1, p);
-            else
-                controller.height = Mathf.Lerp(controller.height, 2, p);
-
-            if (p > 1)
-            {
-                lerpCrouch = false;
-                crouchTimer = 0f;
-            }
-        }
     }
 
     public void ProcessMove(Vector2 input)
@@ -160,14 +144,14 @@ public class PlayerMovement : MonoBehaviour
 
     public void Crouch()
     {
+        if (sprinting) return;
         crouching = !crouching;
         _animator.SetBool(_isCrouchingHash, crouching);
-        crouchTimer = 0;
-        //lerpCrouch = true;
     }
 
     public void Sprint()
     {
+        if (crouching) return;
         sprinting = !sprinting;
     }
 }

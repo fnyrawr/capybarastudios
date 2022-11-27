@@ -1,78 +1,97 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Animations.Rigging;
 
 public class GunScript : MonoBehaviour
 {
-    public float damage = 10;
-    public float range = 100f;
-    public int ammo = 30;
+    public Transform gunSlot;
+    public TwoBoneIKConstraint leftTarget;
+    public RigBuilder rigBuilder;
+    private bool hasPrimary = false;
+    private bool hasSecondary = false;
+
+    private bool hasGun = false;
 
     public new Camera camera;
 
-    public GameObject hitmarker;
-    public float distance;
 
-    //HUD
-    public TextMeshProUGUI ammoText;
+    public Animator animator;
+    public GameObject[] Weapons = new GameObject[4];
+    public int selectedWeapon = 0;
 
-    private int controllerMask = ~(1 << 15);
+    private void Awake()
+    {
+        
+    }
 
     void Update()
     {
+        
     }
 
-    public void Shoot()
+    //gun pickup and discard
+    public void ditchGun(int weaponType)
     {
-        //Debug.Log("Shoot!");
-
-        ammo--;
-        ammoText.text = ammo.ToString() + " / 30";
-        if (ammo == 0)
+        if (Weapons[weaponType])
         {
-            ammo = 30;
-            ammoText.text = ammo.ToString() + " / 30";
-        }
-
-        if (Physics.Raycast(camera.transform.position, camera.transform.forward, out RaycastHit hit, range,
-                controllerMask))
-        {
-            Debug.Log(hit.transform.name);
-
-            GameObject collisionObject = hit.collider.gameObject;
-
-            if (collisionObject.CompareTag("Head") || collisionObject.CompareTag("Body") ||
-                collisionObject.CompareTag("Limbs"))
-            {
-                //does object have stats?
-                if (collisionObject.GetComponent<PlayerStats>() == null) return;
-                //deal damage
-                float hitMultiplier = 1;
-                if (collisionObject.CompareTag("Head")) hitMultiplier = 3;
-                if (collisionObject.CompareTag("Limbs")) hitMultiplier = 0.75f;
-                int finalDamage = (int)(damage * hitMultiplier);
-                collisionObject.GetComponent<PlayerStats>().TakeDamage(finalDamage);
-
-                //Hitmarker
-                HitShow();
-                Invoke(nameof(HitDisable), 0.2f);
-            }
-        }
-        else
-        {
-            Debug.Log("Not hit");
+            var oldGun = gunSlot.GetChild(0);
+            oldGun.SetParent(null);
+            oldGun.GetComponent<Rigidbody>().isKinematic = false;
+            oldGun.GetComponent<BoxCollider>().enabled = true;
+            Debug.Log(oldGun.name + " ditched");
         }
     }
 
-
-    public void HitShow()
+    public void pickUp(GameObject gun)
     {
-        hitmarker.SetActive(true);
+        Debug.Log(gun.name + " aquired");
+        var weaponType = gun.GetComponent<Weapon>().weaponType;
+        ditchGun(weaponType);
+        gun.GetComponent<Rigidbody>().isKinematic = true;
+        gun.GetComponent<BoxCollider>().enabled = false;
+        Weapons[weaponType] = gun;
+        changeWeapon(weaponType);
     }
 
-    public void HitDisable()
+    public void hideGun()
     {
-        hitmarker.SetActive(false);
+        try
+        {
+            var gun = gunSlot.GetChild(0);
+            gun.SetParent(null);
+            gun.gameObject.SetActive(false);
+        }
+        catch (UnityException e)
+        {
+        }
+    }
+
+    public void changeWeapon(int weaponType)
+    {
+        hideGun();
+        selectedWeapon = weaponType;
+        animator.SetInteger("weaponType", weaponType);
+        Weapons[weaponType].transform.SetParent(gunSlot);
+        gunSlot.GetChild(0).gameObject.SetActive(true);
+        var temp = Weapons[weaponType].transform.Find("ref_left_hand_target");
+        leftTarget.data.target = temp ? temp : null;
+        rigBuilder.Build();
+        Weapons[weaponType].transform.localRotation = Quaternion.Euler(0, 0, 0);
+        Weapons[weaponType].transform.localPosition = new Vector3(0, 0, 0);
+    }
+
+    public void EquipKnife()
+    {
+    }
+
+    public void EquipPrimary()
+    {
+    }
+
+    public void EquipSecondary()
+    {
     }
 }

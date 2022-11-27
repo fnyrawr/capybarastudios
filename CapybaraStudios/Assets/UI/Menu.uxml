@@ -1,0 +1,16 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/MenuStyles.uss?fileID=7433441132597879392&amp;guid=a03f6df90bdd04875a57120deb87c5d6&amp;type=3#MenuStyles" />
+    <ui:VisualElement name="Menu" style="flex-grow: 1; flex-direction: row;">
+        <ui:VisualElement name="LeftSection" style="background-color: rgba(0, 0, 0, 0.45); width: 45%; height: 100%; margin-left: 50px; align-items: center;">
+            <ui:VisualElement name="Logo" style="background-image: url(&apos;project://database/Assets/UI/GameNamePlaceholder.png?fileID=2800000&amp;guid=ee3fdc5f0c5b749208a54614e97be8aa&amp;type=3#GameNamePlaceholder&apos;); width: 100%; height: 30%; justify-content: flex-end;" />
+            <ui:VisualElement name="Buttons" style="height: 100px; width: 415px; align-items: center; flex-grow: 1; justify-content: center; padding-bottom: 20%;">
+                <ui:Button text="Play" display-tooltip-when-elided="true" name="PlayButton" class="menu-button" style="width: 395px;" />
+                <ui:Button text="Settings" display-tooltip-when-elided="true" name="SettingsButton" class="menu-button" style="width: 404px;" />
+                <ui:Button text="Exit" display-tooltip-when-elided="true" name="ExitButton" class="menu-button" style="width: 396px;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="RightSection" style="flex-grow: 1; align-items: flex-end; justify-content: flex-end; padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px;">
+            <ui:Button display-tooltip-when-elided="true" name="MuteButton" class="menu-button" style="background-image: url(&apos;project://database/Assets/UI/soundIcon.png?fileID=2800000&amp;guid=1909a676cfc8346afaf32dd2c7e519f0&amp;type=3#soundIcon&apos;); width: 30px; height: 30px; align-items: flex-end; justify-content: space-around; flex-grow: 0;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
