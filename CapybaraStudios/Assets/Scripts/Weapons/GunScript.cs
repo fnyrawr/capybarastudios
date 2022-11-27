@@ -34,11 +34,14 @@ public class GunScript : MonoBehaviour
     {
         if (Weapons[weaponType])
         {
-            var oldGun = gunSlot.GetChild(0);
-            oldGun.SetParent(null);
-            oldGun.GetComponent<Rigidbody>().isKinematic = false;
-            oldGun.GetComponent<BoxCollider>().enabled = true;
-            Debug.Log(oldGun.name + " ditched");
+            if (gunSlot.GetChild(0))
+            {
+                var oldGun = gunSlot.GetChild(0);
+                oldGun.SetParent(null);
+                oldGun.GetComponent<Rigidbody>().isKinematic = false;
+                oldGun.GetComponent<BoxCollider>().enabled = true;
+                Debug.Log(oldGun.name + " ditched");
+            }
         }
     }
 
