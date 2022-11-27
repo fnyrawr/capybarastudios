@@ -44,7 +44,7 @@ public class SpecificWeaponScript : MonoBehaviour
         //ammoText.SetText(bulletsLeft + " / " + magazineSize);
     }
 
-    public void Shoot()
+    public void Shoot(bool first)
     {
         if (reloading) Debug.Log("Reloading");
         if (bulletsLeft <= 0) Debug.Log("no Bullets left");
@@ -55,13 +55,20 @@ public class SpecificWeaponScript : MonoBehaviour
         _animator.Play("Firing Rifle",1);
         readyToShoot = false;
 
-        //Spread
-        float x = Random.Range(-spread, spread);
-        float y = Random.Range(-spread, spread);
-        float z = Random.Range(-spread, spread);
-        //Calculate Direction with Spread
-        Vector3 direction = camera.transform.forward + new Vector3(x, y, z);
-
+        
+        
+        Vector3 direction;
+        if (!first)
+        {
+            //Spread
+            float x = Random.Range(-spread, spread);
+            float y = Random.Range(-spread, spread);
+            float z = Random.Range(-spread, spread);
+            //Calculate Direction with Spread
+            direction = camera.transform.forward + new Vector3(x, y, z);
+        } else
+            direction = camera.transform.forward;
+        
         //hit and damage calc
         if (Physics.Raycast(camera.transform.position, direction, out RaycastHit hit, range,
                 controllerMask))
@@ -105,7 +112,7 @@ public class SpecificWeaponScript : MonoBehaviour
         if (bulletsShot > 0 && bulletsLeft > 0)
         {
             readyToShoot = true;
-            Shoot();
+            Shoot(false);
             return;
         }
 
@@ -127,13 +134,13 @@ public class SpecificWeaponScript : MonoBehaviour
         {
             while (true)
             {
-                Shoot();
+                Shoot(false);
                 yield return rapidFireWait;
             }
         }
         else
         {
-            Shoot();
+            Shoot(true);
             yield return null;
         }
     }
@@ -152,6 +159,11 @@ public class SpecificWeaponScript : MonoBehaviour
         bulletsLeft = magazineSize;
         ammoText.SetText(bulletsLeft + " / " + magazineSize);
         reloading = false;
+    }
+
+    public void ShowAmmo()
+    {
+        ammoText.SetText(bulletsLeft + " / " + magazineSize);
     }
 
     //hitmarker show and disable
