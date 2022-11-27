@@ -330,6 +330,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   message: E to press Button
   button: {fileID: 1817438599}
+--- !u!1 &65745881 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2795301733894970671, guid: 00a731cfcfd061a4c948282f3548c8a3, type: 3}
+  m_PrefabInstance: {fileID: 2795301732602776140}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &99754590
 GameObject:
   m_ObjectHideFlags: 0
@@ -3252,6 +3257,11 @@ Transform:
   m_Father: {fileID: 2013610511}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1211723021 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7436087854324712699, guid: ff23f72474dc317438674a80aa8f8dfe, type: 3}
+  m_PrefabInstance: {fileID: 3201102218231652080}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1222828262
 GameObject:
   m_ObjectHideFlags: 0
@@ -5627,22 +5637,46 @@ PrefabInstance:
       objectReference: {fileID: 1872748937}
     - target: {fileID: 345428251294760006, guid: 219113d5ecb909542859ea45569e71ee, type: 3}
       propertyPath: Weapons.Array.size
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 345428251294760006, guid: 219113d5ecb909542859ea45569e71ee, type: 3}
       propertyPath: Weapons.Array.data[0]
       value: 
-      objectReference: {fileID: 1516275427}
+      objectReference: {fileID: 1211723021}
     - target: {fileID: 345428251294760006, guid: 219113d5ecb909542859ea45569e71ee, type: 3}
       propertyPath: Weapons.Array.data[1]
       value: 
-      objectReference: {fileID: 1609099999}
+      objectReference: {fileID: 65745881}
     - target: {fileID: 345428251294760006, guid: 219113d5ecb909542859ea45569e71ee, type: 3}
       propertyPath: Weapons.Array.data[2]
       value: 
-      objectReference: {fileID: 1960256506}
+      objectReference: {fileID: 65745881}
     - target: {fileID: 345428251294760006, guid: 219113d5ecb909542859ea45569e71ee, type: 3}
       propertyPath: Weapons.Array.data[3]
+      value: 
+      objectReference: {fileID: 65745881}
+    - target: {fileID: 345428251294760006, guid: 219113d5ecb909542859ea45569e71ee, type: 3}
+      propertyPath: Weapons.Array.data[4]
+      value: 
+      objectReference: {fileID: 65745881}
+    - target: {fileID: 345428251294760006, guid: 219113d5ecb909542859ea45569e71ee, type: 3}
+      propertyPath: Weapons.Array.data[5]
+      value: 
+      objectReference: {fileID: 65745881}
+    - target: {fileID: 345428251294760006, guid: 219113d5ecb909542859ea45569e71ee, type: 3}
+      propertyPath: AllWeapons.Array.data[0]
+      value: 
+      objectReference: {fileID: 1516275427}
+    - target: {fileID: 345428251294760006, guid: 219113d5ecb909542859ea45569e71ee, type: 3}
+      propertyPath: AllWeapons.Array.data[1]
+      value: 
+      objectReference: {fileID: 1609099999}
+    - target: {fileID: 345428251294760006, guid: 219113d5ecb909542859ea45569e71ee, type: 3}
+      propertyPath: AllWeapons.Array.data[2]
+      value: 
+      objectReference: {fileID: 1960256506}
+    - target: {fileID: 345428251294760006, guid: 219113d5ecb909542859ea45569e71ee, type: 3}
+      propertyPath: AllWeapons.Array.data[3]
       value: 
       objectReference: {fileID: 1751344344}
     - target: {fileID: 345428251294760006, guid: 219113d5ecb909542859ea45569e71ee, type: 3}
@@ -5826,6 +5860,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2795301733894970666, guid: 00a731cfcfd061a4c948282f3548c8a3, type: 3}
+      propertyPath: weaponSlot
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2795301733894970666, guid: 00a731cfcfd061a4c948282f3548c8a3, type: 3}
+      propertyPath: weaponType
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2795301733894970667, guid: 00a731cfcfd061a4c948282f3548c8a3, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -5937,7 +5979,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8887314444471694321, guid: ff23f72474dc317438674a80aa8f8dfe, type: 3}
       propertyPath: weaponType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff23f72474dc317438674a80aa8f8dfe, type: 3}
