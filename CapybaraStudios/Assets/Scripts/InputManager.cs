@@ -60,6 +60,7 @@ public class InputManager : MonoBehaviour
         walking.Sprint.canceled += SetSprint;
         
         walking.Crouch.started += SetCrouch;
+        walking.Crouch.canceled += SetCrouch;
 
         walking.Jump.started += SetJump;
         walking.Jump.canceled += SetJump;
@@ -80,6 +81,7 @@ public class InputManager : MonoBehaviour
         walking.Sprint.canceled -= SetSprint;
         
         walking.Crouch.started -= SetCrouch;
+        walking.Crouch.canceled -= SetCrouch;
 
         walking.Jump.started -= SetJump;
         walking.Jump.canceled -= SetJump;
@@ -101,7 +103,7 @@ public class InputManager : MonoBehaviour
     }
 
     private void SetCrouch(InputAction.CallbackContext ctx) {
-        CrouchInput = !CrouchInput;
+        CrouchInput = ctx.started;
     }
 
     private void SetSprint(InputAction.CallbackContext ctx) {

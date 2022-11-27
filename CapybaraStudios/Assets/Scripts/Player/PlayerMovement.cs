@@ -14,15 +14,16 @@ public class PlayerMovement : MonoBehaviour
     private float playerVelocity;
     //crouching
     private bool crouching = false;
-
     //sprinting
     private bool sprinting = false;
-
-    //movement
+    //sliding
+    private float crouchingMomentum = 1f;
+    //speed and jump
     public float speed = 7f;
     public float sprintingSpeed = 15f;
     public float jumpHeight = 2f;
     public float gravity = -40f;
+
     //hook
     [NonSerialized] public bool hooked;
     [NonSerialized] public Vector3 midAirMomentum;
@@ -90,8 +91,18 @@ public class PlayerMovement : MonoBehaviour
         //translate vertical mocement to forwards/backwards movement
         moveDirection.z = input.y;
         //if player walks backwards speed can only be speed, else also sprintingSpeed
-        var actualSpeed = input.y < 0 ? speed : sprinting ? sprintingSpeed : speed;
-        controller.Move(actualSpeed * Time.deltaTime * transform.TransformDirection(moveDirection));
+        var actualSpeed = input.y < 0 ? speed : (sprinting && crouchingMomentum >= 1f ? sprintingSpeed : speed);
+        controller.Move(crouchingMomentum * actualSpeed * Time.deltaTime * transform.TransformDirection(moveDirection));
+        //decrease slidingMomentum
+        if(crouchingMomentum > 0.65f && crouching) {
+            float slideTime = 0.2f;
+            crouchingMomentum -= Time.deltaTime * slideTime;
+            if(crouchingMomentum < 0.65f) {
+                crouchingMomentum = 0.65f;
+                _animator.SetBool(_isCrouchingHash, crouching);
+                //_animator.SetBool(_isSlidingHash, false);
+            }
+        }
 
         //constant downward (gravity)
         playerVelocity += (gravity * Time.deltaTime);
@@ -154,9 +165,25 @@ public class PlayerMovement : MonoBehaviour
 
     public void Crouch()
     {
-        if (sprinting) return;
+        if (crouching == _input.CrouchInput) return;
+        if(!crouching && _input.CrouchInput) {
+            if(sprinting) {
+                crouchingMomentum = 1.1f;
+                //_animator.SetBool(_isSlidingHash, _input.CrouchInput);
+            }
+            else {
+                crouchingMomentum = 0.65f;
+                _animator.SetBool(_isCrouchingHash, _input.CrouchInput);
+            } 
+        }
+
+        if(crouching && !_input.CrouchInput) {
+            crouchingMomentum = 1f;
+            _animator.SetBool(_isCrouchingHash, _input.CrouchInput);
+            //_animator.SetBool(_isSlidingHash, _input.CrouchInput);
+        }
+
         crouching = _input.CrouchInput;
-        _animator.SetBool(_isCrouchingHash, crouching);
     }
 
     public void Sprint()

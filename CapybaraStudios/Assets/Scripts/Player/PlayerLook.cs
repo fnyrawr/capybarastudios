@@ -39,8 +39,15 @@ public class PlayerLook : MonoBehaviour
         {
             elapsedcTime += Time.deltaTime;
             float percentage = elapsedTime / 0.4f;
-            if (crouching) currheight = Mathf.Lerp(currheight, height - 0.5f, Mathf.SmoothStep(0, 1, percentage));
-            else currheight = Mathf.Lerp(currheight, height, Mathf.SmoothStep(0, 1, percentage));
+            if (crouching) {
+                currheight = Mathf.Lerp(currheight, height - 0.5f, Mathf.SmoothStep(0, 1, percentage));
+                if (sprinting) camera.fieldOfView = Mathf.Lerp(camera.fieldOfView, baseFOV, Mathf.SmoothStep(0, 1, percentage));
+            }
+            else {
+                currheight = Mathf.Lerp(currheight, height, Mathf.SmoothStep(0, 1, percentage));
+                if (sprinting) camera.fieldOfView = Mathf.Lerp(baseFOV, baseFOV * sprintingFOV,
+                    Mathf.SmoothStep(0, 1, percentage));
+            } 
             camera.transform.localPosition = new Vector3(0, currheight, 0);
         }
     }
@@ -73,7 +80,7 @@ public class PlayerLook : MonoBehaviour
 
     public void Crouch()
     {
-        if (sprinting || crouching == _input.CrouchInput) return;
+        if (crouching == _input.CrouchInput) return;
         crouching = _input.CrouchInput;
         elapsedcTime = 0;
     }
