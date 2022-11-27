@@ -38,6 +38,7 @@ public class PlayerInteract : MonoBehaviour
         if (inputManager.walking.Interact.triggered)
         {
             interactable.BaseInteract(gameObject);
+            inputManager.updateWeaponScript();
         }
     }
 }

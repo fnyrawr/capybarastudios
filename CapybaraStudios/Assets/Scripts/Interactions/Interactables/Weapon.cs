@@ -4,12 +4,27 @@ using UnityEngine;
 
 public class Weapon : Interactable
 {
+    public int weaponSlot;
     public int weaponType;
+    
 
-    //rifile = 1
-    //pistol = 2
-    //knife = 3
-    // Start is called before the first frame update
+    /*
+    weaponSlot
+    
+    primary = 1
+    secondary = 2
+    knife = 3
+    utility = 4
+
+    weaponType
+
+    assault rifle = 1
+    shotgun = 2
+    submachine gun = 3
+    machine gun = 4
+
+    */
+
     void Start()
     {
         message = "Pick up [E]";

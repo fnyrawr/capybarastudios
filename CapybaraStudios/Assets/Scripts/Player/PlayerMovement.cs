@@ -7,14 +7,11 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private CharacterController controller;
-
+    [SerializeField] InputManager _input;
     private Camera camera;
 
     //movement
-    private Vector3 playerVelocity;
-
-    private bool isGrounded;
-
+    private float playerVelocity;
     //crouching
     private bool crouching = false;
 
@@ -26,8 +23,10 @@ public class PlayerMovement : MonoBehaviour
     public float sprintingSpeed = 15f;
     public float jumpHeight = 2f;
     public float gravity = -40f;
-
-
+    //hook
+    [NonSerialized] public bool hooked;
+    [NonSerialized] public Vector3 midAirMomentum;
+    
     public Transform Target;
 
     private Animator _animator;
@@ -54,6 +53,14 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(hooked) {
+            playerVelocity = -2f;
+            return;
+        } 
+        ProcessMovement(_input.MoveInput);
+        Crouch();
+        Sprint();
+        Jump();
         if (controller.isGrounded)
         {
             _animator.SetBool("isFalling", false);
@@ -61,7 +68,7 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             isJumping = false;
-            if (isGrounded) //if the player was grounded in the previous update but nor now, meaning he jumped now
+            if (controller.isGrounded) //if the player was grounded in the previous update but nor now, meaning he jumped now
             {
                 isJumping = true;
                 _animator.SetBool("isFalling", false);
@@ -74,12 +81,9 @@ public class PlayerMovement : MonoBehaviour
 
             _animator.SetBool("isJumping", isJumping);
         }
-
-        isGrounded = controller.isGrounded;
-        _animator.SetBool("isGrounded", isGrounded);
+        _animator.SetBool("isGrounded", controller.isGrounded);
     }
-
-    public void ProcessMove(Vector2 input)
+    public void ProcessMovement(Vector2 input)
     {
         Vector3 moveDirection = Vector3.zero;
         moveDirection.x = input.x;
@@ -87,18 +91,24 @@ public class PlayerMovement : MonoBehaviour
         moveDirection.z = input.y;
         //if player walks backwards speed can only be speed, else also sprintingSpeed
         var actualSpeed = input.y < 0 ? speed : sprinting ? sprintingSpeed : speed;
-        controller.Move(actualSpeed * Time.deltaTime *
-                        transform.TransformDirection(moveDirection));
+        controller.Move(actualSpeed * Time.deltaTime * transform.TransformDirection(moveDirection));
 
         //constant downward (gravity)
-        playerVelocity.y += gravity * Time.deltaTime;
-        if (isGrounded && playerVelocity.y < 0)
+        playerVelocity += (gravity * Time.deltaTime);
+        if (controller.isGrounded && playerVelocity < 0)
         {
-            playerVelocity.y = -2f;
+            playerVelocity = -2f;
+            midAirMomentum = Vector3.zero;
         }
-
-        controller.Move(playerVelocity * Time.deltaTime);
-
+        midAirMomentum.y = playerVelocity;
+        controller.Move(midAirMomentum * Time.deltaTime);
+        
+        //decrease midAirMomentum 
+        if(midAirMomentum.magnitude > 0f) {
+            float drag = 3f; //how much the char gets dragged
+            midAirMomentum -= midAirMomentum * drag * Time.deltaTime;
+            if(midAirMomentum.magnitude < 0f) midAirMomentum = Vector3.zero;
+        }
 
         //general animation controlling
         var s = sprinting ? 4 : 1;
@@ -136,22 +146,22 @@ public class PlayerMovement : MonoBehaviour
 
     public void Jump()
     {
-        if (isGrounded)
+        if (controller.isGrounded && _input.JumpInput)
         {
-            playerVelocity.y = Mathf.Sqrt(jumpHeight * -3.0f * gravity);
+            playerVelocity = Mathf.Sqrt(jumpHeight * -3.0f * gravity);
         }
     }
 
     public void Crouch()
     {
         if (sprinting) return;
-        crouching = !crouching;
+        crouching = _input.CrouchInput;
         _animator.SetBool(_isCrouchingHash, crouching);
     }
 
     public void Sprint()
     {
         if (crouching) return;
-        sprinting = !sprinting;
+        sprinting = _input.SprintInput;
     }
 }
