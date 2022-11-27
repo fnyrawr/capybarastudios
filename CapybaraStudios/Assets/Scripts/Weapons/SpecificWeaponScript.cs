@@ -10,9 +10,10 @@ public class SpecificWeaponScript : MonoBehaviour
     //Gun stats
     public int damage;
     public float spread, range, reloadTime, fireRate, timeBetweenShooting;
-    public int magazineSize, bulletsPerTap;
-    public bool rapidFireEnabled;
+    public int maxAmmo, magazineSize, bulletsPerTap;
+    public bool hasAmmo, rapidFireEnabled;
 
+    [SerializeField]
     int bulletsLeft, bulletsShot;
     bool reloading, readyToShoot;
 
@@ -24,7 +25,7 @@ public class SpecificWeaponScript : MonoBehaviour
 
     //HUD
     public TextMeshProUGUI ammoText;
-
+    public TextMeshProUGUI maxAmmoText;
 
     private WaitForSeconds rapidFireWait;
     private int controllerMask = ~(1 << 15);
@@ -36,12 +37,6 @@ public class SpecificWeaponScript : MonoBehaviour
         bulletsLeft = magazineSize;
         readyToShoot = true;
         rapidFireWait = new WaitForSeconds(1 / fireRate);
-    }
-
-    void Update()
-    {
-        //update ammo
-        //ammoText.SetText(bulletsLeft + " / " + magazineSize);
     }
 
     public void Shoot(bool first)
@@ -108,7 +103,7 @@ public class SpecificWeaponScript : MonoBehaviour
         //magazine
         bulletsLeft--;
         bulletsShot--;
-        ammoText.SetText(bulletsLeft + " / " + magazineSize);
+        ShowAmmo();
         if (bulletsShot > 0 && bulletsLeft > 0)
         {
             readyToShoot = true;
@@ -148,6 +143,16 @@ public class SpecificWeaponScript : MonoBehaviour
     //reload
     public void Reload()
     {
+        if(bulletsLeft.Equals(magazineSize))
+        {
+            Debug.Log("Magazine is already full");
+            return;
+        }
+        if(maxAmmo <= 0)
+        {
+            Debug.Log("No ammo left. Cannot reload");
+            return;
+        }
         Debug.Log("Reload");
         reloading = true;
         readyToShoot = true;
@@ -156,14 +161,31 @@ public class SpecificWeaponScript : MonoBehaviour
 
     private void ReloadFinished()
     {
-        bulletsLeft = magazineSize;
-        ammoText.SetText(bulletsLeft + " / " + magazineSize);
+        if((maxAmmo + bulletsLeft) < magazineSize)
+        {
+            bulletsLeft = maxAmmo + bulletsLeft;
+            maxAmmo = 0;
+        } else {
+            maxAmmo -= magazineSize - bulletsLeft;
+            bulletsLeft = magazineSize;
+        }
+        ShowAmmo();
         reloading = false;
     }
 
     public void ShowAmmo()
     {
-        ammoText.SetText(bulletsLeft + " / " + magazineSize);
+        if(!hasAmmo)
+        {
+            ammoText.SetText("∞");
+            maxAmmoText.SetText("");
+        } else {
+            ammoText.SetText(bulletsLeft + " / " + magazineSize);
+            if (maxAmmo > 0)
+                maxAmmoText.SetText(maxAmmo.ToString());
+            else
+                maxAmmoText.SetText("0");
+        }
     }
 
     //hitmarker show and disable

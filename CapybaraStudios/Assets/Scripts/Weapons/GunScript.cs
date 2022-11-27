@@ -89,10 +89,12 @@ public class GunScript : MonoBehaviour
 
     public void EquipPrimary(int index)
     {
+        //equip primary slot
+        EquipWeapon(0);
         /*
         assault rifle = 0
         shotgun = 1
-        submachine gun = 3
+        submachine gun = 2
         machine gun = 3
         */
         foreach (var item in PrimaryWeapons)
