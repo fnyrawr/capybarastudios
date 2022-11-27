@@ -25,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
     public float gravity = -40f;
     //hook
     [NonSerialized] public bool hooked;
-    
+    [NonSerialized] public Vector3 midAirMomentum;
     
     public Transform Target;
 
@@ -53,6 +53,10 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(hooked) {
+            playerVelocity = -2f;
+            return;
+        } 
         ProcessMovement(_input.MoveInput);
         Crouch();
         Sprint();
@@ -94,9 +98,18 @@ public class PlayerMovement : MonoBehaviour
         if (controller.isGrounded && playerVelocity < 0)
         {
             playerVelocity = -2f;
+            midAirMomentum = Vector3.zero;
         }
-        controller.Move(new Vector3(0, playerVelocity * Time.deltaTime, 0));
+        midAirMomentum.y = playerVelocity;
+        controller.Move(midAirMomentum * Time.deltaTime);
         
+        //decrease midAirMomentum 
+        if(midAirMomentum.magnitude > 0f) {
+            float drag = 3f; //how much the char gets dragged
+            midAirMomentum -= midAirMomentum * drag * Time.deltaTime;
+            if(midAirMomentum.magnitude < 0f) midAirMomentum = Vector3.zero;
+        }
+
         //general animation controlling
         var s = sprinting ? 4 : 1;
         if (input.x > 0 && _velocityX < input.x || input.x < 0 && _velocityX > input.x)

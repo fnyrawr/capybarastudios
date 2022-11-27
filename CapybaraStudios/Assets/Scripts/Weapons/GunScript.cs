@@ -17,8 +17,10 @@ public class GunScript : MonoBehaviour
 
     public WeaponAnimationController weaponAnimator;
     public GameObject[] Weapons = new GameObject[4];
+    public GameObject[] PrimaryWeapons = new GameObject[4];
     public int selectedWeapon = 0;
-
+    public int selectedPrimaryWeapon = 0;
+    
     private void Awake()
     {
     }
@@ -75,15 +77,32 @@ public class GunScript : MonoBehaviour
         Weapons[weaponType].transform.localPosition = new Vector3(0, 0, 0);
     }
 
-    public void EquipKnife()
+    public void EquipWeapon(int index)
     {
+        foreach (var item in Weapons)
+        {
+            item.SetActive(false);
+        }
+        Weapons[index].SetActive(true);
+        selectedWeapon = index;
     }
 
-    public void EquipPrimary()
+    public void EquipPrimary(int index)
     {
+        //equip primary slot
+        EquipWeapon(0);
+        /*
+        assault rifle = 0
+        shotgun = 1
+        submachine gun = 2
+        machine gun = 3
+        */
+        foreach (var item in PrimaryWeapons)
+        {
+            item.SetActive(false);
+        }
+        PrimaryWeapons[index].SetActive(true);
+        selectedPrimaryWeapon = index;
     }
 
-    public void EquipSecondary()
-    {
-    }
 }
