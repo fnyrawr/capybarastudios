@@ -33,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator _animator;
     private int _isCrouchingHash;
     private int _isFallingHash;
+    private int _isSlidingHash;
     private int _sidewaysHash;
     private int _forwardBackwardHash;
     public float _animationTransitionSpeed = 3.0f;
@@ -49,6 +50,7 @@ public class PlayerMovement : MonoBehaviour
         _isFallingHash = Animator.StringToHash("isFalling");
         _sidewaysHash = Animator.StringToHash("movementSideways");
         _forwardBackwardHash = Animator.StringToHash("movementForwards");
+        _isSlidingHash = Animator.StringToHash("isSliding");
     }
 
     // Update is called once per frame
@@ -100,7 +102,7 @@ public class PlayerMovement : MonoBehaviour
             if(crouchingMomentum < 0.65f) {
                 crouchingMomentum = 0.65f;
                 _animator.SetBool(_isCrouchingHash, crouching);
-                //_animator.SetBool(_isSlidingHash, false);
+                _animator.SetBool(_isSlidingHash, false);
             }
         }
 
@@ -169,7 +171,7 @@ public class PlayerMovement : MonoBehaviour
         if(!crouching && _input.CrouchInput) {
             if(sprinting) {
                 crouchingMomentum = 1.1f;
-                //_animator.SetBool(_isSlidingHash, _input.CrouchInput);
+                _animator.SetBool(_isSlidingHash, _input.CrouchInput);
             }
             else {
                 crouchingMomentum = 0.65f;
@@ -180,7 +182,7 @@ public class PlayerMovement : MonoBehaviour
         if(crouching && !_input.CrouchInput) {
             crouchingMomentum = 1f;
             _animator.SetBool(_isCrouchingHash, _input.CrouchInput);
-            //_animator.SetBool(_isSlidingHash, _input.CrouchInput);
+            _animator.SetBool(_isSlidingHash, _input.CrouchInput);
         }
 
         crouching = _input.CrouchInput;
