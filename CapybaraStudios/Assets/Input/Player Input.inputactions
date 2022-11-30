@@ -28,7 +28,7 @@
                     "type": "Value",
                     "id": "28957072-9f0d-460c-af45-002a62fbed84",
                     "expectedControlType": "Vector2",
-                    "processors": "",
+                    "processors": "ScaleVector2(x=0.1,y=0.1)",
                     "interactions": "",
                     "initialStateCheck": true
                 },
@@ -38,7 +38,7 @@
                     "id": "9b9c1c8b-e25a-4a8c-8dd8-244813a1807a",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Press(behavior=2)",
                     "initialStateCheck": false
                 },
                 {
@@ -54,6 +54,15 @@
                     "name": "Interact",
                     "type": "Button",
                     "id": "1a4752c0-29b1-447b-bd39-4ff7b8b5a968",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Grappling",
+                    "type": "Button",
+                    "id": "d8c3270b-d88f-44e8-9ce5-8d5c95bb2472",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -196,7 +205,7 @@
                 {
                     "name": "",
                     "id": "c57f4677-66f3-44ea-8a7d-bd5b9749b5d9",
-                    "path": "<Mouse>/delta",
+                    "path": "<Pointer>/delta",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -280,6 +289,17 @@
                     "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "58a85ada-5ddc-4dd2-8897-f33e36e363bb",
+                    "path": "<Keyboard>/p",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Grappling",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -327,6 +347,15 @@
                     "name": "EquipKnife",
                     "type": "Button",
                     "id": "9bea999f-2061-4549-a939-efbf5a0cce3a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "EquipUtility",
+                    "type": "Button",
+                    "id": "fb38618f-a5a9-4f54-b30b-641e21a3a1f1",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -386,6 +415,39 @@
                     "processors": "",
                     "groups": "",
                     "action": "EquipKnife",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d7dcef2c-3426-4653-80ab-f4965cdac6ab",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "EquipPrimary",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "293cffaf-a285-4424-abe8-9858636d713a",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "EquipSecondary",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1c166b02-adbd-4bbc-b6b7-6c6656774c0e",
+                    "path": "<Keyboard>/4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "EquipUtility",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

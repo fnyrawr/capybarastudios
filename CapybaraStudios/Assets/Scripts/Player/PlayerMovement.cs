@@ -7,30 +7,33 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private CharacterController controller;
+    [SerializeField] InputManager _input;
     private Camera camera;
+
     //movement
-    private Vector3 playerVelocity;
-
-    private bool isGrounded;
-
+    private float playerVelocity;
     //crouching
     private bool crouching = false;
-
     //sprinting
     private bool sprinting = false;
-
-    //movement
+    //sliding
+    private float crouchingMomentum = 1f;
+    //speed and jump
     public float speed = 7f;
     public float sprintingSpeed = 15f;
     public float jumpHeight = 2f;
     public float gravity = -40f;
 
-
+    //hook
+    [NonSerialized] public bool hooked;
+    [NonSerialized] public Vector3 midAirMomentum;
+    
     public Transform Target;
 
     private Animator _animator;
     private int _isCrouchingHash;
     private int _isFallingHash;
+    private int _isSlidingHash;
     private int _sidewaysHash;
     private int _forwardBackwardHash;
     public float _animationTransitionSpeed = 3.0f;
@@ -47,11 +50,20 @@ public class PlayerMovement : MonoBehaviour
         _isFallingHash = Animator.StringToHash("isFalling");
         _sidewaysHash = Animator.StringToHash("movementSideways");
         _forwardBackwardHash = Animator.StringToHash("movementForwards");
+        _isSlidingHash = Animator.StringToHash("isSliding");
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(hooked) {
+            playerVelocity = -2f;
+            return;
+        } 
+        ProcessMovement(_input.MoveInput);
+        Crouch();
+        Sprint();
+        Jump();
         if (controller.isGrounded)
         {
             _animator.SetBool("isFalling", false);
@@ -59,7 +71,7 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             isJumping = false;
-            if (isGrounded) //if the player was grounded in the previous update but nor now, meaning he jumped now
+            if (controller.isGrounded) //if the player was grounded in the previous update but nor now, meaning he jumped now
             {
                 isJumping = true;
                 _animator.SetBool("isFalling", false);
@@ -72,31 +84,44 @@ public class PlayerMovement : MonoBehaviour
 
             _animator.SetBool("isJumping", isJumping);
         }
-
-        isGrounded = controller.isGrounded;
-        _animator.SetBool("isGrounded", isGrounded);
+        _animator.SetBool("isGrounded", controller.isGrounded);
     }
-
-    public void ProcessMove(Vector2 input)
+    public void ProcessMovement(Vector2 input)
     {
         Vector3 moveDirection = Vector3.zero;
         moveDirection.x = input.x;
         //translate vertical mocement to forwards/backwards movement
         moveDirection.z = input.y;
         //if player walks backwards speed can only be speed, else also sprintingSpeed
-        var actualSpeed = input.y < 0 ? speed : sprinting ? sprintingSpeed : speed;
-        controller.Move(actualSpeed * Time.deltaTime *
-                        transform.TransformDirection(moveDirection));
-
-        //constant downward (gravity)
-        playerVelocity.y += gravity * Time.deltaTime;
-        if (isGrounded && playerVelocity.y < 0)
-        {
-            playerVelocity.y = -2f;
+        var actualSpeed = input.y < 0 ? speed : (sprinting && crouchingMomentum >= 1f ? sprintingSpeed : speed);
+        controller.Move(crouchingMomentum * actualSpeed * Time.deltaTime * transform.TransformDirection(moveDirection));
+        //decrease slidingMomentum
+        if(crouchingMomentum > 0.65f && crouching) {
+            float slideTime = 0.2f;
+            crouchingMomentum -= Time.deltaTime * slideTime;
+            if(crouchingMomentum < 0.65f) {
+                crouchingMomentum = 0.65f;
+                _animator.SetBool(_isCrouchingHash, crouching);
+                _animator.SetBool(_isSlidingHash, false);
+            }
         }
 
-        controller.Move(playerVelocity * Time.deltaTime);
-
+        //constant downward (gravity)
+        playerVelocity += (gravity * Time.deltaTime);
+        if (controller.isGrounded && playerVelocity < 0)
+        {
+            playerVelocity = -2f;
+            midAirMomentum = Vector3.zero;
+        }
+        midAirMomentum.y = playerVelocity;
+        controller.Move(midAirMomentum * Time.deltaTime);
+        
+        //decrease midAirMomentum 
+        if(midAirMomentum.magnitude > 0f) {
+            float drag = 3f; //how much the char gets dragged
+            midAirMomentum -= midAirMomentum * drag * Time.deltaTime;
+            if(midAirMomentum.magnitude < 0f) midAirMomentum = Vector3.zero;
+        }
 
         //general animation controlling
         var s = sprinting ? 4 : 1;
@@ -134,22 +159,38 @@ public class PlayerMovement : MonoBehaviour
 
     public void Jump()
     {
-        if (isGrounded)
+        if (controller.isGrounded && _input.JumpInput)
         {
-            playerVelocity.y = Mathf.Sqrt(jumpHeight * -3.0f * gravity);
+            playerVelocity = Mathf.Sqrt(jumpHeight * -3.0f * gravity);
         }
     }
 
     public void Crouch()
     {
-        if(sprinting) return;
-        crouching = !crouching;
-        _animator.SetBool(_isCrouchingHash, crouching);
+        if (crouching == _input.CrouchInput) return;
+        if(!crouching && _input.CrouchInput) {
+            if(sprinting) {
+                crouchingMomentum = 1.1f;
+                _animator.SetBool(_isSlidingHash, _input.CrouchInput);
+            }
+            else {
+                crouchingMomentum = 0.65f;
+                _animator.SetBool(_isCrouchingHash, _input.CrouchInput);
+            } 
+        }
+
+        if(crouching && !_input.CrouchInput) {
+            crouchingMomentum = 1f;
+            _animator.SetBool(_isCrouchingHash, _input.CrouchInput);
+            _animator.SetBool(_isSlidingHash, _input.CrouchInput);
+        }
+
+        crouching = _input.CrouchInput;
     }
 
     public void Sprint()
     {
-        if(crouching) return;
-        sprinting = !sprinting;
+        if (crouching) return;
+        sprinting = _input.SprintInput;
     }
 }

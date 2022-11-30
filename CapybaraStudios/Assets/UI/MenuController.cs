@@ -12,8 +12,7 @@ public class MenuController : MonoBehaviour
     private VisualElement _buttonsWrapper;
 
     //
-    [SerializeField]
-    private VisualTreeAsset _playButtonTemplate; //
+    [SerializeField] private VisualTreeAsset _playButtonTemplate; //
     private VisualElement _playButtons; //
 
     [SerializeField]
@@ -21,11 +20,10 @@ public class MenuController : MonoBehaviour
     private VisualElement _settingsButtons;
 
     //for mute:
-    [Header("Mute Button")]
-    [SerializeField]
+    [Header("Mute Button")] [SerializeField]
     private Sprite _mutedSprite;
-    [SerializeField]
-    private Sprite _unmutedSprite;
+
+    [SerializeField] private Sprite _unmutedSprite;
     private bool _muted;
 
     private Button _playButton;
@@ -46,14 +44,14 @@ public class MenuController : MonoBehaviour
         _settingsButton = _doc.rootVisualElement.Q<Button>("SettingsButton");
         _exitButton = _doc.rootVisualElement.Q<Button>("ExitButton");
         _muteButton = _doc.rootVisualElement.Q<Button>("MuteButton");
-        
+
         //Buttons Wrapper
         _buttonsWrapper = _doc.rootVisualElement.Q<VisualElement>("Buttons");
 
         _playButton.clicked += PlayButtonClicked; // () => { DoSomething(); };
         _settingsButton.clicked += SettingsButtonOnClicked;
         _exitButton.clicked += ExitButtonClicked;
-        
+
         //for mute:
         _muteButton = _doc.rootVisualElement.Q<Button>("MuteButton");
         _muteButton.clicked += MuteButtonOnClicked;
@@ -61,7 +59,6 @@ public class MenuController : MonoBehaviour
 
     private void PlayButtonClicked()
     {
-
         //Debug.Log("a");
         _buttonsWrapper.Clear();
         _buttonsWrapper.Add(_playButtonTemplate.CloneTree());
@@ -80,11 +77,10 @@ public class MenuController : MonoBehaviour
 
     private void BackButtonOnClicked()
     {
-    _buttonsWrapper.Clear();
-    _buttonsWrapper.Add(_playButton);
-    _buttonsWrapper.Add(_settingsButton);
-    _buttonsWrapper.Add(_exitButton);
-
+        _buttonsWrapper.Clear();
+        _buttonsWrapper.Add(_playButton);
+        _buttonsWrapper.Add(_settingsButton);
+        _buttonsWrapper.Add(_exitButton);
     }
 
     private void ExitButtonClicked()
@@ -98,7 +94,7 @@ public class MenuController : MonoBehaviour
         //First grab the image
         var bg = _muteButton.style.backgroundImage;
         //Assign a new Sprite
-        bg.value = Background.FromSprite(_muted? _mutedSprite : _unmutedSprite);
+        bg.value = Background.FromSprite(_muted ? _mutedSprite : _unmutedSprite);
         _muteButton.style.backgroundImage = bg;
 
         //mutes only the menu:
@@ -109,12 +105,10 @@ public class MenuController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
     }
 }

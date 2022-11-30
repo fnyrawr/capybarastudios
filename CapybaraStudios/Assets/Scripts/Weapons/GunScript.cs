@@ -8,9 +8,6 @@ using UnityEngine.Animations.Rigging;
 public class GunScript : MonoBehaviour
 {
     public Transform gunSlot;
-    public TwoBoneIKConstraint rightTarget;
-    public TwoBoneIKConstraint leftTarget;
-    public RigBuilder rigBuilder;
     private bool hasPrimary = false;
     private bool hasSecondary = false;
 
@@ -18,197 +15,99 @@ public class GunScript : MonoBehaviour
 
     public new Camera camera;
 
-    //Gun stats
-    public int damage;
-    public float spread, range, reloadTime, fireRate, timeBetweenShooting;
-    public int magazineSize, bulletsPerTap;
-    public bool rapidFireEnabled;
+    public WeaponAnimationController weaponAnimator;
+    public GameObject[] Weapons = new GameObject[4];
 
-    int bulletsLeft, bulletsShot;
-    bool reloading, readyToShoot;
-
-    //hitmarker
-    public GameObject hitmarker;
-
-    //bullet hole
-    public GameObject bulletHoleGraphic;
-
-    //HUD
-    public TextMeshProUGUI ammoText;
-
-
-    private WaitForSeconds rapidFireWait;
-    private int controllerMask = ~(1 << 15);
-
+    public GameObject[] AllWeapons = new GameObject[4];
+    public GameObject[] PrimaryWeapons = new GameObject[4];
+    public int selectedWeapon = 0;
+    public int selectedPrimaryWeapon = 0;
+    
     private void Awake()
     {
-        bulletsLeft = magazineSize;
-        readyToShoot = true;
-        rapidFireWait = new WaitForSeconds(1 / fireRate);
     }
 
     void Update()
     {
-        //update ammo
-        ammoText.SetText(bulletsLeft + " / " + magazineSize);
     }
-
-    public void Shoot()
-    {
-        if (reloading) Debug.Log("Reloading");
-        if (bulletsLeft <= 0) Debug.Log("no Bullets left");
-        if (!readyToShoot) Debug.Log("weapon on cooldown");
-        if (!readyToShoot || reloading || bulletsLeft <= 0) return;
-
-        Debug.Log("Shoot!");
-
-        readyToShoot = false;
-
-        //Spread
-        float x = UnityEngine.Random.Range(-spread, spread);
-        float y = UnityEngine.Random.Range(-spread, spread);
-        //Calculate Direction with Spread
-        Vector3 direction = camera.transform.forward + new Vector3(x, y, 0);
-
-        //hit and damage calc
-        if (Physics.Raycast(camera.transform.position, direction, out RaycastHit hit, range,
-                controllerMask))
-        {
-            Debug.Log(hit.transform.name);
-
-            GameObject collisionObject = hit.collider.gameObject;
-
-            if (collisionObject.CompareTag("Head") || collisionObject.CompareTag("Body") ||
-                collisionObject.CompareTag("Limbs"))
-            {
-                //does object have stats?
-                if (collisionObject.GetComponent<PlayerStats>() != null)
-                {
-                    //deal damage
-                    float hitMultiplier = 1;
-                    if (collisionObject.CompareTag("Head")) hitMultiplier = 3;
-                    if (collisionObject.CompareTag("Limbs")) hitMultiplier = 0.75f;
-                    int finalDamage = (int)(damage * hitMultiplier);
-                    collisionObject.GetComponent<PlayerStats>().TakeDamage(finalDamage);
-
-                    //Hitmarker
-                    HitShow();
-                    Invoke(nameof(HitDisable), 0.2f);
-                }
-            }
-        }
-        else
-        {
-            Debug.Log("Not hit");
-        }
-
-        //bullet hole
-        GameObject bulletHoleClone = Instantiate(bulletHoleGraphic, hit.point, Quaternion.Euler(0, 180, 0));
-        Destroy(bulletHoleClone, 10f);
-
-        //magazine
-        bulletsLeft--;
-        bulletsShot--;
-        if (bulletsShot > 0 && bulletsLeft > 0)
-        {
-            readyToShoot = true;
-            Shoot();
-            return;
-        }
-
-        Invoke("ResetShot", timeBetweenShooting);
-
-        bulletsShot = bulletsPerTap;
-    }
-
-    //shoot cooldown
-    private void ResetShot()
-    {
-        readyToShoot = true;
-    }
-
-    //rapid fire
-    public IEnumerator RapidFire()
-    {
-        if (rapidFireEnabled)
-        {
-            while (true)
-            {
-                Shoot();
-                yield return rapidFireWait;
-            }
-        }
-        else {
-            Shoot();
-            yield return null;
-        }
-    }
-
-    //reload
-    public void Reload()
-    {
-        Debug.Log("Reload");
-        reloading = true;
-        readyToShoot = true;
-        Invoke("ReloadFinished", reloadTime);
-    }
-    private void ReloadFinished()
-    {
-        bulletsLeft = magazineSize;
-        reloading = false;
-    }
-
-
-
-
-    //hitmarker show and disable
-    public void HitShow()
-    {
-        hitmarker.SetActive(true);
-    }
-    public void HitDisable()
-    {
-        hitmarker.SetActive(false);
-    }
-
-
-
-
 
     //gun pickup and discard
-    public void ditchGun()
+    public void ditchGun(int weaponType)
     {
-        if (hasGun)
+        if (Weapons[weaponType])
         {
-            var oldGun = gunSlot.GetChild(0);
-            oldGun.SetParent(null);
-            oldGun.GetComponent<Rigidbody>().isKinematic = false;
-            oldGun.GetComponent<BoxCollider>().enabled = true;
-            Debug.Log(oldGun.name + " ditched");
+            if (gunSlot.GetChild(0))
+            {
+                var oldGun = gunSlot.GetChild(0);
+                oldGun.SetParent(null);
+                oldGun.GetComponent<Rigidbody>().isKinematic = false;
+                oldGun.GetComponent<BoxCollider>().enabled = true;
+                Debug.Log(oldGun.name + " ditched");
+            }
         }
     }
 
     public void pickUp(GameObject gun)
     {
-        ditchGun();
         Debug.Log(gun.name + " aquired");
-        hasGun = true;
+        var weaponType = gun.GetComponent<Weapon>().weaponType;
+        ditchGun(weaponType);
         gun.GetComponent<Rigidbody>().isKinematic = true;
         gun.GetComponent<BoxCollider>().enabled = false;
-        gun.transform.SetParent(gunSlot);
-        leftTarget.data.target = gun.transform.Find("ref_left_hand_target");
-        rigBuilder.Build();
-        gun.transform.localRotation = Quaternion.Euler(0, 0, 0);
-        gun.transform.localPosition = new Vector3(0, 0, 0);
+        Weapons[weaponType] = gun;
+        changeWeapon(weaponType);
     }
 
-    public void EquipKnife() {
+    public void hideGun()
+    {
+        try
+        {
+            var gun = gunSlot.GetChild(0);
+            gun.SetParent(null);
+            gun.gameObject.SetActive(false);
+        }
+        catch (UnityException e)
+        {
+        }
+    }
 
+    public void changeWeapon(int weaponType)
+    {
+        hideGun();
+        selectedWeapon = weaponType;
+        Weapons[weaponType].transform.SetParent(gunSlot);
+        gunSlot.GetChild(0).gameObject.SetActive(true);
+        weaponAnimator.refresh();
+        Weapons[weaponType].transform.localRotation = Quaternion.Euler(0, 0, 0);
+        Weapons[weaponType].transform.localPosition = new Vector3(0, 0, 0);
     }
-    public void EquipPrimary() {
-        
+
+    public void EquipWeapon(int index)
+    {
+        foreach (var item in AllWeapons)
+        {
+            item.SetActive(false);
+        }
+        AllWeapons[index].SetActive(true);
+        //selectedWeapon = index;
     }
-    public void EquipSecondary() {
-        
+
+    public void EquipPrimary(int index)
+    {
+        //equip primary slot
+        EquipWeapon(0);
+        /*
+        assault rifle = 0
+        shotgun = 1
+        submachine gun = 2
+        machine gun = 3
+        */
+        foreach (var item in PrimaryWeapons)
+        {
+            item.SetActive(false);
+        }
+        PrimaryWeapons[index].SetActive(true);
+        selectedPrimaryWeapon = index;
     }
+
 }

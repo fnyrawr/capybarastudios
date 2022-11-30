@@ -223,8 +223,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 327d8bc115bf4ce44b75e83839f97851, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  message: Pick up [E]
-  button: {fileID: 0}
+  message: 
+  weaponType: 2
 --- !u!54 &4235579737266619029
 Rigidbody:
   m_ObjectHideFlags: 0

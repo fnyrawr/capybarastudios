@@ -5,13 +5,21 @@ using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
+
+    public Vector2 MoveInput {get; private set; }
+    public Vector2 LookInput {get; private set; }
+    public bool JumpInput {get; private set; } = false;
+    public bool SprintInput {get; private set; } = false;
+    public bool CrouchInput {get; private set; } = false;
+
     private PlayerInput playerInput;
     public PlayerInput.WalkingActions walking;
     public PlayerInput.ShootingActions shooting;
 
     private PlayerMovement movement;
     private GunScript gun;
-    private PlayerLook look;
+    private GrapplingGun hook;
+    private SpecificWeaponScript specificWeapon;
 
     Coroutine fireCoroutine;
 
@@ -20,64 +28,94 @@ public class InputManager : MonoBehaviour
         playerInput = new PlayerInput();
         walking = playerInput.Walking;
         shooting = playerInput.Shooting;
-
-        movement = GetComponent<PlayerMovement>();
-        look = GetComponent<PlayerLook>();
         gun = GetComponent<GunScript>();
-        //
-        walking.Jump.performed += ctx => movement.Jump();
+        hook = GetComponentInChildren<GrapplingGun>();
+        updateWeaponScript();
+        
 
-        walking.Crouch.performed += ctx => {
-            movement.Crouch();
-            look.Crouch();
-        }; 
-        walking.Sprint.performed += ctx => {
-            movement.Sprint();
-            look.Sprint();
-        };
+        walking.Grappling.started += ctx => hook.Hook();
+        walking.Grappling.canceled += ctx => hook.StopHook();
 
-        //shooting.Shoot.performed += ctx => gun.Shoot();
         shooting.Shoot.started += ctx => StartFiring();
         shooting.Shoot.canceled += ctx => StopFiring();
 
-        shooting.Reload.performed += ctx => gun.Reload();
-        shooting.Shoot.performed += ctx => gun.Shoot();
+        shooting.Reload.performed += ctx => specificWeapon.Reload();
+        shooting.Shoot.performed += ctx => specificWeapon.Shoot(true);
 
-        shooting.EquipPrimary.performed += ctx => gun.EquipPrimary();
-        shooting.EquipPrimary.performed += ctx => gun.EquipSecondary();
-        shooting.EquipPrimary.performed += ctx => gun.EquipKnife();
+        shooting.EquipPrimary.performed += ctx => equip(0);
+        shooting.EquipSecondary.performed += ctx => equip(1);
+        shooting.EquipKnife.performed += ctx => equip(2);
+        shooting.EquipUtility.performed += ctx => equip(3);
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        //move with PlayerMovement by the value of the movement action
-        movement.ProcessMove(walking.Movement.ReadValue<Vector2>());
-    }
-
-    private void LateUpdate()
-    {
-        look.ProcessLook(walking.LookAround.ReadValue<Vector2>());
-    }
-
-    //walking
     private void OnEnable()
     {
+        walking.Movement.performed += SetMove;
+        walking.Movement.canceled += SetMove;
+
+        walking.LookAround.performed += SetLook;
+        walking.LookAround.canceled += SetLook;
+
+        walking.Sprint.started += SetSprint;
+        walking.Sprint.canceled += SetSprint;
+        
+        walking.Crouch.started += SetCrouch;
+        walking.Crouch.canceled += SetCrouch;
+
+        walking.Jump.started += SetJump;
+        walking.Jump.canceled += SetJump;
+
         walking.Enable();
         shooting.Enable();
     }
 
     private void OnDisable()
     {
+        walking.Movement.performed -= SetMove;
+        walking.Movement.canceled -= SetMove;
+
+        walking.LookAround.performed -= SetLook;
+        walking.LookAround.canceled -= SetLook;
+
+        walking.Sprint.started -= SetSprint;
+        walking.Sprint.canceled -= SetSprint;
+        
+        walking.Crouch.started -= SetCrouch;
+        walking.Crouch.canceled -= SetCrouch;
+
+        walking.Jump.started -= SetJump;
+        walking.Jump.canceled -= SetJump;
+
         walking.Disable();
         shooting.Disable();
     }
 
+    private void SetMove(InputAction.CallbackContext ctx) {
+        MoveInput = ctx.ReadValue<Vector2>();
+    }
+
+    private void SetLook(InputAction.CallbackContext ctx) {
+        LookInput = ctx.ReadValue<Vector2>();
+    }
+
+    private void SetJump(InputAction.CallbackContext ctx) {
+        JumpInput = ctx.started;
+    }
+
+    private void SetCrouch(InputAction.CallbackContext ctx) {
+        CrouchInput = ctx.started;
+    }
+
+    private void SetSprint(InputAction.CallbackContext ctx) {
+        SprintInput = ctx.started;
+    }
     //For Rapid Fire
     void StartFiring()
     {
-        fireCoroutine = StartCoroutine(gun.RapidFire());
+        //fireCoroutine = StartCoroutine(gun.RapidFire());
+        fireCoroutine = StartCoroutine(specificWeapon.RapidFire());
     }
+
     void StopFiring()
     {
         if (fireCoroutine != null)
@@ -86,4 +124,19 @@ public class InputManager : MonoBehaviour
         }
     }
 
+    private void equip(int index)
+    {
+        gun.EquipWeapon(index);
+        updateWeaponScript();
+    }
+
+    public void updateWeaponScript()
+    {
+        if (GetComponentInChildren<SpecificWeaponScript>() != null)
+        {
+            specificWeapon = GetComponentInChildren<SpecificWeaponScript>();
+            specificWeapon.ShowAmmo();
+            Debug.Log("SpecificWeaponScript gefunden");
+        }
+    }
 }

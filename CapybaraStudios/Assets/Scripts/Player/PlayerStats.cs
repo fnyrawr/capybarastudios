@@ -12,12 +12,10 @@ public class PlayerStats : MonoBehaviour
 
     void Start()
     {
-
     }
 
     void Update()
     {
-
     }
 
     public void TakeDamage(int damageAmount)
@@ -30,7 +28,6 @@ public class PlayerStats : MonoBehaviour
         if (playerHealth <= 0)
         {
             //die and respawn
-
         }
     }
 }

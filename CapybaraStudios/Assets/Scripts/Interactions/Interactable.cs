@@ -15,7 +15,7 @@ public abstract class Interactable : MonoBehaviour
     }
 
     protected virtual void Interact(GameObject player)
-    { 
+    {
         //template function
     }
 }
