@@ -9,22 +9,22 @@ public class GunScript : MonoBehaviour
 {
     public Transform gunSlot;
 
-    private bool hasGun = false;
-
     public new Camera camera;
+    public Animator animator;
+    public TextMeshProUGUI ammoText;
+    public TextMeshProUGUI maxAmmoText;
+    public GameObject hitmarker;
+    public GameObject bulletHoleGraphic;
 
     public WeaponAnimationController weaponAnimator;
     public GameObject[] Weapons = new GameObject[4];
 
-    public SpecificWeaponScript currentWeapon;
+    public Weapon currentWeapon;
     public int currentSlot = 0;
 
     private void Awake()
     {
-    }
-
-    void Update()
-    {
+        changeWeapon(currentSlot);
     }
 
     public void ejectGun()
@@ -69,7 +69,8 @@ public class GunScript : MonoBehaviour
     public void pickUp(GameObject gun)
     {
         Debug.Log(gun.name + " aquired");
-        var weaponSlot = gun.GetComponent<Weapon>().weaponSlot - 1;
+        Weapon weapon = gun.GetComponent<Weapon>();
+        var weaponSlot = weapon.weaponSlot - 1;
         ditchGun(weaponSlot);
         gun.GetComponent<Rigidbody>().isKinematic = true;
         gun.GetComponent<BoxCollider>().enabled = false;
@@ -96,7 +97,8 @@ public class GunScript : MonoBehaviour
         currentSlot = index;
         Weapons[currentSlot].transform.SetParent(gunSlot);
         gunSlot.GetChild(0).gameObject.SetActive(true);
-        currentWeapon = gunSlot.GetChild(0).GetComponent<SpecificWeaponScript>();
+        currentWeapon = gunSlot.GetChild(0).GetComponent<Weapon>();
+        currentWeapon.init(animator, camera, ammoText, maxAmmoText, hitmarker, bulletHoleGraphic);
         weaponAnimator.refresh();
         Weapons[currentSlot].transform.localRotation = Quaternion.Euler(0, 0, 0);
         Weapons[currentSlot].transform.localPosition = new Vector3(0, 0, 0);

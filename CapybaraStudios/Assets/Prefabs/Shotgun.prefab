@@ -292,7 +292,6 @@ GameObject:
   - component: {fileID: 6285491156755393976}
   - component: {fileID: 8224732010726354141}
   - component: {fileID: 5066579342820826647}
-  - component: {fileID: -5436851219954954679}
   m_Layer: 6
   m_Name: Shotgun
   m_TagString: Untagged
@@ -334,6 +333,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   message: 
+  damage: 15
+  spread: 0.006
+  range: 100
+  reloadTime: 2
+  fireRate: 1
+  timeBetweenShooting: 0.05
+  maxAmmo: 100
+  magazineSize: 25
+  bulletsPerTap: 5
+  hasAmmo: 1
+  rapidFireEnabled: 0
+  bulletsLeft: 0
+  bulletsShot: 0
   weaponSlot: 1
   animationType: 1
 --- !u!54 &8224732010726354141
@@ -365,36 +377,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.1, y: 0.3, z: 1.5}
   m_Center: {x: 0, y: -0.06, z: -0.12}
---- !u!114 &-5436851219954954679
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5431010200346843826}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cbf1c3f2172f80f46a946d067eeca897, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  camera: {fileID: 0}
-  damage: 15
-  spread: 0.06
-  range: 100
-  reloadTime: 2
-  fireRate: 1
-  timeBetweenShooting: 0.5
-  maxAmmo: 100
-  magazineSize: 25
-  bulletsPerTap: 5
-  hasAmmo: 1
-  rapidFireEnabled: 0
-  bulletsLeft: 0
-  bulletsShot: 0
-  hitmarker: {fileID: 0}
-  bulletHoleGraphic: {fileID: 2987797164400997647, guid: cdd64dc8e7f243b49829c5817ce597bb, type: 3}
-  ammoText: {fileID: 0}
-  maxAmmoText: {fileID: 0}
 --- !u!1 &5538335661641642871
 GameObject:
   m_ObjectHideFlags: 0

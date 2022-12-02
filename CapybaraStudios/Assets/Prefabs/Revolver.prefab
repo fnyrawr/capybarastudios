@@ -178,7 +178,6 @@ GameObject:
   - component: {fileID: 8192357582531077093}
   - component: {fileID: 4235579737266619029}
   - component: {fileID: 5736772152955148994}
-  - component: {fileID: -5019785203544964641}
   m_Layer: 6
   m_Name: Revolver
   m_TagString: Untagged
@@ -225,6 +224,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   message: 
+  damage: 34
+  spread: 0.001
+  range: 100
+  reloadTime: 3
+  fireRate: 1
+  timeBetweenShooting: 1
+  maxAmmo: 60
+  magazineSize: 6
+  bulletsPerTap: 1
+  hasAmmo: 1
+  rapidFireEnabled: 1
+  bulletsLeft: 0
+  bulletsShot: 0
   weaponSlot: 2
   animationType: 1
 --- !u!54 &4235579737266619029
@@ -256,36 +268,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.1, y: 0.3, z: 0.5}
   m_Center: {x: 0, y: 0.03, z: 0.15}
---- !u!114 &-5019785203544964641
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1597034733851191711}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cbf1c3f2172f80f46a946d067eeca897, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  camera: {fileID: 0}
-  damage: 34
-  spread: 0.001
-  range: 100
-  reloadTime: 3
-  fireRate: 1
-  timeBetweenShooting: 1
-  maxAmmo: 60
-  magazineSize: 6
-  bulletsPerTap: 1
-  hasAmmo: 1
-  rapidFireEnabled: 1
-  bulletsLeft: 0
-  bulletsShot: 0
-  hitmarker: {fileID: 0}
-  bulletHoleGraphic: {fileID: 2987797164400997647, guid: cdd64dc8e7f243b49829c5817ce597bb, type: 3}
-  ammoText: {fileID: 0}
-  maxAmmoText: {fileID: 0}
 --- !u!1 &3774489631262544630
 GameObject:
   m_ObjectHideFlags: 0

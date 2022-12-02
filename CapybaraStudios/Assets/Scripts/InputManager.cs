@@ -18,7 +18,7 @@ public class InputManager : MonoBehaviour
     private PlayerMovement movement;
     private GunScript gun;
     private GrapplingGun hook;
-    private SpecificWeaponScript specificWeapon;
+    private Weapon weapon;
 
     Coroutine fireCoroutine;
 
@@ -38,8 +38,8 @@ public class InputManager : MonoBehaviour
         shooting.Shoot.started += ctx => StartFiring();
         shooting.Shoot.canceled += ctx => StopFiring();
 
-        shooting.Reload.performed += ctx => specificWeapon.Reload();
-        shooting.Shoot.performed += ctx => specificWeapon.Shoot(true);
+        shooting.Reload.performed += ctx => weapon.Reload();
+        shooting.Shoot.performed += ctx => weapon.Shoot(true);
 
         shooting.EquipPrimary.performed += ctx => equip(0);
         shooting.EquipSecondary.performed += ctx => equip(1);
@@ -120,7 +120,7 @@ public class InputManager : MonoBehaviour
     void StartFiring()
     {
         //fireCoroutine = StartCoroutine(gun.RapidFire());
-        fireCoroutine = StartCoroutine(specificWeapon.RapidFire());
+        fireCoroutine = StartCoroutine(weapon.RapidFire());
     }
 
     void StopFiring()
@@ -141,8 +141,8 @@ public class InputManager : MonoBehaviour
     {
         if (GetComponent<GunScript>())
         {
-            specificWeapon = GetComponent<GunScript>().currentWeapon;
-            specificWeapon.ShowAmmo();
+            weapon = GetComponent<GunScript>().currentWeapon;
+            weapon.ShowAmmo();
         }
     }
 }
