@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/MenuStyles.uss?fileID=7433441132597879392&amp;guid=a03f6df90bdd04875a57120deb87c5d6&amp;type=3#MenuStyles" />
+    <ui:VisualElement name="Wrapper">
+        <ui:Slider picking-mode="Ignore" label="Sound" value="42" high-value="100" name="Sound" style="-unity-font: url(&apos;project://database/Assets/TextMesh%20Pro/Fonts/AAbsoluteEmpire-EaXpg.ttf?fileID=12800000&amp;guid=61835df5ef45c47869cfceff02679098&amp;type=3#AAbsoluteEmpire-EaXpg&apos;); -unity-font-definition: none; color: rgba(255, 255, 255, 255);" />
+        <ui:Slider picking-mode="Ignore" label="Music" value="42" high-value="100" name="Music" style="-unity-font: url(&apos;project://database/Assets/TextMesh%20Pro/Fonts/AAbsoluteEmpire-EaXpg.ttf?fileID=12800000&amp;guid=61835df5ef45c47869cfceff02679098&amp;type=3#AAbsoluteEmpire-EaXpg&apos;); -unity-font-definition: none; color: rgba(255, 255, 255, 255);" />
+        <ui:Button text="Back" display-tooltip-when-elided="true" name="BackButton" class="menu-button" />
+    </ui:VisualElement>
+</ui:UXML>

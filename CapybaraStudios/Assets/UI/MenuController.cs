@@ -15,6 +15,9 @@ public class MenuController : MonoBehaviour
     [SerializeField] private VisualTreeAsset _playButtonTemplate; //
     private VisualElement _playButtons; //
 
+    [SerializeField] private VisualTreeAsset _settingsButtonTemplate; //
+    private VisualElement _settingsButtons;
+
     //for mute:
     [Header("Mute Button")] [SerializeField]
     private Sprite _mutedSprite;
@@ -45,6 +48,7 @@ public class MenuController : MonoBehaviour
         _buttonsWrapper = _doc.rootVisualElement.Q<VisualElement>("Buttons");
 
         _playButton.clicked += PlayButtonClicked; // () => { DoSomething(); };
+        _settingsButton.clicked += SettingsButtonOnClicked;
         _exitButton.clicked += ExitButtonClicked;
 
         //for mute:
@@ -60,6 +64,14 @@ public class MenuController : MonoBehaviour
         var backButton = _doc.rootVisualElement.Q<Button>("BackButton");
         backButton.clicked += BackButtonOnClicked;
         //Instantiate(_playButtonTemplate);
+    }
+
+    private void SettingsButtonOnClicked()
+    {
+        _buttonsWrapper.Clear();
+        _buttonsWrapper.Add(_settingsButtonTemplate.CloneTree());
+        var backButton = _doc.rootVisualElement.Q<Button>("BackButton");
+        backButton.clicked += BackButtonOnClicked;
     }
 
     private void BackButtonOnClicked()
