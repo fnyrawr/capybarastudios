@@ -31,6 +31,9 @@ public class GunScript : MonoBehaviour
     {
     }
 
+    public void ejectGun() {
+        Debug.Log("drop");
+    }
     //gun pickup and discard
     public void ditchGun(int weaponType)
     {

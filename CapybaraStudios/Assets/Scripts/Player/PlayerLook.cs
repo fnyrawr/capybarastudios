@@ -11,12 +11,13 @@ public class PlayerLook : MonoBehaviour
     public float ySensitivity = 30f;
     public Transform target;
     public Transform targetPoint;
-    private bool sprinting = false, crouching = false;
+    private bool sprinting = false, crouching = false, hooked = false;
     [SerializeField] private float baseFOV;
     [SerializeField] private float sprintingFOV = 1.1f;
     private float elapsedTime = 1f, elapsedcTime = 1f;
     private float height = 0f, currheight;
     [SerializeField] InputManager _input;
+    [SerializeField] ParticleSystem hookParticles;
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -29,7 +30,7 @@ public class PlayerLook : MonoBehaviour
         {
             elapsedTime += Time.deltaTime;
             float percentage = elapsedTime / 0.4f;
-            if (sprinting)
+            if (sprinting || hooked)
                 camera.fieldOfView = Mathf.Lerp(baseFOV, baseFOV * sprintingFOV,
                     Mathf.SmoothStep(0, 1, percentage));
             else camera.fieldOfView = Mathf.Lerp(camera.fieldOfView, baseFOV, Mathf.SmoothStep(0, 1, percentage));
@@ -69,6 +70,20 @@ public class PlayerLook : MonoBehaviour
         //apply to camera
         target.localRotation = Quaternion.Euler(xRotation, 0, 0);
         camera.transform.LookAt(targetPoint);
+    }
+
+    public void StartHook()
+    {
+        hookParticles.Play();
+        hooked = true;
+        elapsedTime = 0;
+    }
+
+    public void StopHook()
+    {
+        hookParticles.Stop();
+        hooked = false;
+        elapsedTime = 0;
     }
 
     public void Sprint()
