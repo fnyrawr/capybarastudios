@@ -15,8 +15,7 @@ public class MenuController : MonoBehaviour
     [SerializeField] private VisualTreeAsset _playButtonTemplate; //
     private VisualElement _playButtons; //
 
-    [SerializeField]
-    private VisualTreeAsset _settingsButtonTemplate; //
+    [SerializeField] private VisualTreeAsset _settingsButtonTemplate; //
     private VisualElement _settingsButtons;
 
     //for mute:

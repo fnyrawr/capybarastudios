@@ -28,7 +28,7 @@ public class WeaponAnimationController : MonoBehaviour
         var Weapon = getActiveWeapon();
         if (Weapon)
         {
-            animator.SetInteger("weaponType", Weapon.GetComponent<Weapon>().weaponType);
+            animator.SetInteger("weaponType", Weapon.GetComponent<Weapon>().animationType);
             var temp = Weapon.transform.Find("ref_left_hand_target");
             if (temp)
             {

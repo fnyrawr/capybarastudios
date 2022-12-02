@@ -125,8 +125,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2795301733894970671}
-  m_LocalRotation: {x: -0.7851391, y: -0.15398774, z: -0.52584094, w: -0.28867948}
-  m_LocalPosition: {x: 2.167, y: 2.246, z: 3.437}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -147,7 +147,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   message: 
-  weaponType: 3
+  damage: 50
+  spread: 0.01
+  range: 5
+  reloadTime: 0
+  fireRate: 1
+  timeBetweenShooting: 1
+  maxAmmo: -1
+  magazineSize: 10000
+  bulletsPerTap: 1
+  hasAmmo: 0
+  rapidFireEnabled: 0
+  bulletsLeft: 0
+  bulletsShot: 0
+  weaponSlot: 3
+  animationType: 3
 --- !u!54 &2795301733894970665
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -18,13 +18,13 @@ public class PlayerLook : MonoBehaviour
     private float height = 0f, currheight;
     [SerializeField] InputManager _input;
     [SerializeField] ParticleSystem hookParticles;
-    private Quaternion hookRot;
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         height = camera.transform.position.y;
         currheight = height;
     }
+
     void FixedUpdate()
     {
         if (elapsedTime <= 1)
@@ -41,23 +41,31 @@ public class PlayerLook : MonoBehaviour
         {
             elapsedcTime += Time.deltaTime;
             float percentage = elapsedTime / 0.4f;
-            if (crouching) {
+            if (crouching)
+            {
                 currheight = Mathf.Lerp(currheight, height - 0.5f, Mathf.SmoothStep(0, 1, percentage));
-                if (sprinting) camera.fieldOfView = Mathf.Lerp(camera.fieldOfView, baseFOV, Mathf.SmoothStep(0, 1, percentage));
+                if (sprinting)
+                    camera.fieldOfView = Mathf.Lerp(camera.fieldOfView, baseFOV, Mathf.SmoothStep(0, 1, percentage));
             }
-            else {
+            else
+            {
                 currheight = Mathf.Lerp(currheight, height, Mathf.SmoothStep(0, 1, percentage));
-                if (sprinting) camera.fieldOfView = Mathf.Lerp(baseFOV, baseFOV * sprintingFOV,
-                    Mathf.SmoothStep(0, 1, percentage));
-            } 
+                if (sprinting)
+                    camera.fieldOfView = Mathf.Lerp(baseFOV, baseFOV * sprintingFOV,
+                        Mathf.SmoothStep(0, 1, percentage));
+            }
+
             camera.transform.localPosition = new Vector3(0, currheight, 0);
         }
     }
-    private void Update() {
+
+    private void Update()
+    {
         ProcessLook(_input.LookInput);
         Sprint();
         Crouch();
     }
+
     public void ProcessLook(Vector2 input)
     {
         float mouseX = input.x;

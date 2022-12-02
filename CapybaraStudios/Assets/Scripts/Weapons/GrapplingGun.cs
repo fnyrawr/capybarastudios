@@ -20,6 +20,7 @@ public class GrapplingGun : MonoBehaviour
     private float throwingTimer;
     [SerializeField] private float cooldown;
     private float currCooldown;
+
     void Awake()
     {
         playerCam = transform.parent.GetComponentInChildren<Camera>();
@@ -34,48 +35,58 @@ public class GrapplingGun : MonoBehaviour
     void Update()
     {
         currCooldown += Time.deltaTime;
-        if(!hooked) return;
+        if (!hooked) return;
         HandleHookMovement();
     }
 
-    private void LateUpdate() {
-        if(!draw && hooked) {
+    private void LateUpdate()
+    {
+        if (!draw && hooked)
+        {
             UpdateRope();
             return;
-        } 
-        else if(!draw) return;
+        }
+        else if (!draw) return;
+
         DrawRope();
     }
 
-    private void DrawRope() {
+    private void DrawRope()
+    {
         throwingTimer += Time.deltaTime;
         float delta = throwingTimer / 0.1f;
         Vector3 ropePos = Vector3.Lerp(gunTip.position, hookPos, delta);
-        lr.SetPosition((int) 1, ropePos);
-        if(delta >= 1) {
+        lr.SetPosition((int)1, ropePos);
+        if (delta >= 1)
+        {
             hooked = true;
             draw = false;
             cameraScript.StartHook();
         }
     }
 
-    private void UpdateRope() {
-        lr.SetPosition((int) 0, gunTip.position);
+    private void UpdateRope()
+    {
+        lr.SetPosition((int)0, gunTip.position);
     }
 
     //call this function in inputscript to hook
-    public void Hook() {
-        if(currCooldown >= cooldown && Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out RaycastHit hit, maxDistance)) {
+    public void Hook()
+    {
+        if (currCooldown >= cooldown && Physics.Raycast(playerCam.transform.position, playerCam.transform.forward,
+                out RaycastHit hit, maxDistance))
+        {
             draw = true;
             hookPos = hit.point;
             playerMovement.hooked = true;
             lr.positionCount = 2;
-            lr.SetPosition((int) 0, gunTip.position);
+            lr.SetPosition((int)0, gunTip.position);
         }
     }
 
-    public void StopHook() {
-        if(hooked) currCooldown = 0;
+    public void StopHook()
+    {
+        if (hooked) currCooldown = 0;
         draw = false;
         hooked = false;
         playerMovement.hooked = false;
@@ -87,13 +98,15 @@ public class GrapplingGun : MonoBehaviour
         cameraScript.StopHook();
     }
 
-    private void HandleHookMovement() {
+    private void HandleHookMovement()
+    {
         hookDir = (hookPos - transform.parent.transform.position).normalized;
         hookSpeed = Mathf.Clamp(Vector3.Distance(transform.position, hookPos), speedMin, speedMax);
         playerController.Move(hookDir * Time.deltaTime * hookSpeed);
 
         float closestDistance = 5f; //set to different value if player shouldnt perma grapple to wall
-        if(Vector3.Distance(transform.position, hookPos) <= closestDistance) {
+        if (Vector3.Distance(transform.position, hookPos) <= closestDistance)
+        {
             hookSpeed = 0f;
         }
     }
