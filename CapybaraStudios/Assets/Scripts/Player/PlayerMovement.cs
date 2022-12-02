@@ -12,12 +12,16 @@ public class PlayerMovement : MonoBehaviour
 
     //movement
     private float playerVelocity;
+
     //crouching
     private bool crouching = false;
+
     //sprinting
     private bool sprinting = false;
+
     //sliding
     private float crouchingMomentum = 1f;
+
     //speed and jump
     public float speed = 7f;
     public float sprintingSpeed = 15f;
@@ -27,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
     //hook
     [NonSerialized] public bool hooked;
     [NonSerialized] public Vector3 midAirMomentum;
-    
+
     public Transform Target;
 
     private Animator _animator;
@@ -56,10 +60,12 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(hooked) {
+        if (hooked)
+        {
             playerVelocity = -2f;
             return;
-        } 
+        }
+
         ProcessMovement(_input.MoveInput);
         Crouch();
         Sprint();
@@ -84,8 +90,10 @@ public class PlayerMovement : MonoBehaviour
 
             _animator.SetBool("isJumping", isJumping);
         }
+
         _animator.SetBool("isGrounded", controller.isGrounded);
     }
+
     public void ProcessMovement(Vector2 input)
     {
         Vector3 moveDirection = Vector3.zero;
@@ -96,10 +104,12 @@ public class PlayerMovement : MonoBehaviour
         var actualSpeed = input.y < 0 ? speed : (sprinting && crouchingMomentum >= 1f ? sprintingSpeed : speed);
         controller.Move(crouchingMomentum * actualSpeed * Time.deltaTime * transform.TransformDirection(moveDirection));
         //decrease slidingMomentum
-        if(crouchingMomentum > 0.65f && crouching) {
+        if (crouchingMomentum > 0.65f && crouching)
+        {
             float slideTime = 0.2f;
             crouchingMomentum -= Time.deltaTime * slideTime;
-            if(crouchingMomentum < 0.65f) {
+            if (crouchingMomentum < 0.65f)
+            {
                 crouchingMomentum = 0.65f;
                 _animator.SetBool(_isCrouchingHash, crouching);
                 _animator.SetBool(_isSlidingHash, false);
@@ -113,14 +123,16 @@ public class PlayerMovement : MonoBehaviour
             playerVelocity = -2f;
             midAirMomentum = Vector3.zero;
         }
+
         midAirMomentum.y = playerVelocity;
         controller.Move(midAirMomentum * Time.deltaTime);
-        
+
         //decrease midAirMomentum 
-        if(midAirMomentum.magnitude > 0f) {
+        if (midAirMomentum.magnitude > 0f)
+        {
             float drag = 3f; //how much the char gets dragged
             midAirMomentum -= midAirMomentum * drag * Time.deltaTime;
-            if(midAirMomentum.magnitude < 0f) midAirMomentum = Vector3.zero;
+            if (midAirMomentum.magnitude < 0f) midAirMomentum = Vector3.zero;
         }
 
         //general animation controlling
@@ -168,18 +180,22 @@ public class PlayerMovement : MonoBehaviour
     public void Crouch()
     {
         if (crouching == _input.CrouchInput) return;
-        if(!crouching && _input.CrouchInput) {
-            if(sprinting) {
+        if (!crouching && _input.CrouchInput)
+        {
+            if (sprinting)
+            {
                 crouchingMomentum = 1.1f;
                 _animator.SetBool(_isSlidingHash, _input.CrouchInput);
             }
-            else {
+            else
+            {
                 crouchingMomentum = 0.65f;
                 _animator.SetBool(_isCrouchingHash, _input.CrouchInput);
-            } 
+            }
         }
 
-        if(crouching && !_input.CrouchInput) {
+        if (crouching && !_input.CrouchInput)
+        {
             crouchingMomentum = 1f;
             _animator.SetBool(_isCrouchingHash, _input.CrouchInput);
             _animator.SetBool(_isSlidingHash, _input.CrouchInput);

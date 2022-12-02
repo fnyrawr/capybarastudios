@@ -8,5 +8,4 @@ using UnityEngine.Animations.Rigging;
 [CreateAssetMenu(fileName = "New Gun", menuName = "Gun")]
 public class Gun : ScriptableObject
 {
-    
 }

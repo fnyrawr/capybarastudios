@@ -5,26 +5,8 @@ using UnityEngine;
 public class Weapon : Interactable
 {
     public int weaponSlot;
-    public int weaponType;
+    public int animationType;
     
-
-    /*
-    weaponSlot
-    
-    primary = 1
-    secondary = 2
-    knife = 3
-    utility = 4
-
-    weaponType
-
-    assault rifle = 1
-    shotgun = 2
-    submachine gun = 3
-    machine gun = 4
-
-    */
-
     void Start()
     {
         message = "Pick up [E]";

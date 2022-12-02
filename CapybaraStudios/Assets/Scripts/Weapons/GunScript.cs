@@ -8,8 +8,6 @@ using UnityEngine.Animations.Rigging;
 public class GunScript : MonoBehaviour
 {
     public Transform gunSlot;
-    private bool hasPrimary = false;
-    private bool hasSecondary = false;
 
     private bool hasGun = false;
 
@@ -18,11 +16,9 @@ public class GunScript : MonoBehaviour
     public WeaponAnimationController weaponAnimator;
     public GameObject[] Weapons = new GameObject[4];
 
-    public GameObject[] AllWeapons = new GameObject[4];
-    public GameObject[] PrimaryWeapons = new GameObject[4];
-    public int selectedWeapon = 0;
-    public int selectedPrimaryWeapon = 0;
-    
+    public SpecificWeaponScript currentWeapon;
+    public int currentSlot = 0;
+
     private void Awake()
     {
     }
@@ -31,13 +27,31 @@ public class GunScript : MonoBehaviour
     {
     }
 
-    public void ejectGun() {
-        Debug.Log("drop");
-    }
-    //gun pickup and discard
-    public void ditchGun(int weaponType)
+    public void ejectGun()
     {
-        if (Weapons[weaponType])
+        Debug.Log("drop");
+        ditchGun(currentSlot);
+        equipHighest();
+    }
+
+    void equipHighest()
+    {
+        foreach (var weapon in Weapons)
+        {
+            if (weapon)
+            {
+                changeWeapon(weapon.GetComponent<Weapon>().weaponSlot - 1);
+                return;
+            }
+        }
+        //no weapon on player...
+        //TODO
+    }
+
+    //gun pickup and discard
+    public void ditchGun(int index)
+    {
+        if (Weapons[index])
         {
             if (gunSlot.GetChild(0))
             {
@@ -47,18 +61,20 @@ public class GunScript : MonoBehaviour
                 oldGun.GetComponent<BoxCollider>().enabled = true;
                 Debug.Log(oldGun.name + " ditched");
             }
+
+            Weapons[index] = null;
         }
     }
 
     public void pickUp(GameObject gun)
     {
         Debug.Log(gun.name + " aquired");
-        var weaponType = gun.GetComponent<Weapon>().weaponType;
-        ditchGun(weaponType);
+        var weaponSlot = gun.GetComponent<Weapon>().weaponSlot - 1;
+        ditchGun(weaponSlot);
         gun.GetComponent<Rigidbody>().isKinematic = true;
         gun.GetComponent<BoxCollider>().enabled = false;
-        Weapons[weaponType] = gun;
-        changeWeapon(weaponType);
+        Weapons[weaponSlot] = gun;
+        changeWeapon(weaponSlot);
     }
 
     public void hideGun()
@@ -74,43 +90,23 @@ public class GunScript : MonoBehaviour
         }
     }
 
-    public void changeWeapon(int weaponType)
+    public void changeWeapon(int index)
     {
         hideGun();
-        selectedWeapon = weaponType;
-        Weapons[weaponType].transform.SetParent(gunSlot);
+        currentSlot = index;
+        Weapons[currentSlot].transform.SetParent(gunSlot);
         gunSlot.GetChild(0).gameObject.SetActive(true);
+        currentWeapon = gunSlot.GetChild(0).GetComponent<SpecificWeaponScript>();
         weaponAnimator.refresh();
-        Weapons[weaponType].transform.localRotation = Quaternion.Euler(0, 0, 0);
-        Weapons[weaponType].transform.localPosition = new Vector3(0, 0, 0);
+        Weapons[currentSlot].transform.localRotation = Quaternion.Euler(0, 0, 0);
+        Weapons[currentSlot].transform.localPosition = new Vector3(0, 0, 0);
     }
 
     public void EquipWeapon(int index)
     {
-        foreach (var item in AllWeapons)
+        if (currentSlot != index)
         {
-            item.SetActive(false);
+            changeWeapon(index);
         }
-        AllWeapons[index].SetActive(true);
-        //selectedWeapon = index;
     }
-
-    public void EquipPrimary(int index)
-    {
-        //equip primary slot
-        EquipWeapon(0);
-        /*
-        assault rifle = 0
-        shotgun = 1
-        submachine gun = 2
-        machine gun = 3
-        */
-        foreach (var item in PrimaryWeapons)
-        {
-            item.SetActive(false);
-        }
-        PrimaryWeapons[index].SetActive(true);
-        selectedPrimaryWeapon = index;
-    }
-
 }

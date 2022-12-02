@@ -111,6 +111,7 @@ GameObject:
   - component: {fileID: 2795301733894970666}
   - component: {fileID: 2795301733894970665}
   - component: {fileID: 2795301733894970660}
+  - component: {fileID: 1987958549794170337}
   m_Layer: 6
   m_Name: Knife
   m_TagString: Untagged
@@ -125,8 +126,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2795301733894970671}
-  m_LocalRotation: {x: -0.7851391, y: -0.15398774, z: -0.52584094, w: -0.28867948}
-  m_LocalPosition: {x: 2.167, y: 2.246, z: 3.437}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -147,7 +148,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   message: 
-  weaponType: 3
+  weaponSlot: 3
+  animationType: 3
 --- !u!54 &2795301733894970665
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -177,6 +179,36 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.3, y: 0.1, z: 0.3}
   m_Center: {x: 0.13, y: 0.01, z: 0}
+--- !u!114 &1987958549794170337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2795301733894970671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbf1c3f2172f80f46a946d067eeca897, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camera: {fileID: 0}
+  damage: 50
+  spread: 0.01
+  range: 5
+  reloadTime: 0
+  fireRate: 1
+  timeBetweenShooting: 1
+  maxAmmo: -1
+  magazineSize: 10000
+  bulletsPerTap: 1
+  hasAmmo: 0
+  rapidFireEnabled: 0
+  bulletsLeft: 0
+  bulletsShot: 0
+  hitmarker: {fileID: 0}
+  bulletHoleGraphic: {fileID: 2987797164400997647, guid: cdd64dc8e7f243b49829c5817ce597bb, type: 3}
+  ammoText: {fileID: 0}
+  maxAmmoText: {fileID: 0}
 --- !u!1 &2795301734200344102
 GameObject:
   m_ObjectHideFlags: 0
