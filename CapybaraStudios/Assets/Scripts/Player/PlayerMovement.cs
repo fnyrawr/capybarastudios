@@ -58,6 +58,10 @@ public class PlayerMovement : MonoBehaviour
     {
         if(hooked) {
             playerVelocity = -2f;
+            if(_input.JumpInput) {
+                GetComponentInChildren<GrapplingGun>().StopHook();
+                playerVelocity = Mathf.Sqrt(jumpHeight * -3.0f * gravity);
+            }
             return;
         } 
         ProcessMovement(_input.MoveInput);
