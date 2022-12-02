@@ -18,6 +18,7 @@ public class PlayerLook : MonoBehaviour
     private float height = 0f, currheight;
     [SerializeField] InputManager _input;
     [SerializeField] ParticleSystem hookParticles;
+    private Quaternion hookRot;
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
