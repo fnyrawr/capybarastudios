@@ -50,7 +50,6 @@ public class Weapon : Interactable
         _maxAmmoText = maxAmmoText;
         _hitmarker = hitmarker;
         _bulletHoleGraphic = bulletHoleGraphic;
-
     }
 
     protected override void Interact(GameObject player)
@@ -89,21 +88,25 @@ public class Weapon : Interactable
                 controllerMask))
         {
             Debug.Log(hit.transform.name);
+            Debug.Log(hit.transform.tag);
 
             GameObject collisionObject = hit.collider.gameObject;
 
             if (collisionObject.CompareTag("Head") || collisionObject.CompareTag("Body") ||
                 collisionObject.CompareTag("Limbs"))
             {
+                print("e");
                 //does object have stats?
-                if (collisionObject.GetComponent<PlayerStats>() != null)
+                if (collisionObject.GetComponentInParent(typeof(PlayerStats)))
                 {
+                    print("e");
                     //deal damage
                     float hitMultiplier = 1;
                     if (collisionObject.CompareTag("Head")) hitMultiplier = 3;
                     if (collisionObject.CompareTag("Limbs")) hitMultiplier = 0.75f;
                     int finalDamage = (int)(damage * hitMultiplier);
-                    collisionObject.GetComponent<PlayerStats>().TakeDamage(finalDamage);
+                    print("e");
+                    (collisionObject.GetComponentInParent(typeof(PlayerStats)) as PlayerStats).TakeDamage(finalDamage);
 
                     //Hitmarker
                     HitShow();
