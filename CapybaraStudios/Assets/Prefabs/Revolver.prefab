@@ -223,8 +223,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 327d8bc115bf4ce44b75e83839f97851, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  message: Pick up [E]
-  button: {fileID: 0}
+  message: 
+  damage: 34
+  spread: 0.001
+  range: 100
+  reloadTime: 3
+  fireRate: 1
+  timeBetweenShooting: 1
+  maxAmmo: 60
+  magazineSize: 6
+  bulletsPerTap: 1
+  hasAmmo: 1
+  rapidFireEnabled: 1
+  bulletsLeft: 0
+  bulletsShot: 0
+  weaponSlot: 2
+  animationType: 1
 --- !u!54 &4235579737266619029
 Rigidbody:
   m_ObjectHideFlags: 0

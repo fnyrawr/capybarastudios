@@ -8,106 +8,107 @@ using UnityEngine.Animations.Rigging;
 public class GunScript : MonoBehaviour
 {
     public Transform gunSlot;
-    public TwoBoneIKConstraint rightTarget;
-    public TwoBoneIKConstraint leftTarget;
-    public RigBuilder rigBuilder;
-
-
-    private bool hasGun = false;
-    public float damage = 10;
-    public float range = 100f;
-    public int ammo = 30;
 
     public new Camera camera;
-
-    public GameObject hitmarker;
-    public float distance;
-
-    //HUD
+    public Animator animator;
     public TextMeshProUGUI ammoText;
+    public TextMeshProUGUI maxAmmoText;
+    public GameObject hitmarker;
+    public GameObject bulletHoleGraphic;
 
-    private int controllerMask = ~(1 << 15);
+    public WeaponAnimationController weaponAnimator;
+    public GameObject[] Weapons = new GameObject[4];
 
-    void Update()
+    public Weapon currentWeapon;
+    public int currentSlot = 0;
+
+    private void Awake()
     {
+        changeWeapon(currentSlot);
     }
 
-    public void Shoot()
+    public void ejectGun()
     {
-        //Debug.Log("Shoot!");
+        Debug.Log("drop");
+        ditchGun(currentSlot);
+        equipHighest();
+    }
 
-        ammo--;
-        ammoText.text = ammo.ToString() + " / 30";
-        if (ammo == 0)
+    void equipHighest()
+    {
+        foreach (var weapon in Weapons)
         {
-            ammo = 30;
-            ammoText.text = ammo.ToString() + " / 30";
-        }
-
-        if (Physics.Raycast(camera.transform.position, camera.transform.forward, out RaycastHit hit, range,
-                controllerMask))
-        {
-            Debug.Log(hit.transform.name);
-
-            GameObject collisionObject = hit.collider.gameObject;
-
-            if (collisionObject.CompareTag("Head") || collisionObject.CompareTag("Body") ||
-                collisionObject.CompareTag("Limbs"))
+            if (weapon)
             {
-                //does object have stats?
-                if (collisionObject.GetComponent<PlayerStats>() == null) return;
-                //deal damage
-                float hitMultiplier = 1;
-                if (collisionObject.CompareTag("Head")) hitMultiplier = 3;
-                if (collisionObject.CompareTag("Limbs")) hitMultiplier = 0.75f;
-                int finalDamage = (int)(damage * hitMultiplier);
-                collisionObject.GetComponent<PlayerStats>().TakeDamage(finalDamage);
-
-                //Hitmarker
-                HitShow();
-                Invoke(nameof(HitDisable), 0.2f);
+                changeWeapon(weapon.GetComponent<Weapon>().weaponSlot - 1);
+                return;
             }
         }
-        else
+        //no weapon on player...
+        //TODO
+    }
+
+    //gun pickup and discard
+    public void ditchGun(int index)
+    {
+        if (Weapons[index])
         {
-            Debug.Log("Not hit");
-        }
-    }
+            if (gunSlot.GetChild(0))
+            {
+                var oldGun = gunSlot.GetChild(0);
+                oldGun.SetParent(null);
+                oldGun.GetComponent<Rigidbody>().isKinematic = false;
+                oldGun.GetComponent<BoxCollider>().enabled = true;
+                Debug.Log(oldGun.name + " ditched");
+            }
 
-
-    public void HitShow()
-    {
-        hitmarker.SetActive(true);
-    }
-
-    public void HitDisable()
-    {
-        hitmarker.SetActive(false);
-    }
-
-    public void ditchGun()
-    {
-        if (hasGun)
-        {
-            var oldGun = gunSlot.GetChild(0);
-            oldGun.SetParent(null);
-            oldGun.GetComponent<Rigidbody>().isKinematic = false;
-            oldGun.GetComponent<BoxCollider>().enabled = true;
-            Debug.Log(oldGun.name + " ditched");
+            Weapons[index] = null;
         }
     }
 
     public void pickUp(GameObject gun)
     {
-        ditchGun();
         Debug.Log(gun.name + " aquired");
-        hasGun = true;
+        Weapon weapon = gun.GetComponent<Weapon>();
+        var weaponSlot = weapon.weaponSlot - 1;
+        ditchGun(weaponSlot);
         gun.GetComponent<Rigidbody>().isKinematic = true;
         gun.GetComponent<BoxCollider>().enabled = false;
-        gun.transform.SetParent(gunSlot);
-        leftTarget.data.target = gun.transform.Find("ref_left_hand_target");
-        rigBuilder.Build();
-        gun.transform.localRotation = Quaternion.Euler(0, 0, 0);
-        gun.transform.localPosition = new Vector3(0, 0, 0);
+        Weapons[weaponSlot] = gun;
+        changeWeapon(weaponSlot);
+    }
+
+    public void hideGun()
+    {
+        try
+        {
+            var gun = gunSlot.GetChild(0);
+            gun.SetParent(null);
+            gun.gameObject.SetActive(false);
+        }
+        catch (UnityException e)
+        {
+        }
+    }
+
+    public void changeWeapon(int index)
+    {
+        hideGun();
+        currentSlot = index;
+        Weapons[currentSlot].transform.SetParent(gunSlot);
+        gunSlot.GetChild(0).gameObject.SetActive(true);
+        currentWeapon = gunSlot.GetChild(0).GetComponent<Weapon>();
+        currentWeapon.init(animator, camera, ammoText, maxAmmoText, hitmarker, bulletHoleGraphic);
+        weaponAnimator.refresh();
+        Weapons[currentSlot].transform.localRotation = Quaternion.Euler(0, 0, 0);
+        Weapons[currentSlot].transform.localPosition = new Vector3(0, 0, 0);
+    }
+
+    public void EquipWeapon(int index)
+    {
+        if (currentSlot != index)
+        {
+            changeWeapon(index);
+        }
     }
 }

@@ -50,7 +50,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""type"": ""Value"",
                     ""id"": ""28957072-9f0d-460c-af45-002a62fbed84"",
                     ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
+                    ""processors"": ""ScaleVector2(x=0.1,y=0.1)"",
                     ""interactions"": """",
                     ""initialStateCheck"": true
                 },
@@ -60,7 +60,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""id"": ""9b9c1c8b-e25a-4a8c-8dd8-244813a1807a"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""Press(behavior=2)"",
                     ""initialStateCheck"": false
                 },
                 {
@@ -76,6 +76,15 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""name"": ""Interact"",
                     ""type"": ""Button"",
                     ""id"": ""1a4752c0-29b1-447b-bd39-4ff7b8b5a968"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Grappling"",
+                    ""type"": ""Button"",
+                    ""id"": ""d8c3270b-d88f-44e8-9ce5-8d5c95bb2472"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -218,7 +227,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""c57f4677-66f3-44ea-8a7d-bd5b9749b5d9"",
-                    ""path"": ""<Mouse>/delta"",
+                    ""path"": ""<Pointer>/delta"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -302,6 +311,17 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""58a85ada-5ddc-4dd2-8897-f33e36e363bb"",
+                    ""path"": ""<Keyboard>/p"",
+                    ""interactions"": ""Hold"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Grappling"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -313,6 +333,60 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""name"": ""Shoot"",
                     ""type"": ""Button"",
                     ""id"": ""19b2281c-4ede-463d-bd55-61e23bfce5c5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Reload"",
+                    ""type"": ""Button"",
+                    ""id"": ""0bf1b139-9d55-418a-ac32-a37969d253a3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""EquipPrimary"",
+                    ""type"": ""Button"",
+                    ""id"": ""ea755602-7dfe-49e4-8ebe-439c8aae69dd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""EquipSecondary"",
+                    ""type"": ""Button"",
+                    ""id"": ""543b4ed2-fb98-4e0a-916e-1ed7e883bee7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""EquipKnife"",
+                    ""type"": ""Button"",
+                    ""id"": ""9bea999f-2061-4549-a939-efbf5a0cce3a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""EquipUtility"",
+                    ""type"": ""Button"",
+                    ""id"": ""fb38618f-a5a9-4f54-b30b-641e21a3a1f1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Drop"",
+                    ""type"": ""Button"",
+                    ""id"": ""e34ba319-abcc-4245-a5a2-040bcff1d641"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -339,6 +413,83 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b1777068-7c38-4742-95f5-1c4665802381"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0583bec6-b6fe-4c3a-b743-ff0dc8d7435c"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""54d9dab5-a200-4c7a-863a-98379d0b452d"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EquipKnife"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d7dcef2c-3426-4653-80ab-f4965cdac6ab"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EquipPrimary"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""293cffaf-a285-4424-abe8-9858636d713a"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EquipSecondary"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1c166b02-adbd-4bbc-b6b7-6c6656774c0e"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EquipUtility"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""af672879-7722-45ed-96e5-028bbe2ffcd5"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Drop"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -871,9 +1022,16 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_Walking_Crouch = m_Walking.FindAction("Crouch", throwIfNotFound: true);
         m_Walking_Sprint = m_Walking.FindAction("Sprint", throwIfNotFound: true);
         m_Walking_Interact = m_Walking.FindAction("Interact", throwIfNotFound: true);
+        m_Walking_Grappling = m_Walking.FindAction("Grappling", throwIfNotFound: true);
         // Shooting
         m_Shooting = asset.FindActionMap("Shooting", throwIfNotFound: true);
         m_Shooting_Shoot = m_Shooting.FindAction("Shoot", throwIfNotFound: true);
+        m_Shooting_Reload = m_Shooting.FindAction("Reload", throwIfNotFound: true);
+        m_Shooting_EquipPrimary = m_Shooting.FindAction("EquipPrimary", throwIfNotFound: true);
+        m_Shooting_EquipSecondary = m_Shooting.FindAction("EquipSecondary", throwIfNotFound: true);
+        m_Shooting_EquipKnife = m_Shooting.FindAction("EquipKnife", throwIfNotFound: true);
+        m_Shooting_EquipUtility = m_Shooting.FindAction("EquipUtility", throwIfNotFound: true);
+        m_Shooting_Drop = m_Shooting.FindAction("Drop", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -951,6 +1109,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_Walking_Crouch;
     private readonly InputAction m_Walking_Sprint;
     private readonly InputAction m_Walking_Interact;
+    private readonly InputAction m_Walking_Grappling;
     public struct WalkingActions
     {
         private @PlayerInput m_Wrapper;
@@ -961,6 +1120,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         public InputAction @Crouch => m_Wrapper.m_Walking_Crouch;
         public InputAction @Sprint => m_Wrapper.m_Walking_Sprint;
         public InputAction @Interact => m_Wrapper.m_Walking_Interact;
+        public InputAction @Grappling => m_Wrapper.m_Walking_Grappling;
         public InputActionMap Get() { return m_Wrapper.m_Walking; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -988,6 +1148,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Interact.started -= m_Wrapper.m_WalkingActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_WalkingActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_WalkingActionsCallbackInterface.OnInteract;
+                @Grappling.started -= m_Wrapper.m_WalkingActionsCallbackInterface.OnGrappling;
+                @Grappling.performed -= m_Wrapper.m_WalkingActionsCallbackInterface.OnGrappling;
+                @Grappling.canceled -= m_Wrapper.m_WalkingActionsCallbackInterface.OnGrappling;
             }
             m_Wrapper.m_WalkingActionsCallbackInterface = instance;
             if (instance != null)
@@ -1010,6 +1173,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
+                @Grappling.started += instance.OnGrappling;
+                @Grappling.performed += instance.OnGrappling;
+                @Grappling.canceled += instance.OnGrappling;
             }
         }
     }
@@ -1019,11 +1185,23 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Shooting;
     private IShootingActions m_ShootingActionsCallbackInterface;
     private readonly InputAction m_Shooting_Shoot;
+    private readonly InputAction m_Shooting_Reload;
+    private readonly InputAction m_Shooting_EquipPrimary;
+    private readonly InputAction m_Shooting_EquipSecondary;
+    private readonly InputAction m_Shooting_EquipKnife;
+    private readonly InputAction m_Shooting_EquipUtility;
+    private readonly InputAction m_Shooting_Drop;
     public struct ShootingActions
     {
         private @PlayerInput m_Wrapper;
         public ShootingActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Shoot => m_Wrapper.m_Shooting_Shoot;
+        public InputAction @Reload => m_Wrapper.m_Shooting_Reload;
+        public InputAction @EquipPrimary => m_Wrapper.m_Shooting_EquipPrimary;
+        public InputAction @EquipSecondary => m_Wrapper.m_Shooting_EquipSecondary;
+        public InputAction @EquipKnife => m_Wrapper.m_Shooting_EquipKnife;
+        public InputAction @EquipUtility => m_Wrapper.m_Shooting_EquipUtility;
+        public InputAction @Drop => m_Wrapper.m_Shooting_Drop;
         public InputActionMap Get() { return m_Wrapper.m_Shooting; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1036,6 +1214,24 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Shoot.started -= m_Wrapper.m_ShootingActionsCallbackInterface.OnShoot;
                 @Shoot.performed -= m_Wrapper.m_ShootingActionsCallbackInterface.OnShoot;
                 @Shoot.canceled -= m_Wrapper.m_ShootingActionsCallbackInterface.OnShoot;
+                @Reload.started -= m_Wrapper.m_ShootingActionsCallbackInterface.OnReload;
+                @Reload.performed -= m_Wrapper.m_ShootingActionsCallbackInterface.OnReload;
+                @Reload.canceled -= m_Wrapper.m_ShootingActionsCallbackInterface.OnReload;
+                @EquipPrimary.started -= m_Wrapper.m_ShootingActionsCallbackInterface.OnEquipPrimary;
+                @EquipPrimary.performed -= m_Wrapper.m_ShootingActionsCallbackInterface.OnEquipPrimary;
+                @EquipPrimary.canceled -= m_Wrapper.m_ShootingActionsCallbackInterface.OnEquipPrimary;
+                @EquipSecondary.started -= m_Wrapper.m_ShootingActionsCallbackInterface.OnEquipSecondary;
+                @EquipSecondary.performed -= m_Wrapper.m_ShootingActionsCallbackInterface.OnEquipSecondary;
+                @EquipSecondary.canceled -= m_Wrapper.m_ShootingActionsCallbackInterface.OnEquipSecondary;
+                @EquipKnife.started -= m_Wrapper.m_ShootingActionsCallbackInterface.OnEquipKnife;
+                @EquipKnife.performed -= m_Wrapper.m_ShootingActionsCallbackInterface.OnEquipKnife;
+                @EquipKnife.canceled -= m_Wrapper.m_ShootingActionsCallbackInterface.OnEquipKnife;
+                @EquipUtility.started -= m_Wrapper.m_ShootingActionsCallbackInterface.OnEquipUtility;
+                @EquipUtility.performed -= m_Wrapper.m_ShootingActionsCallbackInterface.OnEquipUtility;
+                @EquipUtility.canceled -= m_Wrapper.m_ShootingActionsCallbackInterface.OnEquipUtility;
+                @Drop.started -= m_Wrapper.m_ShootingActionsCallbackInterface.OnDrop;
+                @Drop.performed -= m_Wrapper.m_ShootingActionsCallbackInterface.OnDrop;
+                @Drop.canceled -= m_Wrapper.m_ShootingActionsCallbackInterface.OnDrop;
             }
             m_Wrapper.m_ShootingActionsCallbackInterface = instance;
             if (instance != null)
@@ -1043,6 +1239,24 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Shoot.started += instance.OnShoot;
                 @Shoot.performed += instance.OnShoot;
                 @Shoot.canceled += instance.OnShoot;
+                @Reload.started += instance.OnReload;
+                @Reload.performed += instance.OnReload;
+                @Reload.canceled += instance.OnReload;
+                @EquipPrimary.started += instance.OnEquipPrimary;
+                @EquipPrimary.performed += instance.OnEquipPrimary;
+                @EquipPrimary.canceled += instance.OnEquipPrimary;
+                @EquipSecondary.started += instance.OnEquipSecondary;
+                @EquipSecondary.performed += instance.OnEquipSecondary;
+                @EquipSecondary.canceled += instance.OnEquipSecondary;
+                @EquipKnife.started += instance.OnEquipKnife;
+                @EquipKnife.performed += instance.OnEquipKnife;
+                @EquipKnife.canceled += instance.OnEquipKnife;
+                @EquipUtility.started += instance.OnEquipUtility;
+                @EquipUtility.performed += instance.OnEquipUtility;
+                @EquipUtility.canceled += instance.OnEquipUtility;
+                @Drop.started += instance.OnDrop;
+                @Drop.performed += instance.OnDrop;
+                @Drop.canceled += instance.OnDrop;
             }
         }
     }
@@ -1160,10 +1374,17 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         void OnCrouch(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnGrappling(InputAction.CallbackContext context);
     }
     public interface IShootingActions
     {
         void OnShoot(InputAction.CallbackContext context);
+        void OnReload(InputAction.CallbackContext context);
+        void OnEquipPrimary(InputAction.CallbackContext context);
+        void OnEquipSecondary(InputAction.CallbackContext context);
+        void OnEquipKnife(InputAction.CallbackContext context);
+        void OnEquipUtility(InputAction.CallbackContext context);
+        void OnDrop(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
