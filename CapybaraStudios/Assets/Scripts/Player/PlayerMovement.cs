@@ -12,26 +12,32 @@ public class PlayerMovement : MonoBehaviour
 
     //movement
     private float playerVelocity;
+
     //crouching
     private bool crouching = false;
 
     //sprinting
     private bool sprinting = false;
 
-    //movement
+    //sliding
+    private float crouchingMomentum = 1f;
+
+    //speed and jump
     public float speed = 7f;
     public float sprintingSpeed = 15f;
     public float jumpHeight = 2f;
     public float gravity = -40f;
+
     //hook
     [NonSerialized] public bool hooked;
     [NonSerialized] public Vector3 midAirMomentum;
-    
+
     public Transform Target;
 
     private Animator _animator;
     private int _isCrouchingHash;
     private int _isFallingHash;
+    private int _isSlidingHash;
     private int _sidewaysHash;
     private int _forwardBackwardHash;
     public float _animationTransitionSpeed = 3.0f;
@@ -48,15 +54,22 @@ public class PlayerMovement : MonoBehaviour
         _isFallingHash = Animator.StringToHash("isFalling");
         _sidewaysHash = Animator.StringToHash("movementSideways");
         _forwardBackwardHash = Animator.StringToHash("movementForwards");
+        _isSlidingHash = Animator.StringToHash("isSliding");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(hooked) {
+        if (hooked)
+        {
             playerVelocity = -2f;
+            if(_input.JumpInput) {
+                GetComponentInChildren<GrapplingGun>().StopHook();
+                playerVelocity = Mathf.Sqrt(jumpHeight * -3.0f * gravity);
+            }
             return;
-        } 
+        }
+
         ProcessMovement(_input.MoveInput);
         Crouch();
         Sprint();
@@ -81,8 +94,10 @@ public class PlayerMovement : MonoBehaviour
 
             _animator.SetBool("isJumping", isJumping);
         }
+
         _animator.SetBool("isGrounded", controller.isGrounded);
     }
+
     public void ProcessMovement(Vector2 input)
     {
         Vector3 moveDirection = Vector3.zero;
@@ -90,8 +105,20 @@ public class PlayerMovement : MonoBehaviour
         //translate vertical mocement to forwards/backwards movement
         moveDirection.z = input.y;
         //if player walks backwards speed can only be speed, else also sprintingSpeed
-        var actualSpeed = input.y < 0 ? speed : sprinting ? sprintingSpeed : speed;
-        controller.Move(actualSpeed * Time.deltaTime * transform.TransformDirection(moveDirection));
+        var actualSpeed = input.y < 0 ? speed : (sprinting && crouchingMomentum >= 1f ? sprintingSpeed : speed);
+        controller.Move(crouchingMomentum * actualSpeed * Time.deltaTime * transform.TransformDirection(moveDirection));
+        //decrease slidingMomentum
+        if (crouchingMomentum > 0.65f && crouching)
+        {
+            float slideTime = 0.2f;
+            crouchingMomentum -= Time.deltaTime * slideTime;
+            if (crouchingMomentum < 0.65f)
+            {
+                crouchingMomentum = 0.65f;
+                _animator.SetBool(_isCrouchingHash, crouching);
+                _animator.SetBool(_isSlidingHash, false);
+            }
+        }
 
         //constant downward (gravity)
         playerVelocity += (gravity * Time.deltaTime);
@@ -100,14 +127,16 @@ public class PlayerMovement : MonoBehaviour
             playerVelocity = -2f;
             midAirMomentum = Vector3.zero;
         }
+
         midAirMomentum.y = playerVelocity;
         controller.Move(midAirMomentum * Time.deltaTime);
-        
+
         //decrease midAirMomentum 
-        if(midAirMomentum.magnitude > 0f) {
+        if (midAirMomentum.magnitude > 0f)
+        {
             float drag = 3f; //how much the char gets dragged
             midAirMomentum -= midAirMomentum * drag * Time.deltaTime;
-            if(midAirMomentum.magnitude < 0f) midAirMomentum = Vector3.zero;
+            if (midAirMomentum.magnitude < 0f) midAirMomentum = Vector3.zero;
         }
 
         //general animation controlling
@@ -154,9 +183,29 @@ public class PlayerMovement : MonoBehaviour
 
     public void Crouch()
     {
-        if (sprinting) return;
+        if (crouching == _input.CrouchInput) return;
+        if (!crouching && _input.CrouchInput)
+        {
+            if (sprinting)
+            {
+                crouchingMomentum = 1.1f;
+                _animator.SetBool(_isSlidingHash, _input.CrouchInput);
+            }
+            else
+            {
+                crouchingMomentum = 0.65f;
+                _animator.SetBool(_isCrouchingHash, _input.CrouchInput);
+            }
+        }
+
+        if (crouching && !_input.CrouchInput)
+        {
+            crouchingMomentum = 1f;
+            _animator.SetBool(_isCrouchingHash, _input.CrouchInput);
+            _animator.SetBool(_isSlidingHash, _input.CrouchInput);
+        }
+
         crouching = _input.CrouchInput;
-        _animator.SetBool(_isCrouchingHash, crouching);
     }
 
     public void Sprint()

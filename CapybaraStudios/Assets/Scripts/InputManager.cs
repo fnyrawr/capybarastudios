@@ -5,12 +5,11 @@ using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
-
-    public Vector2 MoveInput {get; private set; }
-    public Vector2 LookInput {get; private set; }
-    public bool JumpInput {get; private set; } = false;
-    public bool SprintInput {get; private set; } = false;
-    public bool CrouchInput {get; private set; } = false;
+    public Vector2 MoveInput { get; private set; }
+    public Vector2 LookInput { get; private set; }
+    public bool JumpInput { get; private set; } = false;
+    public bool SprintInput { get; private set; } = false;
+    public bool CrouchInput { get; private set; } = false;
 
     private PlayerInput playerInput;
     public PlayerInput.WalkingActions walking;
@@ -19,7 +18,7 @@ public class InputManager : MonoBehaviour
     private PlayerMovement movement;
     private GunScript gun;
     private GrapplingGun hook;
-    private SpecificWeaponScript specificWeapon;
+    private Weapon weapon;
 
     Coroutine fireCoroutine;
 
@@ -30,10 +29,8 @@ public class InputManager : MonoBehaviour
         shooting = playerInput.Shooting;
         gun = GetComponent<GunScript>();
         hook = GetComponentInChildren<GrapplingGun>();
-        if (GetComponentInChildren<SpecificWeaponScript>() != null)
-        {
-            updateWeaponScript();
-        }
+        updateWeaponScript();
+
 
         walking.Grappling.started += ctx => hook.Hook();
         walking.Grappling.canceled += ctx => hook.StopHook();
@@ -41,13 +38,15 @@ public class InputManager : MonoBehaviour
         shooting.Shoot.started += ctx => StartFiring();
         shooting.Shoot.canceled += ctx => StopFiring();
 
-        shooting.Reload.performed += ctx => specificWeapon.Reload();
-        shooting.Shoot.performed += ctx => specificWeapon.Shoot(true);
+        shooting.Reload.performed += ctx => weapon.Reload();
+        shooting.Shoot.performed += ctx => weapon.Shoot(true);
 
         shooting.EquipPrimary.performed += ctx => equip(0);
         shooting.EquipSecondary.performed += ctx => equip(1);
         shooting.EquipKnife.performed += ctx => equip(2);
         shooting.EquipUtility.performed += ctx => equip(3);
+
+        shooting.Drop.performed += ctx => gun.ejectGun();
     }
 
     private void OnEnable()
@@ -60,8 +59,9 @@ public class InputManager : MonoBehaviour
 
         walking.Sprint.started += SetSprint;
         walking.Sprint.canceled += SetSprint;
-        
+
         walking.Crouch.started += SetCrouch;
+        walking.Crouch.canceled += SetCrouch;
 
         walking.Jump.started += SetJump;
         walking.Jump.canceled += SetJump;
@@ -80,8 +80,9 @@ public class InputManager : MonoBehaviour
 
         walking.Sprint.started -= SetSprint;
         walking.Sprint.canceled -= SetSprint;
-        
+
         walking.Crouch.started -= SetCrouch;
+        walking.Crouch.canceled -= SetCrouch;
 
         walking.Jump.started -= SetJump;
         walking.Jump.canceled -= SetJump;
@@ -90,30 +91,36 @@ public class InputManager : MonoBehaviour
         shooting.Disable();
     }
 
-    private void SetMove(InputAction.CallbackContext ctx) {
+    private void SetMove(InputAction.CallbackContext ctx)
+    {
         MoveInput = ctx.ReadValue<Vector2>();
     }
 
-    private void SetLook(InputAction.CallbackContext ctx) {
+    private void SetLook(InputAction.CallbackContext ctx)
+    {
         LookInput = ctx.ReadValue<Vector2>();
     }
 
-    private void SetJump(InputAction.CallbackContext ctx) {
+    private void SetJump(InputAction.CallbackContext ctx)
+    {
         JumpInput = ctx.started;
     }
 
-    private void SetCrouch(InputAction.CallbackContext ctx) {
-        CrouchInput = !CrouchInput;
+    private void SetCrouch(InputAction.CallbackContext ctx)
+    {
+        CrouchInput = ctx.started;
     }
 
-    private void SetSprint(InputAction.CallbackContext ctx) {
+    private void SetSprint(InputAction.CallbackContext ctx)
+    {
         SprintInput = ctx.started;
     }
+
     //For Rapid Fire
     void StartFiring()
     {
         //fireCoroutine = StartCoroutine(gun.RapidFire());
-        fireCoroutine = StartCoroutine(specificWeapon.RapidFire());
+        fireCoroutine = StartCoroutine(weapon.RapidFire());
     }
 
     void StopFiring()
@@ -132,8 +139,10 @@ public class InputManager : MonoBehaviour
 
     public void updateWeaponScript()
     {
-        specificWeapon = GetComponentInChildren<SpecificWeaponScript>();
-        specificWeapon.ShowAmmo();
-        Debug.Log("SpecificWeaponScript gefunden");
+        if (GetComponent<GunScript>())
+        {
+            weapon = GetComponent<GunScript>().currentWeapon;
+            weapon.ShowAmmo();
+        }
     }
 }

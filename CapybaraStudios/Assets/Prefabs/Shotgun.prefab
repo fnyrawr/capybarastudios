@@ -333,7 +333,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   message: 
-  weaponType: 1
+  damage: 15
+  spread: 0.006
+  range: 100
+  reloadTime: 2
+  fireRate: 1
+  timeBetweenShooting: 0.05
+  maxAmmo: 100
+  magazineSize: 25
+  bulletsPerTap: 5
+  hasAmmo: 1
+  rapidFireEnabled: 0
+  bulletsLeft: 0
+  bulletsShot: 0
+  weaponSlot: 1
+  animationType: 1
 --- !u!54 &8224732010726354141
 Rigidbody:
   m_ObjectHideFlags: 0

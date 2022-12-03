@@ -13,8 +13,7 @@ public class SpecificWeaponScript : MonoBehaviour
     public int maxAmmo, magazineSize, bulletsPerTap;
     public bool hasAmmo, rapidFireEnabled;
 
-    [SerializeField]
-    int bulletsLeft, bulletsShot;
+    [SerializeField] int bulletsLeft, bulletsShot;
     bool reloading, readyToShoot;
 
     //hitmarker
@@ -30,7 +29,7 @@ public class SpecificWeaponScript : MonoBehaviour
     private WaitForSeconds rapidFireWait;
     private int controllerMask = ~(1 << 15);
     private Animator _animator;
-    
+
     private void Awake()
     {
         _animator = transform.parent.parent.GetChild(0).GetComponent<Animator>();
@@ -50,8 +49,7 @@ public class SpecificWeaponScript : MonoBehaviour
         _animator.SetTrigger("shoot");
         readyToShoot = false;
 
-        
-        
+
         Vector3 direction;
         if (!first)
         {
@@ -61,9 +59,10 @@ public class SpecificWeaponScript : MonoBehaviour
             float z = Random.Range(-spread, spread);
             //Calculate Direction with Spread
             direction = camera.transform.forward + new Vector3(x, y, z);
-        } else
+        }
+        else
             direction = camera.transform.forward;
-        
+
         //hit and damage calc
         if (Physics.Raycast(camera.transform.position, direction, out RaycastHit hit, range,
                 controllerMask))
@@ -79,10 +78,15 @@ public class SpecificWeaponScript : MonoBehaviour
                 if (collisionObject.GetComponent<PlayerStats>() != null)
                 {
                     //deal damage
+                    //get body part
                     float hitMultiplier = 1;
                     if (collisionObject.CompareTag("Head")) hitMultiplier = 3;
                     if (collisionObject.CompareTag("Limbs")) hitMultiplier = 0.75f;
                     int finalDamage = (int)(damage * hitMultiplier);
+                    //get range
+                    Debug.Log(hit.distance);
+                    //finalDamage *= (int)hit.distance;
+
                     collisionObject.GetComponent<PlayerStats>().TakeDamage(finalDamage);
 
                     //Hitmarker
@@ -143,16 +147,18 @@ public class SpecificWeaponScript : MonoBehaviour
     //reload
     public void Reload()
     {
-        if(bulletsLeft.Equals(magazineSize))
+        if (bulletsLeft.Equals(magazineSize))
         {
             Debug.Log("Magazine is already full");
             return;
         }
-        if(maxAmmo <= 0)
+
+        if (maxAmmo <= 0)
         {
             Debug.Log("No ammo left. Cannot reload");
             return;
         }
+
         Debug.Log("Reload");
         reloading = true;
         readyToShoot = true;
@@ -161,25 +167,30 @@ public class SpecificWeaponScript : MonoBehaviour
 
     private void ReloadFinished()
     {
-        if((maxAmmo + bulletsLeft) < magazineSize)
+        if ((maxAmmo + bulletsLeft) < magazineSize)
         {
             bulletsLeft = maxAmmo + bulletsLeft;
             maxAmmo = 0;
-        } else {
+        }
+        else
+        {
             maxAmmo -= magazineSize - bulletsLeft;
             bulletsLeft = magazineSize;
         }
+
         ShowAmmo();
         reloading = false;
     }
 
     public void ShowAmmo()
     {
-        if(!hasAmmo)
+        if (!hasAmmo)
         {
             ammoText.SetText("∞");
             maxAmmoText.SetText("");
-        } else {
+        }
+        else
+        {
             ammoText.SetText(bulletsLeft + " / " + magazineSize);
             if (maxAmmo > 0)
                 maxAmmoText.SetText(maxAmmo.ToString());
