@@ -50,7 +50,6 @@ public class Weapon : Interactable
         _maxAmmoText = maxAmmoText;
         _hitmarker = hitmarker;
         _bulletHoleGraphic = bulletHoleGraphic;
-
     }
 
     protected override void Interact(GameObject player)
@@ -104,17 +103,17 @@ public class Weapon : Interactable
                     float hitMultiplier = 1;
                     if (collisionObject.CompareTag("Head")) hitMultiplier = 3;
                     if (collisionObject.CompareTag("Limbs")) hitMultiplier = 0.75f;
-                    int finalDamage = (int)(damage * hitMultiplier);
-                    
+                    float finalDamage = (int)(damage * hitMultiplier);
+
                     //distance multiplier 0.1- 0.01
-                    Debug.Log(hit.distance);
                     float distance = hit.distance / 10f;
                     finalDamage *= (1 - distance * distanceModifier);
                     Debug.Log("distanceMod = " + (1 - distance * distanceModifier));
 
                     //final damage (rounded int)
-                    
-                    (collisionObject.GetComponentInParent(typeof(PlayerStats)) as PlayerStats).TakeDamage((int)finalDamage);
+
+                    (collisionObject.GetComponentInParent(typeof(PlayerStats)) as PlayerStats).TakeDamage(
+                        (int)finalDamage);
 
                     //Hitmarker
                     HitShow();
