@@ -10600,6 +10600,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GrapplingGun
       objectReference: {fileID: 0}
+    - target: {fileID: 9220869672045999276, guid: cda48dbbb3ef5284eb05a3adfd5811bf, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cda48dbbb3ef5284eb05a3adfd5811bf, type: 3}
 --- !u!1001 &1826038556645919013
@@ -10844,6 +10848,10 @@ PrefabInstance:
     - target: {fileID: 2362624211068650614, guid: 219113d5ecb909542859ea45569e71ee, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3261295348130413320, guid: 219113d5ecb909542859ea45569e71ee, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4885653455140952434, guid: 219113d5ecb909542859ea45569e71ee, type: 3}
       propertyPath: m_IsActive
