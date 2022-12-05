@@ -9,7 +9,7 @@ public class Weapon : Interactable
 
     //Gun stats
     public int damage;
-    public float spread, range, reloadTime, fireRate, timeBetweenShooting;
+    public float spread, range, reloadTime, fireRate, timeBetweenShooting, distanceModifier;
     public int maxAmmo, magazineSize, bulletsPerTap;
     public bool hasAmmo, rapidFireEnabled;
 
@@ -50,7 +50,6 @@ public class Weapon : Interactable
         _maxAmmoText = maxAmmoText;
         _hitmarker = hitmarker;
         _bulletHoleGraphic = bulletHoleGraphic;
-
     }
 
     protected override void Interact(GameObject player)
@@ -96,14 +95,25 @@ public class Weapon : Interactable
                 collisionObject.CompareTag("Limbs"))
             {
                 //does object have stats?
-                if (collisionObject.GetComponent<PlayerStats>() != null)
+                if (collisionObject.GetComponentInParent(typeof(PlayerStats)))
                 {
                     //deal damage
+
+                    //body part multiplier
                     float hitMultiplier = 1;
                     if (collisionObject.CompareTag("Head")) hitMultiplier = 3;
                     if (collisionObject.CompareTag("Limbs")) hitMultiplier = 0.75f;
-                    int finalDamage = (int)(damage * hitMultiplier);
-                    collisionObject.GetComponent<PlayerStats>().TakeDamage(finalDamage);
+                    float finalDamage = (int)(damage * hitMultiplier);
+
+                    //distance multiplier 0.1- 0.01
+                    float distance = hit.distance / 10f;
+                    finalDamage *= (1 - distance * distanceModifier);
+                    Debug.Log("distanceMod = " + (1 - distance * distanceModifier));
+
+                    //final damage (rounded int)
+
+                    (collisionObject.GetComponentInParent(typeof(PlayerStats)) as PlayerStats).TakeDamage(
+                        (int)finalDamage);
 
                     //Hitmarker
                     HitShow();

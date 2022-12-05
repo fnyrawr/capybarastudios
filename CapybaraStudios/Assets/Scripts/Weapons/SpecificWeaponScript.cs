@@ -78,10 +78,15 @@ public class SpecificWeaponScript : MonoBehaviour
                 if (collisionObject.GetComponent<PlayerStats>() != null)
                 {
                     //deal damage
+                    //get body part
                     float hitMultiplier = 1;
                     if (collisionObject.CompareTag("Head")) hitMultiplier = 3;
                     if (collisionObject.CompareTag("Limbs")) hitMultiplier = 0.75f;
                     int finalDamage = (int)(damage * hitMultiplier);
+                    //get range
+                    Debug.Log(hit.distance);
+                    //finalDamage *= (int)hit.distance;
+
                     collisionObject.GetComponent<PlayerStats>().TakeDamage(finalDamage);
 
                     //Hitmarker
