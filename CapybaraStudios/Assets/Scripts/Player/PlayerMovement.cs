@@ -63,11 +63,11 @@ public class PlayerMovement : MonoBehaviour
         if (hooked)
         {
             playerVelocity = -2f;
-            if(_input.JumpInput) {
-                GetComponentInChildren<GrapplingGun>().StopHook();
-                playerVelocity = Mathf.Sqrt(jumpHeight * -3.0f * gravity);
+            if(!_input.JumpInput) {
+                return;
             }
-            return;
+            GetComponentInChildren<GrapplingGun>().StopHook();
+            playerVelocity = Mathf.Sqrt(jumpHeight * -3.0f * gravity);
         }
 
         ProcessMovement(_input.MoveInput);
@@ -84,12 +84,11 @@ public class PlayerMovement : MonoBehaviour
             if (controller.isGrounded) //if the player was grounded in the previous update but nor now, meaning he jumped now
             {
                 isJumping = true;
-                _animator.SetBool("isFalling", false);
             }
-            else if ((isJumping && controller.velocity.y < 0) || controller.velocity.y < -2)
+            else if (controller.velocity.y < 0 || controller.velocity.y < -2)
             {
                 isJumping = false;
-                _animator.SetBool("isFalling", true);
+                _animator.SetTrigger("isFalling");
             }
 
             _animator.SetBool("isJumping", isJumping);
