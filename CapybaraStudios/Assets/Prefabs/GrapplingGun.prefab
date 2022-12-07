@@ -927,7 +927,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   message: 
-  cooldownTime: 0
+  cooldownTime: 1
   damage: 0
   spread: 0
   range: 0
@@ -942,8 +942,8 @@ MonoBehaviour:
   rapidFireEnabled: 0
   bulletsLeft: 0
   bulletsShot: 0
-  weaponSlot: 0
-  animationType: 0
+  weaponSlot: 2
+  animationType: 1
 --- !u!54 &6180709947101018883
 Rigidbody:
   m_ObjectHideFlags: 0

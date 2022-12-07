@@ -224,12 +224,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   message: 
+  cooldownTime: 1
   damage: 34
   spread: 0.001
   range: 100
   reloadTime: 3
   fireRate: 1
   timeBetweenShooting: 1
+  distanceModifier: 0.05
   maxAmmo: 60
   magazineSize: 6
   bulletsPerTap: 1
