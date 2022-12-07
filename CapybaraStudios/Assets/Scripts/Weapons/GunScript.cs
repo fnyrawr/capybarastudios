@@ -1,9 +1,6 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.Animations.Rigging;
 
 public class GunScript : MonoBehaviour
 {
@@ -17,30 +14,30 @@ public class GunScript : MonoBehaviour
     public GameObject bulletHoleGraphic;
 
     public WeaponAnimationController weaponAnimator;
-    public GameObject[] Weapons = new GameObject[4];
+    public GameObject[] weapons = new GameObject[4];
 
     public Weapon currentWeapon;
     public int currentSlot = 0;
 
     private void Awake()
     {
-        changeWeapon(currentSlot);
+        ChangeWeapon(currentSlot);
     }
 
-    public void ejectGun()
+    public void EjectGun()
     {
         Debug.Log("drop");
-        ditchGun(currentSlot);
-        equipHighest();
+        DitchGun(currentSlot);
+        EquipHighest();
     }
 
-    void equipHighest()
+    private void EquipHighest()
     {
-        foreach (var weapon in Weapons)
+        foreach (var weapon in weapons)
         {
             if (weapon)
             {
-                changeWeapon(weapon.GetComponent<Weapon>().weaponSlot - 1);
+                ChangeWeapon(weapon.GetComponent<Weapon>().weaponSlot - 1);
                 return;
             }
         }
@@ -49,36 +46,34 @@ public class GunScript : MonoBehaviour
     }
 
     //gun pickup and discard
-    public void ditchGun(int index)
+    private void DitchGun(int index)
     {
-        if (Weapons[index])
+        if (!weapons[index]) return;
+        
+        if (gunSlot.GetChild(0))
         {
-            if (gunSlot.GetChild(0))
-            {
-                var oldGun = gunSlot.GetChild(0);
-                oldGun.SetParent(null);
-                oldGun.GetComponent<Rigidbody>().isKinematic = false;
-                oldGun.GetComponent<BoxCollider>().enabled = true;
-                Debug.Log(oldGun.name + " ditched");
-            }
-
-            Weapons[index] = null;
+            var oldGun = gunSlot.GetChild(0);
+            oldGun.SetParent(null);
+            oldGun.GetComponent<Rigidbody>().isKinematic = false;
+            oldGun.GetComponent<BoxCollider>().enabled = true;
+            print(oldGun.name + " ditched");
         }
+        weapons[index] = null;
     }
 
-    public void pickUp(GameObject gun)
+    public void PickUp(GameObject gun)
     {
-        Debug.Log(gun.name + " aquired");
-        Weapon weapon = gun.GetComponent<Weapon>();
+        print(gun.name + " aquired");
+        var weapon = gun.GetComponent<Weapon>();
         var weaponSlot = weapon.weaponSlot - 1;
-        ditchGun(weaponSlot);
+        DitchGun(weaponSlot);
         gun.GetComponent<Rigidbody>().isKinematic = true;
         gun.GetComponent<BoxCollider>().enabled = false;
-        Weapons[weaponSlot] = gun;
-        changeWeapon(weaponSlot);
+        weapons[weaponSlot] = gun;
+        ChangeWeapon(weaponSlot);
     }
 
-    public void hideGun()
+    private void HideGun()
     {
         try
         {
@@ -86,29 +81,27 @@ public class GunScript : MonoBehaviour
             gun.SetParent(null);
             gun.gameObject.SetActive(false);
         }
-        catch (UnityException e)
-        {
-        }
+        catch (Exception e){}
     }
 
-    public void changeWeapon(int index)
+    private void ChangeWeapon(int index)
     {
-        hideGun();
+        HideGun();
         currentSlot = index;
-        Weapons[currentSlot].transform.SetParent(gunSlot);
+        weapons[currentSlot].transform.SetParent(gunSlot);
         gunSlot.GetChild(0).gameObject.SetActive(true);
         currentWeapon = gunSlot.GetChild(0).GetComponent<Weapon>();
         currentWeapon.init(animator, camera, ammoText, maxAmmoText, hitmarker, bulletHoleGraphic);
         weaponAnimator.refresh();
-        Weapons[currentSlot].transform.localRotation = Quaternion.Euler(0, 0, 0);
-        Weapons[currentSlot].transform.localPosition = new Vector3(0, 0, 0);
+        weapons[currentSlot].transform.localRotation = Quaternion.Euler(0, 0, 0);
+        weapons[currentSlot].transform.localPosition = new Vector3(0, 0, 0);
     }
 
     public void EquipWeapon(int index)
     {
         if (currentSlot != index)
         {
-            changeWeapon(index);
+            ChangeWeapon(index);
         }
     }
 }

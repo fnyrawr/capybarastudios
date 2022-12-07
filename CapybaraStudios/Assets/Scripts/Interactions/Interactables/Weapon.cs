@@ -55,7 +55,7 @@ public class Weapon : Interactable
     protected override void Interact(GameObject player)
     {
         Debug.Log("Picked up " + gameObject.name);
-        player.GetComponent<GunScript>().pickUp(gameObject);
+        player.GetComponent<GunScript>().PickUp(gameObject);
     }
 
     public void Shoot(bool first)

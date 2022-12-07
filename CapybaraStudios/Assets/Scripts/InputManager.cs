@@ -46,7 +46,7 @@ public class InputManager : MonoBehaviour
         shooting.EquipKnife.performed += ctx => equip(2);
         shooting.EquipUtility.performed += ctx => equip(3);
 
-        shooting.Drop.performed += ctx => gun.ejectGun();
+        shooting.Drop.performed += ctx => gun.EjectGun();
     }
 
     private void OnEnable()
