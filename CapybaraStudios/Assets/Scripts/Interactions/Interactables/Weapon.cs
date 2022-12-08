@@ -9,7 +9,7 @@ public class Weapon : Interactable
 
     //Gun stats
     public int damage;
-    public float spread, range, reloadTime, fireRate, timeBetweenShooting, distanceModifier;
+    public float spread, range, reloadTime, fireRate, timeBetweenShooting, distanceModifier, damageFalloffStart;
     public int maxAmmo, magazineSize, bulletsPerTap;
     public bool hasAmmo, rapidFireEnabled;
 
@@ -107,11 +107,18 @@ public class Weapon : Interactable
                     float finalDamage = (int)(damage * hitMultiplier);
 
                     //distance multiplier 0.1- 0.01
-                    float distance = hit.distance / 10f;
-                    finalDamage *= (1 - distance * distanceModifier);
-                    Debug.Log("distanceMod = " + (1 - distance * distanceModifier));
+                    Debug.Log("Hit Distance = " + hit.distance);
+                    if(damageFalloffStart < hit.distance) {
+                        float distance = hit.distance / 10f - damageFalloffStart / 10f;
+                        float distanceMultiplier = (1 - distance * distanceModifier);
+                        if(distanceMultiplier > 1) distanceMultiplier = 1;
+                        if(distanceMultiplier < 0) distanceMultiplier = 0;
+                        finalDamage *= distanceMultiplier;
+                        Debug.Log("distanceMod = " + distanceMultiplier);
+                    }
 
                     //final damage (rounded int)
+                    Debug.Log("final damage dealt = (" + finalDamage + "): " + (int)finalDamage);
 
                     (collisionObject.GetComponentInParent(typeof(PlayerStats)) as PlayerStats).TakeDamage(
                         (int)finalDamage);
