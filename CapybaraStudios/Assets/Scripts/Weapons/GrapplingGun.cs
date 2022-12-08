@@ -23,10 +23,15 @@ public class GrapplingGun : MonoBehaviour
 
     void Awake()
     {
-        playerCam = transform.parent.GetComponentInChildren<Camera>();
-        cameraScript = transform.parent.GetComponent<PlayerLook>();
-        playerController = GetComponentInParent<CharacterController>();
-        playerMovement = GetComponentInParent<PlayerMovement>();
+        lr.positionCount = 0;
+        currCooldown = cooldown;
+    }
+
+    public void init(Camera playerCam, PlayerLook cameraScript, CharacterController playerController, PlayerMovement playerMovement) {
+        this.playerCam = playerCam;
+        this.cameraScript = cameraScript;
+        this.playerController = playerController;
+        this.playerMovement = playerMovement;
         lr.positionCount = 0;
         currCooldown = cooldown;
     }
@@ -67,7 +72,7 @@ public class GrapplingGun : MonoBehaviour
 
     private void UpdateRope()
     {
-        lr.SetPosition((int)0, gunTip.position);
+        lr.SetPosition(0, gunTip.position);
     }
 
     //call this function in inputscript to hook
@@ -80,7 +85,7 @@ public class GrapplingGun : MonoBehaviour
             hookPos = hit.point;
             playerMovement.hooked = true;
             lr.positionCount = 2;
-            lr.SetPosition((int)0, gunTip.position);
+            lr.SetPosition(0, gunTip.position);
         }
     }
 

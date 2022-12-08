@@ -15,7 +15,6 @@ public class GunScript : MonoBehaviour
 
     public WeaponAnimationController weaponAnimator;
     public GameObject[] weapons = new GameObject[4];
-
     public Weapon currentWeapon;
     public int currentSlot = 0;
 
@@ -71,6 +70,9 @@ public class GunScript : MonoBehaviour
         gun.GetComponent<BoxCollider>().enabled = false;
         weapons[weaponSlot] = gun;
         ChangeWeapon(weaponSlot);
+        if(currentWeapon.specialWeaponType == 1) {
+            gun.GetComponent<GrapplingGun>().init(camera, GetComponent<PlayerLook>(),  GetComponent<CharacterController>(), GetComponent<PlayerMovement>());
+        }
     }
 
     private void HideGun()
@@ -86,6 +88,7 @@ public class GunScript : MonoBehaviour
 
     private void ChangeWeapon(int index)
     {
+        StopSpecial();
         HideGun();
         currentSlot = index;
         weapons[currentSlot].transform.SetParent(gunSlot);
@@ -95,7 +98,21 @@ public class GunScript : MonoBehaviour
         weaponAnimator.refresh();
         weapons[currentSlot].transform.localRotation = Quaternion.Euler(0, 0, 0);
         weapons[currentSlot].transform.localPosition = new Vector3(0, 0, 0);
+        
     }
+
+    public void StartSpecial() {
+        if(currentWeapon.specialWeaponType == 1) {
+            weapons[currentSlot].GetComponent<GrapplingGun>().Hook();
+        }
+    }
+
+    public void StopSpecial() {
+        if(currentWeapon.specialWeaponType == 1) {
+            weapons[currentSlot].GetComponent<GrapplingGun>().StopHook();
+        }
+    }
+
 
     public void EquipWeapon(int index)
     {

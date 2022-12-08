@@ -767,12 +767,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6009084418955937931}
-  - component: {fileID: 1605971475555473118}
+  - component: {fileID: 2493296033457110868}
   - component: {fileID: 1605971475555473117}
   - component: {fileID: 8996998100982792086}
   - component: {fileID: 6180709947101018883}
   - component: {fileID: 1395326442574222787}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GrapplingGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -787,7 +787,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9220869672045999276}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.819, z: 0.776}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -797,7 +797,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!120 &1605971475555473118
+--- !u!120 &2493296033457110868
 LineRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -843,13 +843,13 @@ LineRenderer:
   - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1
+    widthMultiplier: 0.1
     widthCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.062892914
+        value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -862,15 +862,15 @@ LineRenderer:
     colorGradient:
       serializedVersion: 2
       key0: {r: 0, g: 0, b: 0, a: 1}
-      key1: {r: 0.2735849, g: 0.2735849, b: 0.2735849, a: 1}
+      key1: {r: 0.4433962, g: 0.4433962, b: 0.4433962, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
       key6: {r: 0, g: 0, b: 0, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
-      ctime0: 0
-      ctime1: 65535
+      ctime0: 8674
+      ctime1: 41827
       ctime2: 0
       ctime3: 0
       ctime4: 0
@@ -910,7 +910,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speedMin: 25
   speedMax: 60
-  lr: {fileID: 1605971475555473118}
+  lr: {fileID: 2493296033457110868}
   maxDistance: 50
   gunTip: {fileID: 1605971474309915189}
   cooldown: 1
@@ -944,6 +944,7 @@ MonoBehaviour:
   bulletsShot: 0
   weaponSlot: 2
   animationType: 1
+  specialWeaponType: 1
 --- !u!54 &6180709947101018883
 Rigidbody:
   m_ObjectHideFlags: 0

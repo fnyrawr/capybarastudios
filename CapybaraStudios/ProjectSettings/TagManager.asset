@@ -42,6 +42,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Interactable
+    uniqueID: 1570413367
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

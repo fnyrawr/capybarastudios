@@ -17,7 +17,6 @@ public class InputManager : MonoBehaviour
 
     private PlayerMovement movement;
     private GunScript gun;
-    private GrapplingGun hook;
     private Weapon weapon;
 
     Coroutine fireCoroutine;
@@ -28,12 +27,10 @@ public class InputManager : MonoBehaviour
         walking = playerInput.Walking;
         shooting = playerInput.Shooting;
         gun = GetComponent<GunScript>();
-        hook = GetComponentInChildren<GrapplingGun>();
         updateWeaponScript();
 
-
-        walking.Grappling.started += ctx => hook.Hook();
-        walking.Grappling.canceled += ctx => hook.StopHook();
+        shooting.Special.started += ctx => gun.StartSpecial();
+        shooting.Special.canceled += ctx => gun.StopSpecial();
 
         shooting.Shoot.started += ctx => StartFiring();
         shooting.Shoot.canceled += ctx => StopFiring();

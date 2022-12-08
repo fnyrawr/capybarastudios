@@ -29,10 +29,11 @@ public class Weapon : Interactable
     private WaitForSeconds rapidFireWait;
     private int controllerMask = ~(1 << 15);
     private Animator _animator;
-
     public int weaponSlot;
     public int animationType;
-
+    public int specialWeaponType;
+    // 0 ist für nicht special Weapon
+    // 1 ist für Grappling Gun
     private void Awake()
     {
         bulletsLeft = magazineSize;
