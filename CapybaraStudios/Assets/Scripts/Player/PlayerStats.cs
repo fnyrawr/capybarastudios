@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,7 +11,7 @@ public class PlayerStats : MonoBehaviour
     public bool isDummy;
 
     public TextMeshPro damageText;
-    public TextMeshPro allDamageText;
+    public TextMeshPro totalDamageText;
     private Animator _animator;
 
     void Start()
@@ -32,7 +33,10 @@ public class PlayerStats : MonoBehaviour
         if (isDummy)
         {
             damageText.text = damageAmount.ToString();
-            allDamageText.text = damageTaken.ToString();
+            int newTotalDamage;
+            Int32.TryParse(totalDamageText.text, out newTotalDamage);
+            newTotalDamage += damageAmount;
+            totalDamageText.text = newTotalDamage.ToString();
         }
         //die if health is < 0
         if (playerHealth <= 0 && !isDummy)

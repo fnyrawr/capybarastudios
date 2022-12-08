@@ -13,7 +13,7 @@ public class Weapon : Interactable
     public int maxAmmo, magazineSize, bulletsPerTap;
     public bool hasAmmo, rapidFireEnabled;
 
-    [SerializeField] int bulletsLeft, bulletsShot;
+    int bulletsLeft, bulletsShot;
     bool reloading, readyToShoot;
 
     //hitmarker
@@ -38,6 +38,7 @@ public class Weapon : Interactable
     {
         bulletsLeft = magazineSize;
         readyToShoot = true;
+        bulletsShot = bulletsPerTap;
         rapidFireWait = new WaitForSeconds(1 / fireRate);
         message = "Pick up [E]";
     }
@@ -171,11 +172,11 @@ public class Weapon : Interactable
                 yield return rapidFireWait;
             }
         }
-        else
+        /*else
         {
             Shoot(true);
             yield return null;
-        }
+        }*/
     }
 
     //reload
