@@ -26,9 +26,4 @@ public class Ragdoll : MonoBehaviour
         }
         animator.enabled = false;
     }
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
