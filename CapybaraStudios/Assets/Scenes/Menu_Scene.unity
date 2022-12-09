@@ -474,6 +474,18 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2980702110858456955, guid: 0a68be1bd13d8694e8d8fe85574ac075, type: 3}
+      propertyPath: m_text
+      value: Single Mode
+      objectReference: {fileID: 0}
+    - target: {fileID: 4867195591476101856, guid: 0a68be1bd13d8694e8d8fe85574ac075, type: 3}
+      propertyPath: m_text
+      value: Join Game
+      objectReference: {fileID: 0}
+    - target: {fileID: 4996103184875045968, guid: 0a68be1bd13d8694e8d8fe85574ac075, type: 3}
+      propertyPath: m_text
+      value: Create Multiplayer
+      objectReference: {fileID: 0}
     - target: {fileID: 6174927620114286714, guid: 0a68be1bd13d8694e8d8fe85574ac075, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -546,4 +558,41 @@ PrefabInstance:
     - {fileID: 4686950909266226592, guid: 0a68be1bd13d8694e8d8fe85574ac075, type: 3}
     - {fileID: 5176075227929176848, guid: 0a68be1bd13d8694e8d8fe85574ac075, type: 3}
     - {fileID: 3160736774527877179, guid: 0a68be1bd13d8694e8d8fe85574ac075, type: 3}
+    - {fileID: 351642387760220684, guid: 0a68be1bd13d8694e8d8fe85574ac075, type: 3}
+    - {fileID: 351642387682386968, guid: 0a68be1bd13d8694e8d8fe85574ac075, type: 3}
+    - {fileID: 351642386389050801, guid: 0a68be1bd13d8694e8d8fe85574ac075, type: 3}
+    - {fileID: 573296086900265536, guid: 0a68be1bd13d8694e8d8fe85574ac075, type: 3}
+    - {fileID: 573514885972877688, guid: 0a68be1bd13d8694e8d8fe85574ac075, type: 3}
+    - {fileID: 573183801826598944, guid: 0a68be1bd13d8694e8d8fe85574ac075, type: 3}
+    - {fileID: 574604164617666576, guid: 0a68be1bd13d8694e8d8fe85574ac075, type: 3}
+    - {fileID: 573761394090886926, guid: 0a68be1bd13d8694e8d8fe85574ac075, type: 3}
+    - {fileID: 574046831479376034, guid: 0a68be1bd13d8694e8d8fe85574ac075, type: 3}
+    - {fileID: 573207902852905184, guid: 0a68be1bd13d8694e8d8fe85574ac075, type: 3}
+    - {fileID: 573848386452693676, guid: 0a68be1bd13d8694e8d8fe85574ac075, type: 3}
+    - {fileID: 574580717334557054, guid: 0a68be1bd13d8694e8d8fe85574ac075, type: 3}
+    - {fileID: 573258818512625384, guid: 0a68be1bd13d8694e8d8fe85574ac075, type: 3}
+    - {fileID: 574600448247145806, guid: 0a68be1bd13d8694e8d8fe85574ac075, type: 3}
+    - {fileID: 573656923536399170, guid: 0a68be1bd13d8694e8d8fe85574ac075, type: 3}
+    - {fileID: 573933743041341974, guid: 0a68be1bd13d8694e8d8fe85574ac075, type: 3}
+    - {fileID: 573698763980430530, guid: 0a68be1bd13d8694e8d8fe85574ac075, type: 3}
+    - {fileID: 573815560835579616, guid: 0a68be1bd13d8694e8d8fe85574ac075, type: 3}
+    - {fileID: 574136703869670584, guid: 0a68be1bd13d8694e8d8fe85574ac075, type: 3}
+    - {fileID: 573536457146736902, guid: 0a68be1bd13d8694e8d8fe85574ac075, type: 3}
+    - {fileID: 574080090245812936, guid: 0a68be1bd13d8694e8d8fe85574ac075, type: 3}
+    - {fileID: 573795521755165970, guid: 0a68be1bd13d8694e8d8fe85574ac075, type: 3}
+    - {fileID: 573219401711285788, guid: 0a68be1bd13d8694e8d8fe85574ac075, type: 3}
+    - {fileID: 573510852728906266, guid: 0a68be1bd13d8694e8d8fe85574ac075, type: 3}
+    - {fileID: 573881826561812668, guid: 0a68be1bd13d8694e8d8fe85574ac075, type: 3}
+    - {fileID: 573855449460482126, guid: 0a68be1bd13d8694e8d8fe85574ac075, type: 3}
+    - {fileID: 573926633177119908, guid: 0a68be1bd13d8694e8d8fe85574ac075, type: 3}
+    - {fileID: 574102941594617540, guid: 0a68be1bd13d8694e8d8fe85574ac075, type: 3}
+    - {fileID: 573967482828106916, guid: 0a68be1bd13d8694e8d8fe85574ac075, type: 3}
+    - {fileID: 574608135720804292, guid: 0a68be1bd13d8694e8d8fe85574ac075, type: 3}
+    - {fileID: 573162445258795694, guid: 0a68be1bd13d8694e8d8fe85574ac075, type: 3}
+    - {fileID: 573192102100445126, guid: 0a68be1bd13d8694e8d8fe85574ac075, type: 3}
+    - {fileID: 574079915728123316, guid: 0a68be1bd13d8694e8d8fe85574ac075, type: 3}
+    - {fileID: 574181942824395744, guid: 0a68be1bd13d8694e8d8fe85574ac075, type: 3}
+    - {fileID: 9018079537768378404, guid: 0a68be1bd13d8694e8d8fe85574ac075, type: 3}
+    - {fileID: 4557485665297507530, guid: 0a68be1bd13d8694e8d8fe85574ac075, type: 3}
+    - {fileID: 573739936504756176, guid: 0a68be1bd13d8694e8d8fe85574ac075, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 0a68be1bd13d8694e8d8fe85574ac075, type: 3}
