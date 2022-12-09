@@ -9838,7 +9838,7 @@ MonoBehaviour:
   weapons:
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7372768741887455248}
   - {fileID: 0}
   currentWeapon: {fileID: 7372768741887455253}
   currentSlot: 2
@@ -9868,7 +9868,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerHealth: 100
+  isDummy: 0
   damageText: {fileID: 0}
+  totalDamageText: {fileID: 0}
 --- !u!114 &4273469739840090928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10104,6 +10106,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00a731cfcfd061a4c948282f3548c8a3, type: 3}
+--- !u!1 &7372768741887455248 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2795301733894970671, guid: 00a731cfcfd061a4c948282f3548c8a3, type: 3}
+  m_PrefabInstance: {fileID: 4655523573997890879}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7372768741887455252 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2795301733894970667, guid: 00a731cfcfd061a4c948282f3548c8a3, type: 3}
@@ -10114,7 +10121,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2795301733894970666, guid: 00a731cfcfd061a4c948282f3548c8a3, type: 3}
   m_PrefabInstance: {fileID: 4655523573997890879}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 7372768741887455248}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 327d8bc115bf4ce44b75e83839f97851, type: 3}

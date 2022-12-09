@@ -63,22 +63,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   message: 
   cooldownTime: 1
-  damage: 0
-  spread: 0
-  range: 0
-  reloadTime: 0
-  fireRate: 0
+  damage: 10
+  spread: 0.05
+  range: 500
+  reloadTime: 4
+  fireRate: 12
   timeBetweenShooting: 0
-  distanceModifier: 0
-  maxAmmo: 0
-  magazineSize: 0
-  bulletsPerTap: 0
-  hasAmmo: 0
-  rapidFireEnabled: 0
-  bulletsLeft: 0
-  bulletsShot: 0
+  distanceModifier: 0.05
+  damageFalloffStart: 30
+  maxAmmo: 500
+  magazineSize: 100
+  bulletsPerTap: 2
+  hasAmmo: 1
+  rapidFireEnabled: 1
   weaponSlot: 1
   animationType: 1
+  specialWeaponType: 0
 --- !u!54 &8654261939209587571
 Rigidbody:
   m_ObjectHideFlags: 0
