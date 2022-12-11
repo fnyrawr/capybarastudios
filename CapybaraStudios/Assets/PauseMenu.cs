@@ -27,6 +27,7 @@ public class PauseMenu : MonoBehaviour
     public void Resume()
     {
         pauseMenuUI.SetActive(false);
+        //TODO if bedingung, nur wenn Singleplayer, dann timeScale
         Time.timeScale = 1f;
         GameIsPaused = false;
     }
@@ -34,13 +35,15 @@ public class PauseMenu : MonoBehaviour
     void Pause()
     {
         pauseMenuUI.SetActive(true);
+        //TODO if bedingung, nur wenn Singleplayer, dann timeScale
         Time.timeScale = 0f;
         GameIsPaused = true;
     }
 
     public void LoadMenu()
     {
-        //Time.timeScale = 1f;
+        //TODO if bedingung, nur wenn Singleplayer, dann timeScale
+        Time.timeScale = 1f;
         SceneManager.LoadScene("Menu_Scene");
     }
 
