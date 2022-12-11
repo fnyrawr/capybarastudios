@@ -57,6 +57,8 @@ namespace SlimUI.ModernMenu{
 		[Tooltip("Optional 4th Menu")]
 		public GameObject extrasMenu;
 
+		public GameObject singleMenu;
+
 		// highlights
 		[Header("Highlight Effects")]
 		[Tooltip("Highlight Image for when GAME Tab is selected in Settings")]
@@ -86,6 +88,7 @@ namespace SlimUI.ModernMenu{
 			playMenu.SetActive(false);
 			exitMenu.SetActive(false);
 			if(extrasMenu) extrasMenu.SetActive(false);
+			if(singleMenu) singleMenu.SetActive(false);
 			firstMenu.SetActive(true);
 			mainMenu.SetActive(true);
 
@@ -111,12 +114,14 @@ namespace SlimUI.ModernMenu{
 		public void PlayCampaign(){
 			exitMenu.SetActive(false);
 			if(extrasMenu) extrasMenu.SetActive(false);
+			if(singleMenu) singleMenu.SetActive(false);
 			playMenu.SetActive(true);
 		}
 		
 		public void PlayCampaignMobile(){
 			exitMenu.SetActive(false);
 			if(extrasMenu) extrasMenu.SetActive(false);
+			if(singleMenu) singleMenu.SetActive(false);
 			playMenu.SetActive(true);
 			mainMenu.SetActive(false);
 		}
@@ -124,6 +129,7 @@ namespace SlimUI.ModernMenu{
 		public void ReturnMenu(){
 			playMenu.SetActive(false);
 			if(extrasMenu) extrasMenu.SetActive(false);
+			if(singleMenu) singleMenu.SetActive(false);
 			exitMenu.SetActive(false);
 			mainMenu.SetActive(true);
 		}
@@ -234,12 +240,14 @@ namespace SlimUI.ModernMenu{
 		public void AreYouSure(){
 			exitMenu.SetActive(true);
 			if(extrasMenu) extrasMenu.SetActive(false);
+			if(singleMenu) singleMenu.SetActive(false);
 			DisablePlayCampaign();
 		}
 
 		public void AreYouSureMobile(){
 			exitMenu.SetActive(true);
 			if(extrasMenu) extrasMenu.SetActive(false);
+			if(singleMenu) singleMenu.SetActive(false);
 			mainMenu.SetActive(false);
 			DisablePlayCampaign();
 		}
@@ -247,6 +255,14 @@ namespace SlimUI.ModernMenu{
 		public void ExtrasMenu(){
 			playMenu.SetActive(false);
 			if(extrasMenu) extrasMenu.SetActive(true);
+			if(singleMenu) singleMenu.SetActive(false);
+			exitMenu.SetActive(false);
+		}
+
+		public void SinglesMenu(){
+			playMenu.SetActive(false);
+			if(extrasMenu) extrasMenu.SetActive(false);
+			if(singleMenu) singleMenu.SetActive(true);
 			exitMenu.SetActive(false);
 		}
 
