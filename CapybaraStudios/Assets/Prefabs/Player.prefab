@@ -2500,7 +2500,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4151
+    m_Bits: 4215
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -9722,7 +9722,7 @@ GameObject:
   - component: {fileID: 4655523573745788998}
   m_Layer: 15
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9867,10 +9867,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f8cc1c6d1698de4e9d78c99f56a62ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHealth: 100
+  maxHealth: 100
   isDummy: 0
+  isAI: 0
   damageText: {fileID: 0}
   totalDamageText: {fileID: 0}
+  blinkDuration: 0
+  blinkIntensity: 0
 --- !u!114 &4273469739840090928
 MonoBehaviour:
   m_ObjectHideFlags: 0
