@@ -840,7 +840,7 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.1
@@ -935,13 +935,12 @@ MonoBehaviour:
   fireRate: 0
   timeBetweenShooting: 0
   distanceModifier: 0
+  damageFalloffStart: 0
   maxAmmo: 0
   magazineSize: 0
   bulletsPerTap: 0
   hasAmmo: 0
   rapidFireEnabled: 0
-  bulletsLeft: 0
-  bulletsShot: 0
   weaponSlot: 2
   animationType: 1
   specialWeaponType: 1

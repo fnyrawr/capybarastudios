@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Weapon : Interactable
 {
@@ -31,9 +32,12 @@ public class Weapon : Interactable
     private Animator _animator;
     public int weaponSlot;
     public int animationType;
+
     public int specialWeaponType;
     // 0 ist für nicht special Weapon
     // 1 ist für Grappling Gun
+
+
     private void Awake()
     {
         bulletsLeft = magazineSize;
@@ -85,12 +89,14 @@ public class Weapon : Interactable
         else
             direction = _camera.transform.forward;
 
+        var ray = new Ray(_camera.transform.position, direction);
+        var hit_ = ray.origin + direction * range;
         //hit and damage calc
-        if (Physics.Raycast(_camera.transform.position, direction, out RaycastHit hit, range,
+        if (Physics.Raycast(ray, out RaycastHit hit, range,
                 controllerMask))
         {
             Debug.Log(hit.transform.name);
-
+            hit_ = hit.point;
             GameObject collisionObject = hit.collider.gameObject;
 
             if (collisionObject.CompareTag("Head") || collisionObject.CompareTag("Body") ||
@@ -109,11 +115,12 @@ public class Weapon : Interactable
 
                     //distance multiplier 0.1- 0.01
                     Debug.Log("Hit Distance = " + hit.distance);
-                    if(damageFalloffStart < hit.distance) {
+                    if (damageFalloffStart < hit.distance)
+                    {
                         float distance = hit.distance / 10f - damageFalloffStart / 10f;
                         float distanceMultiplier = (1 - distance * distanceModifier);
-                        if(distanceMultiplier > 1) distanceMultiplier = 1;
-                        if(distanceMultiplier < 0) distanceMultiplier = 0;
+                        if (distanceMultiplier > 1) distanceMultiplier = 1;
+                        if (distanceMultiplier < 0) distanceMultiplier = 0;
                         finalDamage *= distanceMultiplier;
                         Debug.Log("distanceMod = " + distanceMultiplier);
                     }
@@ -134,6 +141,9 @@ public class Weapon : Interactable
         {
             Debug.Log("Not hit");
         }
+
+
+        EventManager.Shot(ray.origin, hit_, transform.root);
 
         //bullet hole
         GameObject bulletHoleClone = Instantiate(_bulletHoleGraphic, hit.point, Quaternion.Euler(0, 180, 0));
