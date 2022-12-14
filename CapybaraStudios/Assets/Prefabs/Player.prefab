@@ -9868,10 +9868,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  currentHealth: 100
   isDummy: 0
   isAI: 0
   damageText: {fileID: 0}
   totalDamageText: {fileID: 0}
+  healthIndicator: {fileID: 4655523573936019233}
   blinkDuration: 0
   blinkIntensity: 0
 --- !u!114 &4273469739840090928

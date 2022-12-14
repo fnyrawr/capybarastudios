@@ -8,11 +8,12 @@ public class PlayerStats : MonoBehaviour
 {
     public int maxHealth = 100;
     private int damageTaken = 0;
-    private int currentHealth = 100;
+    [SerializeField] private int currentHealth = 100;
     public bool isDummy;
     public bool isAI;
     public TextMeshPro damageText;
     public TextMeshPro totalDamageText;
+    public TextMeshProUGUI healthIndicator;
 
     private Animator _animator;
 
@@ -97,8 +98,14 @@ public class PlayerStats : MonoBehaviour
         }
 
         blinkTimer = blinkDuration;
+        UpdateHealth();
+    }
+
+    void UpdateHealth()
+    {
         if (isAI) agent.healthBar.SetHealtBar(currentHealth / (float)maxHealth);
-        //die if health is < 0
+        else healthIndicator.SetText("+" + currentHealth); //TODO
+        print(currentHealth);
         if (currentHealth <= 0)
         {
             //_animator.SetLayerWeight(1,0);
@@ -112,8 +119,25 @@ public class PlayerStats : MonoBehaviour
                 AIDeathState deathState = agent.stateMachine.GetState(AIStateId.Death) as AIDeathState;
                 agent.stateMachine.ChangeState(AIStateId.Death);
             }
-
             //TODO MORE!!!
+            //disable other scripts, show death screen, drop all weapons
+        }
+    }
+
+    public void Heal(int health)
+    {
+        StartCoroutine(HealOverTime(health));
+    }
+
+    private IEnumerator HealOverTime(int health)
+    {
+        if (health > 0 && currentHealth > 0 && currentHealth < maxHealth)
+        {
+            UpdateHealth();
+            currentHealth += 1;
+            UpdateHealth();
+            yield return new WaitForSeconds(0.1f);
+            StartCoroutine(HealOverTime(health - 1));
         }
     }
 }

@@ -752,10 +752,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  currentHealth: 100
   isDummy: 1
   isAI: 0
   damageText: {fileID: 1155882640}
   totalDamageText: {fileID: 1785167223}
+  healthIndicator: {fileID: 0}
   blinkDuration: 0
   blinkIntensity: 0
 --- !u!1 &249460535
@@ -1543,10 +1545,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  currentHealth: 100
   isDummy: 1
   isAI: 0
   damageText: {fileID: 1155882640}
   totalDamageText: {fileID: 1785167223}
+  healthIndicator: {fileID: 0}
   blinkDuration: 0
   blinkIntensity: 0
 --- !u!1 &494910051
@@ -2514,10 +2518,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  currentHealth: 100
   isDummy: 1
   isAI: 0
   damageText: {fileID: 1155882640}
   totalDamageText: {fileID: 1785167223}
+  healthIndicator: {fileID: 0}
   blinkDuration: 0
   blinkIntensity: 0
 --- !u!1001 &1000447119
@@ -3888,10 +3894,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  currentHealth: 100
   isDummy: 1
   isAI: 0
   damageText: {fileID: 1155882640}
   totalDamageText: {fileID: 1785167223}
+  healthIndicator: {fileID: 0}
   blinkDuration: 0
   blinkIntensity: 0
 --- !u!1 &1512084588
@@ -5151,10 +5159,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  currentHealth: 100
   isDummy: 1
   isAI: 0
   damageText: {fileID: 1155882640}
   totalDamageText: {fileID: 1785167223}
+  healthIndicator: {fileID: 0}
   blinkDuration: 0
   blinkIntensity: 0
 --- !u!1 &1960256506
@@ -5499,10 +5509,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  currentHealth: 100
   isDummy: 1
   isAI: 0
   damageText: {fileID: 1155882640}
   totalDamageText: {fileID: 1785167223}
+  healthIndicator: {fileID: 0}
   blinkDuration: 0
   blinkIntensity: 0
 --- !u!1001 &2042330708
@@ -7664,6 +7676,63 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1001 &3512861316467412781
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3984148261235800683, guid: 49e2e548abe209745b69dad528964b5e, type: 3}
+      propertyPath: m_RootOrder
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 3984148261235800683, guid: 49e2e548abe209745b69dad528964b5e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -9.875
+      objectReference: {fileID: 0}
+    - target: {fileID: 3984148261235800683, guid: 49e2e548abe209745b69dad528964b5e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.41
+      objectReference: {fileID: 0}
+    - target: {fileID: 3984148261235800683, guid: 49e2e548abe209745b69dad528964b5e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 9.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 3984148261235800683, guid: 49e2e548abe209745b69dad528964b5e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 3984148261235800683, guid: 49e2e548abe209745b69dad528964b5e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3984148261235800683, guid: 49e2e548abe209745b69dad528964b5e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 3984148261235800683, guid: 49e2e548abe209745b69dad528964b5e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3984148261235800683, guid: 49e2e548abe209745b69dad528964b5e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3984148261235800683, guid: 49e2e548abe209745b69dad528964b5e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 3984148261235800683, guid: 49e2e548abe209745b69dad528964b5e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4323835044818018513, guid: 49e2e548abe209745b69dad528964b5e, type: 3}
+      propertyPath: m_Name
+      value: HealingStation
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 49e2e548abe209745b69dad528964b5e, type: 3}
 --- !u!4 &3518215110536392276
 Transform:
   m_ObjectHideFlags: 0
@@ -15674,10 +15743,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  currentHealth: 100
   isDummy: 0
   isAI: 0
   damageText: {fileID: 0}
   totalDamageText: {fileID: 0}
+  healthIndicator: {fileID: 0}
   blinkDuration: 0
   blinkIntensity: 0
 --- !u!114 &8025018137018176980
