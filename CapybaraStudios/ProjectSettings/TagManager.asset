@@ -8,6 +8,7 @@ TagManager:
   - Head
   - Body
   - Limbs
+  - Weapon
   layers:
   - Default
   - TransparentFX

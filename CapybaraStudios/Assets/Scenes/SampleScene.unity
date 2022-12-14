@@ -106,15 +106,15 @@ NavMeshSettings:
   m_BuildSettings:
     serializedVersion: 2
     agentTypeID: 0
-    agentRadius: 0.2
-    agentHeight: 2
+    agentRadius: 0.3
+    agentHeight: 3
     agentSlope: 45
     agentClimb: 0.4
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
     minRegionArea: 2
     manualCellSize: 0
-    cellSize: 0.06666667
+    cellSize: 0.1
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
@@ -2090,6 +2090,63 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9270a55e10e86f645b4779bc776f4687, type: 3}
+--- !u!1 &751686952 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7170584610737087306, guid: 031d5a4d635574447b5a1f00e5971f78, type: 3}
+  m_PrefabInstance: {fileID: 6376462604237205050}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &751686958 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4479098996447536010, guid: 031d5a4d635574447b5a1f00e5971f78, type: 3}
+  m_PrefabInstance: {fileID: 6376462604237205050}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &751686961
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 751686952}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.6868441, y: 3.0097108, z: 1}
+  m_Center: {x: -0.04937637, y: 1.0048554, z: 0}
+--- !u!114 &751686962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 751686952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fff0960ef4ea6e04eac66b4a7fd2189d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RigLayers:
+  - m_Rig: {fileID: 0}
+    m_Active: 1
+  - m_Rig: {fileID: 0}
+    m_Active: 1
+  m_Effectors: []
+--- !u!114 &751686963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 751686952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bea0762184501e245971a945d0e87cb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 751686958}
+  rigBuilder: {fileID: 0}
+  leftHandIK: {fileID: 0}
+  GunSlot: {fileID: 0}
 --- !u!1001 &807846910
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2139,6 +2196,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4617601031172390920, guid: 8be673c8ba67927419fb464d4f52fdea, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5066579342820826647, guid: 8be673c8ba67927419fb464d4f52fdea, type: 3}
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5431010200346843826, guid: 8be673c8ba67927419fb464d4f52fdea, type: 3}
@@ -14857,6 +14918,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3205823812804940440, guid: 031d5a4d635574447b5a1f00e5971f78, type: 3}
+      propertyPath: initalState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5887753169488715565, guid: 031d5a4d635574447b5a1f00e5971f78, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7170584610737087306, guid: 031d5a4d635574447b5a1f00e5971f78, type: 3}
       propertyPath: m_Name
       value: PlayerAI

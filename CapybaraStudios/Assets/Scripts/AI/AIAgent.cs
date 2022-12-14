@@ -19,6 +19,7 @@ public class AIAgent : MonoBehaviour
         stateMachine.RegisterState(new AIChasePlayerState());
         stateMachine.RegisterState(new AIDeathState());
         stateMachine.RegisterState(new AIIdleState());
+        stateMachine.RegisterState(new AIFindWeaponState());
         stateMachine.ChangeState(initalState);
     }
 

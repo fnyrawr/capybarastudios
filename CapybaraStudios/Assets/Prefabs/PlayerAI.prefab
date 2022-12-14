@@ -2459,6 +2459,7 @@ GameObject:
   - component: {fileID: 5266167014823038177}
   - component: {fileID: 3205823812804940443}
   - component: {fileID: 3205823812804940440}
+  - component: {fileID: 8396934314356736416}
   m_Layer: 0
   m_Name: PlayerAI
   m_TagString: Untagged
@@ -2571,10 +2572,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  currentHealth: 100
   isDummy: 0
   isAI: 1
   damageText: {fileID: 0}
   totalDamageText: {fileID: 0}
+  healthIndicator: {fileID: 0}
   blinkDuration: 0.1
   blinkIntensity: 4
 --- !u!114 &3205823812804940440
@@ -2589,10 +2592,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc39588258b944c448b6a983ee5b43fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initalState: 0
+  initalState: 3
   config: {fileID: 11400000, guid: c8cc8e0685c11654cba869431ca246e6, type: 2}
   healthBar: {fileID: 0}
   player: {fileID: 0}
+--- !u!114 &8396934314356736416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7170584610737087306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bbf837e6d6e47e408a7866fc0c29f24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7495753462615631779
 GameObject:
   m_ObjectHideFlags: 0
