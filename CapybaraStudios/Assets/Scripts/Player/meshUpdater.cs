@@ -6,7 +6,6 @@ public class meshUpdater : MonoBehaviour
 {
     private MeshCollider mc;
     private SkinnedMeshRenderer smr;
-
     private MeshFilter mf;
 
     // Start is called before the first frame update

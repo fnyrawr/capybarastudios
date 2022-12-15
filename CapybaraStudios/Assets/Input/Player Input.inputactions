@@ -58,15 +58,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "Grappling",
-                    "type": "Button",
-                    "id": "d8c3270b-d88f-44e8-9ce5-8d5c95bb2472",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -289,17 +280,6 @@
                     "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "58a85ada-5ddc-4dd2-8897-f33e36e363bb",
-                    "path": "<Keyboard>/p",
-                    "interactions": "Hold",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Grappling",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 }
             ]
         },
@@ -365,6 +345,15 @@
                     "name": "Drop",
                     "type": "Button",
                     "id": "e34ba319-abcc-4245-a5a2-040bcff1d641",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Special",
+                    "type": "Button",
+                    "id": "fad6c353-03bf-4473-bd3f-4386946ed334",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -468,6 +457,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Drop",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fe673a43-c5f7-4a69-8cfa-6daeaf1dada2",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Special",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

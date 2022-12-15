@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 5736772152955148994}
   m_Layer: 6
   m_Name: Revolver
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -224,21 +224,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   message: 
+  cooldownTime: 0.1
   damage: 34
-  spread: 0.001
-  range: 100
+  spread: 0
+  range: 200
   reloadTime: 3
   fireRate: 1
   timeBetweenShooting: 1
+  distanceModifier: 0.05
+  damageFalloffStart: 20
   maxAmmo: 60
   magazineSize: 6
   bulletsPerTap: 1
   hasAmmo: 1
   rapidFireEnabled: 1
-  bulletsLeft: 0
-  bulletsShot: 0
   weaponSlot: 2
   animationType: 1
+  specialWeaponType: 0
 --- !u!54 &4235579737266619029
 Rigidbody:
   m_ObjectHideFlags: 0

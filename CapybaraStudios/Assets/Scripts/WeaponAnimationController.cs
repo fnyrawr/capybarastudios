@@ -18,11 +18,6 @@ public class WeaponAnimationController : MonoBehaviour
         refresh();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
-
     public void refresh()
     {
         var Weapon = getActiveWeapon();

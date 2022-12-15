@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Weapon : Interactable
 {
@@ -9,11 +10,11 @@ public class Weapon : Interactable
 
     //Gun stats
     public int damage;
-    public float spread, range, reloadTime, fireRate, timeBetweenShooting, distanceModifier;
+    public float spread, range, reloadTime, fireRate, timeBetweenShooting, distanceModifier, damageFalloffStart;
     public int maxAmmo, magazineSize, bulletsPerTap;
     public bool hasAmmo, rapidFireEnabled;
 
-    [SerializeField] int bulletsLeft, bulletsShot;
+    int bulletsLeft, bulletsShot;
     bool reloading, readyToShoot;
 
     //hitmarker
@@ -29,14 +30,19 @@ public class Weapon : Interactable
     private WaitForSeconds rapidFireWait;
     private int controllerMask = ~(1 << 15);
     private Animator _animator;
-
     public int weaponSlot;
     public int animationType;
+
+    public int specialWeaponType;
+    // 0 ist für nicht special Weapon
+    // 1 ist für Grappling Gun
+
 
     private void Awake()
     {
         bulletsLeft = magazineSize;
         readyToShoot = true;
+        bulletsShot = bulletsPerTap;
         rapidFireWait = new WaitForSeconds(1 / fireRate);
         message = "Pick up [E]";
     }
@@ -50,13 +56,12 @@ public class Weapon : Interactable
         _maxAmmoText = maxAmmoText;
         _hitmarker = hitmarker;
         _bulletHoleGraphic = bulletHoleGraphic;
-
     }
 
     protected override void Interact(GameObject player)
     {
         Debug.Log("Picked up " + gameObject.name);
-        player.GetComponent<GunScript>().pickUp(gameObject);
+        player.GetComponent<GunScript>().PickUp(gameObject);
     }
 
     public void Shoot(bool first)
@@ -84,19 +89,21 @@ public class Weapon : Interactable
         else
             direction = _camera.transform.forward;
 
+        var ray = new Ray(_camera.transform.position, direction);
+        var hit_ = ray.origin + direction * range;
         //hit and damage calc
-        if (Physics.Raycast(_camera.transform.position, direction, out RaycastHit hit, range,
+        if (Physics.Raycast(ray, out RaycastHit hit, range,
                 controllerMask))
         {
             Debug.Log(hit.transform.name);
-
+            hit_ = hit.point;
             GameObject collisionObject = hit.collider.gameObject;
 
             if (collisionObject.CompareTag("Head") || collisionObject.CompareTag("Body") ||
                 collisionObject.CompareTag("Limbs"))
             {
                 //does object have stats?
-                if (collisionObject.GetComponent<PlayerStats>() != null)
+                if (collisionObject.GetComponentInParent(typeof(PlayerStats)))
                 {
                     //deal damage
 
@@ -104,16 +111,25 @@ public class Weapon : Interactable
                     float hitMultiplier = 1;
                     if (collisionObject.CompareTag("Head")) hitMultiplier = 3;
                     if (collisionObject.CompareTag("Limbs")) hitMultiplier = 0.75f;
-                    float finalDamage = (damage * hitMultiplier);
+                    float finalDamage = (int)(damage * hitMultiplier);
 
                     //distance multiplier 0.1- 0.01
-                    Debug.Log(hit.distance);
-                    float distance = hit.distance / 10f;
-                    finalDamage *= (1 - distance * distanceModifier);
-                    Debug.Log("distanceMod = " + (1 - distance * distanceModifier));
+                    Debug.Log("Hit Distance = " + hit.distance);
+                    if (damageFalloffStart < hit.distance)
+                    {
+                        float distance = hit.distance / 10f - damageFalloffStart / 10f;
+                        float distanceMultiplier = (1 - distance * distanceModifier);
+                        if (distanceMultiplier > 1) distanceMultiplier = 1;
+                        if (distanceMultiplier < 0) distanceMultiplier = 0;
+                        finalDamage *= distanceMultiplier;
+                        Debug.Log("distanceMod = " + distanceMultiplier);
+                    }
 
                     //final damage (rounded int)
-                    collisionObject.GetComponent<PlayerStats>().TakeDamage((int)finalDamage);
+                    Debug.Log("final damage dealt = (" + finalDamage + "): " + (int)finalDamage);
+
+                    (collisionObject.GetComponentInParent(typeof(PlayerStats)) as PlayerStats).TakeDamage(
+                        (int)finalDamage);
 
                     //Hitmarker
                     HitShow();
@@ -125,6 +141,9 @@ public class Weapon : Interactable
         {
             Debug.Log("Not hit");
         }
+
+
+        EventManager.Shot(ray.origin, hit_, transform.root);
 
         //bullet hole
         GameObject bulletHoleClone = Instantiate(_bulletHoleGraphic, hit.point, Quaternion.Euler(0, 180, 0));
@@ -163,11 +182,11 @@ public class Weapon : Interactable
                 yield return rapidFireWait;
             }
         }
-        else
+        /*else
         {
             Shoot(true);
             yield return null;
-        }
+        }*/
     }
 
     //reload

@@ -19,12 +19,15 @@ public class PlayerLook : MonoBehaviour
     [SerializeField] InputManager _input;
     [SerializeField] ParticleSystem hookParticles;
     private Quaternion hookRot;
+
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         height = camera.transform.position.y;
         currheight = height;
     }
+    
+
 
     void FixedUpdate()
     {
@@ -81,11 +84,11 @@ public class PlayerLook : MonoBehaviour
         target.localRotation = Quaternion.Euler(xRotation, 0, 0);
         camera.transform.LookAt(targetPoint);
 
-        if(hooked) {
-            if(Quaternion.Angle(transform.localRotation, hookRot) > 50f) hookParticles.Stop();
-            else if(hookParticles.isStopped) hookParticles.Play();
+        if (hooked)
+        {
+            if (Quaternion.Angle(transform.localRotation, hookRot) > 50f) hookParticles.Stop();
+            else if (hookParticles.isStopped) hookParticles.Play();
         }
-
     }
 
     public void StartHook()
