@@ -10,14 +10,12 @@ public class AIWeapons : MonoBehaviour
     [SerializeField] private Transform gunSlot;
 
     private void OnTriggerEnter(Collider other) {
-        Debug.Log(other.gameObject.tag);
         if(!HasWeapon() && other.gameObject.tag == "Weapon") {
             EquipWeapon(other.gameObject);
         }
     }
 
     public void EquipWeapon(GameObject weapon) {
-        
         current = weapon;
         weapon.GetComponent<Rigidbody>().isKinematic = true;
         weapon.GetComponent<BoxCollider>().enabled = false;
@@ -29,6 +27,18 @@ public class AIWeapons : MonoBehaviour
         weaponAnimator.refresh();
         weapon.transform.localRotation = Quaternion.Euler(0, 0, 0);
         weapon.transform.localPosition = new Vector3(0, 0, 0);
+    }
+
+    public void DitchWeapon() {
+        if(!HasWeapon()) return;
+        print("aaa");
+        Debug.Log(current.transform);
+        var weapon = current.transform;
+        weapon.SetParent(null);
+        weapon.GetComponent<Rigidbody>().isKinematic = false;
+        weapon.GetComponent<BoxCollider>().enabled = true;
+        //current = null;
+        //currentWeapon = null;
     }
 
     public bool HasWeapon() {

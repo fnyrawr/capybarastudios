@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-
+using UnityEngine.AI;
 public class PlayerStats : MonoBehaviour
 {
     public int maxHealth = 100;
@@ -109,13 +109,13 @@ public class PlayerStats : MonoBehaviour
         if (currentHealth <= 0)
         {
             //_animator.SetLayerWeight(1,0);
-            _animator.applyRootMotion = true;
-            _animator.SetTrigger("dying");
-            _animator.SetTrigger("dying2");
+            //_animator.SetTrigger("dying");
+            //_animator.SetTrigger("dying2");
+            GetComponent<Ragdoll>().EnablePhysics();
             if (isAI)
             {
-                //GetComponent<Ragdoll>().EnablePhysics();
-                _animator.applyRootMotion = false;
+                GetComponent<NavMeshAgent>().enabled = false;
+                GetComponent<AiController>().enabled = false;
                 AIDeathState deathState = agent.stateMachine.GetState(AIStateId.Death) as AIDeathState;
                 agent.stateMachine.ChangeState(AIStateId.Death);
             }
