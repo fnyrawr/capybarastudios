@@ -82,7 +82,7 @@ public class PlayerStats : MonoBehaviour
 
     public void TakeDamage(int damageAmount)
     {
-        if (damageAmount < 0 || currentHealth <= 0) return;
+        if (damageAmount <= 0 || currentHealth <= 0) return;
         Debug.Log("Take Damage: " + damageAmount);
         //take damage
         currentHealth -= damageAmount;
