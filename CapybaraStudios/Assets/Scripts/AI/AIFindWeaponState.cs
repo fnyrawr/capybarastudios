@@ -13,7 +13,6 @@ public class AIFindWeaponState : AIState
 
     public void Exit(AIAgent agent)
     {
-        agent.agent.stoppingDistance = 5;
     }
 
     public AIStateId GetId()
@@ -23,7 +22,9 @@ public class AIFindWeaponState : AIState
 
     public void Update(AIAgent agent)
     {
-
+        if(agent.weapons.HasWeapon()) {
+            agent.stateMachine.ChangeState(AIStateId.AttackPlayer);
+        }
     }
 
     private Weapon FindWeapon(AIAgent agent) {

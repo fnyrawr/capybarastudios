@@ -7,6 +7,7 @@ public class AIChasePlayerState : AIState
     float timer = 0.0f;
     public void Enter(AIAgent agent)
     {
+        agent.agent.stoppingDistance = 5f;
     }
 
     public void Exit(AIAgent agent)

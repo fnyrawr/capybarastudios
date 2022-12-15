@@ -10,6 +10,7 @@ public class AIAgent : MonoBehaviour
     public AIAgentConfig config;
     public UIHealthBar healthBar;
     public Transform player;
+    [SerializeField] public AIWeapons weapons; 
     void Awake()
     {   
         agent = GetComponent<NavMeshAgent>();
@@ -20,6 +21,7 @@ public class AIAgent : MonoBehaviour
         stateMachine.RegisterState(new AIDeathState());
         stateMachine.RegisterState(new AIIdleState());
         stateMachine.RegisterState(new AIFindWeaponState());
+        stateMachine.RegisterState(new AIAttackPlayerState());
         stateMachine.ChangeState(initalState);
     }
 
