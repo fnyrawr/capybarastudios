@@ -13,6 +13,7 @@ public class Weapon : Interactable
     public float spread, range, reloadTime, fireRate, timeBetweenShooting, distanceModifier, damageFalloffStart;
     public int maxAmmo, magazineSize, bulletsPerTap;
     public bool hasAmmo, rapidFireEnabled;
+    public AudioSource gunSound;
 
     int bulletsLeft, bulletsShot;
     bool reloading, readyToShoot;
@@ -153,6 +154,7 @@ public class Weapon : Interactable
         bulletsLeft--;
         bulletsShot--;
         ShowAmmo();
+        gunSound.PlayOneShot(gunSound.clip);
         if (bulletsShot > 0 && bulletsLeft > 0)
         {
             readyToShoot = true;
