@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using Random = UnityEngine.Random;
 
 public class Weapon : Interactable
 {
@@ -10,7 +12,16 @@ public class Weapon : Interactable
 
     //Gun stats
     public int damage;
-    public float spread, range, reloadTime, fireRate, timeBetweenShooting, distanceModifier, damageFalloffStart;
+
+    public float initialSpread,
+        maxSpread,
+        range,
+        reloadTime,
+        fireRate,
+        timeBetweenShooting,
+        distanceModifier,
+        damageFalloffStart;
+
     public int maxAmmo, magazineSize, bulletsPerTap;
     public bool hasAmmo, rapidFireEnabled;
 
@@ -32,6 +43,10 @@ public class Weapon : Interactable
     private Animator _animator;
     public int weaponSlot;
     public int animationType;
+
+    [SerializeField] private float spreadIncrease = 0.001f;
+    [SerializeField] private float spreadDecrease = 0.01f; //per second
+    public float currentSpread;
 
     public int specialWeaponType;
     // 0 ist für nicht special Weapon
@@ -58,6 +73,13 @@ public class Weapon : Interactable
         _bulletHoleGraphic = bulletHoleGraphic;
     }
 
+    private void Update()
+    {
+        if (currentSpread == initialSpread)return;
+        if (currentSpread < initialSpread) currentSpread = initialSpread;
+        else currentSpread -= Time.deltaTime * spreadDecrease;
+    }
+
     protected override void Interact(GameObject player)
     {
         Debug.Log("Picked up " + gameObject.name);
@@ -79,15 +101,19 @@ public class Weapon : Interactable
         Vector3 direction;
         if (!first)
         {
-            //Spread
-            float x = Random.Range(-spread, spread);
-            float y = Random.Range(-spread, spread);
-            float z = Random.Range(-spread, spread);
             //Calculate Direction with Spread
-            direction = _camera.transform.forward + new Vector3(x, y, z);
+            direction = _camera.transform.forward + (Vector3)Random.insideUnitCircle * currentSpread;
         }
         else
             direction = _camera.transform.forward;
+
+        //spread increase for each shot
+        if (currentSpread < maxSpread)
+        {
+            currentSpread += spreadIncrease * bulletsPerTap;
+            if (currentSpread > maxSpread) currentSpread = maxSpread;
+        }
+
 
         var ray = new Ray(_camera.transform.position, direction);
         var hit_ = ray.origin + direction * range;
