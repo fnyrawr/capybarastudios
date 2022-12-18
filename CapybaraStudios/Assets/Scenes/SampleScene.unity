@@ -331,6 +331,17 @@ MonoBehaviour:
   message: E to press Button
   cooldownTime: 0.5
   button: {fileID: 1817438599}
+--- !u!114 &30535173 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4515897417237762987, guid: 0f3b39205360352448b069cc23a16f4c, type: 3}
+  m_PrefabInstance: {fileID: 4515897417004609842}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57fbd67fec4e46d4f8293facf8596f77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &141015060
 GameObject:
   m_ObjectHideFlags: 0
@@ -1160,10 +1171,14 @@ MonoBehaviour:
   rapidFireEnabled: 0
   bulletsLeft: 0
   bulletsShot: 0
+  reloading: 0
+  readyToShoot: 0
   hitmarker: {fileID: 1826038556645919015}
   bulletHoleGraphic: {fileID: 2987797164400997647, guid: cdd64dc8e7f243b49829c5817ce597bb, type: 3}
   ammoText: {fileID: 1826038556645919014}
   maxAmmoText: {fileID: 680672504}
+  controllerMask: -32769
+  _animator: {fileID: 0}
 --- !u!1 &374658214
 GameObject:
   m_ObjectHideFlags: 0
@@ -1705,10 +1720,14 @@ MonoBehaviour:
   rapidFireEnabled: 1
   bulletsLeft: 0
   bulletsShot: 0
+  reloading: 0
+  readyToShoot: 0
   hitmarker: {fileID: 1826038556645919015}
   bulletHoleGraphic: {fileID: 2987797164400997647, guid: cdd64dc8e7f243b49829c5817ce597bb, type: 3}
   ammoText: {fileID: 1826038556645919014}
   maxAmmoText: {fileID: 680672504}
+  controllerMask: -32769
+  _animator: {fileID: 0}
 --- !u!1 &603877807
 GameObject:
   m_ObjectHideFlags: 0
@@ -2148,6 +2167,14 @@ PrefabInstance:
     - target: {fileID: 5431010200346843826, guid: 8be673c8ba67927419fb464d4f52fdea, type: 3}
       propertyPath: m_Name
       value: Shotgun
+      objectReference: {fileID: 0}
+    - target: {fileID: 6285491156755393976, guid: 8be673c8ba67927419fb464d4f52fdea, type: 3}
+      propertyPath: maxSpread
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 6285491156755393976, guid: 8be673c8ba67927419fb464d4f52fdea, type: 3}
+      propertyPath: initialSpread
+      value: 0.01
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8be673c8ba67927419fb464d4f52fdea, type: 3}
@@ -2654,10 +2681,14 @@ MonoBehaviour:
   rapidFireEnabled: 1
   bulletsLeft: 0
   bulletsShot: 0
+  reloading: 0
+  readyToShoot: 0
   hitmarker: {fileID: 1826038556645919015}
   bulletHoleGraphic: {fileID: 2987797164400997647, guid: cdd64dc8e7f243b49829c5817ce597bb, type: 3}
   ammoText: {fileID: 1826038556645919014}
   maxAmmoText: {fileID: 680672504}
+  controllerMask: -32769
+  _animator: {fileID: 0}
 --- !u!1 &1032928517
 GameObject:
   m_ObjectHideFlags: 0
@@ -2755,6 +2786,134 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1032928517}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1033240729
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1033240731}
+  - component: {fileID: 1033240730}
+  m_Layer: 0
+  m_Name: musicManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!82 &1033240730
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1033240729}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: e4e44149a56892648a657f65007ceb34, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 0.091
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 0
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &1033240731
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1033240729}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.016566515, y: 0.72000146, z: 0.12564182}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 22
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1077032770
 GameObject:
   m_ObjectHideFlags: 0
@@ -3409,10 +3568,14 @@ MonoBehaviour:
   rapidFireEnabled: 1
   bulletsLeft: 0
   bulletsShot: 0
+  reloading: 0
+  readyToShoot: 0
   hitmarker: {fileID: 1826038556645919015}
   bulletHoleGraphic: {fileID: 2987797164400997647, guid: cdd64dc8e7f243b49829c5817ce597bb, type: 3}
   ammoText: {fileID: 1826038556645919014}
   maxAmmoText: {fileID: 680672504}
+  controllerMask: -32769
+  _animator: {fileID: 0}
 --- !u!1 &1280315297
 GameObject:
   m_ObjectHideFlags: 0
@@ -4101,10 +4264,14 @@ MonoBehaviour:
   rapidFireEnabled: 0
   bulletsLeft: 0
   bulletsShot: 0
+  reloading: 0
+  readyToShoot: 0
   hitmarker: {fileID: 1826038556645919015}
   bulletHoleGraphic: {fileID: 2987797164400997647, guid: cdd64dc8e7f243b49829c5817ce597bb, type: 3}
   ammoText: {fileID: 1826038556645919014}
   maxAmmoText: {fileID: 680672504}
+  controllerMask: -32769
+  _animator: {fileID: 0}
 --- !u!1001 &1544153589
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5261,10 +5428,14 @@ MonoBehaviour:
   rapidFireEnabled: 1
   bulletsLeft: 0
   bulletsShot: 0
+  reloading: 0
+  readyToShoot: 0
   hitmarker: {fileID: 1826038556645919015}
   bulletHoleGraphic: {fileID: 2987797164400997647, guid: cdd64dc8e7f243b49829c5817ce597bb, type: 3}
   ammoText: {fileID: 1826038556645919014}
   maxAmmoText: {fileID: 680672504}
+  controllerMask: -32769
+  _animator: {fileID: 0}
 --- !u!1 &2013610510
 GameObject:
   m_ObjectHideFlags: 0
@@ -5521,6 +5692,24 @@ MonoBehaviour:
   healthIndicator: {fileID: 0}
   blinkDuration: 0
   blinkIntensity: 0
+--- !u!1 &2037495677 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4515897416401309050, guid: 0f3b39205360352448b069cc23a16f4c, type: 3}
+  m_PrefabInstance: {fileID: 4515897417004609842}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2037495681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2037495677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6e3cfeedb3123a42954169e38c62fb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gunScript: {fileID: 30535173}
 --- !u!1001 &2042330708
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8425,6 +8614,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4515897416401309051, guid: 0f3b39205360352448b069cc23a16f4c, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4515897417237762976, guid: 0f3b39205360352448b069cc23a16f4c, type: 3}
       propertyPath: m_Name
       value: Player
