@@ -75,7 +75,7 @@ public class Weapon : Interactable
 
     private void Update()
     {
-        if (currentSpread == initialSpread)return;
+        if (currentSpread == initialSpread) return;
         if (currentSpread < initialSpread) currentSpread = initialSpread;
         else currentSpread -= Time.deltaTime * spreadDecrease;
     }
@@ -255,6 +255,7 @@ public class Weapon : Interactable
 
     public void ShowAmmo()
     {
+        if (!_ammoText || !_maxAmmoText) return;
         if (!hasAmmo)
         {
             _ammoText.SetText("∞");

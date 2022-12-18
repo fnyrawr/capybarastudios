@@ -15,7 +15,6 @@ public class spreadIndicator : MonoBehaviour
     {
         rt = GetComponent<RectTransform>();
         initialSpread = rt.localScale;
-        print(initialSpread);
     }
 
     // Update is called once per frame

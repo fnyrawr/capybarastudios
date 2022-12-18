@@ -95,7 +95,8 @@ MonoBehaviour:
   message: 
   cooldownTime: 1
   damage: 90
-  spread: 0
+  initialSpread: 0
+  maxSpread: 0.05
   range: 1000
   reloadTime: 3
   fireRate: 1
