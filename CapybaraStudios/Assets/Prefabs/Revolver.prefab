@@ -240,6 +240,9 @@ MonoBehaviour:
   rapidFireEnabled: 1
   weaponSlot: 2
   animationType: 1
+  spreadIncrease: 0.001
+  spreadDecrease: 0.01
+  currentSpread: 0
   specialWeaponType: 0
 --- !u!54 &4235579737266619029
 Rigidbody:
