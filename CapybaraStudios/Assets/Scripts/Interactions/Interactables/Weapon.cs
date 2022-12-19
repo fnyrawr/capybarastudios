@@ -103,7 +103,7 @@ public class Weapon : Interactable
         if (!first)
         {
             //Calculate Direction with Spread
-            direction = _transform.forward + (Vector3)Random.insideUnitCircle * currentSpread * _inaccuracy;
+            direction = _transform.forward + (Vector3)Random.insideUnitSphere * currentSpread * _inaccuracy;
         }
         else
             direction = _transform.forward;
@@ -163,6 +163,12 @@ public class Weapon : Interactable
                     Invoke(nameof(HitDisable), 0.2f);
                 }
             }
+            else
+            {
+                //bullet hole if no player was hit
+                GameObject bulletHoleClone = Instantiate(bulletHoleGraphic, hit.point, Quaternion.FromToRotation(Vector3.back, hit.normal));
+                Destroy(bulletHoleClone, 10f);
+            }
         }
         else
         {
@@ -171,9 +177,7 @@ public class Weapon : Interactable
 
         EventManager.Shot(ray.origin, hit_, transform.root);
 
-        //bullet hole
-        GameObject bulletHoleClone = Instantiate(bulletHoleGraphic, hit.point, Quaternion.Euler(0, 180, 0));
-        Destroy(bulletHoleClone, 10f);
+        
 
         //magazine
         bulletsLeft--;
