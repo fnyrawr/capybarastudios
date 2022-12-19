@@ -8,15 +8,17 @@ public class AIAttackPlayerState : AIState
     private float currentTime = 0f; 
     private Quaternion currRotation;
     private Quaternion lookRotation;
+
     public void Enter(AIAgent agent)
     {
         currRotation = agent.transform.rotation;
         currentTime = agent.config.rotationSeconds;
+        agent.weapons.SetFiring(true);
     }
 
     public void Exit(AIAgent agent)
     {
-      
+      agent.weapons.SetFiring(false);
     }
 
     public AIStateId GetId()

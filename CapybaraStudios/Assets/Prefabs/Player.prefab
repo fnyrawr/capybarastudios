@@ -3947,7 +3947,8 @@ MonoBehaviour:
   message: 
   cooldownTime: 0
   damage: 50
-  spread: 0.01
+  initialSpread: 0
+  maxSpread: 0
   range: 5
   reloadTime: 0
   fireRate: 1
@@ -3959,8 +3960,12 @@ MonoBehaviour:
   bulletsPerTap: 1
   hasAmmo: 0
   rapidFireEnabled: 0
+  bulletHoleGraphic: {fileID: 2987797164400997647, guid: cdd64dc8e7f243b49829c5817ce597bb, type: 3}
   weaponSlot: 3
   animationType: 3
+  spreadIncrease: 0.001
+  spreadDecrease: 0.01
+  currentSpread: 0
   specialWeaponType: 0
 --- !u!1 &4515897417201679618
 GameObject:
@@ -4395,7 +4400,6 @@ MonoBehaviour:
   ammoText: {fileID: 2881411654894352404}
   maxAmmoText: {fileID: 4515897417668480458}
   hitmarker: {fileID: 2881411654894352405}
-  bulletHoleGraphic: {fileID: 2987797164400997647, guid: cdd64dc8e7f243b49829c5817ce597bb, type: 3}
   weaponAnimator: {fileID: 4515897417237762982}
   weapons:
   - {fileID: 0}

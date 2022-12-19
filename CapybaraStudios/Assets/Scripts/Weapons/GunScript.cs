@@ -11,12 +11,11 @@ public class GunScript : MonoBehaviour
     public TextMeshProUGUI ammoText;
     public TextMeshProUGUI maxAmmoText;
     public GameObject hitmarker;
-    public GameObject bulletHoleGraphic;
-
     public WeaponAnimationController weaponAnimator;
     public GameObject[] weapons = new GameObject[4];
     public Weapon currentWeapon;
     public int currentSlot = 0;
+    Coroutine fireCoroutine;
 
     private void Awake()
     {
@@ -94,11 +93,11 @@ public class GunScript : MonoBehaviour
         weapons[currentSlot].transform.SetParent(gunSlot);
         gunSlot.GetChild(0).gameObject.SetActive(true);
         currentWeapon = gunSlot.GetChild(0).GetComponent<Weapon>();
-        currentWeapon.init(animator, camera, ammoText, maxAmmoText, hitmarker, bulletHoleGraphic);
+        currentWeapon.init(animator, camera.transform, ammoText, maxAmmoText, hitmarker);
         weaponAnimator.refresh();
         weapons[currentSlot].transform.localRotation = Quaternion.Euler(0, 0, 0);
         weapons[currentSlot].transform.localPosition = new Vector3(0, 0, 0);
-        
+        currentWeapon.ShowAmmo();
     }
 
     public void StartSpecial() {
@@ -113,12 +112,31 @@ public class GunScript : MonoBehaviour
         }
     }
 
-
     public void EquipWeapon(int index)
     {
         if (currentSlot != index)
         {
             ChangeWeapon(index);
         }
+    }
+
+    public void StopFiring() {
+        if (fireCoroutine != null)
+        {
+            StopCoroutine(fireCoroutine);
+        }
+    }
+
+    public void StartFiring()
+    {
+        //fireCoroutine = StartCoroutine(gun.RapidFire());
+        fireCoroutine = StartCoroutine(currentWeapon.RapidFire());
+    }
+    public void Reload() {
+        currentWeapon.Reload();
+    }
+
+    public void Shoot() {
+        currentWeapon.Shoot(true);
     }
 }
