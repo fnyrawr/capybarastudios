@@ -53,6 +53,9 @@ public class Weapon : Interactable
     // 0 ist für nicht special Weapon
     // 1 ist für Grappling Gun
 
+    //Bullet Trail
+    public Transform BulletFirePoint;
+    public TrailRenderer BulletTrail;
 
     private void Awake()
     {
@@ -127,7 +130,9 @@ public class Weapon : Interactable
             GameObject collisionObject = hit.collider.gameObject;
 
             //trail
-            //TrailRenderer trail = Instantiate(BulletTrail, BulletSpawnPoint.position, Quaternion.identity);
+            TrailRenderer trail = Instantiate(BulletTrail, BulletFirePoint.position, Quaternion.identity);
+            //
+            StartCoroutine(SpawnTrail(trail, hit));
 
             if (collisionObject.CompareTag("Head") || collisionObject.CompareTag("Body") ||
                 collisionObject.CompareTag("Limbs"))
@@ -270,9 +275,9 @@ public class Weapon : Interactable
         }
         else
         {
-            _ammoText.SetText(bulletsLeft + " / " + magazineSize);
+            _ammoText.SetText((bulletsLeft/bulletsPerTap) + " / " + (magazineSize/bulletsPerTap));
             if (maxAmmo > 0)
-                _maxAmmoText.SetText(maxAmmo.ToString());
+                _maxAmmoText.SetText((maxAmmo/bulletsPerTap).ToString());
             else
                 _maxAmmoText.SetText("0");
         }
@@ -289,5 +294,24 @@ public class Weapon : Interactable
     {
         if(!_hitmarker) return;
         _hitmarker.SetActive(false);
+    }
+
+    //Trail
+    public IEnumerator SpawnTrail(TrailRenderer trail, RaycastHit hit)
+    {
+        float time = 0;
+        Vector3 start = trail.transform.position;
+
+        while(time < 1)
+        {
+            //interpolate between 2 points
+            trail.transform.position = Vector3.Lerp(start, hit.point, time);
+            time += Time.deltaTime / trail.time;
+
+            yield return null;
+        }
+        trail.transform.position = hit.point;
+
+        Destroy(trail.gameObject, trail.time);
     }
 }
