@@ -52,6 +52,7 @@ public class Weapon : Interactable
     public int specialWeaponType;
     // 0 ist für nicht special Weapon
     // 1 ist für Grappling Gun
+    // 2 ist für sniper
 
     //Bullet Trail
     public Transform BulletFirePoint;
@@ -317,5 +318,21 @@ public class Weapon : Interactable
         trail.transform.position = hit.point;
 
         Destroy(trail.gameObject, trail.time);
+    }
+
+    public void ZoomIn(bool isSniper)
+    {
+
+        if(isSniper) {
+            //SniperHUD.SetActive(true);
+        }
+    }
+
+    public void ZoomOut(bool isSniper)
+    {
+        
+        if(isSniper) {
+            //SniperHUD.SetActive(true);
+        }
     }
 }

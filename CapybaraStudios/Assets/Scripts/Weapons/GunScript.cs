@@ -101,14 +101,38 @@ public class GunScript : MonoBehaviour
     }
 
     public void StartSpecial() {
-        if(currentWeapon.specialWeaponType == 1) {
-            weapons[currentSlot].GetComponent<GrapplingGun>().Hook();
+        switch(currentWeapon.specialWeaponType)
+        {
+            case 0: //normal
+                camera.fieldOfView = Mathf.Lerp(camera.fieldOfView, 30, Time.deltaTime * 2);
+                currentWeapon.ZoomOut(false);
+                break;
+            case 1: //grapling gun
+                weapons[currentSlot].GetComponent<GrapplingGun>().Hook();
+                break;
+            case 2: //sniper
+                currentWeapon.ZoomIn(true);
+                break;
+            default:
+                break;
         }
     }
 
     public void StopSpecial() {
-        if(currentWeapon.specialWeaponType == 1) {
-            weapons[currentSlot].GetComponent<GrapplingGun>().StopHook();
+        switch(currentWeapon.specialWeaponType)
+        {
+            case 0: //normal
+                camera.fieldOfView = Mathf.Lerp(camera.fieldOfView, 60, Time.deltaTime * 2);
+                currentWeapon.ZoomOut(false);
+                break;
+            case 1: //grapling gun
+                weapons[currentSlot].GetComponent<GrapplingGun>().StopHook();
+                break;
+            case 2: //sniper
+                currentWeapon.ZoomOut(true);
+                break;
+            default:
+                break;
         }
     }
 
@@ -139,4 +163,5 @@ public class GunScript : MonoBehaviour
     public void Shoot() {
         currentWeapon.Shoot(true);
     }
+
 }
