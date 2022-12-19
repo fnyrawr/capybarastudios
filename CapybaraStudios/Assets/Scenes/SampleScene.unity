@@ -781,6 +781,7 @@ MonoBehaviour:
   healthIndicator: {fileID: 0}
   blinkDuration: 0
   blinkIntensity: 0
+  volume: {fileID: 0}
 --- !u!1 &249460535
 GameObject:
   m_ObjectHideFlags: 0
@@ -1512,6 +1513,7 @@ MonoBehaviour:
   healthIndicator: {fileID: 0}
   blinkDuration: 0
   blinkIntensity: 0
+  volume: {fileID: 0}
 --- !u!1001 &441100236
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1519,6 +1521,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2971606991982773395, guid: 05788b5fa001dfe47b947d12833d5bd8, type: 3}
+      propertyPath: m_IsGlobal
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2971606991982773395, guid: 05788b5fa001dfe47b947d12833d5bd8, type: 3}
+      propertyPath: sharedProfile
+      value: 
+      objectReference: {fileID: 11400000, guid: 1dc473d20c46719408bdbebc6aabb421, type: 2}
     - target: {fileID: 2971606992276117158, guid: 05788b5fa001dfe47b947d12833d5bd8, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.5
@@ -1551,6 +1561,10 @@ PrefabInstance:
       propertyPath: m_fontSizeBase
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 2971606993417293392, guid: 05788b5fa001dfe47b947d12833d5bd8, type: 3}
+      propertyPath: volumeProfile
+      value: 
+      objectReference: {fileID: 11400000, guid: 1dc473d20c46719408bdbebc6aabb421, type: 2}
     - target: {fileID: 2971606993417293396, guid: 05788b5fa001dfe47b947d12833d5bd8, type: 3}
       propertyPath: m_RootOrder
       value: 18
@@ -2568,6 +2582,7 @@ MonoBehaviour:
   healthIndicator: {fileID: 0}
   blinkDuration: 0
   blinkIntensity: 0
+  volume: {fileID: 0}
 --- !u!1001 &1000447119
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3975,6 +3990,7 @@ MonoBehaviour:
   healthIndicator: {fileID: 0}
   blinkDuration: 0
   blinkIntensity: 0
+  volume: {fileID: 0}
 --- !u!1 &1512084588
 GameObject:
   m_ObjectHideFlags: 0
@@ -5080,6 +5096,7 @@ MonoBehaviour:
   healthIndicator: {fileID: 0}
   blinkDuration: 0
   blinkIntensity: 0
+  volume: {fileID: 0}
 --- !u!1 &2013610510
 GameObject:
   m_ObjectHideFlags: 0
@@ -5336,6 +5353,7 @@ MonoBehaviour:
   healthIndicator: {fileID: 0}
   blinkDuration: 0
   blinkIntensity: 0
+  volume: {fileID: 0}
 --- !u!1001 &2042330708
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15436,6 +15454,7 @@ MonoBehaviour:
   healthIndicator: {fileID: 0}
   blinkDuration: 0
   blinkIntensity: 0
+  volume: {fileID: 0}
 --- !u!114 &8025018137018176980
 MonoBehaviour:
   m_ObjectHideFlags: 0

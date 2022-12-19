@@ -65,6 +65,7 @@ public class GrapplingGun : MonoBehaviour
         if (delta >= 1)
         {
             hooked = true;
+            playerMovement.hooked = true;
             draw = false;
             cameraScript.StartHook();
         }
@@ -83,7 +84,6 @@ public class GrapplingGun : MonoBehaviour
         {
             draw = true;
             hookPos = hit.point;
-            playerMovement.hooked = true;
             lr.positionCount = 2;
             lr.SetPosition(0, gunTip.position);
         }

@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.AI;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 public class PlayerStats : MonoBehaviour
 {
     public int maxHealth = 100;
@@ -14,16 +16,14 @@ public class PlayerStats : MonoBehaviour
     public TextMeshPro damageText;
     public TextMeshPro totalDamageText;
     public TextMeshProUGUI healthIndicator;
-
     private Animator _animator;
-
     //private Ragdoll ragdoll;
     private SkinnedMeshRenderer[] skinnedMeshRenderers;
     private Color color;
     [SerializeField] private float blinkDuration, blinkIntensity;
     private float blinkTimer;
     private AIAgent agent;
-
+    [SerializeField] private Volume volume;
 
     private void OnEnable()
     {
@@ -104,7 +104,10 @@ public class PlayerStats : MonoBehaviour
     void UpdateHealth()
     {
         if (isAI) agent.healthBar.SetHealtBar(currentHealth / (float)maxHealth);
-        else healthIndicator.SetText("+" + currentHealth); //TODO
+        else {
+            updateVignette();
+            healthIndicator.SetText("+" + currentHealth); //TODO
+        }
         print(currentHealth);
         if (currentHealth <= 0)
         {
@@ -119,7 +122,10 @@ public class PlayerStats : MonoBehaviour
                 AIDeathState deathState = agent.stateMachine.GetState(AIStateId.Death) as AIDeathState;
                 agent.stateMachine.ChangeState(AIStateId.Death);
             }
-            //TODO MORE!!!
+            else {
+                //TODO MORE!!!
+
+            }
             //disable other scripts, show death screen, drop all weapons
         }
     }
@@ -127,6 +133,15 @@ public class PlayerStats : MonoBehaviour
     public void Heal(int health)
     {
         StartCoroutine(HealOverTime(health));
+        updateVignette();
+    }
+
+    public void updateVignette() {
+        Vignette vignette;
+        if(volume.profile.TryGet(out vignette)) {
+            float percent = 0.55f * (1.0f - (currentHealth / (float) maxHealth));
+            vignette.intensity.value = percent;
+        }
     }
 
     private IEnumerator HealOverTime(int health)

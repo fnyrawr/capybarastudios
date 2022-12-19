@@ -31,7 +31,6 @@ public class PlayerLook : MonoBehaviour
         //for zooming
         if (elapsedzTime <= 0.4f)
         {
-            print(elapsedzTime);
             elapsedzTime += Time.deltaTime;
             float percentage = elapsedzTime / 0.4f;
             if (zoom > 0f) camera.fieldOfView = Mathf.Lerp(camera.fieldOfView, baseFOV * zoom, Mathf.SmoothStep(0, 1, percentage));
