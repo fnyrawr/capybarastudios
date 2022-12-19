@@ -1519,6 +1519,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2971606992276117158, guid: 05788b5fa001dfe47b947d12833d5bd8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2971606992276117158, guid: 05788b5fa001dfe47b947d12833d5bd8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2971606992276117158, guid: 05788b5fa001dfe47b947d12833d5bd8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2971606992276117158, guid: 05788b5fa001dfe47b947d12833d5bd8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2971606992276117158, guid: 05788b5fa001dfe47b947d12833d5bd8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2971606992276117158, guid: 05788b5fa001dfe47b947d12833d5bd8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2971606992276117158, guid: 05788b5fa001dfe47b947d12833d5bd8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2971606992700837951, guid: 05788b5fa001dfe47b947d12833d5bd8, type: 3}
       propertyPath: m_fontSizeBase
       value: 20
@@ -1570,6 +1598,26 @@ PrefabInstance:
     - target: {fileID: 2971606993417293397, guid: 05788b5fa001dfe47b947d12833d5bd8, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6216746115417813118, guid: 05788b5fa001dfe47b947d12833d5bd8, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 2100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6216746115417813118, guid: 05788b5fa001dfe47b947d12833d5bd8, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1170
+      objectReference: {fileID: 0}
+    - target: {fileID: 6216746115417813118, guid: 05788b5fa001dfe47b947d12833d5bd8, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -16.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7041327796140552663, guid: 05788b5fa001dfe47b947d12833d5bd8, type: 3}
+      propertyPath: m_Name
+      value: SniperScope
+      objectReference: {fileID: 0}
+    - target: {fileID: 7041327796140552663, guid: 05788b5fa001dfe47b947d12833d5bd8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 05788b5fa001dfe47b947d12833d5bd8, type: 3}
@@ -1688,6 +1736,11 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
+--- !u!1 &498697300 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2971606991435174031, guid: 05788b5fa001dfe47b947d12833d5bd8, type: 3}
+  m_PrefabInstance: {fileID: 441100236}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &603877807
 GameObject:
   m_ObjectHideFlags: 0
@@ -3098,6 +3151,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1136545433}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1147544073 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7041327796140552663, guid: 05788b5fa001dfe47b947d12833d5bd8, type: 3}
+  m_PrefabInstance: {fileID: 441100236}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1155882639
 GameObject:
   m_ObjectHideFlags: 0
@@ -13853,6 +13911,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sniper
       objectReference: {fileID: 0}
+    - target: {fileID: 6487712134320530052, guid: 2cf95ac77bf71784ba860ab9aeac3a2d, type: 3}
+      propertyPath: CrossHair
+      value: 
+      objectReference: {fileID: 498697300}
+    - target: {fileID: 6487712134320530052, guid: 2cf95ac77bf71784ba860ab9aeac3a2d, type: 3}
+      propertyPath: SniperHUD
+      value: 
+      objectReference: {fileID: 1147544073}
     - target: {fileID: 7705432883869403580, guid: 2cf95ac77bf71784ba860ab9aeac3a2d, type: 3}
       propertyPath: m_RootOrder
       value: 12
