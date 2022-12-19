@@ -10,6 +10,7 @@ public class AIAgent : MonoBehaviour
     public AIAgentConfig config;
     public UIHealthBar healthBar;
     public Transform player;
+    [SerializeField] public Transform rotationTarget;
     [SerializeField] public AIWeapons weapons; 
     void Awake()
     {   

@@ -1,16 +1,32 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using Random = UnityEngine.Random;
 
 public class Weapon : Interactable
 {
-    private Camera _camera;
+    private Transform _transform;
+
+    //sounds
+    public AudioSource gunSound;
+    public AudioSource reloadSound;
+    public AudioSource pickupSound;
 
     //Gun stats
     public int damage;
-    public float spread, range, reloadTime, fireRate, timeBetweenShooting, distanceModifier, damageFalloffStart;
+
+    public float initialSpread,
+        maxSpread,
+        range,
+        reloadTime,
+        fireRate,
+        timeBetweenShooting,
+        distanceModifier,
+        damageFalloffStart;
+
     public int maxAmmo, magazineSize, bulletsPerTap;
     public bool hasAmmo, rapidFireEnabled;
     public AudioSource gunSound;
@@ -22,7 +38,7 @@ public class Weapon : Interactable
     private GameObject _hitmarker;
 
     //bullet hole
-    private GameObject _bulletHoleGraphic;
+    public GameObject bulletHoleGraphic;
 
     //HUD
     private TextMeshProUGUI _ammoText;
@@ -34,6 +50,11 @@ public class Weapon : Interactable
     public int weaponSlot;
     public int animationType;
 
+    [SerializeField] private float spreadIncrease = 0.001f;
+    [SerializeField] private float spreadDecrease = 0.01f; //per second
+    public float currentSpread;
+
+    private float _inaccuracy = 1f;
     public int specialWeaponType;
     // 0 ist für nicht special Weapon
     // 1 ist für Grappling Gun
@@ -48,21 +69,29 @@ public class Weapon : Interactable
         message = "Pick up [E]";
     }
 
-    public void init(Animator animatior, Camera camera, TextMeshProUGUI ammoText, TextMeshProUGUI maxAmmoText,
-        GameObject hitmarker, GameObject bulletHoleGraphic)
+    public void init(Animator animatior, Transform transform, TextMeshProUGUI ammoText, TextMeshProUGUI maxAmmoText,
+        GameObject hitmarker, float inaccuracy=1f)
     {
         _animator = animatior;
-        _camera = camera;
+        _transform = transform;
         _ammoText = ammoText;
         _maxAmmoText = maxAmmoText;
         _hitmarker = hitmarker;
-        _bulletHoleGraphic = bulletHoleGraphic;
+        _inaccuracy = inaccuracy;
+    }
+
+    private void Update()
+    {
+        if (currentSpread == initialSpread) return;
+        if (currentSpread < initialSpread) currentSpread = initialSpread;
+        else currentSpread -= Time.deltaTime * spreadDecrease;
     }
 
     protected override void Interact(GameObject player)
     {
         Debug.Log("Picked up " + gameObject.name);
         player.GetComponent<GunScript>().PickUp(gameObject);
+        pickupSound.PlayOneShot(pickupSound.clip);
     }
 
     public void Shoot(bool first)
@@ -80,17 +109,21 @@ public class Weapon : Interactable
         Vector3 direction;
         if (!first)
         {
-            //Spread
-            float x = Random.Range(-spread, spread);
-            float y = Random.Range(-spread, spread);
-            float z = Random.Range(-spread, spread);
             //Calculate Direction with Spread
-            direction = _camera.transform.forward + new Vector3(x, y, z);
+            direction = _transform.forward + (Vector3)Random.insideUnitSphere * currentSpread * _inaccuracy;
         }
         else
-            direction = _camera.transform.forward;
+            direction = _transform.forward;
 
-        var ray = new Ray(_camera.transform.position, direction);
+        //spread increase for each shot
+        if (currentSpread < maxSpread)
+        {
+            currentSpread += spreadIncrease * bulletsPerTap;
+            if (currentSpread > maxSpread) currentSpread = maxSpread;
+        }
+
+
+        var ray = new Ray(_transform.position, direction);
         var hit_ = ray.origin + direction * range;
         //hit and damage calc
         if (Physics.Raycast(ray, out RaycastHit hit, range,
@@ -99,6 +132,9 @@ public class Weapon : Interactable
             Debug.Log(hit.transform.name);
             hit_ = hit.point;
             GameObject collisionObject = hit.collider.gameObject;
+
+            //trail
+            //TrailRenderer trail = Instantiate(BulletTrail, BulletSpawnPoint.position, Quaternion.identity);
 
             if (collisionObject.CompareTag("Head") || collisionObject.CompareTag("Body") ||
                 collisionObject.CompareTag("Limbs"))
@@ -137,18 +173,21 @@ public class Weapon : Interactable
                     Invoke(nameof(HitDisable), 0.2f);
                 }
             }
+            else
+            {
+                //bullet hole if no player was hit
+                GameObject bulletHoleClone = Instantiate(bulletHoleGraphic, hit.point, Quaternion.FromToRotation(Vector3.back, hit.normal));
+                Destroy(bulletHoleClone, 10f);
+            }
         }
         else
         {
             Debug.Log("Not hit");
         }
 
-
         EventManager.Shot(ray.origin, hit_, transform.root);
 
-        //bullet hole
-        GameObject bulletHoleClone = Instantiate(_bulletHoleGraphic, hit.point, Quaternion.Euler(0, 180, 0));
-        Destroy(bulletHoleClone, 10f);
+        
 
         //magazine
         bulletsLeft--;
@@ -210,6 +249,7 @@ public class Weapon : Interactable
         reloading = true;
         readyToShoot = true;
         Invoke("ReloadFinished", reloadTime);
+        reloadSound.PlayOneShot(reloadSound.clip);
     }
 
     private void ReloadFinished()
@@ -231,6 +271,7 @@ public class Weapon : Interactable
 
     public void ShowAmmo()
     {
+        if (!_ammoText || !_maxAmmoText) return;
         if (!hasAmmo)
         {
             _ammoText.SetText("∞");
@@ -249,11 +290,13 @@ public class Weapon : Interactable
     //hitmarker show and disable
     public void HitShow()
     {
+        if(!_hitmarker) return;
         _hitmarker.SetActive(true);
     }
 
     public void HitDisable()
     {
+        if(!_hitmarker) return;
         _hitmarker.SetActive(false);
     }
 }
