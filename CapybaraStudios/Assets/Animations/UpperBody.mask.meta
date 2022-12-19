@@ -1,6 +1,15 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:CapybaraStudios/Assets/Models/Animations/Jump Up.anim.meta
+<<<<<<< HEAD:CapybaraStudios/Assets/Maps/Storage/LowPolyShaders/README.txt.meta
+guid: 1a0dbcf7d6b1bcb40972ef0ef5f7a89e
+TextScriptImporter:
+=======
+guid: e53841f1edc991945a5d880492eb4bdc
+=======
 guid: 5cec5f0e2f1074343b112ab9bbf348af
+>>>>>>> fc05fc6b4c1a882c60858328526375f3a315496d:CapybaraStudios/Assets/Animations/UpperBody.mask.meta
 NativeFormatImporter:
+>>>>>>> master:CapybaraStudios/Assets/Models/Animations/Jump Up.anim.meta
   externalObjects: {}
   mainObjectFileID: 31900000
   userData: 

@@ -10,6 +10,11 @@ public class Weapon : Interactable
 {
     private Transform _transform;
 
+    //sounds
+    public AudioSource gunSound;
+    public AudioSource reloadSound;
+    public AudioSource pickupSound;
+
     //Gun stats
     public int damage;
 
@@ -89,6 +94,7 @@ public class Weapon : Interactable
     {
         Debug.Log("Picked up " + gameObject.name);
         player.GetComponent<GunScript>().PickUp(gameObject);
+        pickupSound.PlayOneShot(pickupSound.clip);
     }
 
     public void Shoot(bool first)
@@ -196,6 +202,7 @@ public class Weapon : Interactable
         bulletsLeft--;
         bulletsShot--;
         ShowAmmo();
+        //gunSound.PlayOneShot(gunSound.clip);
         if (bulletsShot > 0 && bulletsLeft > 0)
         {
             readyToShoot = true;
@@ -251,6 +258,7 @@ public class Weapon : Interactable
         reloading = true;
         readyToShoot = true;
         Invoke("ReloadFinished", reloadTime);
+        //sreloadSound.PlayOneShot(reloadSound.clip);
     }
 
     private void ReloadFinished()
