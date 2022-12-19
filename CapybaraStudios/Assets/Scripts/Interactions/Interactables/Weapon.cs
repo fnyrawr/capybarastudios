@@ -130,9 +130,11 @@ public class Weapon : Interactable
             GameObject collisionObject = hit.collider.gameObject;
 
             //trail
-            TrailRenderer trail = Instantiate(BulletTrail, BulletFirePoint.position, Quaternion.identity);
-            //
-            StartCoroutine(SpawnTrail(trail, hit));
+            if(hasAmmo)
+            {
+                TrailRenderer trail = Instantiate(BulletTrail, BulletFirePoint.position, Quaternion.identity);
+                StartCoroutine(SpawnTrail(trail, hit));
+            }
 
             if (collisionObject.CompareTag("Head") || collisionObject.CompareTag("Body") ||
                 collisionObject.CompareTag("Limbs"))
@@ -165,6 +167,8 @@ public class Weapon : Interactable
 
                     (collisionObject.GetComponentInParent(typeof(PlayerStats)) as PlayerStats).TakeDamage(
                         (int)finalDamage);
+
+                    //player hit particle TODO
 
                     //Hitmarker
                     HitShow();
