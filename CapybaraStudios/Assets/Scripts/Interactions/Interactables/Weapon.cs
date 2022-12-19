@@ -126,6 +126,9 @@ public class Weapon : Interactable
             hit_ = hit.point;
             GameObject collisionObject = hit.collider.gameObject;
 
+            //trail
+            //TrailRenderer trail = Instantiate(BulletTrail, BulletSpawnPoint.position, Quaternion.identity);
+
             if (collisionObject.CompareTag("Head") || collisionObject.CompareTag("Body") ||
                 collisionObject.CompareTag("Limbs"))
             {
