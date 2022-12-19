@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 
 public class Weapon : Interactable
 {
-    private Camera _camera;
+    private Transform _transform;
 
     //Gun stats
     public int damage;
@@ -32,7 +32,7 @@ public class Weapon : Interactable
     private GameObject _hitmarker;
 
     //bullet hole
-    private GameObject _bulletHoleGraphic;
+    public GameObject bulletHoleGraphic;
 
     //HUD
     private TextMeshProUGUI _ammoText;
@@ -48,6 +48,7 @@ public class Weapon : Interactable
     [SerializeField] private float spreadDecrease = 0.01f; //per second
     public float currentSpread;
 
+    private float _inaccuracy = 1f;
     public int specialWeaponType;
     // 0 ist für nicht special Weapon
     // 1 ist für Grappling Gun
@@ -62,15 +63,15 @@ public class Weapon : Interactable
         message = "Pick up [E]";
     }
 
-    public void init(Animator animatior, Camera camera, TextMeshProUGUI ammoText, TextMeshProUGUI maxAmmoText,
-        GameObject hitmarker, GameObject bulletHoleGraphic)
+    public void init(Animator animatior, Transform transform, TextMeshProUGUI ammoText, TextMeshProUGUI maxAmmoText,
+        GameObject hitmarker, float inaccuracy=1f)
     {
         _animator = animatior;
-        _camera = camera;
+        _transform = transform;
         _ammoText = ammoText;
         _maxAmmoText = maxAmmoText;
         _hitmarker = hitmarker;
-        _bulletHoleGraphic = bulletHoleGraphic;
+        _inaccuracy = inaccuracy;
     }
 
     private void Update()
@@ -102,10 +103,10 @@ public class Weapon : Interactable
         if (!first)
         {
             //Calculate Direction with Spread
-            direction = _camera.transform.forward + (Vector3)Random.insideUnitCircle * currentSpread;
+            direction = _transform.forward + (Vector3)Random.insideUnitCircle * currentSpread * _inaccuracy;
         }
         else
-            direction = _camera.transform.forward;
+            direction = _transform.forward;
 
         //spread increase for each shot
         if (currentSpread < maxSpread)
@@ -115,7 +116,7 @@ public class Weapon : Interactable
         }
 
 
-        var ray = new Ray(_camera.transform.position, direction);
+        var ray = new Ray(_transform.position, direction);
         var hit_ = ray.origin + direction * range;
         //hit and damage calc
         if (Physics.Raycast(ray, out RaycastHit hit, range,
@@ -168,11 +169,10 @@ public class Weapon : Interactable
             Debug.Log("Not hit");
         }
 
-
         EventManager.Shot(ray.origin, hit_, transform.root);
 
         //bullet hole
-        GameObject bulletHoleClone = Instantiate(_bulletHoleGraphic, hit.point, Quaternion.Euler(0, 180, 0));
+        GameObject bulletHoleClone = Instantiate(bulletHoleGraphic, hit.point, Quaternion.Euler(0, 180, 0));
         Destroy(bulletHoleClone, 10f);
 
         //magazine
@@ -274,11 +274,13 @@ public class Weapon : Interactable
     //hitmarker show and disable
     public void HitShow()
     {
+        if(!_hitmarker) return;
         _hitmarker.SetActive(true);
     }
 
     public void HitDisable()
     {
+        if(!_hitmarker) return;
         _hitmarker.SetActive(false);
     }
 }

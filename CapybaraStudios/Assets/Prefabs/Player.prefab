@@ -3673,6 +3673,7 @@ MonoBehaviour:
   bulletsPerTap: 1
   hasAmmo: 0
   rapidFireEnabled: 0
+  bulletHoleGraphic: {fileID: 2987797164400997647, guid: cdd64dc8e7f243b49829c5817ce597bb, type: 3}
   weaponSlot: 3
   animationType: 3
   spreadIncrease: 0.001
@@ -3977,7 +3978,6 @@ MonoBehaviour:
   ammoText: {fileID: 2881411654894352404}
   maxAmmoText: {fileID: 4515897417668480458}
   hitmarker: {fileID: 2881411654894352405}
-  bulletHoleGraphic: {fileID: 2987797164400997647, guid: cdd64dc8e7f243b49829c5817ce597bb, type: 3}
   weaponAnimator: {fileID: 4515897417237762982}
   weapons:
   - {fileID: 0}

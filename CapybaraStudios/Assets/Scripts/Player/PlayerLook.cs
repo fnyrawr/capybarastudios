@@ -26,8 +26,6 @@ public class PlayerLook : MonoBehaviour
         currheight = height;
     }
     
-
-
     void FixedUpdate()
     {
         if (elapsedTime <= 1)

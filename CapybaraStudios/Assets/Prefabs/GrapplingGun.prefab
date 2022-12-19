@@ -929,7 +929,8 @@ MonoBehaviour:
   message: 
   cooldownTime: 1
   damage: 0
-  spread: 0
+  initialSpread: 0
+  maxSpread: 0
   range: 0
   reloadTime: 0
   fireRate: 0
@@ -941,8 +942,12 @@ MonoBehaviour:
   bulletsPerTap: 0
   hasAmmo: 0
   rapidFireEnabled: 0
+  bulletHoleGraphic: {fileID: 2987797164400997647, guid: cdd64dc8e7f243b49829c5817ce597bb, type: 3}
   weaponSlot: 2
   animationType: 1
+  spreadIncrease: 0.001
+  spreadDecrease: 0.01
+  currentSpread: 0
   specialWeaponType: 1
 --- !u!54 &6180709947101018883
 Rigidbody:

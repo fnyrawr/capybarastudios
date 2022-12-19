@@ -1640,6 +1640,11 @@ Transform:
   m_Father: {fileID: 1280315298}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &677610235 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5164089035725534706, guid: 82ad52d93afffab428fc920edacd47b0, type: 3}
+  m_PrefabInstance: {fileID: 8226854223143704591}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &693745034
 GameObject:
   m_ObjectHideFlags: 0
@@ -1979,15 +1984,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4617601031172390920, guid: 8be673c8ba67927419fb464d4f52fdea, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.13
+      value: -2.463
       objectReference: {fileID: 0}
     - target: {fileID: 4617601031172390920, guid: 8be673c8ba67927419fb464d4f52fdea, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.252
+      value: 0.11
       objectReference: {fileID: 0}
     - target: {fileID: 4617601031172390920, guid: 8be673c8ba67927419fb464d4f52fdea, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.133
+      value: 10.87
       objectReference: {fileID: 0}
     - target: {fileID: 4617601031172390920, guid: 8be673c8ba67927419fb464d4f52fdea, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2015,10 +2020,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4617601031172390920, guid: 8be673c8ba67927419fb464d4f52fdea, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5066579342820826647, guid: 8be673c8ba67927419fb464d4f52fdea, type: 3}
-      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5431010200346843826, guid: 8be673c8ba67927419fb464d4f52fdea, type: 3}
@@ -3887,6 +3888,11 @@ MeshFilter:
 Transform:
   m_CorrespondingSourceObject: {fileID: 415809114545771437, guid: 9270a55e10e86f645b4779bc776f4687, type: 3}
   m_PrefabInstance: {fileID: 839409340}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1532232611 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7241694295381570639, guid: 82ad52d93afffab428fc920edacd47b0, type: 3}
+  m_PrefabInstance: {fileID: 8226854223143704591}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1544153589
 PrefabInstance:
@@ -15412,6 +15418,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerAI
       objectReference: {fileID: 0}
+    - target: {fileID: 6832508076721731477, guid: 82ad52d93afffab428fc920edacd47b0, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 1532232611}
+    - target: {fileID: 6832508076721731477, guid: 82ad52d93afffab428fc920edacd47b0, type: 3}
+      propertyPath: headTransform
+      value: 
+      objectReference: {fileID: 677610235}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82ad52d93afffab428fc920edacd47b0, type: 3}
 --- !u!1 &8263510192647411116

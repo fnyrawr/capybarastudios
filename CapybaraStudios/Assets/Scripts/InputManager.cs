@@ -17,26 +17,21 @@ public class InputManager : MonoBehaviour
 
     private PlayerMovement movement;
     private GunScript gun;
-    private Weapon weapon;
-
-    Coroutine fireCoroutine;
-
     void Awake()
     {
         playerInput = new PlayerInput();
         walking = playerInput.Walking;
         shooting = playerInput.Shooting;
         gun = GetComponent<GunScript>();
-        updateWeaponScript();
 
         shooting.Special.started += ctx => gun.StartSpecial();
         shooting.Special.canceled += ctx => gun.StopSpecial();
 
-        shooting.Shoot.started += ctx => StartFiring();
-        shooting.Shoot.canceled += ctx => StopFiring();
+        shooting.Shoot.started += ctx => gun.StartFiring();
+        shooting.Shoot.performed += ctx => gun.Shoot();
+        shooting.Shoot.canceled += ctx => gun.StopFiring();
 
-        shooting.Reload.performed += ctx => weapon.Reload();
-        shooting.Shoot.performed += ctx => weapon.Shoot(true);
+        shooting.Reload.performed += ctx => gun.Reload();
 
         shooting.EquipPrimary.performed += ctx => equip(0);
         shooting.EquipSecondary.performed += ctx => equip(1);
@@ -113,33 +108,8 @@ public class InputManager : MonoBehaviour
         SprintInput = ctx.started;
     }
 
-    //For Rapid Fire
-    void StartFiring()
-    {
-        //fireCoroutine = StartCoroutine(gun.RapidFire());
-        fireCoroutine = StartCoroutine(weapon.RapidFire());
-    }
-
-    void StopFiring()
-    {
-        if (fireCoroutine != null)
-        {
-            StopCoroutine(fireCoroutine);
-        }
-    }
-
     private void equip(int index)
     {
         gun.EquipWeapon(index);
-        updateWeaponScript();
-    }
-
-    public void updateWeaponScript()
-    {
-        if (GetComponent<GunScript>())
-        {
-            weapon = GetComponent<GunScript>().currentWeapon;
-            weapon.ShowAmmo();
-        }
     }
 }
