@@ -1640,11 +1640,6 @@ Transform:
   m_Father: {fileID: 1280315298}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &677610235 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5164089035725534706, guid: 82ad52d93afffab428fc920edacd47b0, type: 3}
-  m_PrefabInstance: {fileID: 8226854223143704591}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &693745034
 GameObject:
   m_ObjectHideFlags: 0
@@ -3888,11 +3883,6 @@ MeshFilter:
 Transform:
   m_CorrespondingSourceObject: {fileID: 415809114545771437, guid: 9270a55e10e86f645b4779bc776f4687, type: 3}
   m_PrefabInstance: {fileID: 839409340}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &1532232611 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 7241694295381570639, guid: 82ad52d93afffab428fc920edacd47b0, type: 3}
-  m_PrefabInstance: {fileID: 8226854223143704591}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1544153589
 PrefabInstance:
@@ -15418,14 +15408,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerAI
       objectReference: {fileID: 0}
-    - target: {fileID: 6832508076721731477, guid: 82ad52d93afffab428fc920edacd47b0, type: 3}
-      propertyPath: animator
-      value: 
-      objectReference: {fileID: 1532232611}
-    - target: {fileID: 6832508076721731477, guid: 82ad52d93afffab428fc920edacd47b0, type: 3}
-      propertyPath: headTransform
-      value: 
-      objectReference: {fileID: 677610235}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82ad52d93afffab428fc920edacd47b0, type: 3}
 --- !u!1 &8263510192647411116

@@ -56,7 +56,7 @@ public class AIWeapons : MonoBehaviour
         if(val) {
             fireCoroutine = StartCoroutine(currentWeapon.RapidFire());
         } else {
-            StopCoroutine(fireCoroutine);
+            if(fireCoroutine != null) StopCoroutine(fireCoroutine);
         }
     }
 

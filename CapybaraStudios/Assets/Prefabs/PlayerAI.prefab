@@ -144,7 +144,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponAnimator: {fileID: 7623399587033095325}
+  animator: {fileID: 7241694295381570639}
+  headTransform: {fileID: 5164089035725534706}
   gunSlot: {fileID: 7241694293907965644}
+  inaccuracy: 3
 --- !u!114 &7623399587033095325
 MonoBehaviour:
   m_ObjectHideFlags: 0
