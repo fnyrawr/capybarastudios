@@ -39,6 +39,10 @@ public class Weapon : Interactable
     //bullet hole
     public GameObject bulletHoleGraphic;
 
+    //sniperHUD
+    public GameObject SniperHUD;
+    public GameObject CrossHair;
+
     //HUD
     private TextMeshProUGUI _ammoText;
     private TextMeshProUGUI _maxAmmoText;
@@ -330,11 +334,13 @@ public class Weapon : Interactable
 
     public void ZoomIn()
     {
-        //SniperHUD.SetActive(true);
+        SniperHUD.SetActive(true);
+        CrossHair.SetActive(false);
     }
 
     public void ZoomOut()
     {
-        //SniperHUD.SetActive(true);
+        SniperHUD.SetActive(false);
+        CrossHair.SetActive(true);
     }
 }

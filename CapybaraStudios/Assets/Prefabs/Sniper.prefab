@@ -141,12 +141,13 @@ MonoBehaviour:
   hasAmmo: 1
   rapidFireEnabled: 0
   bulletHoleGraphic: {fileID: 2987797164400997647, guid: cdd64dc8e7f243b49829c5817ce597bb, type: 3}
+  SniperHUD: {fileID: 0}
   weaponSlot: 1
   animationType: 1
   spreadIncrease: 0.001
   spreadDecrease: 0.01
   currentSpread: 0
-  specialWeaponType: 0
+  specialWeaponType: 2
   BulletFirePoint: {fileID: 4654877866010232492}
   BulletTrail: {fileID: 1734369488617747396, guid: e68430fd2495d1b418a51b23a5c7f771, type: 3}
   zoom: 0.2
