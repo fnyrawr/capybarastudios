@@ -57,7 +57,7 @@ public class Weapon : Interactable
     //Bullet Trail
     public Transform BulletFirePoint;
     public TrailRenderer BulletTrail;
-
+    public float zoom = 0f;
     private void Awake()
     {
         bulletsLeft = magazineSize;
@@ -320,19 +320,13 @@ public class Weapon : Interactable
         Destroy(trail.gameObject, trail.time);
     }
 
-    public void ZoomIn(bool isSniper)
+    public void ZoomIn()
     {
-
-        if(isSniper) {
-            //SniperHUD.SetActive(true);
-        }
+        //SniperHUD.SetActive(true);
     }
 
-    public void ZoomOut(bool isSniper)
+    public void ZoomOut()
     {
-        
-        if(isSniper) {
-            //SniperHUD.SetActive(true);
-        }
+        //SniperHUD.SetActive(true);
     }
 }

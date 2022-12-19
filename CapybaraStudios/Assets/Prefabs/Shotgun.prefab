@@ -358,6 +358,7 @@ MonoBehaviour:
   specialWeaponType: 0
   BulletFirePoint: {fileID: 6929684728162639175}
   BulletTrail: {fileID: 1734369488617747396, guid: e68430fd2495d1b418a51b23a5c7f771, type: 3}
+  zoom: 0.9
 --- !u!54 &8224732010726354141
 Rigidbody:
   m_ObjectHideFlags: 0

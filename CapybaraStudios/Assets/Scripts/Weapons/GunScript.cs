@@ -6,7 +6,7 @@ public class GunScript : MonoBehaviour
 {
     public Transform gunSlot;
 
-    public new Camera camera;
+    public Camera camera;
     public Animator animator;
     public TextMeshProUGUI ammoText;
     public TextMeshProUGUI maxAmmoText;
@@ -16,9 +16,11 @@ public class GunScript : MonoBehaviour
     public Weapon currentWeapon;
     public int currentSlot = 0;
     Coroutine fireCoroutine;
+    private PlayerLook cameraScript;
 
     private void Awake()
     {
+        cameraScript = GetComponent<PlayerLook>();
         ChangeWeapon(currentSlot);
     }
 
@@ -109,14 +111,15 @@ public class GunScript : MonoBehaviour
         switch(currentWeapon.specialWeaponType)
         {
             case 0: //normal
-                camera.fieldOfView = Mathf.Lerp(camera.fieldOfView, 30, Time.deltaTime * 2);
-                currentWeapon.ZoomOut(false);
+                print(currentWeapon.zoom);
+                cameraScript.Zoom(currentWeapon.zoom);
                 break;
             case 1: //grapling gun
                 weapons[currentSlot].GetComponent<GrapplingGun>().Hook();
                 break;
             case 2: //sniper
-                currentWeapon.ZoomIn(true);
+                cameraScript.Zoom(currentWeapon.zoom);
+                currentWeapon.ZoomIn();
                 break;
             default:
                 break;
@@ -127,14 +130,14 @@ public class GunScript : MonoBehaviour
         switch(currentWeapon.specialWeaponType)
         {
             case 0: //normal
-                camera.fieldOfView = Mathf.Lerp(camera.fieldOfView, 60, Time.deltaTime * 2);
-                currentWeapon.ZoomOut(false);
+                cameraScript.Zoom(0f);
                 break;
             case 1: //grapling gun
                 weapons[currentSlot].GetComponent<GrapplingGun>().StopHook();
                 break;
             case 2: //sniper
-                currentWeapon.ZoomOut(true);
+                cameraScript.Zoom(0f);
+                currentWeapon.ZoomOut();
                 break;
             default:
                 break;

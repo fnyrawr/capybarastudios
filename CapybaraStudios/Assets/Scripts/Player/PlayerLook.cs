@@ -14,12 +14,12 @@ public class PlayerLook : MonoBehaviour
     private bool sprinting = false, crouching = false, hooked = false;
     [SerializeField] private float baseFOV;
     [SerializeField] private float sprintingFOV = 1.1f;
-    private float elapsedTime = 1f, elapsedcTime = 1f;
+    private float elapsedTime = 1f, elapsedcTime = 1f, elapsedzTime = 1f;
     private float height = 0f, currheight;
     [SerializeField] InputManager _input;
     [SerializeField] ParticleSystem hookParticles;
     private Quaternion hookRot;
-
+    private float zoom = 0f;
     private void Start()
     {
         height = camera.transform.position.y;
@@ -28,17 +28,29 @@ public class PlayerLook : MonoBehaviour
     
     void FixedUpdate()
     {
-        if (elapsedTime <= 1)
+        //for zooming
+        if (elapsedzTime <= 0.4f)
+        {
+            print(elapsedzTime);
+            elapsedzTime += Time.deltaTime;
+            float percentage = elapsedzTime / 0.4f;
+            if (zoom > 0f) camera.fieldOfView = Mathf.Lerp(camera.fieldOfView, baseFOV * zoom, Mathf.SmoothStep(0, 1, percentage));
+            else camera.fieldOfView = Mathf.Lerp(camera.fieldOfView, baseFOV, Mathf.SmoothStep(0, 1, percentage));
+        }
+
+        //for sprinting
+        if (elapsedTime <= 0.4f)
         {
             elapsedTime += Time.deltaTime;
             float percentage = elapsedTime / 0.4f;
             if (sprinting || hooked)
-                camera.fieldOfView = Mathf.Lerp(baseFOV, baseFOV * sprintingFOV,
+                camera.fieldOfView = Mathf.Lerp(camera.fieldOfView, baseFOV * sprintingFOV,
                     Mathf.SmoothStep(0, 1, percentage));
             else camera.fieldOfView = Mathf.Lerp(camera.fieldOfView, baseFOV, Mathf.SmoothStep(0, 1, percentage));
         }
 
-        if (elapsedcTime <= 1)
+        //for sneaking
+        if (elapsedcTime <= 0.4f)
         {
             elapsedcTime += Time.deltaTime;
             float percentage = elapsedTime / 0.4f;
@@ -52,7 +64,7 @@ public class PlayerLook : MonoBehaviour
             {
                 currheight = Mathf.Lerp(currheight, height, Mathf.SmoothStep(0, 1, percentage));
                 if (sprinting)
-                    camera.fieldOfView = Mathf.Lerp(baseFOV, baseFOV * sprintingFOV,
+                    camera.fieldOfView = Mathf.Lerp(camera.fieldOfView, baseFOV * sprintingFOV,
                         Mathf.SmoothStep(0, 1, percentage));
             }
 
@@ -105,9 +117,15 @@ public class PlayerLook : MonoBehaviour
 
     public void Sprint()
     {
-        if (crouching || sprinting == _input.SprintInput) return;
+        if (crouching || sprinting == _input.SprintInput || zoom > 0f) return;
         sprinting = _input.SprintInput;
         elapsedTime = 0;
+    }
+
+    public void Zoom(float zoom) {
+        sprinting = false;
+        this.zoom = zoom;
+        elapsedzTime = 0f;
     }
 
     public void Crouch()
