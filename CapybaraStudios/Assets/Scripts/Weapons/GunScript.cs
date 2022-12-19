@@ -12,7 +12,7 @@ public class GunScript : MonoBehaviour
     public TextMeshProUGUI maxAmmoText;
     public GameObject hitmarker;
     public WeaponAnimationController weaponAnimator;
-    public GameObject[] weapons = new GameObject[4];
+    public GameObject[] weapons = new GameObject[3];
     public Weapon currentWeapon;
     public int currentSlot = 0;
     Coroutine fireCoroutine;
@@ -24,6 +24,7 @@ public class GunScript : MonoBehaviour
 
     public void EjectGun()
     {
+        if(currentSlot == 2) return;
         Debug.Log("drop");
         DitchGun(currentSlot);
         EquipHighest();
@@ -50,6 +51,8 @@ public class GunScript : MonoBehaviour
         
         if (gunSlot.GetChild(0))
         {
+            print("ditched");
+            StopSpecial();
             var oldGun = gunSlot.GetChild(0);
             oldGun.SetParent(null);
             oldGun.GetComponent<Rigidbody>().isKinematic = false;
@@ -87,8 +90,10 @@ public class GunScript : MonoBehaviour
 
     private void ChangeWeapon(int index)
     {
-        StopSpecial();
-        HideGun();
+        if(weapons[currentSlot] != null) {
+            StopSpecial();
+            HideGun();
+        }
         currentSlot = index;
         weapons[currentSlot].transform.SetParent(gunSlot);
         gunSlot.GetChild(0).gameObject.SetActive(true);
