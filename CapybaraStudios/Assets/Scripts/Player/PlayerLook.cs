@@ -22,7 +22,6 @@ public class PlayerLook : MonoBehaviour
 
     private void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
         height = camera.transform.position.y;
         currheight = height;
     }
