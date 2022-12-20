@@ -6389,6 +6389,7 @@ MonoBehaviour:
   healthIndicator: {fileID: 0}
   blinkDuration: 0
   blinkIntensity: 0
+  volume: {fileID: 0}
 --- !u!135 &361604739
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -8304,6 +8305,7 @@ MonoBehaviour:
   healthIndicator: {fileID: 0}
   blinkDuration: 0
   blinkIntensity: 0
+  volume: {fileID: 0}
 --- !u!135 &455901769
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -8945,6 +8947,7 @@ MonoBehaviour:
   healthIndicator: {fileID: 0}
   blinkDuration: 0
   blinkIntensity: 0
+  volume: {fileID: 0}
 --- !u!136 &484470410
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -16239,6 +16242,7 @@ MonoBehaviour:
   healthIndicator: {fileID: 0}
   blinkDuration: 0
   blinkIntensity: 0
+  volume: {fileID: 0}
 --- !u!136 &840069431
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -16429,6 +16433,7 @@ MonoBehaviour:
   healthIndicator: {fileID: 0}
   blinkDuration: 0
   blinkIntensity: 0
+  volume: {fileID: 0}
 --- !u!136 &851264719
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -17455,6 +17460,7 @@ MonoBehaviour:
   healthIndicator: {fileID: 0}
   blinkDuration: 0
   blinkIntensity: 0
+  volume: {fileID: 0}
 --- !u!136 &903896390
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -17862,6 +17868,7 @@ MonoBehaviour:
   healthIndicator: {fileID: 0}
   blinkDuration: 0
   blinkIntensity: 0
+  volume: {fileID: 0}
 --- !u!136 &921620868
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -19345,6 +19352,7 @@ MonoBehaviour:
   healthIndicator: {fileID: 0}
   blinkDuration: 0
   blinkIntensity: 0
+  volume: {fileID: 0}
 --- !u!136 &1008577040
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -23373,6 +23381,7 @@ MonoBehaviour:
   healthIndicator: {fileID: 0}
   blinkDuration: 0
   blinkIntensity: 0
+  volume: {fileID: 0}
 --- !u!136 &1236224939
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -24214,6 +24223,7 @@ MonoBehaviour:
   healthIndicator: {fileID: 0}
   blinkDuration: 0
   blinkIntensity: 0
+  volume: {fileID: 0}
 --- !u!136 &1255372883
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -24580,6 +24590,7 @@ MonoBehaviour:
   healthIndicator: {fileID: 0}
   blinkDuration: 0
   blinkIntensity: 0
+  volume: {fileID: 0}
 --- !u!135 &1265433382
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -25463,6 +25474,7 @@ MonoBehaviour:
   healthIndicator: {fileID: 0}
   blinkDuration: 0
   blinkIntensity: 0
+  volume: {fileID: 0}
 --- !u!136 &1329109075
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -28035,6 +28047,7 @@ MonoBehaviour:
   healthIndicator: {fileID: 0}
   blinkDuration: 0
   blinkIntensity: 0
+  volume: {fileID: 0}
 --- !u!136 &1453625423
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -30998,6 +31011,7 @@ MonoBehaviour:
   healthIndicator: {fileID: 0}
   blinkDuration: 0
   blinkIntensity: 0
+  volume: {fileID: 0}
 --- !u!136 &1671546746
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -31715,6 +31729,7 @@ MonoBehaviour:
   healthIndicator: {fileID: 0}
   blinkDuration: 0
   blinkIntensity: 0
+  volume: {fileID: 0}
 --- !u!136 &1714566816
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -32597,6 +32612,7 @@ MonoBehaviour:
   healthIndicator: {fileID: 0}
   blinkDuration: 0
   blinkIntensity: 0
+  volume: {fileID: 0}
 --- !u!136 &1742303888
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -36788,6 +36804,7 @@ MonoBehaviour:
   healthIndicator: {fileID: 0}
   blinkDuration: 0
   blinkIntensity: 0
+  volume: {fileID: 0}
 --- !u!136 &1984264096
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -39193,6 +39210,7 @@ MonoBehaviour:
   healthIndicator: {fileID: 0}
   blinkDuration: 0
   blinkIntensity: 0
+  volume: {fileID: 0}
 --- !u!136 &2128200814
 CapsuleCollider:
   m_ObjectHideFlags: 0

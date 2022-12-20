@@ -113,6 +113,7 @@ MonoBehaviour:
   healthIndicator: {fileID: 0}
   blinkDuration: 0.1
   blinkIntensity: 4
+  volume: {fileID: 0}
 --- !u!114 &444529689097397421
 MonoBehaviour:
   m_ObjectHideFlags: 0

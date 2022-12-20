@@ -5421,7 +5421,7 @@ MonoBehaviour:
   healthIndicator: {fileID: 2971606993018302384}
   blinkDuration: 0
   blinkIntensity: 0
-  volumeProfile: {fileID: 11400000, guid: 0fe5c3f5837a3904e88d8690591bdb76, type: 2}
+  volume: {fileID: 0}
 --- !u!114 &2971606993417293393
 MonoBehaviour:
   m_ObjectHideFlags: 0
