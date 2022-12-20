@@ -6,13 +6,7 @@ public class woodenDoor : Interactable
 {
     public GameObject button;
     public GameObject door;
-    private bool open;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        open = false;
-    }
+    private bool open = false;
 
     // Update is called once per frame
     void Update()

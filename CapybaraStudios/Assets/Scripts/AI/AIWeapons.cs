@@ -13,6 +13,7 @@ public class AIWeapons : MonoBehaviour
     [SerializeField] private float inaccuracy = 3f;
     private bool isFiring;
     Coroutine fireCoroutine;
+    [SerializeField] AIAgent agent;
     private void Update() {
         if(isFiring && HasWeapon()) {
             currentWeapon.Shoot(true);
@@ -60,4 +61,13 @@ public class AIWeapons : MonoBehaviour
         }
     }
 
+    public void Reload() {
+        if(currentWeapon.bulletsLeft > 0) return;
+        if(currentWeapon.bulletsShot == 0) {
+            DitchWeapon();
+            agent.stateMachine.ChangeState(AIStateId.FindWeapon);
+            return;
+        }
+        currentWeapon.Reload();
+    }
 }

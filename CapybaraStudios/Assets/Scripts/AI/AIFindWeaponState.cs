@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class AIFindWeaponState : AIState
 {
+    Weapon pickup;
     public void Enter(AIAgent agent)
     {
-        Weapon pickup = FindWeapon(agent);
+        pickup = FindWeapon(agent);
         agent.agent.destination = pickup.transform.position;
         agent.agent.stoppingDistance = 0;
     }
@@ -23,7 +24,11 @@ public class AIFindWeaponState : AIState
     public void Update(AIAgent agent)
     {
         if(agent.weapons.HasWeapon()) {
-            agent.stateMachine.ChangeState(AIStateId.AttackPlayer);
+            agent.stateMachine.ChangeState(AIStateId.Idle);
+        }
+        if(pickup.GetComponent<BoxCollider>().enabled == false) {
+            pickup = FindWeapon(agent);
+            agent.agent.destination = pickup.transform.position;
         }
     }
 
@@ -31,10 +36,13 @@ public class AIFindWeaponState : AIState
         Weapon[] weapons = Object.FindObjectsOfType<Weapon>();
         Weapon closest = null;
         float closestDistance = float.MaxValue;
+        Debug.Log(weapons.Length);
         foreach (var weapon in weapons) {
+            //wenn BoxCollider false ist, dann hat jemand anderes schon die waffe
+            if(weapon.GetComponent<BoxCollider>().enabled == false) continue;
             float distance = Vector3.Distance(agent.transform.position, weapon.transform.position);
             if(distance < closestDistance) {
-                distance = closestDistance;
+                closestDistance = distance;
                 closest = weapon;
             }
         }
