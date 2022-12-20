@@ -6,13 +6,14 @@ using UnityEngine.UI;
 
 public class reloadIndicator : MonoBehaviour
 {
-    [SerializeField] private GunScript _gunScript;
+    private GunScript _gunScript;
 
     [CanBeNull] private Image img;
 
     // Start is called before the first frame update
     void Start()
     {
+        _gunScript = GetComponentInParent<GunScript>();
         img = GetComponent<Image>();
     }
 
