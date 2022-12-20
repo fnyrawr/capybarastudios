@@ -32,6 +32,7 @@ public class Weapon : Interactable
 
     int bulletsLeft, bulletsShot;
     bool reloading, readyToShoot;
+    private float reloadStatus = 1;
 
     //hitmarker
     private GameObject _hitmarker;
@@ -58,6 +59,7 @@ public class Weapon : Interactable
     public float currentSpread;
 
     private float _inaccuracy = 1f;
+
     public int specialWeaponType;
     // 0 ist für nicht special Weapon
     // 1 ist für Grappling Gun
@@ -67,6 +69,7 @@ public class Weapon : Interactable
     public Transform BulletFirePoint;
     public TrailRenderer BulletTrail;
     public float zoom = 0f;
+
     private void Awake()
     {
         bulletsLeft = magazineSize;
@@ -77,7 +80,7 @@ public class Weapon : Interactable
     }
 
     public void init(Animator animatior, Transform transform, TextMeshProUGUI ammoText, TextMeshProUGUI maxAmmoText,
-        GameObject hitmarker, float inaccuracy=1f)
+        GameObject hitmarker, float inaccuracy = 1f)
     {
         _animator = animatior;
         _transform = transform;
@@ -89,6 +92,9 @@ public class Weapon : Interactable
 
     private void Update()
     {
+        if (reloadStatus < 1) reloadStatus += Time.deltaTime / reloadTime;
+        else if (reloadStatus > 1) reloadStatus = 1;
+
         if (currentSpread == initialSpread) return;
         if (currentSpread < initialSpread) currentSpread = initialSpread;
         else currentSpread -= Time.deltaTime * spreadDecrease;
@@ -141,7 +147,7 @@ public class Weapon : Interactable
             GameObject collisionObject = hit.collider.gameObject;
 
             //trail
-            if(hasAmmo)
+            if (hasAmmo)
             {
                 TrailRenderer trail = Instantiate(BulletTrail, BulletFirePoint.position, Quaternion.identity);
                 StartCoroutine(SpawnTrail(trail, hit));
@@ -189,7 +195,8 @@ public class Weapon : Interactable
             else
             {
                 //bullet hole if no player was hit
-                GameObject bulletHoleClone = Instantiate(bulletHoleGraphic, hit.point, Quaternion.FromToRotation(Vector3.back, hit.normal));
+                GameObject bulletHoleClone = Instantiate(bulletHoleGraphic, hit.point,
+                    Quaternion.FromToRotation(Vector3.back, hit.normal));
                 Destroy(bulletHoleClone, 10f);
             }
         }
@@ -200,7 +207,6 @@ public class Weapon : Interactable
 
         EventManager.Shot(ray.origin, hit_, transform.root);
 
-        
 
         //magazine
         bulletsLeft--;
@@ -262,6 +268,7 @@ public class Weapon : Interactable
         reloading = true;
         readyToShoot = true;
         Invoke("ReloadFinished", reloadTime);
+        reloadStatus = 0;
         //sreloadSound.PlayOneShot(reloadSound.clip);
     }
 
@@ -292,9 +299,9 @@ public class Weapon : Interactable
         }
         else
         {
-            _ammoText.SetText((bulletsLeft/bulletsPerTap) + " / " + (magazineSize/bulletsPerTap));
+            _ammoText.SetText((bulletsLeft / bulletsPerTap) + " / " + (magazineSize / bulletsPerTap));
             if (maxAmmo > 0)
-                _maxAmmoText.SetText((maxAmmo/bulletsPerTap).ToString());
+                _maxAmmoText.SetText((maxAmmo / bulletsPerTap).ToString());
             else
                 _maxAmmoText.SetText("0");
         }
@@ -303,13 +310,13 @@ public class Weapon : Interactable
     //hitmarker show and disable
     public void HitShow()
     {
-        if(!_hitmarker) return;
+        if (!_hitmarker) return;
         _hitmarker.SetActive(true);
     }
 
     public void HitDisable()
     {
-        if(!_hitmarker) return;
+        if (!_hitmarker) return;
         _hitmarker.SetActive(false);
     }
 
@@ -319,7 +326,7 @@ public class Weapon : Interactable
         float time = 0;
         Vector3 start = trail.transform.position;
 
-        while(time < 1)
+        while (time < 1)
         {
             //interpolate between 2 points
             trail.transform.position = Vector3.Lerp(start, hit.point, time);
@@ -327,6 +334,7 @@ public class Weapon : Interactable
 
             yield return null;
         }
+
         trail.transform.position = hit.point;
 
         Destroy(trail.gameObject, trail.time);
@@ -342,5 +350,10 @@ public class Weapon : Interactable
     {
         SniperHUD.SetActive(false);
         CrossHair.SetActive(true);
+    }
+
+    public float getReloadStatus()
+    {
+        return reloadStatus;
     }
 }

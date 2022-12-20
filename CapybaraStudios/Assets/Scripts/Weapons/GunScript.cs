@@ -172,4 +172,9 @@ public class GunScript : MonoBehaviour
         currentWeapon.Shoot(true);
     }
 
+    public float getReloadStatus()
+    {
+        return currentWeapon.getReloadStatus();
+    }
+
 }

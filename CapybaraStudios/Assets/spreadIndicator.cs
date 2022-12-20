@@ -6,7 +6,7 @@ using UnityEngine;
 public class spreadIndicator : MonoBehaviour
 {
     [SerializeField] private GunScript _gunScript;
-
+    
     private Vector3 initialSpread;
     [CanBeNull] private RectTransform rt;
 
