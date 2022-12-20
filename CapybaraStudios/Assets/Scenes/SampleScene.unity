@@ -1613,6 +1613,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2971606993417293397, guid: 05788b5fa001dfe47b947d12833d5bd8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4304608083161901417, guid: 05788b5fa001dfe47b947d12833d5bd8, type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677018014703307429, guid: 05788b5fa001dfe47b947d12833d5bd8, type: 3}
+      propertyPath: _gunScript
+      value: 
+      objectReference: {fileID: 1172059646}
     - target: {fileID: 6216746115417813118, guid: 05788b5fa001dfe47b947d12833d5bd8, type: 3}
       propertyPath: m_SizeDelta.x
       value: 2100
@@ -1625,6 +1637,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -16.3
       objectReference: {fileID: 0}
+    - target: {fileID: 6243135483059421987, guid: 05788b5fa001dfe47b947d12833d5bd8, type: 3}
+      propertyPath: m_Name
+      value: reload circle
+      objectReference: {fileID: 0}
     - target: {fileID: 7041327796140552663, guid: 05788b5fa001dfe47b947d12833d5bd8, type: 3}
       propertyPath: m_Name
       value: SniperScope
@@ -1633,7 +1649,32 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 7419463647196954619, guid: 05788b5fa001dfe47b947d12833d5bd8, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7419463647196954619, guid: 05788b5fa001dfe47b947d12833d5bd8, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8586998047789212757, guid: 05788b5fa001dfe47b947d12833d5bd8, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8586998047789212757, guid: 05788b5fa001dfe47b947d12833d5bd8, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8586998047789212757, guid: 05788b5fa001dfe47b947d12833d5bd8, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8586998047789212757, guid: 05788b5fa001dfe47b947d12833d5bd8, type: 3}
+      propertyPath: m_FillAmount
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 2971606991927221062, guid: 05788b5fa001dfe47b947d12833d5bd8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 05788b5fa001dfe47b947d12833d5bd8, type: 3}
 --- !u!1 &494910051
 GameObject:
@@ -3349,6 +3390,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 415809114545771437, guid: 9270a55e10e86f645b4779bc776f4687, type: 3}
   m_PrefabInstance: {fileID: 415809113421211241}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1172059646 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2971606993417293406, guid: 05788b5fa001dfe47b947d12833d5bd8, type: 3}
+  m_PrefabInstance: {fileID: 441100236}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57fbd67fec4e46d4f8293facf8596f77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1181552190
 GameObject:
   m_ObjectHideFlags: 0
