@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
@@ -33,26 +35,29 @@ public class PauseMenu : MonoBehaviour
 
     public void Resume()
     {
-        pauseMenuUI.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
+        InputSystem.settings.updateMode = InputSettings.UpdateMode.ProcessEventsInFixedUpdate;
         //TODO if bedingung, nur wenn Singleplayer, dann timeScale
-        Time.timeScale = 1f;
+        Time.timeScale = 1;
         GameIsPaused = false;
+        pauseMenuUI.SetActive(false);
     }
 
-    void Pause()
+    public void Pause()
     {
         pauseMenuUI.SetActive(true);
         
         Cursor.lockState = CursorLockMode.None;
         //TODO if bedingung, nur wenn Singleplayer, dann timeScale
-        //Time.timeScale = 0f;
+        InputSystem.settings.updateMode = InputSettings.UpdateMode.ProcessEventsInDynamicUpdate;
+        Time.timeScale = 0f;
         GameIsPaused = true;
     }
 
     public void LoadMenu()
     {
         //TODO if bedingung, nur wenn Singleplayer, dann timeScale
+        InputSystem.settings.updateMode = InputSettings.UpdateMode.ProcessEventsInFixedUpdate;
         Time.timeScale = 1f;
         SceneManager.LoadScene("Menu_Scene");
     }
