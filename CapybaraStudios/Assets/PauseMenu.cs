@@ -14,6 +14,7 @@ public class PauseMenu : MonoBehaviour
 
     void Start()
     {
+        InputSystem.settings.updateMode = InputSettings.UpdateMode.ProcessEventsInFixedUpdate;
         Cursor.lockState = CursorLockMode.Locked;
     }
     
