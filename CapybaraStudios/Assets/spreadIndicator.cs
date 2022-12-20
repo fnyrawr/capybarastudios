@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class spreadIndicator : MonoBehaviour
 {
-    [SerializeField] private GunScript _gunScript;
+    private GunScript _gunScript;
     
     private Vector3 initialSpread;
     [CanBeNull] private RectTransform rt;
@@ -13,6 +13,7 @@ public class spreadIndicator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _gunScript = GetComponentInParent<GunScript>();
         rt = GetComponent<RectTransform>();
         initialSpread = rt.localScale;
     }
