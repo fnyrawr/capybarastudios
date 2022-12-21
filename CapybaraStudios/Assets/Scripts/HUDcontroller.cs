@@ -12,6 +12,7 @@ public class HUDcontroller : MonoBehaviour
     public GameObject pauseMenuUI;
     public GameObject deathMenuUI;
     public GameObject gameUI;
+    public GameObject tabMenuUI;
 
 
     void Start()
@@ -33,6 +34,15 @@ public class HUDcontroller : MonoBehaviour
             {
                 Pause();
             }
+        }
+
+        if(Input.GetKey(KeyCode.Tab))
+        {
+            tabMenuUI.SetActive(true);
+        }
+        else
+        {
+            tabMenuUI.SetActive(false);
         }
     }
 
