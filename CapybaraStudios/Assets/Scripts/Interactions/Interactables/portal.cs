@@ -33,6 +33,11 @@ public class portal : MonoBehaviour
 
     void Update()
     {
+        if (!thePlayer)
+        {
+            thePlayer = FindObjectOfType<GameManager>().player;
+        }
+
         playerStats = thePlayer.GetComponent<PlayerStats>();
         if (playerStats.currentHealth < playerStats.maxHealth)
         {

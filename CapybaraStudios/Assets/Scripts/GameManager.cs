@@ -12,12 +12,6 @@ public class GameManager : MonoBehaviour
     public event CharacterSpawnedDelegate OnCharacterSpawned;
 
     public delegate void CharacterSpawnedDelegate(GameObject player);
-
-    public class OnCharacterSpawnedEventArgs : EventArgs
-    {
-        public GameObject player;
-    }
-
     private GameObject currentPlayer;
 
     private void Start()
