@@ -140,7 +140,7 @@ public class Weapon : Interactable
         var ray = new Ray(_transform.position, direction);
         var hit_ = ray.origin + direction * range;
         RaycastHit[] hits;
-        hits = Physics.RaycastAll(transform.position, direction, range, controllerMask).OrderBy(x => x.distance)
+        hits = Physics.RaycastAll(_transform.position, direction, range, controllerMask).OrderBy(x => x.distance)
             .ToArray();
 
 
