@@ -147,12 +147,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   message: 
+  cooldownTime: 0
+  gunSound: {fileID: 0}
+  reloadSound: {fileID: 0}
+  pickupSound: {fileID: 0}
   damage: 50
-  spread: 0.01
+  initialSpread: 0
+  maxSpread: 0
   range: 5
   reloadTime: 0
   fireRate: 1
   timeBetweenShooting: 1
+  distanceModifier: 0
+  damageFalloffStart: 0
   maxAmmo: -1
   magazineSize: 10000
   bulletsPerTap: 1
@@ -160,8 +167,17 @@ MonoBehaviour:
   rapidFireEnabled: 0
   bulletsLeft: 0
   bulletsShot: 0
+  bulletHoleGraphic: {fileID: 7478510997650025130, guid: 75f843caeb913534a89bf32402509b23, type: 3}
+  SniperHUD: {fileID: 0}
   weaponSlot: 3
   animationType: 3
+  spreadIncrease: 0.001
+  spreadDecrease: 0.01
+  currentSpread: 0
+  specialWeaponType: 0
+  BulletFirePoint: {fileID: 0}
+  BulletTrail: {fileID: 0}
+  zoom: 1
 --- !u!54 &2795301733894970665
 Rigidbody:
   m_ObjectHideFlags: 0
