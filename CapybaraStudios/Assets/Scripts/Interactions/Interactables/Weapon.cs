@@ -43,7 +43,7 @@ public class Weapon : Interactable
 
     //sniperHUD
     public GameObject SniperHUD;
-    public GameObject CrossHair;
+    //public GameObject CrossHair;
 
     //HUD
     private TextMeshProUGUI _ammoText;
@@ -60,6 +60,7 @@ public class Weapon : Interactable
     public float currentSpread;
 
     private float _inaccuracy = 1f;
+
     //_inaccuracy for extra ai inaccuracy, player inaccuracy = 0
     public int specialWeaponType;
     // 0 ist für nicht special Weapon
@@ -208,7 +209,7 @@ public class Weapon : Interactable
                     Invoke(nameof(HitDisable), 0.2f);
                 }
             }
-            else
+            else if (hit.transform.root.tag != "Player" && hit.transform.root.tag != "Enemy")
             {
                 //bullet hole if no player was hit
                 GameObject bulletHoleClone = Instantiate(bulletHoleGraphic, hit.point,
@@ -277,6 +278,11 @@ public class Weapon : Interactable
         if (maxAmmo <= 0)
         {
             Debug.Log("No ammo left. Cannot reload");
+            return;
+        }
+
+        if (reloadStatus < 1)
+        {
             return;
         }
 
@@ -359,13 +365,13 @@ public class Weapon : Interactable
     public void ZoomIn()
     {
         SniperHUD.SetActive(true);
-        CrossHair.SetActive(false);
+        //CrossHair.SetActive(false);
     }
 
     public void ZoomOut()
     {
         SniperHUD.SetActive(false);
-        CrossHair.SetActive(true);
+        //CrossHair.SetActive(true);
     }
 
     public float getReloadStatus()

@@ -8,7 +8,6 @@ public class PlayerMovement : MonoBehaviour
 {
     private CharacterController controller;
     [SerializeField] InputManager _input;
-    private Camera camera;
 
     //movement
     private float playerVelocity;
