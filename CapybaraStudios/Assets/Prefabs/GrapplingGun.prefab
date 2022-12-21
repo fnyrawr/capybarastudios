@@ -947,9 +947,8 @@ MonoBehaviour:
   rapidFireEnabled: 1
   bulletsLeft: 0
   bulletsShot: 0
-  bulletHoleGraphic: {fileID: 2987797164400997647, guid: cdd64dc8e7f243b49829c5817ce597bb, type: 3}
+  bulletHoleGraphic: {fileID: 7478510997650025130, guid: 75f843caeb913534a89bf32402509b23, type: 3}
   SniperHUD: {fileID: 0}
-  CrossHair: {fileID: 0}
   weaponSlot: 2
   animationType: 1
   spreadIncrease: 0.001
