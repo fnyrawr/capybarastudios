@@ -17,6 +17,10 @@ public class TabController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timeText.text = Time.timeSinceLevelLoad + "";
+
+
+        //timeText.text = Time.timeSinceLevelLoad + "";
+        timeText.text = string.Format("{0:00}", Time.timeSinceLevelLoad);
+        
     }
 }
