@@ -8,9 +8,10 @@ using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 public class PlayerStats : MonoBehaviour
 {
+    public AudioSource deathSound;
     public int maxHealth = 100;
     private int damageTaken = 0;
-    [SerializeField] private int currentHealth = 100;
+    [SerializeField] public int currentHealth = 100;
     public bool isDummy;
     public bool isAI;
     public TextMeshPro damageText;
@@ -107,7 +108,7 @@ public class PlayerStats : MonoBehaviour
         UpdateHealth();
     }
 
-    void UpdateHealth()
+    public void UpdateHealth()
     {
         if (isAI) agent.healthBar.SetHealtBar(currentHealth / (float)maxHealth);
         else {
@@ -117,6 +118,7 @@ public class PlayerStats : MonoBehaviour
         print(currentHealth);
         if (currentHealth <= 0)
         {
+            deathSound.Play();
             //_animator.SetLayerWeight(1,0);
             //_animator.SetTrigger("dying");
             //_animator.SetTrigger("dying2");

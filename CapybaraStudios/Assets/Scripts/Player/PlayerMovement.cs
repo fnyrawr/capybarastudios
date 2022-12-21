@@ -10,6 +10,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] InputManager _input;
     private Camera camera;
 
+    //sounds
+    public AudioSource walkingSound;
+    public AudioSource slidingSound;
+
     //movement
     private float playerVelocity;
 
@@ -188,6 +192,9 @@ public class PlayerMovement : MonoBehaviour
             {
                 crouchingMomentum = 1.1f;
                 _animator.SetBool(_isSlidingHash, _input.CrouchInput);
+                if(!slidingSound.isPlaying) {
+                slidingSound.Play();
+            }
             }
             else
             {
