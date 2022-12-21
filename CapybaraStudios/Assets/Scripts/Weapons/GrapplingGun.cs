@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GrapplingGun : MonoBehaviour
 {
+    public AudioSource grapplingSound;
     Camera playerCam;
     CharacterController playerController;
     PlayerMovement playerMovement;
@@ -82,6 +83,7 @@ public class GrapplingGun : MonoBehaviour
         if (currCooldown >= cooldown && Physics.Raycast(playerCam.transform.position, playerCam.transform.forward,
                 out RaycastHit hit, maxDistance))
         {
+            grapplingSound.Play();
             draw = true;
             hookPos = hit.point;
             lr.positionCount = 2;
@@ -91,6 +93,7 @@ public class GrapplingGun : MonoBehaviour
 
     public void StopHook()
     {
+        grapplingSound.Stop();
         if (hooked) currCooldown = 0;
         draw = false;
         hooked = false;
