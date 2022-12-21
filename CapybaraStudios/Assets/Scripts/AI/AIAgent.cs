@@ -13,12 +13,14 @@ public class AIAgent : MonoBehaviour
     [SerializeField] public Transform rotationTarget;
     [SerializeField] public AIWeapons weapons; 
     public PlayerStats playerStats;
+    public AISensor sensor;
     void Awake()
     {   
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         healthBar = GetComponentInChildren<UIHealthBar>();
         playerStats = GetComponent<PlayerStats>();
+        sensor = GetComponent<AISensor>();
         stateMachine = new AIStateMachine(this);
         stateMachine.RegisterState(new AIChasePlayerState());
         stateMachine.RegisterState(new AIDeathState());

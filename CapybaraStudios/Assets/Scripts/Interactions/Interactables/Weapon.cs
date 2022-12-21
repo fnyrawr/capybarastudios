@@ -214,7 +214,6 @@ public class Weapon : Interactable
                 //bullet hole if no player was hit
                 GameObject bulletHoleClone = Instantiate(bulletHoleGraphic, hit.point + hit.normal * 0.001f,
                     Quaternion.FromToRotation(Vector3.back, hit.normal));
-                //bulletHoleClone.transform.position -= bulletHoleClone.transform.forward / 1000;
                 Destroy(bulletHoleClone, 10f);
             }
         }
