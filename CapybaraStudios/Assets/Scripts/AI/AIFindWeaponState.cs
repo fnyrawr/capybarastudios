@@ -33,19 +33,9 @@ public class AIFindWeaponState : AIState
     }
 
     private Weapon FindWeapon(AIAgent agent) {
-        Weapon[] weapons = Object.FindObjectsOfType<Weapon>();
-        Weapon closest = null;
-        float closestDistance = float.MaxValue;
-        Debug.Log(weapons.Length);
-        foreach (var weapon in weapons) {
-            //wenn BoxCollider false ist, dann hat jemand anderes schon die waffe
-            if(weapon.GetComponent<BoxCollider>().enabled == false) continue;
-            float distance = Vector3.Distance(agent.transform.position, weapon.transform.position);
-            if(distance < closestDistance) {
-                closestDistance = distance;
-                closest = weapon;
-            }
+        if(agent.sensor.objects.Count > 0) {
+            return agent.sensor.objects[0].GetComponent<Weapon>();
         }
-        return closest;
+        return null;
     }
 }
