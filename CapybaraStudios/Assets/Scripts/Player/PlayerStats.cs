@@ -127,7 +127,7 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
-    private void die()
+    public void die()
     {
         if (isAI)
         {
@@ -150,7 +150,9 @@ public class PlayerStats : MonoBehaviour
             GetComponent<GunScript>().EjectGun();
             FindObjectOfType<HUDcontroller>().Death();
         }
-        deathSound.Play();
+        if(!deathSound.isPlaying) {
+            deathSound.Play();
+        }
         GetComponent<Ragdoll>().EnablePhysics();
     }
 
