@@ -12,7 +12,7 @@ public class AISensor : MonoBehaviour
     public float scanFrequency = 10f;
     public LayerMask layers;
     public LayerMask occlusionLayers;
-    public List<GameObject> objects = new List<GameObject>();
+    [HideInInspector] public List<GameObject> objects = new List<GameObject>();
     Collider[] colliders = new Collider[50];
     int count;
     float scanInterval, scanTimer;
@@ -44,6 +44,7 @@ public class AISensor : MonoBehaviour
     }
 
     public bool IsInSight(GameObject obj) {
+        
         Vector3 origin = transform.position;
         Vector3 dest = obj.transform.position;
         Vector3 direction = dest - origin;
