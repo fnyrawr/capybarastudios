@@ -5839,6 +5839,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -16.3
       objectReference: {fileID: 0}
+    - target: {fileID: 6956388360558184421, guid: 3e50cfeb74ac19c48a5755ff0ee9ebf5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 7271417800735428792}
+    - target: {fileID: 6956388360558184421, guid: 3e50cfeb74ac19c48a5755ff0ee9ebf5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: QuitGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 6956388360558184421, guid: 3e50cfeb74ac19c48a5755ff0ee9ebf5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: HUDcontroller, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 7716671411166872626, guid: 3e50cfeb74ac19c48a5755ff0ee9ebf5, type: 3}
       propertyPath: m_Name
       value: SniperScope
@@ -5925,5 +5937,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7271417800735428792 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2301763852318788294, guid: 3e50cfeb74ac19c48a5755ff0ee9ebf5, type: 3}
+  m_PrefabInstance: {fileID: 8870052709420653182}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5811d9eaaee3461f8f01a1550d61633, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
