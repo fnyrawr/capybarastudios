@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -42,7 +43,7 @@ public class Weapon : Interactable
 
     //sniperHUD
     public GameObject SniperHUD;
-    public GameObject CrossHair;
+    //public GameObject CrossHair;
 
     //HUD
     private TextMeshProUGUI _ammoText;
@@ -59,6 +60,7 @@ public class Weapon : Interactable
     public float currentSpread;
 
     private float _inaccuracy = 1f;
+
     //_inaccuracy for extra ai inaccuracy, player inaccuracy = 0
     public int specialWeaponType;
     // 0 ist für nicht special Weapon
@@ -138,9 +140,24 @@ public class Weapon : Interactable
 
         var ray = new Ray(_transform.position, direction);
         var hit_ = ray.origin + direction * range;
+        RaycastHit[] hits;
+        hits = Physics.RaycastAll(_transform.position, direction, range, controllerMask).OrderBy(x => x.distance)
+            .ToArray();
+
+
+        RaycastHit hit = new RaycastHit();
+        foreach (var hit__ in hits)
+        {
+            if (hit__.transform.root != transform.root)
+            {
+                hit = hit__;
+                break;
+            }
+        }
+
+
         //hit and damage calc
-        if (Physics.Raycast(ray, out RaycastHit hit, range,
-                controllerMask))
+        if (hit.distance != 0)
         {
             Debug.Log(hit.transform.name);
             hit_ = hit.point;
@@ -192,7 +209,7 @@ public class Weapon : Interactable
                     Invoke(nameof(HitDisable), 0.2f);
                 }
             }
-            else
+            else if (hit.transform.root.tag != "Player" && hit.transform.root.tag != "Enemy")
             {
                 //bullet hole if no player was hit
                 GameObject bulletHoleClone = Instantiate(bulletHoleGraphic, hit.point,
@@ -234,9 +251,10 @@ public class Weapon : Interactable
     //rapid fire
     public IEnumerator RapidFire()
     {
+        var shooter = transform.root;
         if (rapidFireEnabled)
         {
-            while (true)
+            while (transform.root == shooter)
             {
                 Shoot(false);
                 yield return rapidFireWait;
@@ -261,6 +279,11 @@ public class Weapon : Interactable
         if (maxAmmo <= 0)
         {
             Debug.Log("No ammo left. Cannot reload");
+            return;
+        }
+
+        if (reloadStatus < 1)
+        {
             return;
         }
 
@@ -343,13 +366,13 @@ public class Weapon : Interactable
     public void ZoomIn()
     {
         SniperHUD.SetActive(true);
-        CrossHair.SetActive(false);
+        //CrossHair.SetActive(false);
     }
 
     public void ZoomOut()
     {
         SniperHUD.SetActive(false);
-        CrossHair.SetActive(true);
+        //CrossHair.SetActive(true);
     }
 
     public float getReloadStatus()

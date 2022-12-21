@@ -67,7 +67,7 @@ public class PlayerLook : MonoBehaviour
                         Mathf.SmoothStep(0, 1, percentage));
             }
 
-            camera.transform.localPosition = new Vector3(0, currheight, 0);
+            //camera.transform.localPosition = new Vector3(0, currheight, 0);
         }
     }
 

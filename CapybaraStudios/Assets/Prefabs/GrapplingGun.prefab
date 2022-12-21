@@ -956,7 +956,7 @@ MonoBehaviour:
   spreadDecrease: 0.01
   currentSpread: 0
   specialWeaponType: 1
-  BulletFirePoint: {fileID: 0}
+  BulletFirePoint: {fileID: 1853561382924808035}
   BulletTrail: {fileID: 1734369488617747396, guid: e68430fd2495d1b418a51b23a5c7f771, type: 3}
   zoom: 1
 --- !u!54 &6500638468959876693

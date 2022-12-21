@@ -11,4 +11,9 @@ public class cullHead : MonoBehaviour
     {
         head.layer = 15;
     }
+
+    public void die()
+    {
+        head.layer = 0;
+    }
 }
