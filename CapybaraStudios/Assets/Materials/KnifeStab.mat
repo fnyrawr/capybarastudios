@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BulletHole
+  m_Name: KnifeStab
   m_Shader: {fileID: -6465566751694194690, guid: 9b4e681081e2b4c469111bb649e2f7ee, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -21,11 +21,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - Base_Map:
-        m_Texture: {fileID: 2800000, guid: d7fd3b85c8d8e4c468bf938262532856, type: 3}
+        m_Texture: {fileID: 2800000, guid: ba5ccb9d9c58c2e47baa15027073d203, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Normal_Map:
-        m_Texture: {fileID: 2800000, guid: 359be8a6a410da84eb04b03a4e23d9c5, type: 3}
+        m_Texture: {fileID: 2800000, guid: 41c0900ccc7f961498fd6a2e13a7bf10, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
