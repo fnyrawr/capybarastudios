@@ -199,8 +199,9 @@ public class Weapon : Interactable
                     //final damage (rounded int)
                     Debug.Log("final damage dealt = (" + finalDamage + "): " + (int)finalDamage);
 
-                    (collisionObject.GetComponentInParent(typeof(PlayerStats)) as PlayerStats).TakeDamage(
-                        (int)finalDamage);
+                    GetComponentInParent<PlayerStats>().damage_done +=
+                        (collisionObject.GetComponentInParent(typeof(PlayerStats)) as PlayerStats).TakeDamage(
+                            (int)finalDamage);
 
                     //player hit particle TODO
 

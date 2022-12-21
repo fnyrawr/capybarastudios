@@ -18,7 +18,8 @@ public class PlayerStats : MonoBehaviour
     public TextMeshPro damageText;
     public TextMeshPro totalDamageText;
     public TextMeshProUGUI healthIndicator;
-
+    public int damage_done = 0;
+    public int kills = 0;
     private Animator _animator;
 
     //private Ragdoll ragdoll;
@@ -84,11 +85,19 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damageAmount)
+    public int TakeDamage(int damageAmount)
     {
-        if (damageAmount <= 0 || currentHealth <= 0) return;
+        if (damageAmount <= 0 || currentHealth <= 0) return 0;
         Debug.Log("Take Damage: " + damageAmount);
         //take damage
+        int damage_taken = (currentHealth - damageAmount);
+        if (damage_taken < 0)
+        {
+            damage_taken = 0;
+        }
+
+        damage_taken = currentHealth - damage_taken;
+
         currentHealth -= damageAmount;
         damageTaken += damageAmount;
         if (isDummy)
@@ -98,7 +107,7 @@ public class PlayerStats : MonoBehaviour
             Int32.TryParse(totalDamageText.text, out newTotalDamage);
             newTotalDamage += damageAmount;
             totalDamageText.text = newTotalDamage.ToString();
-            return;
+            return damage_taken;
         }
 
         if (isAI)
@@ -109,6 +118,7 @@ public class PlayerStats : MonoBehaviour
 
         blinkTimer = blinkDuration;
         UpdateHealth();
+        return damage_taken;
     }
 
     public void UpdateHealth()
@@ -131,6 +141,7 @@ public class PlayerStats : MonoBehaviour
     {
         if (isAI)
         {
+            FindObjectOfType<PlayerMovement>().GetComponent<PlayerStats>().kills += 1;
             GetComponent<NavMeshAgent>().enabled = false;
             GetComponent<AiController>().enabled = false;
             AIDeathState deathState = agent.stateMachine.GetState(AIStateId.Death) as AIDeathState;
@@ -150,6 +161,7 @@ public class PlayerStats : MonoBehaviour
             GetComponent<GunScript>().EjectGun();
             FindObjectOfType<HUDcontroller>().Death();
         }
+
         deathSound.Play();
         GetComponent<Ragdoll>().EnablePhysics();
     }
