@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class AIFindWeaponState : AIState
 {
     Weapon pickup;
+    GameObject[] weapons = new GameObject[1];
     public void Enter(AIAgent agent)
     {
         agent.agent.stoppingDistance = 0;
@@ -22,6 +23,10 @@ public class AIFindWeaponState : AIState
 
     public void Update(AIAgent agent)
     {
+        if(agent.weapons.HasWeapon()) {
+            agent.stateMachine.ChangeState(AIStateId.Idle);
+        }
+        
         pickup = FindWeapon(agent);
         if(pickup != null) agent.agent.destination = pickup.transform.position;
 
@@ -36,15 +41,12 @@ public class AIFindWeaponState : AIState
             }
             agent.agent.destination = finalPosition;
         }
-
-        if(agent.weapons.HasWeapon()) {
-            agent.stateMachine.ChangeState(AIStateId.Idle);
-        }
     }
 
     private Weapon FindWeapon(AIAgent agent) {
-        if(agent.sensor.objects.Count > 0) {
-            return agent.sensor.objects[0].GetComponent<Weapon>();
+        int count = agent.sensor.FilterByTag(weapons, "Weapon");
+        if(count > 0) {
+            return weapons[0].GetComponent<Weapon>();
         }
         return null;
     }

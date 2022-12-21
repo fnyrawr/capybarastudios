@@ -14,6 +14,10 @@ public class AIWeapons : MonoBehaviour
     private bool isFiring;
     Coroutine fireCoroutine;
     [SerializeField] AIAgent agent;
+
+    private void Awake() {
+        if(agent.config.startWeapon != null) EquipWeapon(agent.config.startWeapon);
+    }
     private void Update() {
         if(isFiring && HasWeapon()) {
             currentWeapon.Shoot(true);
