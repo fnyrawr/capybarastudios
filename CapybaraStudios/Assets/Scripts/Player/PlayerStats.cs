@@ -10,6 +10,7 @@ using UnityEngine.Rendering.Universal;
 public class PlayerStats : MonoBehaviour
 {
     public AudioSource deathSound;
+    public AudioSource killSound;
     public int maxHealth = 100;
     private int damageTaken = 0;
     [SerializeField] public int currentHealth = 100;
@@ -165,8 +166,11 @@ public class PlayerStats : MonoBehaviour
             GetComponent<GunScript>().EjectGun();
             FindObjectOfType<HUDcontroller>().Death();
         }
-        if(!deathSound.isPlaying) {
+        if(!deathSound.isPlaying && !isAI) {
             deathSound.Play();
+        }
+        if(!killSound.isPlaying && isAI) {
+            killSound.Play();
         }
         GetComponent<Ragdoll>().EnablePhysics();
     }
