@@ -11,4 +11,5 @@ public class AIAgentConfig : ScriptableObject
     public float rotationSeconds = 0.5f;
     public float healTime = 1f;
     public int maxHp = 100;
+    public GameObject startWeapon;
 }
