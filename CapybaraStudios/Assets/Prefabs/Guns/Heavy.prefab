@@ -230,15 +230,13 @@ MonoBehaviour:
   gunSound: {fileID: 9144474326173335717}
   reloadSound: {fileID: 4183726293315528806}
   pickupSound: {fileID: 2332691224550780770}
-  aimingSound: {fileID: 0}
   damage: 10
-  hasScope: 0
   initialSpread: 0
   maxSpread: 0.05
   range: 500
   reloadTime: 4
   fireRate: 12
-  timeBetweenShooting: 0
+  timeBetweenShooting: 0.2
   distanceModifier: 0.05
   damageFalloffStart: 30
   maxAmmo: 500

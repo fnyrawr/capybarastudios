@@ -33,7 +33,7 @@ public class AIAttackPlayerState : AIState
         if(!oldPlayerPos.Equals(agent.player.position)) {
             currentTime = 0f;
             Vector3 targetDir = agent.player.position - agent.transform.position;
-            if(Vector3.Angle(agent.player.position, agent.transform.position) > 90f) agent.weapons.SetFiring(false);
+            if(Vector3.Angle(agent.player.position, agent.transform.position) > 10f) agent.weapons.SetFiring(false);
             lookRotation = Quaternion.LookRotation(targetDir);
             oldPlayerPos = agent.player.position;
         }

@@ -168,7 +168,7 @@ public class PlayerStats : MonoBehaviour
         Vignette vignette;
         if (volume.profile.TryGet(out vignette))
         {
-            float percent = 0.55f * Math.Max((1.0f - (currentHealth / (float)maxHealth)), 1f);
+            float percent = 0.55f * Math.Max((1.0f - (currentHealth / (float)maxHealth)), 0f);
             vignette.intensity.value = percent;
         }
     }
