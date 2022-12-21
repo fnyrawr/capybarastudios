@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class respawn : MonoBehaviour
+public class outOfMap : MonoBehaviour
 {
     public GameObject thePlayer;
-    public Transform respawnTarget;
     public float heightOffset;
+    private PlayerStats playerStats;
 
     // Start is called before the first frame update
     void Start()
@@ -18,7 +18,9 @@ public class respawn : MonoBehaviour
     void Update()
     {
         if(thePlayer.transform.position.y < heightOffset) {
-            thePlayer.transform.position = respawnTarget.transform.position;
+            playerStats = thePlayer.GetComponent<PlayerStats>();
+            playerStats.TakeDamage(playerStats.maxHealth);
+            thePlayer.GetComponent<PlayerStats>();
         }
         
     }

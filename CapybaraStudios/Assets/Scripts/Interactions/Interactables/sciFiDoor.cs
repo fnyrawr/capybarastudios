@@ -7,6 +7,7 @@ public class sciFiDoor : Interactable
     public GameObject button;
     public GameObject leftDoor;
     public GameObject rightDoor;
+    public AudioSource doorSound;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +23,7 @@ public class sciFiDoor : Interactable
 
     protected override void Interact(GameObject player)
     {
+        doorSound.Play();
         Debug.Log(player.name + "interacted with " + gameObject.name);
         var buttonRenderer = button.GetComponent<Renderer>();
         if(buttonRenderer.material.color.Equals(Color.red)) {

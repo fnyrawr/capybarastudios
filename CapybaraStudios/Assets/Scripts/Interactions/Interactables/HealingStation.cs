@@ -5,6 +5,7 @@ using UnityEngine.PlayerLoop;
 
 public class HealingStation : Interactable
 {
+    public AudioSource healSound;
     private Material healingMaterial;
     private bool ready_ = true;
     public float cd = 2;
@@ -19,7 +20,7 @@ public class HealingStation : Interactable
     {
         if (ready_)
         {
-            print("TODO HEAL SOUND");
+            healSound.Play();
             var playerStats = player.GetComponent<PlayerStats>();
             playerStats.Heal(healingPower);
             message = "";
