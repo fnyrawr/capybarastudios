@@ -6475,13 +6475,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerAI (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5265362129531757254, guid: af77e8fb26bf1d24a812637eb3b1c7f7, type: 3}
+      propertyPath: m_TagString
+      value: Respawn
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af77e8fb26bf1d24a812637eb3b1c7f7, type: 3}
---- !u!1 &329084854 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5265362129531757254, guid: af77e8fb26bf1d24a812637eb3b1c7f7, type: 3}
-  m_PrefabInstance: {fileID: 329084853}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &340355617
 GameObject:
   m_ObjectHideFlags: 0
@@ -8620,11 +8619,8 @@ MonoBehaviour:
   message: Press E to respawn the bots
   cooldownTime: 10
   button: {fileID: 430319634}
-  bot1: {fileID: 1133673470}
-  bot2: {fileID: 329084854}
-  bot3: {fileID: 1862067888}
-  bot4: {fileID: 502605963}
-  bot5: {fileID: 1989466483}
+  bot: {fileID: 5265362129531757254, guid: af77e8fb26bf1d24a812637eb3b1c7f7, type: 3}
+  respawns: []
 --- !u!1001 &431198723
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10121,13 +10117,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerAI (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 5265362129531757254, guid: af77e8fb26bf1d24a812637eb3b1c7f7, type: 3}
+      propertyPath: m_TagString
+      value: Respawn
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af77e8fb26bf1d24a812637eb3b1c7f7, type: 3}
---- !u!1 &502605963 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5265362129531757254, guid: af77e8fb26bf1d24a812637eb3b1c7f7, type: 3}
-  m_PrefabInstance: {fileID: 502605962}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &506414800 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8908750602205011249, guid: 386272c2cd2daf040ade792158663725, type: 3}
@@ -23302,13 +23297,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerAI
       objectReference: {fileID: 0}
+    - target: {fileID: 5265362129531757254, guid: af77e8fb26bf1d24a812637eb3b1c7f7, type: 3}
+      propertyPath: m_TagString
+      value: Respawn
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af77e8fb26bf1d24a812637eb3b1c7f7, type: 3}
---- !u!1 &1133673470 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5265362129531757254, guid: af77e8fb26bf1d24a812637eb3b1c7f7, type: 3}
-  m_PrefabInstance: {fileID: 1133673469}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1136034116
 GameObject:
   m_ObjectHideFlags: 0
@@ -36617,13 +36611,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerAI (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5265362129531757254, guid: af77e8fb26bf1d24a812637eb3b1c7f7, type: 3}
+      propertyPath: m_TagString
+      value: Respawn
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af77e8fb26bf1d24a812637eb3b1c7f7, type: 3}
---- !u!1 &1862067888 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5265362129531757254, guid: af77e8fb26bf1d24a812637eb3b1c7f7, type: 3}
-  m_PrefabInstance: {fileID: 1862067887}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1862663631
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -38496,13 +38489,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerAI (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 5265362129531757254, guid: af77e8fb26bf1d24a812637eb3b1c7f7, type: 3}
+      propertyPath: m_TagString
+      value: Respawn
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af77e8fb26bf1d24a812637eb3b1c7f7, type: 3}
---- !u!1 &1989466483 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5265362129531757254, guid: af77e8fb26bf1d24a812637eb3b1c7f7, type: 3}
-  m_PrefabInstance: {fileID: 1989466482}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1994518802
 PrefabInstance:
   m_ObjectHideFlags: 0
