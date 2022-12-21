@@ -198,7 +198,7 @@ MonoBehaviour:
   pickupSound: {fileID: 4932071714083151844}
   damage: 13
   initialSpread: 0
-  maxSpread: 0.07
+  maxSpread: 0.1
   range: 100
   reloadTime: 2
   fireRate: 20
@@ -216,8 +216,8 @@ MonoBehaviour:
   SniperHUD: {fileID: 0}
   weaponSlot: 1
   animationType: 1
-  spreadIncrease: 0.003
-  spreadDecrease: 0.01
+  spreadIncrease: 0.01
+  spreadDecrease: 0.05
   currentSpread: 0
   specialWeaponType: 0
   BulletFirePoint: {fileID: 9222990514138747425}
