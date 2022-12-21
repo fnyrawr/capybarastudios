@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AIIdleState : AIState
 {
+    private float healTimer = 0f;
     public void Enter(AIAgent agent)
     {    
     }
@@ -18,9 +19,12 @@ public class AIIdleState : AIState
     }
 
     public void Update(AIAgent agent)
-    {
-        //muss überarbeitet werden
-
+    {   
+        healTimer += Time.deltaTime;
+        if(healTimer > agent.config.healTime) {
+            agent.playerStats.Heal(1);
+            healTimer = 0f;
+        }
         Vector3 pdir = agent.player.position - agent.transform.position;
         if(pdir.magnitude > agent.config.maxSightDistance) {
             return;

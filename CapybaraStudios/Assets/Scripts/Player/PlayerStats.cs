@@ -57,13 +57,14 @@ public class PlayerStats : MonoBehaviour
             skinnedMeshRenderers = GetComponentsInChildren<SkinnedMeshRenderer>();
             color = skinnedMeshRenderers[0].material.color;
         }
-
+        currentHealth = maxHealth;
         if (isAI)
         {
             agent = GetComponent<AIAgent>();
+            currentHealth = agent.config.maxHp;
         }
 
-        currentHealth = maxHealth;
+        
     }
 
     void Update()
@@ -97,6 +98,11 @@ public class PlayerStats : MonoBehaviour
             return;
         }
 
+        if(isAI) {
+           AIAttackPlayerState attackState = agent.stateMachine.GetState(AIStateId.Death) as AIAttackPlayerState;
+           agent.stateMachine.ChangeState(AIStateId.AttackPlayer);
+        }
+
         blinkTimer = blinkDuration;
         UpdateHealth();
     }
@@ -121,6 +127,7 @@ public class PlayerStats : MonoBehaviour
                 GetComponent<AiController>().enabled = false;
                 AIDeathState deathState = agent.stateMachine.GetState(AIStateId.Death) as AIDeathState;
                 agent.stateMachine.ChangeState(AIStateId.Death);
+                Destroy(agent.gameObject, 60f);
             }
             else {
                 //TODO MORE!!!
@@ -133,7 +140,7 @@ public class PlayerStats : MonoBehaviour
     public void Heal(int health)
     {
         StartCoroutine(HealOverTime(health));
-        updateVignette();
+        if(!isAI && !isDummy) updateVignette();
     }
 
     public void updateVignette() {

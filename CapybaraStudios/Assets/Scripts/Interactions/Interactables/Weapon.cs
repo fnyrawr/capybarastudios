@@ -31,7 +31,7 @@ public class Weapon : Interactable
     public int maxAmmo, magazineSize, bulletsPerTap;
     public bool hasAmmo, rapidFireEnabled;
 
-    int bulletsLeft, bulletsShot;
+    public int bulletsLeft, bulletsShot;
     bool reloading, readyToShoot;
     private float reloadStatus = 1;
 
@@ -60,7 +60,7 @@ public class Weapon : Interactable
     public float currentSpread;
 
     private float _inaccuracy = 1f;
-
+    //_inaccuracy for extra ai inaccuracy, player inaccuracy = 0
     public int specialWeaponType;
     // 0 ist für nicht special Weapon
     // 1 ist für Grappling Gun
@@ -69,7 +69,7 @@ public class Weapon : Interactable
     //Bullet Trail
     public Transform BulletFirePoint;
     public TrailRenderer BulletTrail;
-    public float zoom = 0f;
+    public float zoom = 1f;
 
     private void Awake()
     {

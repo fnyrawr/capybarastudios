@@ -28,10 +28,12 @@ public class AIAttackPlayerState : AIState
 
     public void Update(AIAgent agent)
     {
+        agent.weapons.Reload();
         //wenn player out of range geht, dann wechsle zum chase modus
         if(!oldPlayerPos.Equals(agent.player.position)) {
             currentTime = 0f;
             Vector3 targetDir = agent.player.position - agent.transform.position;
+            if(Vector3.Angle(agent.player.position, agent.transform.position) > 90f) agent.weapons.SetFiring(false);
             lookRotation = Quaternion.LookRotation(targetDir);
             oldPlayerPos = agent.player.position;
         }
@@ -43,6 +45,9 @@ public class AIAttackPlayerState : AIState
             Vector3 rotation = currRotation.eulerAngles;
             agent.rotationTarget.localRotation = Quaternion.Euler(rotation.x, 0f,0f);
             agent.transform.rotation = Quaternion.Euler(0f,rotation.y,0f);
+            if(percentage >= 1f) {
+                agent.weapons.SetFiring(true);
+            }
         }
         
     }
