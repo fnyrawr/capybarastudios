@@ -103,8 +103,12 @@ public class PlayerStats : MonoBehaviour
 
         if (isAI)
         {
-            AIAttackPlayerState attackState = agent.stateMachine.GetState(AIStateId.Death) as AIAttackPlayerState;
-            agent.stateMachine.ChangeState(AIStateId.AttackPlayer);
+            if(agent.weapons.HasWeapon()) {
+                AIAttackPlayerState attackState = agent.stateMachine.GetState(AIStateId.Death) as AIAttackPlayerState;
+                agent.stateMachine.ChangeState(AIStateId.AttackPlayer);
+            } else {
+                //gehe in Fluchtstate
+            }
         }
 
         blinkTimer = blinkDuration;

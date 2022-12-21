@@ -178,6 +178,7 @@ GameObject:
   - component: {fileID: 7569580565273996068}
   - component: {fileID: 5688455889874788507}
   - component: {fileID: 498779732837339925}
+  - component: {fileID: 665846950101510388}
   m_Layer: 0
   m_Name: PlayerAI
   m_TagString: Enemy
@@ -295,6 +296,7 @@ MonoBehaviour:
   rotationTarget: {fileID: 8281245292858647812}
   weapons: {fileID: 6779814126208188460}
   playerStats: {fileID: 0}
+  sensor: {fileID: 0}
 --- !u!114 &6779814126208188460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -354,6 +356,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 559e0ad338450304c9e0c667cec68d93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &665846950101510388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5265362129531757254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ec9450bcd60ed34584aa77a09b7a19d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: 10
+  angle: 90
+  height: 1
+  scanFrequency: 10
+  layers:
+    serializedVersion: 2
+    m_Bits: 64
+  occlusionLayers:
+    serializedVersion: 2
+    m_Bits: 1
+  objects: []
 --- !u!1 &8281245292163991344
 GameObject:
   m_ObjectHideFlags: 0
