@@ -197,10 +197,15 @@ public class Weapon : Interactable
 
                     //final damage (rounded int)
                     Debug.Log("final damage dealt = (" + finalDamage + "): " + (int)finalDamage);
+                    var ps = GetComponentInParent<PlayerStats>();
+                    var dmg = (collisionObject.GetComponentInParent(typeof(PlayerStats)) as PlayerStats).TakeDamage(
+                        (int)finalDamage);
+                    ps.damage_done += dmg;
 
-                    GetComponentInParent<PlayerStats>().damage_done +=
-                        (collisionObject.GetComponentInParent(typeof(PlayerStats)) as PlayerStats).TakeDamage(
-                            (int)finalDamage);
+                    if (transform.root.tag == "Player")
+                    {
+                        GameManager.damageDone += dmg;
+                    }
 
                     //player hit particle TODO
 

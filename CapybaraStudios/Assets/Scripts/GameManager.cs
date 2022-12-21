@@ -10,8 +10,11 @@ public class GameManager : MonoBehaviour
     public Transform respawnPoint;
     public GameObject player;
     public event CharacterSpawnedDelegate OnCharacterSpawned;
+    public static int kills = 0;
+    public static int damageDone = 0;
 
     public delegate void CharacterSpawnedDelegate(GameObject player);
+
     private GameObject currentPlayer;
 
     private void Start()

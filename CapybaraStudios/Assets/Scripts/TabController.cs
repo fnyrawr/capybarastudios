@@ -18,5 +18,7 @@ public class TabController : MonoBehaviour
     void Update()
     {
         timeText.text = Time.timeSinceLevelLoad + "";
+        damageText.text = GameManager.damageDone + "";
+        killsText.text = GameManager.kills + "";
     }
 }
