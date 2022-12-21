@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine.AI;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+
 public class PlayerStats : MonoBehaviour
 {
     public AudioSource deathSound;
@@ -17,7 +18,9 @@ public class PlayerStats : MonoBehaviour
     public TextMeshPro damageText;
     public TextMeshPro totalDamageText;
     public TextMeshProUGUI healthIndicator;
+
     private Animator _animator;
+
     //private Ragdoll ragdoll;
     private SkinnedMeshRenderer[] skinnedMeshRenderers;
     private Color color;
@@ -58,14 +61,13 @@ public class PlayerStats : MonoBehaviour
             skinnedMeshRenderers = GetComponentsInChildren<SkinnedMeshRenderer>();
             color = skinnedMeshRenderers[0].material.color;
         }
+
         currentHealth = maxHealth;
         if (isAI)
         {
             agent = GetComponent<AIAgent>();
             currentHealth = agent.config.maxHp;
         }
-
-        
     }
 
     void Update()
@@ -99,9 +101,10 @@ public class PlayerStats : MonoBehaviour
             return;
         }
 
-        if(isAI) {
-           AIAttackPlayerState attackState = agent.stateMachine.GetState(AIStateId.Death) as AIAttackPlayerState;
-           agent.stateMachine.ChangeState(AIStateId.AttackPlayer);
+        if (isAI)
+        {
+            AIAttackPlayerState attackState = agent.stateMachine.GetState(AIStateId.Death) as AIAttackPlayerState;
+            agent.stateMachine.ChangeState(AIStateId.AttackPlayer);
         }
 
         blinkTimer = blinkDuration;
@@ -111,44 +114,59 @@ public class PlayerStats : MonoBehaviour
     public void UpdateHealth()
     {
         if (isAI) agent.healthBar.SetHealtBar(currentHealth / (float)maxHealth);
-        else {
+        else
+        {
             updateVignette();
             healthIndicator.SetText("+" + currentHealth); //TODO
         }
+
         print(currentHealth);
         if (currentHealth <= 0)
         {
-            deathSound.Play();
-            //_animator.SetLayerWeight(1,0);
-            //_animator.SetTrigger("dying");
-            //_animator.SetTrigger("dying2");
-            GetComponent<Ragdoll>().EnablePhysics();
-            if (isAI)
-            {
-                GetComponent<NavMeshAgent>().enabled = false;
-                GetComponent<AiController>().enabled = false;
-                AIDeathState deathState = agent.stateMachine.GetState(AIStateId.Death) as AIDeathState;
-                agent.stateMachine.ChangeState(AIStateId.Death);
-                Destroy(agent.gameObject, 60f);
-            }
-            else {
-                //TODO MORE!!!
-
-            }
-            //disable other scripts, show death screen, drop all weapons
+            die();
         }
     }
+
+    private void die()
+    {
+        if (isAI)
+        {
+            GetComponent<NavMeshAgent>().enabled = false;
+            GetComponent<AiController>().enabled = false;
+            AIDeathState deathState = agent.stateMachine.GetState(AIStateId.Death) as AIDeathState;
+            agent.stateMachine.ChangeState(AIStateId.Death);
+            Destroy(agent.gameObject, 60f);
+        }
+        else
+        {
+            GetComponent<InputManager>().enabled = false;
+            GetComponent<PlayerMovement>().enabled = false;
+            GetComponent<PlayerLook>().enabled = false;
+            GetComponent<cullHead>().die();
+            GetComponent<PlayerInteract>().enabled = false;
+            GetComponent<PlayerUI>().enabled = false;
+            GetComponent<WeaponAnimationController>().enabled = false;
+            GetComponent<GunScript>().EjectGun();
+            GetComponent<GunScript>().EjectGun();
+            FindObjectOfType<HUDcontroller>().Death();
+        }
+
+        GetComponent<Ragdoll>().EnablePhysics();
+    }
+
 
     public void Heal(int health)
     {
         StartCoroutine(HealOverTime(health));
-        if(!isAI && !isDummy) updateVignette();
+        if (!isAI && !isDummy) updateVignette();
     }
 
-    public void updateVignette() {
+    public void updateVignette()
+    {
         Vignette vignette;
-        if(volume.profile.TryGet(out vignette)) {
-            float percent = 0.55f * Math.Max((1.0f - (currentHealth / (float) maxHealth)), 1f);
+        if (volume.profile.TryGet(out vignette))
+        {
+            float percent = 0.55f * Math.Max((1.0f - (currentHealth / (float)maxHealth)), 1f);
             vignette.intensity.value = percent;
         }
     }

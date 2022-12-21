@@ -67,7 +67,7 @@ public class PlayerLook : MonoBehaviour
                         Mathf.SmoothStep(0, 1, percentage));
             }
 
-            camera.transform.localPosition = new Vector3(0, currheight, 0);
+            //camera.transform.localPosition = new Vector3(0, currheight, 0);
         }
     }
 
@@ -85,7 +85,6 @@ public class PlayerLook : MonoBehaviour
         //calculate camera rotation for up and down
         xRotation -= (mouseY * Time.deltaTime) * ySensitivity;
         xRotation = Mathf.Clamp(xRotation, -80f, 80f);
-        //camera.transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
         //rotate Player for left and right
         transform.Rotate(Vector3.up * (mouseX * Time.deltaTime) * xSensitivity);
         //apply to camera

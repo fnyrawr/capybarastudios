@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class respawn : MonoBehaviour
+public class outOfMap : MonoBehaviour
 {
     public GameObject thePlayer;
-    public Transform respawnTarget;
     public float heightOffset;
     private PlayerStats playerStats;
 
@@ -19,14 +18,9 @@ public class respawn : MonoBehaviour
     void Update()
     {
         if(thePlayer.transform.position.y < heightOffset) {
-            thePlayer.transform.position = respawnTarget.transform.position;
             playerStats = thePlayer.GetComponent<PlayerStats>();
             playerStats.TakeDamage(playerStats.maxHealth);
-            playerStats.currentHealth = playerStats.maxHealth;
-            playerStats.Heal(playerStats.maxHealth);
-            playerStats.UpdateHealth();
-            playerStats.updateVignette();
-            // thePlayer.GetComponent<Ragdoll>().Awake();
+            thePlayer.GetComponent<PlayerStats>();
         }
         
     }

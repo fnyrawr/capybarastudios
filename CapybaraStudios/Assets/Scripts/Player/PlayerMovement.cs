@@ -8,7 +8,6 @@ public class PlayerMovement : MonoBehaviour
 {
     private CharacterController controller;
     [SerializeField] InputManager _input;
-    private Camera camera;
 
     //sounds
     public AudioSource walkingSound;
@@ -108,6 +107,7 @@ public class PlayerMovement : MonoBehaviour
         moveDirection.z = input.y;
         //if player walks backwards speed can only be speed, else also sprintingSpeed
         var actualSpeed = input.y < 0 ? speed : (sprinting && crouchingMomentum >= 1f ? sprintingSpeed : speed);
+        if(!walkingSound.isPlaying && input.y != 0) walkingSound.Play();
         controller.Move(crouchingMomentum * actualSpeed * Time.deltaTime * transform.TransformDirection(moveDirection));
         //decrease slidingMomentum
         if (crouchingMomentum > 0.65f && crouching)

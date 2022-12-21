@@ -43,7 +43,7 @@ public class Weapon : Interactable
 
     //sniperHUD
     public GameObject SniperHUD;
-    public GameObject CrossHair;
+    //public GameObject CrossHair;
 
     //HUD
     private TextMeshProUGUI _ammoText;
@@ -60,6 +60,7 @@ public class Weapon : Interactable
     public float currentSpread;
 
     private float _inaccuracy = 1f;
+
     //_inaccuracy for extra ai inaccuracy, player inaccuracy = 0
     public int specialWeaponType;
     // 0 ist für nicht special Weapon
@@ -208,11 +209,12 @@ public class Weapon : Interactable
                     Invoke(nameof(HitDisable), 0.2f);
                 }
             }
-            else
+            else if (hit.transform.root.tag != "Player" && hit.transform.root.tag != "Enemy")
             {
                 //bullet hole if no player was hit
-                GameObject bulletHoleClone = Instantiate(bulletHoleGraphic, hit.point,
+                GameObject bulletHoleClone = Instantiate(bulletHoleGraphic, hit.point + hit.normal * 0.001f,
                     Quaternion.FromToRotation(Vector3.back, hit.normal));
+                //bulletHoleClone.transform.position -= bulletHoleClone.transform.forward / 1000;
                 Destroy(bulletHoleClone, 10f);
             }
         }
@@ -250,9 +252,10 @@ public class Weapon : Interactable
     //rapid fire
     public IEnumerator RapidFire()
     {
+        var shooter = transform.root;
         if (rapidFireEnabled)
         {
-            while (true)
+            while (transform.root == shooter)
             {
                 Shoot(false);
                 yield return rapidFireWait;
@@ -277,6 +280,11 @@ public class Weapon : Interactable
         if (maxAmmo <= 0)
         {
             Debug.Log("No ammo left. Cannot reload");
+            return;
+        }
+
+        if (reloadStatus < 1)
+        {
             return;
         }
 
@@ -359,13 +367,13 @@ public class Weapon : Interactable
     public void ZoomIn()
     {
         SniperHUD.SetActive(true);
-        CrossHair.SetActive(false);
+        //CrossHair.SetActive(false);
     }
 
     public void ZoomOut()
     {
         SniperHUD.SetActive(false);
-        CrossHair.SetActive(true);
+        //CrossHair.SetActive(true);
     }
 
     public float getReloadStatus()

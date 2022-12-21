@@ -5,11 +5,14 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-public class PauseMenu : MonoBehaviour
+public class HUDcontroller : MonoBehaviour
 {
     public static bool GameIsPaused = false;
 
     public GameObject pauseMenuUI;
+    public GameObject deathMenuUI;
+    public GameObject gameUI;
+    public GameObject tabMenuUI;
 
 
     void Start()
@@ -17,7 +20,7 @@ public class PauseMenu : MonoBehaviour
         InputSystem.settings.updateMode = InputSettings.UpdateMode.ProcessEventsInFixedUpdate;
         Cursor.lockState = CursorLockMode.Locked;
     }
-    
+
     // Update is called once per frame
     void Update()
     {
@@ -32,6 +35,23 @@ public class PauseMenu : MonoBehaviour
                 Pause();
             }
         }
+
+        if(Input.GetKey(KeyCode.Tab))
+        {
+            tabMenuUI.SetActive(true);
+        }
+        else
+        {
+            tabMenuUI.SetActive(false);
+        }
+    }
+
+    public void Death()
+    {
+        deathMenuUI.SetActive(true);
+        gameUI.SetActive(false);
+        Cursor.lockState = CursorLockMode.None;
+        InputSystem.settings.updateMode = InputSettings.UpdateMode.ProcessEventsInDynamicUpdate;
     }
 
     public void Resume()
@@ -42,12 +62,13 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1;
         GameIsPaused = false;
         pauseMenuUI.SetActive(false);
+        gameUI.SetActive(true);
     }
 
     public void Pause()
     {
         pauseMenuUI.SetActive(true);
-        
+        gameUI.SetActive(false);
         Cursor.lockState = CursorLockMode.None;
         //TODO if bedingung, nur wenn Singleplayer, dann timeScale
         InputSystem.settings.updateMode = InputSettings.UpdateMode.ProcessEventsInDynamicUpdate;
@@ -60,11 +81,16 @@ public class PauseMenu : MonoBehaviour
         //TODO if bedingung, nur wenn Singleplayer, dann timeScale
         InputSystem.settings.updateMode = InputSettings.UpdateMode.ProcessEventsInFixedUpdate;
         Time.timeScale = 1f;
-        SceneManager.LoadScene("Menu_Scene");
+        SceneManager.LoadScene(0);
     }
 
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void Respawn()
+    {
+        FindObjectOfType<GameManager>().Respawn();
     }
 }
