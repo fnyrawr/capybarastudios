@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -17,7 +18,7 @@ public class TabController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timeText.text = Time.timeSinceLevelLoad + "";
+        timeText.text = FindObjectOfType<GameManager>().time;
         damageText.text = GameManager.damageDone + "";
         killsText.text = GameManager.kills + "";
     }
