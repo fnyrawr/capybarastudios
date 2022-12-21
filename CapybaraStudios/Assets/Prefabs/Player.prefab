@@ -9718,7 +9718,7 @@ MonoBehaviour:
   pauseMenuUI: {fileID: 7752672515954586178}
   deathMenuUI: {fileID: 187309771548319198}
   gameUI: {fileID: 4153482752743979495}
-  tabMenuUI: {fileID: 0}
+  tabMenuUI: {fileID: 5231893752599416461}
 --- !u!1 &4686149855267691057
 GameObject:
   m_ObjectHideFlags: 0
@@ -10236,7 +10236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f8cc1c6d1698de4e9d78c99f56a62ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathSound: {fileID: 0}
+  deathSound: {fileID: 1001630194400081092}
   maxHealth: 100
   currentHealth: 100
   isDummy: 0

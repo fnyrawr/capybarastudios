@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class portal : MonoBehaviour
 {
-    public GameObject thePlayer;
+    private GameObject thePlayer;
     public Transform teleportTarget;
     public AudioSource portalSound;
     public AudioSource themeOne;
@@ -14,41 +14,56 @@ public class portal : MonoBehaviour
     private PlayerStats playerStats;
     public bool changeMusic;
 
-    void OnTriggerEnter(Collider other) {
+    void OnTriggerEnter(Collider other)
+    {
+        thePlayer = other.gameObject.transform.root.gameObject;
         thePlayer.transform.position = teleportTarget.transform.position;
         portalSound.Play();
-        if(changeMusic) {
+        if (changeMusic)
+        {
             themeOne.Stop();
             themeTwo.Play();
         }
     }
 
-    void Start() {
+    void Start()
+    {
         themeOne.Play();
     }
 
-    void Update() {
+    void Update()
+    {
         playerStats = thePlayer.GetComponent<PlayerStats>();
-        if (playerStats.currentHealth < playerStats.maxHealth) {
-            if(themeOne.isPlaying) {
+        if (playerStats.currentHealth < playerStats.maxHealth)
+        {
+            if (themeOne.isPlaying)
+            {
                 themeOneIntense.Play();
-                if(themeOneIntense.isPlaying) {
+                if (themeOneIntense.isPlaying)
+                {
                     themeOne.Stop();
                 }
             }
-            if(themeTwo.isPlaying) {
+
+            if (themeTwo.isPlaying)
+            {
                 themeTwoIntense.Play();
-                if(themeTwoIntense.isPlaying) {
+                if (themeTwoIntense.isPlaying)
+                {
                     themeTwo.Stop();
                 }
             }
         }
-        else {
-            if(themeOneIntense.isPlaying) {
+        else
+        {
+            if (themeOneIntense.isPlaying)
+            {
                 themeOne.Play();
                 themeOneIntense.Stop();
             }
-            if(themeTwoIntense.isPlaying) {
+
+            if (themeTwoIntense.isPlaying)
+            {
                 themeTwo.Play();
                 themeTwoIntense.Stop();
             }
