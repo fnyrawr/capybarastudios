@@ -21,6 +21,11 @@ public class canvasCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!player)
+        {
+            player = GameObject.FindGameObjectWithTag("Player");
+        }
+
         transform.LookAt(player.transform);
     }
 }

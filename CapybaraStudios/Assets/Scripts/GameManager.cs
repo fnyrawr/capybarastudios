@@ -10,28 +10,36 @@ public class GameManager : MonoBehaviour
     public Transform respawnPoint;
     public GameObject player;
     public event CharacterSpawnedDelegate OnCharacterSpawned;
+
     public delegate void CharacterSpawnedDelegate(GameObject player);
-    public class OnCharacterSpawnedEventArgs : EventArgs {
+
+    public class OnCharacterSpawnedEventArgs : EventArgs
+    {
         public GameObject player;
     }
+
     private GameObject currentPlayer;
+
     private void Start()
     {
-        if (!GameObject.Find("Player")) {
+        if (!GameObject.Find("Player"))
+        {
             SpawnPlayer();
-        } else {
+        }
+        else
+        {
             currentPlayer = GameObject.Find("Player");
         }
-        
     }
 
     public void Respawn()
     {
-        Destroy(GameObject.Find("Player"));
+        Destroy(currentPlayer);
         SpawnPlayer();
     }
 
-    public void SpawnPlayer() {
+    public void SpawnPlayer()
+    {
         currentPlayer = Instantiate(player, respawnPoint.position, Quaternion.identity);
         OnCharacterSpawned?.Invoke(currentPlayer);
     }
