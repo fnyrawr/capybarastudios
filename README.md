@@ -6,17 +6,17 @@ Unity Version
 
 # TODO bis zur Alpha:
 - [ ] Das neue CharakterModell [Deniz]
-- [ ] Pause Menü bei ESC in Game [Zainab]
+- [x] Pause Menü bei ESC in Game [Zainab]
 - [ ] TabMenü für den SingePlayer in Game mit [Zainab, _]
    - [ ] verteilter Schaden
    - [ ] Kills
    - [ ] Namen
 - [ ] Zainabs Menüs  [Zainab]
-  - [ ] man sollte mindestens Musik leiser machen können und die SinglePlayer Maps anwählen können
+  - [x] man sollte mindestens Musik leiser machen können und die SinglePlayer Maps anwählen können
   - [ ] Namen im Menü ändern
  - [ ] man sollte auf der SinglePlayer Map spielen können [Erdenay]
   - [ ] Anfgansarea auf der ersten Map sollte Tutorialarea sein
- - [ ] Tutorial Nachrichten [Erdenay]
+  - [ ] Tutorial Nachrichten [Erdenay]
  - [ ] alle Waffenarten und Gegner platzieren auf der Map [Erdenay]
  - [ ] 1-2 Gegnertypen [Eric]
 - [x] man sollte auf Gegner schießen, ihnen Schaden machen und sie töten können [Felix, Eric, Adrian]
