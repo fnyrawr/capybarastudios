@@ -32,7 +32,7 @@ public class AIIdleState : AIState
         Debug.DrawRay(agent.player.position, dir * 20f, Color.blue, 20f);
         RaycastHit hit;
         Physics.Raycast(agent.transform.position, dir * agent.config.minSightDistance, out hit);
-        Debug.Log(hit.transform.gameObject.tag);
+        //Debug.Log(hit.transform.gameObject.tag);
         if(dist <= agent.config.minSightDistance && hit.transform.gameObject.tag == "Enemy") {
             agent.stateMachine.ChangeState(AIStateId.Chase);
         }
