@@ -251,9 +251,10 @@ public class Weapon : Interactable
     //rapid fire
     public IEnumerator RapidFire()
     {
+        var shooter = transform.root;
         if (rapidFireEnabled)
         {
-            while (true)
+            while (transform.root == shooter)
             {
                 Shoot(false);
                 yield return rapidFireWait;
