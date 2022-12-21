@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1557,10 +1557,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2971606992677782239, guid: 05788b5fa001dfe47b947d12833d5bd8, type: 3}
-      propertyPath: m_ScreenMatchMode
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2971606992700837951, guid: 05788b5fa001dfe47b947d12833d5bd8, type: 3}
       propertyPath: m_fontSizeBase
       value: 20
@@ -1637,18 +1633,6 @@ PrefabInstance:
       propertyPath: _gunScript
       value: 
       objectReference: {fileID: 2971606993254410642}
-    - target: {fileID: 6216746115417813118, guid: 05788b5fa001dfe47b947d12833d5bd8, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 2100
-      objectReference: {fileID: 0}
-    - target: {fileID: 6216746115417813118, guid: 05788b5fa001dfe47b947d12833d5bd8, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 1170
-      objectReference: {fileID: 0}
-    - target: {fileID: 6216746115417813118, guid: 05788b5fa001dfe47b947d12833d5bd8, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -16.3
-      objectReference: {fileID: 0}
     - target: {fileID: 6243135483059421987, guid: 05788b5fa001dfe47b947d12833d5bd8, type: 3}
       propertyPath: m_Name
       value: reload circle
@@ -1659,30 +1643,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7041327796140552663, guid: 05788b5fa001dfe47b947d12833d5bd8, type: 3}
       propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7419463647196954619, guid: 05788b5fa001dfe47b947d12833d5bd8, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7419463647196954619, guid: 05788b5fa001dfe47b947d12833d5bd8, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8586998047789212757, guid: 05788b5fa001dfe47b947d12833d5bd8, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8586998047789212757, guid: 05788b5fa001dfe47b947d12833d5bd8, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8586998047789212757, guid: 05788b5fa001dfe47b947d12833d5bd8, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8586998047789212757, guid: 05788b5fa001dfe47b947d12833d5bd8, type: 3}
-      propertyPath: m_FillAmount
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:

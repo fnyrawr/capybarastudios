@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -138,9 +139,24 @@ public class Weapon : Interactable
 
         var ray = new Ray(_transform.position, direction);
         var hit_ = ray.origin + direction * range;
+        RaycastHit[] hits;
+        hits = Physics.RaycastAll(transform.position, direction, range, controllerMask).OrderBy(x => x.distance)
+            .ToArray();
+
+
+        RaycastHit hit = new RaycastHit();
+        foreach (var hit__ in hits)
+        {
+            if (hit__.transform.root != transform.root)
+            {
+                hit = hit__;
+                break;
+            }
+        }
+
+
         //hit and damage calc
-        if (Physics.Raycast(ray, out RaycastHit hit, range,
-                controllerMask))
+        if (hit.distance != 0)
         {
             Debug.Log(hit.transform.name);
             hit_ = hit.point;
