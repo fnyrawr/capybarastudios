@@ -14,6 +14,8 @@ public class AIAgent : MonoBehaviour
     [SerializeField] public AIWeapons weapons; 
     public PlayerStats playerStats;
     public AISensor sensor;
+    private bool playerFound; 
+
     void Awake()
     {   
         agent = GetComponent<NavMeshAgent>();
@@ -28,10 +30,18 @@ public class AIAgent : MonoBehaviour
         stateMachine.RegisterState(new AIFindWeaponState());
         stateMachine.RegisterState(new AIAttackPlayerState());
         stateMachine.ChangeState(initalState);
+        GameManager gameManager = FindObjectOfType<GameManager>();
+        gameManager.OnCharacterSpawned += UpdatePlayer;
     }
 
     void Update()
     {
+        if(player == null) return;
         stateMachine.Update();
+    }
+
+    private void UpdatePlayer(GameObject player) {
+        stateMachine.ChangeState(initalState);
+        this.player = player.transform;
     }
 }

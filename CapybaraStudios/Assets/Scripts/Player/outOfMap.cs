@@ -19,8 +19,7 @@ public class outOfMap : MonoBehaviour
     {
         if(thePlayer.transform.position.y < heightOffset) {
             playerStats = thePlayer.GetComponent<PlayerStats>();
-            playerStats.TakeDamage(playerStats.maxHealth);
-            thePlayer.GetComponent<PlayerStats>();
+            playerStats.die();
         }
         
     }

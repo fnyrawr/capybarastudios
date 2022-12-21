@@ -44,7 +44,6 @@ public class AISensor : MonoBehaviour
     }
 
     public bool IsInSight(GameObject obj) {
-        
         Vector3 origin = transform.position;
         Vector3 dest = obj.transform.position;
         Vector3 direction = dest - origin;
@@ -152,7 +151,18 @@ public class AISensor : MonoBehaviour
         foreach(var obj in objects) {
             Gizmos.DrawSphere(obj.transform.position, 0.2f);
         }
-
     }
 
+    public int FilterByTag(GameObject[] buffer, string tag) {
+        int count = 0;
+        foreach(var obj in objects) {
+            if(obj.tag == tag) {
+                buffer[count++] = obj;
+            }
+
+            if(buffer.Length == count) break;
+        }
+
+        return count;
+    }
 }

@@ -49,7 +49,7 @@ public class PlayerLook : MonoBehaviour
         }
 
         //for sneaking
-        if (elapsedcTime <= 0.4f)
+        /*if (elapsedcTime <= 0.4f)
         {
             elapsedcTime += Time.deltaTime;
             float percentage = elapsedTime / 0.4f;
@@ -68,7 +68,7 @@ public class PlayerLook : MonoBehaviour
             }
 
             //camera.transform.localPosition = new Vector3(0, currheight, 0);
-        }
+        }*/
     }
 
     private void Update()
