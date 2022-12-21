@@ -1438,6 +1438,7 @@ MonoBehaviour:
   pauseMenuUI: {fileID: 4359504200524032498}
   deathMenuUI: {fileID: 4643168485895774549}
   gameUI: {fileID: 4847450808091646981}
+  tabMenuUI: {fileID: 2592902298975778573}
 --- !u!1 &2566358278889063352
 GameObject:
   m_ObjectHideFlags: 0
