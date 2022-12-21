@@ -288,11 +288,14 @@ public class Weapon : Interactable
         }
 
         Debug.Log("Reload");
+    
         reloading = true;
         readyToShoot = true;
-        Invoke("ReloadFinished", reloadTime);
         reloadStatus = 0;
+        currentSpread = initialSpread;
         reloadSound.Play();
+
+        Invoke("ReloadFinished", reloadTime);
     }
 
     private void ReloadFinished()
@@ -307,8 +310,8 @@ public class Weapon : Interactable
             maxAmmo -= magazineSize - bulletsLeft;
             bulletsLeft = magazineSize;
         }
-
         ShowAmmo();
+        
         reloading = false;
     }
 

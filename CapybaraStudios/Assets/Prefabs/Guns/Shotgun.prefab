@@ -596,8 +596,8 @@ MonoBehaviour:
   reloadSound: {fileID: 1651835445119751782}
   pickupSound: {fileID: 5500871621976512426}
   damage: 15
-  initialSpread: 0.01
-  maxSpread: 0.05
+  initialSpread: 0.03
+  maxSpread: 0.1
   range: 100
   reloadTime: 2
   fireRate: 1
