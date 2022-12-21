@@ -10,12 +10,13 @@ public class AIWeapons : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private Transform headTransform; //casts ray from this position
     [SerializeField] private Transform gunSlot;
-    [SerializeField] private float inaccuracy = 3f;
+    private float inaccuracy = 3f;
     private bool isFiring;
     Coroutine fireCoroutine;
     [SerializeField] AIAgent agent;
 
     private void Awake() {
+        inaccuracy = agent.config.inaccuracy;
         if(agent.config.startWeapon != null) EquipWeapon(agent.config.startWeapon);
     }
     private void Update() {
@@ -67,7 +68,7 @@ public class AIWeapons : MonoBehaviour
 
     public void Reload() {
         if(currentWeapon.bulletsLeft > 0) return;
-        if(currentWeapon.bulletsShot == 0) {
+        if(currentWeapon.maxAmmo == 0) {
             DitchWeapon();
             agent.stateMachine.ChangeState(AIStateId.FindWeapon);
             return;

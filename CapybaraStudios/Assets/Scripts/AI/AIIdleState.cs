@@ -25,15 +25,15 @@ public class AIIdleState : AIState
             agent.playerStats.Heal(1);
             healTimer = 0f;
         }
-        Vector3 pdir = agent.player.position - agent.transform.position;
-        if(pdir.magnitude > agent.config.maxSightDistance) {
-            return;
-        }
 
-        Vector3 adir = agent.transform.forward;
-
-        float dot = Vector3.Dot(pdir.normalized, adir);
-        if(dot > 0.0f) {
+        float dist = Vector3.Distance(agent.player.position, agent.transform.position);
+        Vector3 dir = (agent.player.position - agent.transform.position).normalized;
+        //RAYCAST soll enemy hitten
+        Debug.DrawRay(agent.player.position, dir * 20f, Color.blue, 20f);
+        RaycastHit hit;
+        Physics.Raycast(agent.transform.position, dir * agent.config.minSightDistance, out hit);
+        Debug.Log(hit.transform.gameObject.tag);
+        if(dist <= agent.config.minSightDistance && hit.transform.gameObject.tag == "Enemy") {
             agent.stateMachine.ChangeState(AIStateId.Chase);
         }
     }

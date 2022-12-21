@@ -30,8 +30,7 @@ public class Weapon : Interactable
 
     public int maxAmmo, magazineSize, bulletsPerTap;
     public bool hasAmmo, rapidFireEnabled;
-
-    public int bulletsLeft, bulletsShot;
+    [HideInInspector] public int bulletsLeft, bulletsShot;
     bool reloading, readyToShoot;
     private float reloadStatus = 1;
 
