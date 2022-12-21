@@ -2329,9 +2329,17 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8234861005737994333, guid: 0a68be1bd13d8694e8d8fe85574ac075, type: 3}
+      propertyPath: m_text
+      value: Credits
+      objectReference: {fileID: 0}
     - target: {fileID: 8333314972647556651, guid: 0a68be1bd13d8694e8d8fe85574ac075, type: 3}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8348427602791365427, guid: 0a68be1bd13d8694e8d8fe85574ac075, type: 3}
+      propertyPath: m_Name
+      value: Btn_Credits
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 574192436321107734, guid: 0a68be1bd13d8694e8d8fe85574ac075, type: 3}
