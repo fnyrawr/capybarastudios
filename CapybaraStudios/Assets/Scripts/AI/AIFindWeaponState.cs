@@ -31,7 +31,9 @@ public class AIFindWeaponState : AIState
         if(pickup != null) agent.agent.destination = pickup.transform.position;
 
         //walk random
-        agent.WalkRandom(new Vector3(UnityEngine.Random.Range(1f,100f), UnityEngine.Random.Range(0, 0.39f), UnityEngine.Random.Range(1,100f)));
+        if(!agent.agent.hasPath) {
+            agent.WalkRandom(new Vector3(UnityEngine.Random.Range(1f,100f), UnityEngine.Random.Range(0, 0.39f), UnityEngine.Random.Range(1,100f)));
+        }
     }
 
     private Weapon FindWeapon(AIAgent agent) {

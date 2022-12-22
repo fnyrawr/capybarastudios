@@ -17,7 +17,10 @@ public class AIWeapons : MonoBehaviour
 
     private void Awake() {
         inaccuracy = agent.config.inaccuracy;
-        if(agent.config.startWeapon != null) EquipWeapon(agent.config.startWeapon);
+        if(agent.config.startWeapon != null) {
+            GameObject weapon = Instantiate(agent.config.startWeapon);
+            EquipWeapon(weapon);
+        }
     }
     private void Update() {
         if(isFiring && HasWeapon()) {
@@ -32,6 +35,7 @@ public class AIWeapons : MonoBehaviour
     }
 
     public void EquipWeapon(GameObject weapon) {
+        if(weapon.GetComponent<Weapon>().maxAmmo == 0) return;
         current = weapon;
         weapon.GetComponent<Rigidbody>().isKinematic = true;
         weapon.GetComponent<BoxCollider>().enabled = false;
@@ -51,6 +55,8 @@ public class AIWeapons : MonoBehaviour
         weapon.SetParent(null);
         weapon.GetComponent<Rigidbody>().isKinematic = false;
         weapon.GetComponent<BoxCollider>().enabled = true;
+        current = null;
+        currentWeapon = null;
     }
 
     public bool HasWeapon() {
@@ -67,6 +73,7 @@ public class AIWeapons : MonoBehaviour
     }
 
     public void Reload() {
+        if(!HasWeapon()) return;
         if(currentWeapon.bulletsLeft > 0) return;
         if(currentWeapon.maxAmmo == 0) {
             DitchWeapon();

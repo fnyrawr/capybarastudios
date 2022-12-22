@@ -8345,6 +8345,7 @@ MonoBehaviour:
   gravity: -40
   Target: {fileID: 300647477097907602}
   _animationTransitionSpeed: 3
+  torso: {fileID: 3905116734959657787}
 --- !u!114 &1109721722943156136
 MonoBehaviour:
   m_ObjectHideFlags: 0

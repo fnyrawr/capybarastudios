@@ -15,11 +15,14 @@ public class AIAgent : MonoBehaviour
     public PlayerStats playerStats;
     public AISensor sensor;
     private bool playerFound; 
-
+    [HideInInspector] public Transform target;
     void Awake()
     {   
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        if(player != null) {
+            target = player.GetComponent<PlayerMovement>().torso;
+        }
         healthBar = GetComponentInChildren<UIHealthBar>();
         playerStats = GetComponent<PlayerStats>();
         sensor = GetComponent<AISensor>();
@@ -43,19 +46,17 @@ public class AIAgent : MonoBehaviour
     private void UpdatePlayer(GameObject player) {
         stateMachine.ChangeState(initalState);
         this.player = player.transform;
+        target = player.GetComponent<PlayerMovement>().torso;
     }
 
     public void WalkRandom(Vector3 randomDir) {
-        if(!agent.hasPath || agent.isStopped) {
-            Debug.Log("FFFAFAFFAFA");
-            Vector3 randomDirection = randomDir;
-            randomDirection += agent.transform.position;
-            NavMeshHit hit;
-            Vector3 finalPosition = Vector3.zero;
-            if (NavMesh.SamplePosition(randomDirection, out hit, 5, 1)) {
-                finalPosition = hit.position;            
-            }
-            agent.destination = finalPosition;
+        Vector3 randomDirection = randomDir;
+        randomDirection += agent.transform.position;
+        NavMeshHit hit;
+        Vector3 finalPosition = Vector3.zero;
+        if (NavMesh.SamplePosition(randomDirection, out hit, 5, 1)) {
+            finalPosition = hit.position;            
         }
+        agent.destination = finalPosition;
     }
 }

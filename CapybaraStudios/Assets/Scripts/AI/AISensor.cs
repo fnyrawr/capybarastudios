@@ -145,11 +145,6 @@ public class AISensor : MonoBehaviour
             Gizmos.color = color;
             Gizmos.DrawMesh(mesh, transform.position, transform.rotation);
         }
-
-        Gizmos.color = Color.green;
-        foreach(var obj in objects) {
-            Gizmos.DrawSphere(obj.transform.position, 0.4f);
-        }
     }
 
     public int FilterByTag(GameObject[] buffer, string tag) {

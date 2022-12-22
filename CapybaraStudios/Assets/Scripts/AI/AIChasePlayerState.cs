@@ -1,4 +1,3 @@
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -33,8 +32,9 @@ public class AIChasePlayerState : AIState
                 agent.stateMachine.ChangeState(AIStateId.Idle);
             }
             else if(distance > agent.config.maxDistance * agent.config.maxDistance) {
-                agent.agent.destination = agent.player.position;
+                agent.agent.destination = agent.target.position;
             } else {
+                agent.agent.destination = agent.transform.position;
                 agent.stateMachine.ChangeState(AIStateId.AttackPlayer);
             }
             timer = agent.config.maxTime;

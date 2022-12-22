@@ -25,8 +25,10 @@ public class AIIdleState : AIState
             agent.playerStats.Heal(1);
             healTimer = 0f;
         }
-
-        agent.WalkRandom(new Vector3(UnityEngine.Random.Range(1,100f), UnityEngine.Random.Range(0, 0.39f), UnityEngine.Random.Range(1,100f)));
+        
+        if(!agent.agent.hasPath) {
+            agent.WalkRandom(new Vector3(UnityEngine.Random.Range(1,100f), UnityEngine.Random.Range(0, 0.39f), UnityEngine.Random.Range(1,100f)));
+        }
 
         float dist = (agent.player.position - agent.transform.position).sqrMagnitude;
         if(dist <= agent.config.minSightDistance * agent.config.minSightDistance

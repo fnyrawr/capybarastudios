@@ -48,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
     private float _velocityX = 0;
     private float _velocityZ = 0;
     private bool isJumping;
-
+    public Transform torso;
     // Start is called before the first frame update
     void Start()
     {

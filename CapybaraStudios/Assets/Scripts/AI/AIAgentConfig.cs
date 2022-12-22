@@ -13,6 +13,6 @@ public class AIAgentConfig : ScriptableObject
     public float outOfRangeDistance = 35f;
     public int maxHp = 100;
     public float inaccuracy = 5f;
-    public float stoppingDistance = 3f;
+    public float stoppingDistance = 7f;
     public GameObject startWeapon;
 }
