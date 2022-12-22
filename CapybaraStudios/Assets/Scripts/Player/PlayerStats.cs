@@ -126,6 +126,12 @@ public class PlayerStats : MonoBehaviour
         return damage_taken;
     }
 
+
+    public void UpdateScore()
+    {
+        
+    }
+    
     public void UpdateHealth()
     {
         if (isAI) agent.healthBar.SetHealtBar(currentHealth / (float)maxHealth);
@@ -146,7 +152,7 @@ public class PlayerStats : MonoBehaviour
     {
         if (isAI)
         {
-            FindObjectOfType<PlayerMovement>().GetComponent<PlayerStats>().kills += 1;
+            GameManager.kills += 1;
             GetComponent<NavMeshAgent>().enabled = false;
             GetComponent<AiController>().enabled = false;
             AIDeathState deathState = agent.stateMachine.GetState(AIStateId.Death) as AIDeathState;

@@ -775,7 +775,7 @@ MonoBehaviour:
   deathSound: {fileID: 0}
   killSound: {fileID: 0}
   maxHealth: 100
-  currentHealth: 100
+  currentHealth: 100000
   isDummy: 1
   isAI: 0
   damageText: {fileID: 1155882640}
@@ -1509,9 +1509,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathSound: {fileID: 0}
-  killSound: {fileID: 0}
-  maxHealth: 100
-  currentHealth: 100
+  maxHealth: 100000
+  currentHealth: 100000
   isDummy: 1
   isAI: 0
   damageText: {fileID: 1155882640}
@@ -2572,7 +2571,7 @@ MonoBehaviour:
   deathSound: {fileID: 0}
   killSound: {fileID: 0}
   maxHealth: 100
-  currentHealth: 100
+  currentHealth: 100000
   isDummy: 1
   isAI: 0
   damageText: {fileID: 1155882640}
@@ -3979,7 +3978,7 @@ MonoBehaviour:
   deathSound: {fileID: 0}
   killSound: {fileID: 0}
   maxHealth: 100
-  currentHealth: 100
+  currentHealth: 100000
   isDummy: 1
   isAI: 0
   damageText: {fileID: 1155882640}
@@ -4366,7 +4365,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1732118451
 Transform:
   m_ObjectHideFlags: 0
@@ -4867,9 +4866,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathSound: {fileID: 0}
-  killSound: {fileID: 0}
-  maxHealth: 100
-  currentHealth: 100
+  maxHealth: 100000
+  currentHealth: 100000
   isDummy: 1
   isAI: 0
   damageText: {fileID: 1155882640}
@@ -5128,9 +5126,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathSound: {fileID: 0}
-  killSound: {fileID: 0}
-  maxHealth: 100
-  currentHealth: 100
+  maxHealth: 1000000
+  currentHealth: 100000
   isDummy: 1
   isAI: 0
   damageText: {fileID: 1155882640}
@@ -5823,6 +5820,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerAI
       objectReference: {fileID: 0}
+    - target: {fileID: 5265362129531757254, guid: af77e8fb26bf1d24a812637eb3b1c7f7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7170984859030850925, guid: af77e8fb26bf1d24a812637eb3b1c7f7, type: 3}
       propertyPath: path
       value: 1
@@ -5830,6 +5831,10 @@ PrefabInstance:
     - target: {fileID: 7170984859030850925, guid: af77e8fb26bf1d24a812637eb3b1c7f7, type: 3}
       propertyPath: velocity
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7170984859030850925, guid: af77e8fb26bf1d24a812637eb3b1c7f7, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7170984859030850925, guid: af77e8fb26bf1d24a812637eb3b1c7f7, type: 3}
       propertyPath: desiredVelocity

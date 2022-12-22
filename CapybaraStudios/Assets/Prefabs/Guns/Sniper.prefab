@@ -603,7 +603,7 @@ MonoBehaviour:
   gunSound: {fileID: 8888644364764015516}
   reloadSound: {fileID: 8540068806897639622}
   pickupSound: {fileID: 7425526843762842009}
-  damage: 90
+  damage: 95
   initialSpread: 0
   maxSpread: 0.05
   range: 1000
