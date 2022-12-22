@@ -9,6 +9,7 @@ TagManager:
   - Body
   - Limbs
   - Weapon
+  - BotWeapon
   layers:
   - Default
   - TransparentFX

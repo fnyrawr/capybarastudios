@@ -3879,6 +3879,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shotgun
       objectReference: {fileID: 0}
+    - target: {fileID: 5431010200346843826, guid: 8be673c8ba67927419fb464d4f52fdea, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8be673c8ba67927419fb464d4f52fdea, type: 3}
 --- !u!1001 &218300202
@@ -6970,6 +6974,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sniper
       objectReference: {fileID: 0}
+    - target: {fileID: 1773712428791678988, guid: 2cf95ac77bf71784ba860ab9aeac3a2d, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 1773712428791679088, guid: 2cf95ac77bf71784ba860ab9aeac3a2d, type: 3}
       propertyPath: m_RootOrder
       value: 12
@@ -8747,11 +8755,6 @@ MonoBehaviour:
   button: {fileID: 430319634}
   bot: {fileID: 5265362129531757254, guid: af77e8fb26bf1d24a812637eb3b1c7f7, type: 3}
   weapon1: {fileID: 1597034733851191711, guid: 7d791ce83ceac9f4896a9b1222c5d24c, type: 3}
-  weapon2: {fileID: 5431010200346843826, guid: 8be673c8ba67927419fb464d4f52fdea, type: 3}
-  weapon3: {fileID: 1073516863588008007, guid: ef099eebe0ae27d468e41174f1298744, type: 3}
-  weapon4: {fileID: 1773712428791678988, guid: 2cf95ac77bf71784ba860ab9aeac3a2d, type: 3}
-  weapon5: {fileID: 2199072146890847219, guid: 7a5f38a0d9e9e404e957e3a85d5e9060, type: 3}
-  weapon6: {fileID: 2731676188501952796, guid: 1b21cf4c72f9edb459ff24c0f15c66c5, type: 3}
   respawns: []
   weapons: []
 --- !u!1001 &431198723
@@ -24531,6 +24534,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Heavy
       objectReference: {fileID: 0}
+    - target: {fileID: 2199072146890847219, guid: 7a5f38a0d9e9e404e957e3a85d5e9060, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 6619746001078872920, guid: 7a5f38a0d9e9e404e957e3a85d5e9060, type: 3}
       propertyPath: m_RootOrder
       value: 13
@@ -29255,6 +29262,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Assault_Rifle
       objectReference: {fileID: 0}
+    - target: {fileID: 2731676188501952796, guid: 1b21cf4c72f9edb459ff24c0f15c66c5, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 3360544769196233638, guid: 1b21cf4c72f9edb459ff24c0f15c66c5, type: 3}
       propertyPath: m_RootOrder
       value: 15
@@ -32261,6 +32272,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Uzi
       objectReference: {fileID: 0}
+    - target: {fileID: 1073516863588008007, guid: ef099eebe0ae27d468e41174f1298744, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 5093042292371653437, guid: ef099eebe0ae27d468e41174f1298744, type: 3}
       propertyPath: m_RootOrder
       value: 11
@@ -32838,6 +32853,10 @@ PrefabInstance:
     - target: {fileID: 8072630662231964154, guid: 08291bdc635ea744dba56640a2b52d4a, type: 3}
       propertyPath: m_Name
       value: GrapplingGun
+      objectReference: {fileID: 0}
+    - target: {fileID: 8072630662231964154, guid: 08291bdc635ea744dba56640a2b52d4a, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 08291bdc635ea744dba56640a2b52d4a, type: 3}
@@ -37828,6 +37847,10 @@ PrefabInstance:
     - target: {fileID: 1597034733851191711, guid: 7d791ce83ceac9f4896a9b1222c5d24c, type: 3}
       propertyPath: m_Name
       value: Revolver
+      objectReference: {fileID: 0}
+    - target: {fileID: 1597034733851191711, guid: 7d791ce83ceac9f4896a9b1222c5d24c, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 2117287818678596389, guid: 7d791ce83ceac9f4896a9b1222c5d24c, type: 3}
       propertyPath: m_RootOrder
