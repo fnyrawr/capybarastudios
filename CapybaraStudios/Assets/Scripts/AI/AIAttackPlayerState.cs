@@ -8,17 +8,19 @@ public class AIAttackPlayerState : AIState
     private float currentTime = 0f; 
     private Quaternion currRotation;
     private Quaternion lookRotation;
-
+    private float timer = 0f;
     public void Enter(AIAgent agent)
     {
         currRotation = agent.transform.rotation;
         currentTime = agent.config.rotationSeconds;
         agent.weapons.SetFiring(true);
+        agent.agent.stoppingDistance = agent.config.stoppingDistance;
     }
 
     public void Exit(AIAgent agent)
     {
       agent.weapons.SetFiring(false);
+      agent.agent.stoppingDistance = 0;
     }
 
     public AIStateId GetId()
@@ -33,7 +35,7 @@ public class AIAttackPlayerState : AIState
         if(!oldPlayerPos.Equals(agent.player.position)) {
             currentTime = 0f;
             Vector3 targetDir = agent.player.position - agent.transform.position;
-            if(Vector3.Angle(agent.player.position, agent.transform.position) > 10f) agent.weapons.SetFiring(false);
+            if(Vector3.Angle(agent.player.position, agent.transform.position) > 20f) agent.weapons.SetFiring(false);
             lookRotation = Quaternion.LookRotation(targetDir);
             oldPlayerPos = agent.player.position;
         }
@@ -45,10 +47,22 @@ public class AIAttackPlayerState : AIState
             Vector3 rotation = currRotation.eulerAngles;
             agent.rotationTarget.localRotation = Quaternion.Euler(rotation.x, 0f,0f);
             agent.transform.rotation = Quaternion.Euler(0f,rotation.y,0f);
-            if(percentage >= 1f) {
+            if(percentage >= 0.8f) {
                 agent.weapons.SetFiring(true);
             }
         }
         
+        timer -= Time.deltaTime;
+        if(timer < 0.0f) {
+            float distance = (agent.player.position - agent.transform.position).sqrMagnitude;
+            if(distance > agent.config.outOfRangeDistance * agent.config.outOfRangeDistance) {
+                agent.stateMachine.ChangeState(AIStateId.Idle);
+            } else if(distance > agent.config.maxDistance * agent.config.maxDistance) {
+                agent.agent.destination = agent.player.position;
+            } else {
+                agent.WalkRandom(new Vector3(UnityEngine.Random.Range(0f,3f), UnityEngine.Random.Range(0f, 0.39f), UnityEngine.Random.Range(0f,3f)));
+            }
+            timer = agent.config.maxTime;
+        }
     }
 }

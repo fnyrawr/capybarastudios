@@ -103,19 +103,14 @@ public class Weapon : Interactable
 
     protected override void Interact(GameObject player)
     {
-        Debug.Log("Picked up " + gameObject.name);
         player.GetComponent<GunScript>().PickUp(gameObject);
         pickupSound.Play();
     }
 
     public void Shoot(bool first)
     {
-        if (reloading) Debug.Log("Reloading");
-        if (bulletsLeft <= 0) Debug.Log("no Bullets left");
-        if (!readyToShoot) Debug.Log("weapon on cooldown");
         if (!readyToShoot || reloading || bulletsLeft <= 0) return;
 
-        Debug.Log("Shoot!");
         _animator.SetTrigger("shoot");
         readyToShoot = false;
 
@@ -158,7 +153,6 @@ public class Weapon : Interactable
         //hit and damage calc
         if (hit.distance != 0)
         {
-            Debug.Log(hit.transform.name);
             hit_ = hit.point;
             GameObject collisionObject = hit.collider.gameObject;
 
@@ -184,7 +178,6 @@ public class Weapon : Interactable
                     float finalDamage = (int)(damage * hitMultiplier);
 
                     //distance multiplier 0.1- 0.01
-                    Debug.Log("Hit Distance = " + hit.distance);
                     if (damageFalloffStart < hit.distance)
                     {
                         float distance = hit.distance / 10f - damageFalloffStart / 10f;
@@ -192,11 +185,9 @@ public class Weapon : Interactable
                         if (distanceMultiplier > 1) distanceMultiplier = 1;
                         if (distanceMultiplier < 0) distanceMultiplier = 0;
                         finalDamage *= distanceMultiplier;
-                        Debug.Log("distanceMod = " + distanceMultiplier);
                     }
 
                     //final damage (rounded int)
-                    Debug.Log("final damage dealt = (" + finalDamage + "): " + (int)finalDamage);
                     var ps = GetComponentInParent<PlayerStats>();
                     var dmg = (collisionObject.GetComponentInParent(typeof(PlayerStats)) as PlayerStats).TakeDamage(
                         (int)finalDamage);
@@ -224,7 +215,7 @@ public class Weapon : Interactable
         }
         else
         {
-            Debug.Log("Not hit");
+            //Debug.Log("Not hit");
         }
 
         EventManager.Shot(ray.origin, hit_, transform.root);
@@ -277,13 +268,11 @@ public class Weapon : Interactable
     {
         if (bulletsLeft.Equals(magazineSize))
         {
-            Debug.Log("Magazine is already full");
             return;
         }
 
         if (maxAmmo <= 0)
         {
-            Debug.Log("No ammo left. Cannot reload");
             return;
         }
 
@@ -292,8 +281,6 @@ public class Weapon : Interactable
             return;
         }
 
-        Debug.Log("Reload");
-    
         reloading = true;
         readyToShoot = true;
         reloadStatus = 0;

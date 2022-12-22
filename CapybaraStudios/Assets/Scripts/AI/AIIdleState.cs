@@ -26,14 +26,11 @@ public class AIIdleState : AIState
             healTimer = 0f;
         }
 
-        float dist = Vector3.Distance(agent.player.position, agent.transform.position);
-        Vector3 dir = (agent.player.position - agent.transform.position).normalized;
-        //RAYCAST soll enemy hitten
-        Debug.DrawRay(agent.player.position, dir * 20f, Color.blue, 20f);
-        RaycastHit hit;
-        Physics.Raycast(agent.transform.position, dir * agent.config.minSightDistance, out hit);
-        //Debug.Log(hit.transform.gameObject.tag);
-        if(dist <= agent.config.minSightDistance && hit.transform.gameObject.tag == "Enemy") {
+        agent.WalkRandom(new Vector3(UnityEngine.Random.Range(1,100f), UnityEngine.Random.Range(0, 0.39f), UnityEngine.Random.Range(1,100f)));
+
+        float dist = (agent.player.position - agent.transform.position).sqrMagnitude;
+        if(dist <= agent.config.minSightDistance * agent.config.minSightDistance
+         && !Physics.Linecast(agent.player.position, agent.transform.position, agent.sensor.occlusionLayers)) {
             agent.stateMachine.ChangeState(AIStateId.Chase);
         }
     }

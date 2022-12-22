@@ -7,7 +7,7 @@ public class AIChasePlayerState : AIState
     float timer = 0.0f;
     public void Enter(AIAgent agent)
     {
-        agent.agent.stoppingDistance = 5f;
+        agent.agent.stoppingDistance = agent.config.stoppingDistance;
     }
 
     public void Exit(AIAgent agent)
@@ -28,9 +28,14 @@ public class AIChasePlayerState : AIState
 
         timer -= Time.deltaTime;
         if(timer < 0.0f) {
-            float distance = (agent.player.position - agent.agent.destination).sqrMagnitude;
-            if(distance > agent.config.maxDistance) {
+            float distance = (agent.player.position - agent.transform.position).sqrMagnitude;
+            if(distance > agent.config.outOfRangeDistance * agent.config.outOfRangeDistance) {
+                agent.stateMachine.ChangeState(AIStateId.Idle);
+            }
+            else if(distance > agent.config.maxDistance * agent.config.maxDistance) {
                 agent.agent.destination = agent.player.position;
+            } else {
+                agent.stateMachine.ChangeState(AIStateId.AttackPlayer);
             }
             timer = agent.config.maxTime;
         }

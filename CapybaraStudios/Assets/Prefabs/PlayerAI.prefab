@@ -377,7 +377,7 @@ MonoBehaviour:
   scanFrequency: 10
   layers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 32832
   occlusionLayers:
     serializedVersion: 2
     m_Bits: 1
