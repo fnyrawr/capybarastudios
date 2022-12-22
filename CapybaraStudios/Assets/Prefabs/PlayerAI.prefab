@@ -315,7 +315,6 @@ MonoBehaviour:
   animator: {fileID: 7257804187245478902}
   headTransform: {fileID: 5146993689247351371}
   gunSlot: {fileID: 7257804185506640245}
-  inaccuracy: 3
   agent: {fileID: 498779732837339924}
 --- !u!114 &7569580565273996068
 MonoBehaviour:
@@ -376,7 +375,7 @@ MonoBehaviour:
   scanFrequency: 10
   layers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 32832
   occlusionLayers:
     serializedVersion: 2
     m_Bits: 1

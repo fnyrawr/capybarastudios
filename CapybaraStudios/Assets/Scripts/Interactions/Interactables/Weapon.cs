@@ -187,9 +187,16 @@ public class Weapon : Interactable
                         finalDamage *= distanceMultiplier;
                     }
 
-                    GetComponentInParent<PlayerStats>().damage_done +=
-                        (collisionObject.GetComponentInParent(typeof(PlayerStats)) as PlayerStats).TakeDamage(
-                            (int)finalDamage);
+                    //final damage (rounded int)
+                    var ps = GetComponentInParent<PlayerStats>();
+                    var dmg = (collisionObject.GetComponentInParent(typeof(PlayerStats)) as PlayerStats).TakeDamage(
+                        (int)finalDamage);
+                    ps.damage_done += dmg;
+
+                    if (transform.root.tag == "Player")
+                    {
+                        GameManager.damageDone += dmg;
+                    }
 
                     //player hit particle TODO
 
@@ -276,9 +283,11 @@ public class Weapon : Interactable
 
         reloading = true;
         readyToShoot = true;
-        Invoke("ReloadFinished", reloadTime);
         reloadStatus = 0;
+        currentSpread = initialSpread;
         reloadSound.Play();
+
+        Invoke("ReloadFinished", reloadTime);
     }
 
     private void ReloadFinished()
@@ -293,8 +302,8 @@ public class Weapon : Interactable
             maxAmmo -= magazineSize - bulletsLeft;
             bulletsLeft = magazineSize;
         }
-
         ShowAmmo();
+        
         reloading = false;
     }
 

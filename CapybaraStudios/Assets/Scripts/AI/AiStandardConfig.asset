@@ -12,5 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a80ad3b040a4c534fa4f1aca3cdfb002, type: 3}
   m_Name: AiStandardConfig
   m_EditorClassIdentifier: 
-  maxTime: 1
-  maxDistance: 1
+  maxTime: 0.5
+  maxDistance: 15
+  minSightDistance: 20
+  rotationSeconds: 0.025
+  healTime: 1
+  outOfRangeDistance: 35
+  maxHp: 100
+  inaccuracy: 5
+  stoppingDistance: 3
+  startWeapon: {fileID: 0}

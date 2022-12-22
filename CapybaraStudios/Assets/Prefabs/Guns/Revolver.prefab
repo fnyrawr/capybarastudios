@@ -392,7 +392,7 @@ MonoBehaviour:
   gunSound: {fileID: 2340936587793681115}
   reloadSound: {fileID: 4856134107159863374}
   pickupSound: {fileID: 4721922714863377058}
-  damage: 34
+  damage: 36
   initialSpread: 0
   maxSpread: 0.05
   range: 200

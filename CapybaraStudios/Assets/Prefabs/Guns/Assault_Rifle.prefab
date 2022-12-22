@@ -391,9 +391,9 @@ MonoBehaviour:
   maxSpread: 0.05
   range: 100
   reloadTime: 2
-  fireRate: 20
-  timeBetweenShooting: 0.1
-  distanceModifier: 0.1
+  fireRate: 10
+  timeBetweenShooting: 0
+  distanceModifier: 0.05
   damageFalloffStart: 15
   maxAmmo: 200
   magazineSize: 30
@@ -406,7 +406,7 @@ MonoBehaviour:
   SniperHUD: {fileID: 0}
   weaponSlot: 1
   animationType: 1
-  spreadIncrease: 0.004
+  spreadIncrease: 0.005
   spreadDecrease: 0.01
   currentSpread: 0
   specialWeaponType: 0
