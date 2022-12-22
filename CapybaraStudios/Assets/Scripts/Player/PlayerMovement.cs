@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     //sounds
     public AudioSource walkingSound;
     public AudioSource slidingSound;
+    public AudioSource jumpSound;
 
     //movement
     private float playerVelocity;
@@ -180,6 +181,7 @@ public class PlayerMovement : MonoBehaviour
         if (controller.isGrounded && _input.JumpInput)
         {
             playerVelocity = Mathf.Sqrt(jumpHeight * -3.0f * gravity);
+            jumpSound.Play();
         }
     }
 
