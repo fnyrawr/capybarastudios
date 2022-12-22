@@ -236,7 +236,7 @@ MonoBehaviour:
   range: 500
   reloadTime: 4
   fireRate: 5
-  timeBetweenShooting: 0
+  timeBetweenShooting: 0.2
   distanceModifier: 0.05
   damageFalloffStart: 30
   maxAmmo: 500
