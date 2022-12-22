@@ -7,7 +7,7 @@ public class tutorialButton : Interactable
 {
     public GameObject button;
     public TMP_Text text;
-    private string[] messages = {"This is a Tutorial", "You can walk with WASD", "You can jump with SPACE", "You can sprint with SHIFT", "You can crouch with STRG", "You can slide with SHIFT + STRG", "You can pick items up with E ->", "You can scroll thgough your inventory with 123", "You can drop items with Q", "You Can Attack with Left MB (& Shoot)", "You can aim with Right MB (& Grapple)", "You can reload with R","Turn around and test some other weapons", "Then pass the door infront of you!", "Back to earth!"};
+    private string[] messages = {"This is a Tutorial", "You can walk with WASD", "You can jump with SPACE", "You can sprint with SHIFT", "You can crouch with STRG", "You can slide with SHIFT + STRG", "You can pick items up with E ->", "You can scroll through your inventory with 123", "You can drop items with Q", "You Can Attack with Left MB (& Shoot)", "You can aim with Right MB (& Grapple)", "You can reload with R","Turn around and test some other weapons", "Then pass the door infront of you!", "Back to earth!"};
     private int counter = -1;
     // Start is called before the first frame update
     void Start()
