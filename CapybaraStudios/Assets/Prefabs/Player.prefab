@@ -2166,7 +2166,7 @@ GameObject:
   - component: {fileID: 8834190564626210786}
   - component: {fileID: 4796882912755375450}
   - component: {fileID: 3101232906559522921}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PlayerBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10137,6 +10137,8 @@ MonoBehaviour:
   damageText: {fileID: 0}
   totalDamageText: {fileID: 0}
   healthIndicator: {fileID: 5142780579765735370}
+  damage_done: 0
+  kills: 0
   blinkDuration: 0
   blinkIntensity: 0
   volume: {fileID: 4319109925342848768}

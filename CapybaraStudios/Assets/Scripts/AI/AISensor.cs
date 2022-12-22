@@ -48,15 +48,14 @@ public class AISensor : MonoBehaviour
         Vector3 dest = obj.transform.position;
         Vector3 direction = dest - origin;
         if(direction.y < 0 || direction.y > height) return false;
-        
+                
         direction.y = 0;
         float deltaAngle = Vector3.Angle(direction, transform.forward);
         if(deltaAngle > angle) return false;
         
-        origin.y += height / 2;
+        origin.y += height / 2 ;
         dest.y = origin.y;
         if(Physics.Linecast(origin, dest, occlusionLayers)) return false;
-        
         return true;
     }
 
@@ -149,7 +148,7 @@ public class AISensor : MonoBehaviour
 
         Gizmos.color = Color.green;
         foreach(var obj in objects) {
-            Gizmos.DrawSphere(obj.transform.position, 0.2f);
+            Gizmos.DrawSphere(obj.transform.position, 0.4f);
         }
     }
 

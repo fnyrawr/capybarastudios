@@ -44,4 +44,18 @@ public class AIAgent : MonoBehaviour
         stateMachine.ChangeState(initalState);
         this.player = player.transform;
     }
+
+    public void WalkRandom(Vector3 randomDir) {
+        if(!agent.hasPath || agent.isStopped) {
+            Debug.Log("FFFAFAFFAFA");
+            Vector3 randomDirection = randomDir;
+            randomDirection += agent.transform.position;
+            NavMeshHit hit;
+            Vector3 finalPosition = Vector3.zero;
+            if (NavMesh.SamplePosition(randomDirection, out hit, 5, 1)) {
+                finalPosition = hit.position;            
+            }
+            agent.destination = finalPosition;
+        }
+    }
 }
