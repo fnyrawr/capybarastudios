@@ -6,8 +6,11 @@ public class botRespawn : Interactable
 {
     public GameObject button;
     public GameObject bot;
+    public GameObject weapon1;
+    private GameObject spawnedWeapon1;
     private GameObject spawnedBot;
     public GameObject[] respawns;
+    public GameObject[] weapons;
 
     // Start is called before the first frame update
     void Start()
@@ -24,12 +27,20 @@ public class botRespawn : Interactable
     protected override void Interact(GameObject player)
     {
         respawns = GameObject.FindGameObjectsWithTag("Respawn");
+        weapons = GameObject.FindGameObjectsWithTag("Weapon");
         
         foreach (GameObject respawn in respawns)
         {
             spawnedBot = Instantiate(bot, respawn.transform.position, respawn.transform.rotation);
             spawnedBot.tag = "Respawn";
             Destroy(respawn);
+            
+        }
+        foreach (GameObject weapon in weapons)
+        {
+            spawnedWeapon1 = Instantiate(weapon1, weapon.transform.position, weapon.transform.rotation);
+            spawnedWeapon1.tag = "Weapon";
+            Destroy(weapon);
             
         }
         Debug.Log(player.name + "interacted with " + gameObject.name);
