@@ -27,6 +27,7 @@ public class AIIdleState : AIState
         }
         
         if(!agent.agent.hasPath) {
+            if (!agent.agent.isOnNavMesh) return;
             agent.WalkRandom(new Vector3(UnityEngine.Random.Range(1,100f), UnityEngine.Random.Range(0, 0.39f), UnityEngine.Random.Range(1,100f)));
         }
 

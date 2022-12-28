@@ -32,6 +32,7 @@ public class AIFindWeaponState : AIState
 
         //walk random
         if(!agent.agent.hasPath) {
+            if (!agent.agent.isOnNavMesh) return;
             agent.WalkRandom(new Vector3(UnityEngine.Random.Range(1f,100f), UnityEngine.Random.Range(0, 0.39f), UnityEngine.Random.Range(1,100f)));
         }
     }
