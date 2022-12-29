@@ -113,11 +113,8 @@ public class PlayerStats : MonoBehaviour
 
         if (isAI)
         {
-            if(agent.weapons.HasWeapon()) {
-                AIAttackPlayerState attackState = agent.stateMachine.GetState(AIStateId.Death) as AIAttackPlayerState;
+            if(agent.weapons.HasWeapon() && agent.config.aIBehaviour == AIBehaviour.Passiv) {
                 agent.stateMachine.ChangeState(AIStateId.AttackPlayer);
-            } else {
-                //gehe in Fluchtstate
             }
         }
 

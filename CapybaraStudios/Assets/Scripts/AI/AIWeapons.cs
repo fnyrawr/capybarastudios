@@ -55,12 +55,11 @@ public class AIWeapons : MonoBehaviour
         weapon.SetParent(null);
         weapon.GetComponent<Rigidbody>().isKinematic = false;
         weapon.GetComponent<BoxCollider>().enabled = true;
-        current = null;
         currentWeapon = null;
     }
 
     public bool HasWeapon() {
-        return current != null;
+        return currentWeapon != null;
     }
 
     public void SetFiring(bool val) {

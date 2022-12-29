@@ -31,6 +31,8 @@ public class AIIdleState : AIState
             agent.WalkRandom(new Vector3(UnityEngine.Random.Range(1,100f), UnityEngine.Random.Range(0, 0.39f), UnityEngine.Random.Range(1,100f)));
         }
 
+        if(agent.config.aIBehaviour != AIBehaviour.Aggressiv) return;
+
         float dist = (agent.player.position - agent.transform.position).sqrMagnitude;
         if(dist <= agent.config.minSightDistance * agent.config.minSightDistance
          && !Physics.Linecast(agent.player.position, agent.transform.position, agent.sensor.occlusionLayers)) {

@@ -2,6 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum AIBehaviour
+{
+   Friendly,
+   Passiv,
+   Aggressiv     
+}
+
 [CreateAssetMenu()]
 public class AIAgentConfig : ScriptableObject
 {
@@ -15,4 +22,5 @@ public class AIAgentConfig : ScriptableObject
     public float inaccuracy = 5f;
     public float stoppingDistance = 7f;
     public GameObject startWeapon;
+    public AIBehaviour aIBehaviour = AIBehaviour.Aggressiv;
 }

@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 498779732837339925}
   - component: {fileID: 665846950101510388}
   m_Layer: 0
-  m_Name: PlayerAI
+  m_Name: FriendlyAI
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -278,7 +278,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initalState: 3
-  config: {fileID: 11400000, guid: c8cc8e0685c11654cba869431ca246e6, type: 2}
+  config: {fileID: 11400000, guid: f05aa0d01fa05d742b1bb01e20d8718d, type: 2}
   healthBar: {fileID: 8281245292630088751}
   player: {fileID: 0}
   rotationTarget: {fileID: 8281245292858647812}
