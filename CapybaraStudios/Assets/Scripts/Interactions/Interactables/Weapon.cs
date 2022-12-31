@@ -281,6 +281,9 @@ public class Weapon : Interactable
             return;
         }
 
+
+        ZoomOut();
+        transform.root.GetComponent<PlayerLook>().Zoom(0);
         reloading = true;
         readyToShoot = true;
         reloadStatus = 0;
@@ -302,8 +305,9 @@ public class Weapon : Interactable
             maxAmmo -= magazineSize - bulletsLeft;
             bulletsLeft = magazineSize;
         }
+
         ShowAmmo();
-        
+
         reloading = false;
     }
 
@@ -360,14 +364,25 @@ public class Weapon : Interactable
 
     public void ZoomIn()
     {
-        SniperHUD.SetActive(true);
-        //CrossHair.SetActive(false);
+        if (reloadStatus < 1)
+        {
+            return;
+        }
+
+        if (SniperHUD)
+        {
+            SniperHUD.SetActive(true);
+            //CrossHair.SetActive(false);
+        }
     }
 
     public void ZoomOut()
     {
-        SniperHUD.SetActive(false);
-        //CrossHair.SetActive(true);
+        if (SniperHUD)
+        {
+            SniperHUD.SetActive(false);
+            //CrossHair.SetActive(true);
+        }
     }
 
     public float getReloadStatus()
