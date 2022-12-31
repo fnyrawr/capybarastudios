@@ -56,6 +56,7 @@ public class GunScript : MonoBehaviour
             print("ditched");
             StopSpecial();
             var oldGun = gunSlot.GetChild(0);
+            oldGun.GetComponent<Weapon>().cancelReload();
             oldGun.SetParent(null);
             oldGun.GetComponent<Rigidbody>().isKinematic = false;
             oldGun.GetComponent<BoxCollider>().enabled = true;
@@ -84,6 +85,7 @@ public class GunScript : MonoBehaviour
         try
         {
             var gun = gunSlot.GetChild(0);
+            gun.GetComponent<Weapon>().cancelReload();
             gun.SetParent(null);
             gun.gameObject.SetActive(false);
         }

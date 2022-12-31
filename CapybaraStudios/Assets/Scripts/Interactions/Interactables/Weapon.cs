@@ -287,7 +287,6 @@ public class Weapon : Interactable
         reloading = true;
         readyToShoot = true;
         reloadStatus = 0;
-        currentSpread = initialSpread;
         reloadSound.Play();
 
         Invoke("ReloadFinished", reloadTime);
@@ -295,6 +294,7 @@ public class Weapon : Interactable
 
     private void ReloadFinished()
     {
+        currentSpread = initialSpread;
         if ((maxAmmo + bulletsLeft) < magazineSize)
         {
             bulletsLeft = maxAmmo + bulletsLeft;
@@ -388,5 +388,13 @@ public class Weapon : Interactable
     public float getReloadStatus()
     {
         return reloadStatus;
+    }
+
+    public void cancelReload()
+    {
+        reloading = false;
+        readyToShoot = true;
+        reloadStatus = 1;
+        CancelInvoke("ReloadFinished");
     }
 }
