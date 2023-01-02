@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     public event CharacterSpawnedDelegate OnCharacterSpawned;
     public static int kills = 0;
     public static int damageDone = 0;
-    public string time;
+    public static string time = TimeSpan.Zero.ToString(@"hh\:mm\:ss");
 
     public delegate void CharacterSpawnedDelegate(GameObject player);
 
@@ -21,6 +21,9 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        kills = 0;
+        damageDone = 0;
+        time = TimeSpan.Zero.ToString(@"hh\:mm\:ss");
         if (!GameObject.Find("Player"))
         {
             SpawnPlayer();

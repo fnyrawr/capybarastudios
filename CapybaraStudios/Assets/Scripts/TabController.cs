@@ -18,7 +18,7 @@ public class TabController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timeText.text = FindObjectOfType<GameManager>().time;
+        timeText.text = GameManager.time;
         damageText.text = GameManager.damageDone + "";
         killsText.text = GameManager.kills + "";
     }
