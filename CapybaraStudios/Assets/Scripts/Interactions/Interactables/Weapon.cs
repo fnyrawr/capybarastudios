@@ -294,6 +294,7 @@ public class Weapon : Interactable
 
     private void ReloadFinished()
     {
+        pickupSound.Play();
         currentSpread = initialSpread;
         if ((maxAmmo + bulletsLeft) < magazineSize)
         {
