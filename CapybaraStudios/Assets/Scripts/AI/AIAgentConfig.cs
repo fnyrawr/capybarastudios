@@ -4,6 +4,7 @@ using UnityEngine;
 
 public enum AIBehaviour
 {
+   Dummy,
    Friendly,
    Passiv,
    Aggressiv     

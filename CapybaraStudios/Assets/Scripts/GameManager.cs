@@ -9,6 +9,7 @@ using UnityEngine.PlayerLoop;
 public class GameManager : MonoBehaviour
 {
     public Transform respawnPoint;
+    private Vector3 respawnPosition;
     public GameObject player;
     public event CharacterSpawnedDelegate OnCharacterSpawned;
     public static int kills = 0;
@@ -21,6 +22,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        respawnPosition = respawnPoint.position;
         kills = 0;
         damageDone = 0;
         time = TimeSpan.Zero.ToString(@"hh\:mm\:ss");
@@ -47,7 +49,17 @@ public class GameManager : MonoBehaviour
 
     public void SpawnPlayer()
     {
-        currentPlayer = Instantiate(player, respawnPoint.position, Quaternion.identity);
+        currentPlayer = Instantiate(player, respawnPosition, Quaternion.identity);
         OnCharacterSpawned?.Invoke(currentPlayer);
+    }
+
+    public void changeRespawn(Transform t)
+    {
+        changeRespawn(t.position);
+    }
+
+    public void changeRespawn(Vector3 p)
+    {
+        respawnPosition = p;
     }
 }
