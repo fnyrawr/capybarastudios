@@ -302,7 +302,6 @@ public class Weapon : Interactable
 
     private void ReloadFinished()
     {
-        
         if (reloadSound)
         {
             reloadSound.Stop();
