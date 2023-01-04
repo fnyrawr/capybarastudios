@@ -71,7 +71,7 @@ public class Weapon : Interactable
     public Transform BulletFirePoint;
     public TrailRenderer BulletTrail;
     public float zoom = 1f;
-
+    private bool _ai;
     private void Awake()
     {
         bulletsLeft = magazineSize;
@@ -82,7 +82,7 @@ public class Weapon : Interactable
     }
 
     public void init(Animator animatior, Transform transform, TextMeshProUGUI ammoText, TextMeshProUGUI maxAmmoText,
-        GameObject hitmarker, float inaccuracy = 1f)
+        GameObject hitmarker, float inaccuracy = 1f, bool ai = false)
     {
         _animator = animatior;
         _transform = transform;
@@ -90,6 +90,7 @@ public class Weapon : Interactable
         _maxAmmoText = maxAmmoText;
         _hitmarker = hitmarker;
         _inaccuracy = inaccuracy;
+        _ai = ai;
     }
 
     private void Update()
@@ -287,9 +288,10 @@ public class Weapon : Interactable
             return;
         }
 
-
-        ZoomOut();
-        transform.root.GetComponent<PlayerLook>().Zoom(0);
+        if(!_ai) {
+            ZoomOut();
+            transform.root.GetComponent<PlayerLook>().Zoom(0);
+        }
         reloading = true;
         readyToShoot = true;
         reloadStatus = 0;

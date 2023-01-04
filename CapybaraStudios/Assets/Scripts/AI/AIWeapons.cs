@@ -42,7 +42,7 @@ public class AIWeapons : MonoBehaviour
         weapon.transform.SetParent(gunSlot);
         gunSlot.GetChild(0).gameObject.SetActive(true);
         currentWeapon = gunSlot.GetChild(0).GetComponent<Weapon>();
-        currentWeapon.init(animator, headTransform, null, null, null, inaccuracy);
+        currentWeapon.init(animator, headTransform, null, null, null, inaccuracy, true);
 
         weaponAnimator.refresh();
         weapon.transform.localRotation = Quaternion.Euler(0, 0, 0);
