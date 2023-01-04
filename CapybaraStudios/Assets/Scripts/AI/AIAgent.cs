@@ -33,6 +33,10 @@ public class AIAgent : MonoBehaviour
         stateMachine.RegisterState(new AIFindWeaponState());
         stateMachine.RegisterState(new AIAttackPlayerState());
         stateMachine.ChangeState(initalState);
+        if(config.aIBehaviour == AIBehaviour.Dummy) {
+            weapons.enabled = false;
+            //hier das mit der animation
+        }
         GameManager gameManager = FindObjectOfType<GameManager>();
         gameManager.OnCharacterSpawned += UpdatePlayer;
     }
