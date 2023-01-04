@@ -19,7 +19,7 @@ public class NetworkManagerUI : MonoBehaviour
             NetworkManager.Singleton.StartClient();
         });
     }
-    private void Update() {
+    /*private void Update() {
         playersInGameText.text = "Players in Game: " + PlayersManager.Instance.PlayersInGame;
-    }
+    }*/
 }
