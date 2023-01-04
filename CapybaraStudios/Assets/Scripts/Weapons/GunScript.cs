@@ -134,6 +134,7 @@ public class GunScript : MonoBehaviour
         currentWeapon.ShowAmmo();
     }
 
+    //right click events
     public void StartSpecial()
     {
         switch (currentWeapon.specialWeaponType)
@@ -191,7 +192,6 @@ public class GunScript : MonoBehaviour
 
     public void StartFiring()
     {
-        //fireCoroutine = StartCoroutine(gun.RapidFire());
         fireCoroutine = StartCoroutine(currentWeapon.RapidFire());
     }
 

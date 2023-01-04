@@ -65,6 +65,7 @@ public class Weapon : Interactable
     // 0 ist für nicht special Weapon
     // 1 ist für Grappling Gun
     // 2 ist für sniper
+    // 3 ist für rocket launcher
 
     //Bullet Trail
     public Transform BulletFirePoint;
@@ -114,6 +115,11 @@ public class Weapon : Interactable
         _animator.SetTrigger("shoot");
         readyToShoot = false;
 
+        //rocket launcher
+        if (specialWeaponType == 3)
+        {
+            ShootRocket();
+        }
 
         Vector3 direction;
         if (!first)
@@ -151,7 +157,7 @@ public class Weapon : Interactable
 
 
         //hit and damage calc
-        if (hit.distance != 0)
+        if (hit.distance != 0 && specialWeaponType != 3)
         {
             hit_ = hit.point;
             GameObject collisionObject = hit.collider.gameObject;
@@ -406,5 +412,10 @@ public class Weapon : Interactable
         readyToShoot = true;
         reloadStatus = 1;
         CancelInvoke("ReloadFinished");
+    }
+
+    public void ShootRocket()
+    {
+        GetComponent<Launcher>().Launch();
     }
 }
