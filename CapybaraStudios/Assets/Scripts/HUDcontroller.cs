@@ -36,7 +36,7 @@ public class HUDcontroller : MonoBehaviour
             }
         }
 
-        if(Input.GetKey(KeyCode.Tab))
+        if (Input.GetKey(KeyCode.Tab))
         {
             tabMenuUI.SetActive(true);
         }
@@ -48,10 +48,27 @@ public class HUDcontroller : MonoBehaviour
 
     public void Death()
     {
+        deathMenuUI.GetComponent<CanvasGroup>().alpha = 0;
         deathMenuUI.SetActive(true);
         gameUI.SetActive(false);
-        Cursor.lockState = CursorLockMode.None;
-        InputSystem.settings.updateMode = InputSettings.UpdateMode.ProcessEventsInDynamicUpdate;
+        StartCoroutine(DeathFadein(1500));
+    }
+
+
+    private IEnumerator DeathFadein(float time)
+    {
+        if (time > 0)
+        {
+            yield return new WaitForSeconds(0.1f);
+            deathMenuUI.GetComponent<CanvasGroup>().alpha += 0.06666666f;
+            time -= 100;
+            StartCoroutine(DeathFadein(time));
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+            InputSystem.settings.updateMode = InputSettings.UpdateMode.ProcessEventsInDynamicUpdate;
+        }
     }
 
     public void Resume()

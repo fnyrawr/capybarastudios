@@ -10850,6 +10850,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5341667554475568450}
     m_Modifications:
+    - target: {fileID: 2795301733894970660, guid: 00a731cfcfd061a4c948282f3548c8a3, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2795301733894970665, guid: 00a731cfcfd061a4c948282f3548c8a3, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2795301733894970667, guid: 00a731cfcfd061a4c948282f3548c8a3, type: 3}
       propertyPath: m_RootOrder
       value: 0

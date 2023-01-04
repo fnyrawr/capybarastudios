@@ -50,7 +50,7 @@ public class PlayerStats : MonoBehaviour
             else if (Vector3.Dot(hit - origin, transform.position - hit) > 0) X = hit;
             else X = origin + Vector3.Project(transform.position - origin, hit - origin);
             float distance = (X - transform.position + new Vector3(0, 2, 0)).magnitude;
-            print("distance to shot:" + distance);
+            //print("distance to shot:" + distance);
         }
     }
 
@@ -113,7 +113,8 @@ public class PlayerStats : MonoBehaviour
 
         if (isAI)
         {
-            if(agent.weapons.HasWeapon() && agent.config.aIBehaviour == AIBehaviour.Passiv) {
+            if (agent.weapons.HasWeapon() && agent.config.aIBehaviour == AIBehaviour.Passiv)
+            {
                 agent.stateMachine.ChangeState(AIStateId.AttackPlayer);
             }
         }
@@ -126,9 +127,8 @@ public class PlayerStats : MonoBehaviour
 
     public void UpdateScore()
     {
-        
     }
-    
+
     public void UpdateHealth()
     {
         if (isAI) agent.healthBar.SetHealtBar(currentHealth / (float)maxHealth);
@@ -169,12 +169,17 @@ public class PlayerStats : MonoBehaviour
             GetComponent<GunScript>().EjectGun();
             FindObjectOfType<HUDcontroller>().Death();
         }
-        if(!deathSound.isPlaying && !isAI) {
+
+        if (!deathSound.isPlaying && !isAI)
+        {
             deathSound.Play();
         }
-        if(!killSound.isPlaying && isAI) {
+
+        if (!killSound.isPlaying && isAI)
+        {
             killSound.Play();
         }
+
         GetComponent<Ragdoll>().EnablePhysics();
     }
 
