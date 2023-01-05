@@ -22,4 +22,4 @@ MonoBehaviour:
   inaccuracy: 5
   stoppingDistance: 3
   startWeapon: {fileID: 0}
-  aIBehaviour: 0
+  aIBehaviour: 1
