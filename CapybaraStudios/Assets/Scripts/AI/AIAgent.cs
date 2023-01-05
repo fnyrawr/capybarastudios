@@ -39,7 +39,6 @@ public class AIAgent : MonoBehaviour
         if (config.aIBehaviour == AIBehaviour.Dummy)
         {
             weapons.enabled = false;
-            GetComponent<NavMeshAgent>().enabled = false;
         }
 
         GameManager gameManager = FindObjectOfType<GameManager>();
