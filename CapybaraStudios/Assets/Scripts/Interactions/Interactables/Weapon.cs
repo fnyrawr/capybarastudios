@@ -28,6 +28,9 @@ public class Weapon : Interactable
         distanceModifier,
         damageFalloffStart;
 
+    public bool singleReload;
+    private float singleReloadTime;
+
     public int maxAmmo, magazineSize, bulletsPerTap;
     public bool hasAmmo, rapidFireEnabled;
     [HideInInspector] public int bulletsLeft, bulletsShot;
@@ -72,8 +75,10 @@ public class Weapon : Interactable
     public TrailRenderer BulletTrail;
     public float zoom = 1f;
     private bool _ai;
+
     private void Awake()
     {
+        singleReloadTime = reloadTime / ((float)magazineSize / bulletsPerTap);
         bulletsLeft = magazineSize;
         readyToShoot = true;
         bulletsShot = bulletsPerTap;
@@ -111,6 +116,14 @@ public class Weapon : Interactable
 
     public void Shoot(bool first)
     {
+        if (singleReload && reloading)
+        {
+            cancelReload();
+            readyToShoot = false;
+            Invoke("ResetShot", timeBetweenShooting);
+            return;
+        }
+
         if (!readyToShoot || reloading || bulletsLeft <= 0) return;
 
         _animator.SetTrigger("shoot");
@@ -273,40 +286,65 @@ public class Weapon : Interactable
     //reload
     public void Reload()
     {
-        if (bulletsLeft.Equals(magazineSize))
-        {
-            return;
-        }
+        if (bulletsLeft.Equals(magazineSize) || maxAmmo <= 0 || reloadStatus < 1) return;
 
-        if (maxAmmo <= 0)
-        {
-            return;
-        }
+        reloading = true;
+        readyToShoot = true;
 
-        if (reloadStatus < 1)
+        if (!_ai)
         {
-            return;
-        }
-
-        if(!_ai) {
             ZoomOut();
             transform.root.GetComponent<PlayerLook>().Zoom(0);
         }
-        reloading = true;
-        readyToShoot = true;
-        reloadStatus = 0;
-        reloadSound.Play();
 
-        Invoke("ReloadFinished", reloadTime);
+        if (singleReload)
+        {
+            reloadStatus = (float)bulletsLeft / (float)magazineSize;
+            StartCoroutine(PeloadSingle());
+        }
+        else
+        {
+            reloadSound.Play();
+            reloadStatus = 0;
+            Invoke("ReloadFinished", reloadTime);
+        }
+    }
+
+    private IEnumerator PeloadSingle()
+    {
+        while (reloading && maxAmmo > 0 && bulletsLeft < magazineSize)
+        {
+            reloadSound.Play();
+            yield return new WaitForSeconds(singleReloadTime);
+            print(reloading && maxAmmo > 0 && bulletsLeft < magazineSize);
+            if (!reloading)
+            {
+                break;
+            }
+
+            bulletsLeft += bulletsPerTap;
+            maxAmmo-= bulletsPerTap;
+            ShowAmmo();
+        }
+
+        pickupSound.Play();
+        reloading = false;
+    }
+
+    private IEnumerator PlayReloadSound()
+    {
+        print("reload sound");
+        reloadSound.Play();
+        yield return null;
     }
 
     private void ReloadFinished()
     {
-        
         if (reloadSound)
         {
             reloadSound.Stop();
         }
+
         pickupSound.Play();
         currentSpread = initialSpread;
         if ((maxAmmo + bulletsLeft) < magazineSize)
@@ -410,10 +448,12 @@ public class Weapon : Interactable
         {
             reloadSound.Stop();
         }
+
         reloading = false;
         readyToShoot = true;
         reloadStatus = 1;
         CancelInvoke("ReloadFinished");
+        StopCoroutine("reloadSingle");
     }
 
     public void ShootRocket()

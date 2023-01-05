@@ -604,6 +604,7 @@ MonoBehaviour:
   timeBetweenShooting: 1
   distanceModifier: 0.1
   damageFalloffStart: 10
+  singleReload: 1
   maxAmmo: 100
   magazineSize: 25
   bulletsPerTap: 5
