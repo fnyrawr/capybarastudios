@@ -37,7 +37,7 @@ Unity Version
   - [ ] mindestens eine neue Multiplayermap
     - [ ] Parkourmap oder Parkourelemente
 
-- [ ] Waffen:
+- [ ] Waffen
   - [ ] Granadelauncher
   - [ ] Rocketlauncher
 
