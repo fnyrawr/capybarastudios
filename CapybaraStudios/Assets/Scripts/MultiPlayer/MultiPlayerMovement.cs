@@ -1,13 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class MultiPlayerMovement : MonoBehaviour
+public class MultiPlayerMovement : NetworkBehaviour
 {
     private CharacterController controller;
-    [SerializeField] InputManager _input;
+    [SerializeField] M_InputManager _input;
 
     //sounds
     public AudioSource walkingSound;
@@ -64,14 +65,15 @@ public class MultiPlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (hooked)
+        if(!IsOwner) return;
+        /*if (hooked)
         {
             playerVelocity = -2f;
             if(_input.JumpInput) {
                 GetComponentInChildren<GrapplingGun>().StopHook();
                 playerVelocity = Mathf.Sqrt(jumpHeight * -3.0f * gravity);
             }
-        }
+        }*/
 
         ProcessMovement(_input.MoveInput);
         Crouch();
