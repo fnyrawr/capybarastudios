@@ -20,8 +20,13 @@ public class GameManager : MonoBehaviour
 
     private GameObject currentPlayer;
 
+    private static Transform _dummy;
+    public Transform dummy;
+
     private void Start()
     {
+        _dummy = dummy;
+
         respawnPosition = respawnPoint.position;
         kills = 0;
         damageDone = 0;
@@ -61,5 +66,11 @@ public class GameManager : MonoBehaviour
     public void changeRespawn(Vector3 p)
     {
         respawnPosition = p;
+    }
+
+
+    public static void triggerRespawn(Vector3 pos)
+    {
+        Instantiate(_dummy, pos, Quaternion.identity);
     }
 }

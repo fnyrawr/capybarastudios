@@ -179,6 +179,7 @@ GameObject:
   - component: {fileID: 5688455889874788507}
   - component: {fileID: 498779732837339925}
   - component: {fileID: 665846950101510388}
+  - component: {fileID: -6023192193361119905}
   m_Layer: 0
   m_Name: DummyAI
   m_TagString: Enemy
@@ -212,7 +213,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5265362129531757254}
-  m_Enabled: 1
+  m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 6
@@ -367,6 +368,19 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   objects: []
+--- !u!114 &-6023192193361119905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5265362129531757254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20a9c707d370f814580dbe9823e4b689, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dummy: {fileID: 4780995798902552700}
 --- !u!1 &6783753736985541009
 GameObject:
   m_ObjectHideFlags: 0
