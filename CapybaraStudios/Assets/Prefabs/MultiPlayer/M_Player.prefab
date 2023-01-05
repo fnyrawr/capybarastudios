@@ -4038,6 +4038,7 @@ MonoBehaviour:
   timeBetweenShooting: 1
   distanceModifier: 0
   damageFalloffStart: 0
+  singleReload: 0
   maxAmmo: -1
   magazineSize: 10000
   bulletsPerTap: 1
@@ -6849,6 +6850,7 @@ GameObject:
   - component: {fileID: 3007601069905876932}
   - component: {fileID: 1276083470260032892}
   - component: {fileID: 8659778157883129935}
+  - component: {fileID: 14313676526841376}
   m_Layer: 7
   m_Name: PlayerBody
   m_TagString: Untagged
@@ -6918,6 +6920,19 @@ MonoBehaviour:
   - m_Rig: {fileID: 8738996429363222073}
     m_Active: 0
   m_Effectors: []
+--- !u!114 &14313676526841376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5658153157185018548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac6c60cbfc77e454aaf0f24c3fb1706d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Animator: {fileID: 1276083470260032892}
 --- !u!1 &5754972598415212619
 GameObject:
   m_ObjectHideFlags: 0
