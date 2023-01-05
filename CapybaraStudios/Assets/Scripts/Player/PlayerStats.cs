@@ -155,6 +155,10 @@ public class PlayerStats : MonoBehaviour
             AIDeathState deathState = agent.stateMachine.GetState(AIStateId.Death) as AIDeathState;
             agent.stateMachine.ChangeState(AIStateId.Death);
             Destroy(agent.gameObject, 60f);
+            if (GetComponent<DummyRespawn>())
+            {
+                GetComponent<DummyRespawn>().triggerRespawn();
+            }
         }
         else
         {
