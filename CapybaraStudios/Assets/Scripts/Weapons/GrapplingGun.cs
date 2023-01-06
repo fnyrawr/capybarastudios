@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class GrapplingGun : MonoBehaviour
@@ -22,7 +21,6 @@ public class GrapplingGun : MonoBehaviour
     private float throwingTimer;
     [SerializeField] private float cooldown;
     private float currCooldown;
-    private int controllerMask = ~(1 << 15);
 
     void Awake()
     {
@@ -82,24 +80,8 @@ public class GrapplingGun : MonoBehaviour
     //call this function in inputscript to hook
     public void Hook()
     {
-        var ray = new Ray(playerCam.transform.position, playerCam.transform.forward);
-        var hit_ = ray.origin + playerCam.transform.forward * maxDistance;
-        RaycastHit[] hits;
-        hits = Physics.RaycastAll(playerCam.transform.position, playerCam.transform.forward, maxDistance, controllerMask).OrderBy(x => x.distance)
-            .ToArray();
-
-        RaycastHit hit = new RaycastHit();
-        foreach (var hit__ in hits)
-        {
-            if (hit__.transform.root != transform.root)
-            {
-                hit = hit__;
-                break;
-            }
-        }
-        
-        
-        if (hit.distance != 0)
+        if (currCooldown >= cooldown && Physics.Raycast(playerCam.transform.position, playerCam.transform.forward,
+                out RaycastHit hit, maxDistance))
         {
             grapplingSound.Play();
             draw = true;

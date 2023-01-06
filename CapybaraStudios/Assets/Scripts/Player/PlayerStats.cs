@@ -22,7 +22,6 @@ public class PlayerStats : MonoBehaviour
     public int damage_done = 0;
     public int kills = 0;
     private Animator _animator;
-    public bool dead = false;
 
     //private Ragdoll ragdoll;
     private SkinnedMeshRenderer[] skinnedMeshRenderers;
@@ -51,7 +50,7 @@ public class PlayerStats : MonoBehaviour
             else if (Vector3.Dot(hit - origin, transform.position - hit) > 0) X = hit;
             else X = origin + Vector3.Project(transform.position - origin, hit - origin);
             float distance = (X - transform.position + new Vector3(0, 2, 0)).magnitude;
-            //print("distance to shot:" + distance);
+            print("distance to shot:" + distance);
         }
     }
 
@@ -114,9 +113,11 @@ public class PlayerStats : MonoBehaviour
 
         if (isAI)
         {
-            if (agent.weapons.HasWeapon() && agent.config.aIBehaviour == AIBehaviour.Passiv)
-            {
+            if(agent.weapons.HasWeapon()) {
+                AIAttackPlayerState attackState = agent.stateMachine.GetState(AIStateId.Death) as AIAttackPlayerState;
                 agent.stateMachine.ChangeState(AIStateId.AttackPlayer);
+            } else {
+                //gehe in Fluchtstate
             }
         }
 
@@ -128,8 +129,9 @@ public class PlayerStats : MonoBehaviour
 
     public void UpdateScore()
     {
+        
     }
-
+    
     public void UpdateHealth()
     {
         if (isAI) agent.healthBar.SetHealtBar(currentHealth / (float)maxHealth);
@@ -148,12 +150,6 @@ public class PlayerStats : MonoBehaviour
 
     public void die()
     {
-        if (dead)
-        {
-            return;
-        }
-
-        dead = true;
         if (isAI)
         {
             GameManager.kills += 1;
@@ -162,10 +158,6 @@ public class PlayerStats : MonoBehaviour
             AIDeathState deathState = agent.stateMachine.GetState(AIStateId.Death) as AIDeathState;
             agent.stateMachine.ChangeState(AIStateId.Death);
             Destroy(agent.gameObject, 60f);
-            if (GetComponent<DummyRespawn>())
-            {
-                GetComponent<DummyRespawn>().triggerRespawn();
-            }
         }
         else
         {
@@ -180,17 +172,12 @@ public class PlayerStats : MonoBehaviour
             GetComponent<GunScript>().EjectGun();
             FindObjectOfType<HUDcontroller>().Death();
         }
-
-        if (!deathSound.isPlaying && !isAI)
-        {
+        if(!deathSound.isPlaying && !isAI) {
             deathSound.Play();
         }
-
-        if (!killSound.isPlaying && isAI)
-        {
+        if(!killSound.isPlaying && isAI) {
             killSound.Play();
         }
-
         GetComponent<Ragdoll>().EnablePhysics();
     }
 

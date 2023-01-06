@@ -28,9 +28,6 @@ public class Weapon : Interactable
         distanceModifier,
         damageFalloffStart;
 
-    public bool singleReload;
-    private float singleReloadTime;
-
     public int maxAmmo, magazineSize, bulletsPerTap;
     public bool hasAmmo, rapidFireEnabled;
     [HideInInspector] public int bulletsLeft, bulletsShot;
@@ -68,17 +65,14 @@ public class Weapon : Interactable
     // 0 ist für nicht special Weapon
     // 1 ist für Grappling Gun
     // 2 ist für sniper
-    // 3 ist für rocket launcher
 
     //Bullet Trail
     public Transform BulletFirePoint;
     public TrailRenderer BulletTrail;
     public float zoom = 1f;
-    private bool _ai;
 
     private void Awake()
     {
-        singleReloadTime = reloadTime / ((float)magazineSize / bulletsPerTap);
         bulletsLeft = magazineSize;
         readyToShoot = true;
         bulletsShot = bulletsPerTap;
@@ -87,7 +81,7 @@ public class Weapon : Interactable
     }
 
     public void init(Animator animatior, Transform transform, TextMeshProUGUI ammoText, TextMeshProUGUI maxAmmoText,
-        GameObject hitmarker, float inaccuracy = 1f, bool ai = false)
+        GameObject hitmarker, float inaccuracy = 1f)
     {
         _animator = animatior;
         _transform = transform;
@@ -95,7 +89,6 @@ public class Weapon : Interactable
         _maxAmmoText = maxAmmoText;
         _hitmarker = hitmarker;
         _inaccuracy = inaccuracy;
-        _ai = ai;
     }
 
     private void Update()
@@ -116,24 +109,11 @@ public class Weapon : Interactable
 
     public void Shoot(bool first)
     {
-        if (singleReload && reloading)
-        {
-            cancelReload();
-            readyToShoot = false;
-            Invoke("ResetShot", timeBetweenShooting);
-            return;
-        }
-
         if (!readyToShoot || reloading || bulletsLeft <= 0) return;
 
         _animator.SetTrigger("shoot");
         readyToShoot = false;
 
-        //rocket launcher
-        if (specialWeaponType == 3)
-        {
-            ShootRocket();
-        }
 
         Vector3 direction;
         if (!first)
@@ -171,7 +151,7 @@ public class Weapon : Interactable
 
 
         //hit and damage calc
-        if (hit.distance != 0 && specialWeaponType != 3)
+        if (hit.distance != 0)
         {
             hit_ = hit.point;
             GameObject collisionObject = hit.collider.gameObject;
@@ -286,60 +266,32 @@ public class Weapon : Interactable
     //reload
     public void Reload()
     {
-        if (bulletsLeft.Equals(magazineSize) || maxAmmo <= 0 || reloadStatus < 1) return;
+        if (bulletsLeft.Equals(magazineSize))
+        {
+            return;
+        }
+
+        if (maxAmmo <= 0)
+        {
+            return;
+        }
+
+        if (reloadStatus < 1)
+        {
+            return;
+        }
 
         reloading = true;
         readyToShoot = true;
+        reloadStatus = 0;
+        currentSpread = initialSpread;
+        reloadSound.Play();
 
-        if (!_ai)
-        {
-            ZoomOut();
-            transform.root.GetComponent<PlayerLook>().Zoom(0);
-        }
-
-        if (singleReload)
-        {
-            reloadStatus = (float)bulletsLeft / (float)magazineSize;
-            StartCoroutine(ReloadSingle());
-        }
-        else
-        {
-            reloadSound.Play();
-            reloadStatus = 0;
-            Invoke("ReloadFinished", reloadTime);
-        }
+        Invoke("ReloadFinished", reloadTime);
     }
-
-    private IEnumerator ReloadSingle()
-    {
-        while (reloading && maxAmmo > 0 && bulletsLeft < magazineSize)
-        {
-            reloadSound.Play();
-            yield return new WaitForSeconds(singleReloadTime);
-            if (!reloading)
-            {
-                break;
-            }
-
-            bulletsLeft += bulletsPerTap;
-            maxAmmo -= bulletsPerTap;
-            ShowAmmo();
-        }
-
-        pickupSound.Play();
-        reloading = false;
-    }
-
 
     private void ReloadFinished()
     {
-        if (reloadSound)
-        {
-            reloadSound.Stop();
-        }
-
-        pickupSound.Play();
-        currentSpread = initialSpread;
         if ((maxAmmo + bulletsLeft) < magazineSize)
         {
             bulletsLeft = maxAmmo + bulletsLeft;
@@ -350,9 +302,8 @@ public class Weapon : Interactable
             maxAmmo -= magazineSize - bulletsLeft;
             bulletsLeft = magazineSize;
         }
-
         ShowAmmo();
-
+        
         reloading = false;
     }
 
@@ -409,48 +360,18 @@ public class Weapon : Interactable
 
     public void ZoomIn()
     {
-        if (reloadStatus < 1)
-        {
-            return;
-        }
-
-        if (SniperHUD)
-        {
-            SniperHUD.SetActive(true);
-            //CrossHair.SetActive(false);
-        }
+        SniperHUD.SetActive(true);
+        //CrossHair.SetActive(false);
     }
 
     public void ZoomOut()
     {
-        if (SniperHUD)
-        {
-            SniperHUD.SetActive(false);
-            //CrossHair.SetActive(true);
-        }
+        SniperHUD.SetActive(false);
+        //CrossHair.SetActive(true);
     }
 
     public float getReloadStatus()
     {
         return reloadStatus;
-    }
-
-    public void cancelReload()
-    {
-        if (reloadSound)
-        {
-            reloadSound.Stop();
-        }
-
-        reloading = false;
-        readyToShoot = true;
-        reloadStatus = 1;
-        CancelInvoke("ReloadFinished");
-        StopCoroutine("ReloadSingle");
-    }
-
-    public void ShootRocket()
-    {
-        GetComponent<Launcher>().Launch();
     }
 }

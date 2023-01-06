@@ -8,7 +8,7 @@ public class AIDeathState : AIState
     {
         agent.healthBar.gameObject.SetActive(false);
         agent.weapons.DitchWeapon();
-        //agent.weapons.enabled = false;
+        agent.weapons.enabled = false;
     }
 
     public void Exit(AIAgent agent)

@@ -20,13 +20,12 @@ public class PlayerLook : MonoBehaviour
     [SerializeField] ParticleSystem hookParticles;
     private Quaternion hookRot;
     private float zoom = 0f;
-
     private void Start()
     {
         height = camera.transform.position.y;
         currheight = height;
     }
-
+    
     void FixedUpdate()
     {
         //for zooming
@@ -34,8 +33,7 @@ public class PlayerLook : MonoBehaviour
         {
             elapsedzTime += Time.deltaTime;
             float percentage = elapsedzTime / 0.4f;
-            if (zoom > 0f)
-                camera.fieldOfView = Mathf.Lerp(camera.fieldOfView, baseFOV * zoom, Mathf.SmoothStep(0, 1, percentage));
+            if (zoom > 0f) camera.fieldOfView = Mathf.Lerp(camera.fieldOfView, baseFOV * zoom, Mathf.SmoothStep(0, 1, percentage));
             else camera.fieldOfView = Mathf.Lerp(camera.fieldOfView, baseFOV, Mathf.SmoothStep(0, 1, percentage));
         }
 
@@ -122,13 +120,7 @@ public class PlayerLook : MonoBehaviour
         elapsedTime = 0;
     }
 
-    public void Zoom(float zoom)
-    {
-        if (GetComponent<GunScript>().currentWeapon.getReloadStatus() < 1)
-        {
-            return;
-        }
-
+    public void Zoom(float zoom) {
         sprinting = false;
         this.zoom = zoom;
         elapsedzTime = 0f;

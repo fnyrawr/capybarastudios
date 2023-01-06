@@ -60,6 +60,10 @@ public class AIAttackPlayerState : AIState
                 agent.stateMachine.ChangeState(AIStateId.Idle);
             } else if(distance > agent.config.maxDistance * agent.config.maxDistance) {
                 agent.agent.destination = agent.player.position;
+            } else {
+                if(!agent.agent.hasPath) {
+                    agent.WalkRandom(new Vector3(UnityEngine.Random.Range(0f,3f), UnityEngine.Random.Range(0f, 0.39f), UnityEngine.Random.Range(0f,3f)));
+                }
             }
             timer = agent.config.maxTime;
         }

@@ -26,9 +26,8 @@ public class GunScript : MonoBehaviour
 
     public void EjectGun()
     {
-        if (currentSlot == 2) return;
+        if(currentSlot == 2) return;
         Debug.Log("drop");
-        StopSpecial();
         DitchGun(currentSlot);
         EquipHighest();
     }
@@ -51,24 +50,22 @@ public class GunScript : MonoBehaviour
     private void DitchGun(int index)
     {
         if (!weapons[index]) return;
-
+        
         if (gunSlot.GetChild(0))
         {
-            //StopSpecial();
+            print("ditched");
+            StopSpecial();
             var oldGun = gunSlot.GetChild(0);
-            oldGun.GetComponent<Weapon>().cancelReload();
             oldGun.SetParent(null);
             oldGun.GetComponent<Rigidbody>().isKinematic = false;
             oldGun.GetComponent<BoxCollider>().enabled = true;
             print(oldGun.name + " ditched");
         }
-
         weapons[index] = null;
     }
 
     public void PickUp(GameObject gun)
     {
-        StopSpecial();
         print(gun.name + " aquired");
         var weapon = gun.GetComponent<Weapon>();
         var weaponSlot = weapon.weaponSlot - 1;
@@ -77,10 +74,8 @@ public class GunScript : MonoBehaviour
         gun.GetComponent<BoxCollider>().enabled = false;
         weapons[weaponSlot] = gun;
         ChangeWeapon(weaponSlot);
-        if (currentWeapon.specialWeaponType == 1)
-        {
-            gun.GetComponent<GrapplingGun>().init(camera, GetComponent<PlayerLook>(),
-                GetComponent<CharacterController>(), GetComponent<PlayerMovement>());
+        if(currentWeapon.specialWeaponType == 1) {
+            gun.GetComponent<GrapplingGun>().init(camera, GetComponent<PlayerLook>(),  GetComponent<CharacterController>(), GetComponent<PlayerMovement>());
         }
     }
 
@@ -89,44 +84,22 @@ public class GunScript : MonoBehaviour
         try
         {
             var gun = gunSlot.GetChild(0);
-            gun.GetComponent<Weapon>().cancelReload();
             gun.SetParent(null);
             gun.gameObject.SetActive(false);
         }
-        catch (Exception e)
-        {
-        }
+        catch (Exception e){}
     }
 
     private void ChangeWeapon(int index)
     {
-        if (weapons[currentSlot] != null)
-        {
-            //StopSpecial();
+        if(weapons[currentSlot] != null) {
+            StopSpecial();
             HideGun();
         }
-
-        if (!weapons[index])
-        {
-            //no weapon at index
-            if (weapons[currentSlot])
-            {
-                //switching back to last equiped weapon
-                ChangeWeapon(currentSlot);
-            }
-            else
-            {
-                //switching to the next best weapon if case before is not possible
-                EquipHighest();
-            }
-
-            return;
-        }
-
         currentSlot = index;
         weapons[currentSlot].transform.SetParent(gunSlot);
         gunSlot.GetChild(0).gameObject.SetActive(true);
-        currentWeapon = weapons[currentSlot].GetComponent<Weapon>();
+        currentWeapon = gunSlot.GetChild(0).GetComponent<Weapon>();
         currentWeapon.init(animator, camera.transform, ammoText, maxAmmoText, hitmarker);
         weaponAnimator.refresh();
         weapons[currentSlot].transform.localRotation = Quaternion.Euler(0, 0, 0);
@@ -134,10 +107,8 @@ public class GunScript : MonoBehaviour
         currentWeapon.ShowAmmo();
     }
 
-    //right click events
-    public void StartSpecial()
-    {
-        switch (currentWeapon.specialWeaponType)
+    public void StartSpecial() {
+        switch(currentWeapon.specialWeaponType)
         {
             case 0: //normal
                 print(currentWeapon.zoom);
@@ -155,9 +126,8 @@ public class GunScript : MonoBehaviour
         }
     }
 
-    public void StopSpecial()
-    {
-        switch (currentWeapon.specialWeaponType)
+    public void StopSpecial() {
+        switch(currentWeapon.specialWeaponType)
         {
             case 0: //normal
                 cameraScript.Zoom(0f);
@@ -182,8 +152,7 @@ public class GunScript : MonoBehaviour
         }
     }
 
-    public void StopFiring()
-    {
+    public void StopFiring() {
         if (fireCoroutine != null)
         {
             StopCoroutine(fireCoroutine);
@@ -192,16 +161,14 @@ public class GunScript : MonoBehaviour
 
     public void StartFiring()
     {
+        //fireCoroutine = StartCoroutine(gun.RapidFire());
         fireCoroutine = StartCoroutine(currentWeapon.RapidFire());
     }
-
-    public void Reload()
-    {
+    public void Reload() {
         currentWeapon.Reload();
     }
 
-    public void Shoot()
-    {
+    public void Shoot() {
         currentWeapon.Shoot(true);
     }
 
@@ -209,4 +176,5 @@ public class GunScript : MonoBehaviour
     {
         return currentWeapon.getReloadStatus();
     }
+
 }
