@@ -66,15 +66,6 @@ public class MultiPlayerMovement : NetworkBehaviour
     void Update()
     {
         if(!IsOwner) return;
-        /*if (hooked)
-        {
-            playerVelocity = -2f;
-            if(_input.JumpInput) {
-                GetComponentInChildren<GrapplingGun>().StopHook();
-                playerVelocity = Mathf.Sqrt(jumpHeight * -3.0f * gravity);
-            }
-        }*/
-
         ProcessMovement(_input.MoveInput);
         Crouch();
         Sprint();

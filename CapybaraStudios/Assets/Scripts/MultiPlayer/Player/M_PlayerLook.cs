@@ -25,6 +25,7 @@ public class M_PlayerLook : NetworkBehaviour
 
     void FixedUpdate()
     {
+        if(!IsOwner) return;
         //for sprinting
         if (elapsedTime <= 0.4f)
         {

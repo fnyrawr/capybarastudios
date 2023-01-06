@@ -1322,6 +1322,7 @@ GameObject:
   - component: {fileID: 4322564949865965329}
   - component: {fileID: 4750660733123678403}
   - component: {fileID: 3995095118400568700}
+  - component: {fileID: 1594645271672734586}
   m_Layer: 15
   m_Name: M_Player
   m_TagString: Player
@@ -1475,6 +1476,19 @@ MonoBehaviour:
   baseFOV: 90
   sprintingFOV: 1.1
   _input: {fileID: 9148826288943837784}
+--- !u!114 &1594645271672734586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1168766782365090938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d77ca73cc20cc5f46937c12bc7146d88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  head: {fileID: 8756691152361757365}
 --- !u!1 &1309686336261624343
 GameObject:
   m_ObjectHideFlags: 0
@@ -8089,6 +8103,7 @@ GameObject:
   - component: {fileID: 1683131718342614404}
   - component: {fileID: 554454199102203288}
   - component: {fileID: 4881416720305089929}
+  - component: {fileID: 5365298880576887148}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -8196,6 +8211,22 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!114 &5365298880576887148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6912617472856648100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 951099334
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &7163064717288751890
 GameObject:
   m_ObjectHideFlags: 0
