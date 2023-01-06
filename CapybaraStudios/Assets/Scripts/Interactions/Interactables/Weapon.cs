@@ -15,6 +15,7 @@ public class Weapon : Interactable
     public AudioSource gunSound;
     public AudioSource reloadSound;
     public AudioSource pickupSound;
+    public AudioSource scopeSound;
 
     //Gun stats
     public int damage;
@@ -360,12 +361,16 @@ public class Weapon : Interactable
 
     public void ZoomIn()
     {
+        scopeSound.pitch = 1;
+        scopeSound.Play();
         SniperHUD.SetActive(true);
         //CrossHair.SetActive(false);
     }
 
     public void ZoomOut()
     {
+        scopeSound.pitch = -1;
+        scopeSound.Play();
         SniperHUD.SetActive(false);
         //CrossHair.SetActive(true);
     }

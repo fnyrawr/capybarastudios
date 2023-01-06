@@ -7,6 +7,7 @@ public class woodenDoor : Interactable
     public GameObject button;
     public GameObject door;
     private bool open = false;
+    public AudioSource buttonSound;
 
     // Update is called once per frame
     void Update()
@@ -20,6 +21,7 @@ public class woodenDoor : Interactable
         if(open == false) {
             door.transform.localRotation = Quaternion.Euler(0, 0, 0);
             button.transform.localPosition = new Vector3(833, -78, 170);
+            buttonSound.Play();
         }
         else {
             door.transform.localRotation = Quaternion.Euler(0, -90, 0);

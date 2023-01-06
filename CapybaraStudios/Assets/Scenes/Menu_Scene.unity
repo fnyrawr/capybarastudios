@@ -271,7 +271,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.6862745, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.68602705, b: 0, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -439,7 +439,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.6862745, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.68602705, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -911,7 +911,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.6862745, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.68602705, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1251,7 +1251,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.6862745, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.68602705, b: 0, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2093,6 +2093,10 @@ PrefabInstance:
       value: hard
       objectReference: {fileID: 0}
     - target: {fileID: 393905815672338038, guid: 0a68be1bd13d8694e8d8fe85574ac075, type: 3}
+      propertyPath: endMusic
+      value: 
+      objectReference: {fileID: -808880793787451258, guid: 653f76c08fa07df45b7864eb8932ad7c, type: 3}
+    - target: {fileID: 393905815672338038, guid: 0a68be1bd13d8694e8d8fe85574ac075, type: 3}
       propertyPath: gameMusicOne
       value: 
       objectReference: {fileID: 5160241704365622297, guid: 60ddec0bf171da04d990ea7a506c8c2e, type: 3}
@@ -2110,6 +2114,10 @@ PrefabInstance:
       objectReference: {fileID: 7677675400391291140, guid: 34a8e4471872b794aa790709a3b43b95, type: 3}
     - target: {fileID: 394455144726955508, guid: 0a68be1bd13d8694e8d8fe85574ac075, type: 3}
       propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 415971624532527858, guid: 0a68be1bd13d8694e8d8fe85574ac075, type: 3}
+      propertyPath: m_PlayOnAwake
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 575974444132127564, guid: 0a68be1bd13d8694e8d8fe85574ac075, type: 3}
@@ -2508,32 +2516,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51f7ab2135dc14b45b2acef27ecb59ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sounds:
-  - {fileID: 7506556164442006651, guid: ee93025b83f9f4543a99183ca3a405f2, type: 3}
-  - {fileID: -2268488949256064451, guid: 9d86ea1b9184f50448993ef5dc16b4db, type: 3}
-  - {fileID: -2372618421268561370, guid: af987c2e86bf5004e876ef732be285bd, type: 3}
-  - {fileID: -8521165875771477006, guid: 65c9979e910145746bb44ccdc22ec974, type: 3}
-  - {fileID: -437349993934948162, guid: a5027e88831613643b207715f4e0cfde, type: 3}
-  - {fileID: 2878155432439525321, guid: 3c23b2a3cdf4a744eb815808bfbbc900, type: 3}
-  - {fileID: 6710982408712679655, guid: c62a62994813fed4f9baabda6b35e461, type: 3}
-  - {fileID: 5979892217100651550, guid: 3996a07892c141343be42cf143f73d55, type: 3}
-  - {fileID: -7061177333033325586, guid: dff91c62ec4ee8d4791f860f42fde594, type: 3}
-  - {fileID: 6921845985839024239, guid: 60fe9733497e13045868fcb0042bd3f6, type: 3}
-  - {fileID: -3250170485934517659, guid: 30e257ebb3af9af4f9160c28495262b0, type: 3}
-  - {fileID: -2191926686170340035, guid: 34d8bb97385ff544fa8aecb7c429f5ba, type: 3}
-  - {fileID: 2580914989538855435, guid: 804a5d53f6347064abbe0bbbd93227bb, type: 3}
-  - {fileID: 1595289792998351868, guid: 539138deeecd42d4d8c955dc311eecd2, type: 3}
-  - {fileID: -7694869553600274228, guid: 649d58e4c3cf5144ebff62ba0d04cf67, type: 3}
-  - {fileID: 1111083658217211645, guid: e2dd0d0cf9aedf947b3f490f38d29927, type: 3}
-  - {fileID: 8952194282656303234, guid: fb69e61e681c7cc4b9b90f9ac9a4d78a, type: 3}
-  - {fileID: -1227981640201296367, guid: 0b5fc2a4fbb13bc43971b423a2851e1a, type: 3}
-  - {fileID: 840862062351700850, guid: 5e59db8e4423dfb40b57491e3e1b9fdd, type: 3}
-  - {fileID: 2026477424380421904, guid: aecb3f85002c41e40b516c9d7b59575f, type: 3}
-  - {fileID: 4573466659334988682, guid: c2a773e6b8f268b40829c124ce86b3fb, type: 3}
-  - {fileID: 5545689069661966880, guid: e4b82da7dc171954ba4014fa1d42cd23, type: 3}
-  - {fileID: -5244882661116427644, guid: 02b636cf99549cb41812040025695321, type: 3}
-  - {fileID: -7791032373676981398, guid: d4f9551abc367834b8a1153401fde78f, type: 3}
-  - {fileID: 7032116659832266288, guid: 8a4b364868081164dbcfd8506e19da22, type: 3}
-  - {fileID: 2129733757996127670, guid: 8d17d0bda0fb96c40bb3b487b3cb0df5, type: 3}
-  - {fileID: 8423739853932057364, guid: 7ee75c62bb36b0142b328941d2232374, type: 3}
-  - {fileID: -816538900342173917, guid: 140baaf0dc9451d4887aa9c9bff18ccb, type: 3}
+  ak47_reload: {fileID: 7506556164442006651, guid: ee93025b83f9f4543a99183ca3a405f2, type: 3}
+  ak47_shot: {fileID: -2268488949256064451, guid: 9d86ea1b9184f50448993ef5dc16b4db, type: 3}
+  button: {fileID: -2372618421268561370, guid: af987c2e86bf5004e876ef732be285bd, type: 3}
+  dead: {fileID: -8521165875771477006, guid: 65c9979e910145746bb44ccdc22ec974, type: 3}
+  door: {fileID: -437349993934948162, guid: a5027e88831613643b207715f4e0cfde, type: 3}
+  grappling_grab: {fileID: 2878155432439525321, guid: 3c23b2a3cdf4a744eb815808bfbbc900, type: 3}
+  grappling_reload: {fileID: 6710982408712679655, guid: c62a62994813fed4f9baabda6b35e461, type: 3}
+  grappling_shoot: {fileID: 5979892217100651550, guid: 3996a07892c141343be42cf143f73d55, type: 3}
+  heal: {fileID: -7061177333033325586, guid: dff91c62ec4ee8d4791f860f42fde594, type: 3}
+  jump: {fileID: 6921845985839024239, guid: 60fe9733497e13045868fcb0042bd3f6, type: 3}
+  kill: {fileID: -3250170485934517659, guid: 30e257ebb3af9af4f9160c28495262b0, type: 3}
+  knife: {fileID: -2191926686170340035, guid: 34d8bb97385ff544fa8aecb7c429f5ba, type: 3}
+  lmg_shot: {fileID: 2580914989538855435, guid: 804a5d53f6347064abbe0bbbd93227bb, type: 3}
+  pickup: {fileID: 1595289792998351868, guid: 539138deeecd42d4d8c955dc311eecd2, type: 3}
+  pistol_reload: {fileID: -7694869553600274228, guid: 649d58e4c3cf5144ebff62ba0d04cf67, type: 3}
+  pistol_shot: {fileID: 1111083658217211645, guid: e2dd0d0cf9aedf947b3f490f38d29927, type: 3}
+  portal: {fileID: 8952194282656303234, guid: fb69e61e681c7cc4b9b90f9ac9a4d78a, type: 3}
+  reload: {fileID: -1227981640201296367, guid: 0b5fc2a4fbb13bc43971b423a2851e1a, type: 3}
+  shell: {fileID: 840862062351700850, guid: 5e59db8e4423dfb40b57491e3e1b9fdd, type: 3}
+  shells: {fileID: 2026477424380421904, guid: aecb3f85002c41e40b516c9d7b59575f, type: 3}
+  shotgun_reload: {fileID: 4573466659334988682, guid: c2a773e6b8f268b40829c124ce86b3fb, type: 3}
+  shotgun_shot: {fileID: 5545689069661966880, guid: e4b82da7dc171954ba4014fa1d42cd23, type: 3}
+  slide: {fileID: -5244882661116427644, guid: 02b636cf99549cb41812040025695321, type: 3}
+  sniper_reload: {fileID: -7791032373676981398, guid: d4f9551abc367834b8a1153401fde78f, type: 3}
+  sniper_scope: {fileID: 7032116659832266288, guid: 8a4b364868081164dbcfd8506e19da22, type: 3}
+  sniper_shot: {fileID: 2129733757996127670, guid: 8d17d0bda0fb96c40bb3b487b3cb0df5, type: 3}
+  steps: {fileID: 8423739853932057364, guid: 7ee75c62bb36b0142b328941d2232374, type: 3}
+  uzi_shot: {fileID: -816538900342173917, guid: 140baaf0dc9451d4887aa9c9bff18ccb, type: 3}
