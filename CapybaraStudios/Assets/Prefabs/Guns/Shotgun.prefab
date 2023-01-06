@@ -343,11 +343,12 @@ MonoBehaviour:
   initialSpread: 0.03
   maxSpread: 0.1
   range: 100
-  reloadTime: 2
+  reloadTime: 3
   fireRate: 1
   timeBetweenShooting: 1
   distanceModifier: 0.1
   damageFalloffStart: 10
+  singleReload: 1
   maxAmmo: 100
   magazineSize: 25
   bulletsPerTap: 5

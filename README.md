@@ -4,34 +4,48 @@ Semesterproject of Capybara Studios Group
 Unity Version
 2021.3.11f1
 
-# TODO bis zur Alpha:
-- [ ] Das neue CharakterModell [Deniz]
-- [x] Pause Menü bei ESC in Game [Zainab]
-- [ ] TabMenü für den SingePlayer in Game mit [Zainab, _]
-   - [ ] verteilter Schaden
-   - [ ] Kills
+# TODOs bis zur Endpräsentation:
+- [ ] Multiplayer
+  - [x] movement
+  - [ ] kamera
+  - [ ] dmg
+  - [ ] rocketlauncher
+  - [ ] dying
+  - [ ] respawning
+  - [ ] Name aus Menü soll über dem Kopf angezeigt werden
+  - [ ] Players sollen unterschiedliche Farben haben 
+  - [ ] connect to lobby by code with relay
+  - [ ] TabMenü für den Multiplayer
+  - [ ] Sounds
+  - [ ] Tabmenü im Multiplayer
+
+- [ ] Tabmenü
    - [ ] Namen
-- [ ] Zainabs Menüs  [Zainab]
-  - [x] man sollte mindestens Musik leiser machen können und die SinglePlayer Maps anwählen können
-  - [ ] Namen im Menü ändern
- - [ ] man sollte auf der SinglePlayer Map spielen können [Erdenay]
-  - [ ] Anfgansarea auf der ersten Map sollte Tutorialarea sein
-  - [ ] Tutorial Nachrichten [Erdenay]
- - [ ] alle Waffenarten und Gegner platzieren auf der Map [Erdenay]
- - [ ] 1-2 Gegnertypen [Eric]
-- [x] man sollte auf Gegner schießen, ihnen Schaden machen und sie töten können [Felix, Eric, Adrian]
-- [x] es sollten mindestens 3Waffen (Pistole, Shotgun, Grappling gun) komplett implementiert sein [Felix, Eric, Adrian]
-- [ ] man sollte die erste SinglePlayerMap abschließen können und die Bestzeit soll in das Menü gespeichert werden [Felix, Eric, Adrian]
-- [x] man sollte sterben können und sich heilen können [Felix, Eric, Adrian]
-- [ ] Sounds die noch fehlen bis zur Alpha: [Florian]
-  - [ ] Pistole(Schuss und Nachladen)
-  - [ ] Shotgun(Schuss und Nachladen)
-  - [ ] Grapplinggun(Schuss und Nachladen)
+
+- [ ] Menüs
+  - [ ] Namen ändern in Settings
+  - [ ] alle Optionen im Menü funktionieren
+    - [ ] Soundmanager
+    - [ ] Controls 
+      - [ ] mindestens Maussenstivität einstellbar
+    - [ ] Video Funktionen einbauen
+
+- [ ] Maps
+  - [ ] mindestens 2 neue SingleplayerMaps
+  - [ ] Storyline
+  - [ ] map muss abgeschlossen werden, um nächste freizuschalten
+  - [ ] mindestens eine neue Multiplayermap
+    - [ ] Parkourmap oder Parkourelemente
+
+- [ ] Waffen
+  - [ ] Granadelauncher
+  - [ ] Rocketlauncher
+
+- [ ] Sounds
   - [ ] Schritte
-  - [ ] Sliden
-  - [x] Game Sound für die erste Map
-  - [ ] Portal
-  - [ ] Tür
-  - [ ] Aufheben von Waffen
-  - [ ] Sterben
   - [ ] Heilen
+  - [ ] 2 neue Soundtracks für die neuen Maps
+  - [ ] Menümusik
+  - [ ] Soundtrack für den Multiplayer
+  - [ ] Rocketlauncher
+  - [ ] Granadelauncher

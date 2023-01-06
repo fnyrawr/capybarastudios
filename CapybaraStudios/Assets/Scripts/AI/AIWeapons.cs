@@ -29,7 +29,7 @@ public class AIWeapons : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other) {
-        if(!HasWeapon() && other.gameObject.tag == "Weapon") {
+        if(!HasWeapon() && other.gameObject.tag == "Weapon"&& !agent.playerStats.dead) {
             EquipWeapon(other.gameObject);
         }
     }
@@ -42,7 +42,7 @@ public class AIWeapons : MonoBehaviour
         weapon.transform.SetParent(gunSlot);
         gunSlot.GetChild(0).gameObject.SetActive(true);
         currentWeapon = gunSlot.GetChild(0).GetComponent<Weapon>();
-        currentWeapon.init(animator, headTransform, null, null, null, inaccuracy);
+        currentWeapon.init(animator, headTransform, null, null, null, inaccuracy, true);
 
         weaponAnimator.refresh();
         weapon.transform.localRotation = Quaternion.Euler(0, 0, 0);
@@ -50,17 +50,20 @@ public class AIWeapons : MonoBehaviour
     }
 
     public void DitchWeapon() {
-        if(!HasWeapon()) return;
-        var weapon = current.transform;
-        weapon.SetParent(null);
-        weapon.GetComponent<Rigidbody>().isKinematic = false;
-        weapon.GetComponent<BoxCollider>().enabled = true;
-        current = null;
+        if (gunSlot.GetChild(0))
+        {
+            var oldGun = gunSlot.GetChild(0);
+            oldGun.GetComponent<Weapon>().cancelReload();
+            oldGun.SetParent(null);
+            oldGun.GetComponent<Rigidbody>().isKinematic = false;
+            oldGun.GetComponent<BoxCollider>().enabled = true;
+            print(oldGun.name + " ditched");
+        }
         currentWeapon = null;
     }
 
     public bool HasWeapon() {
-        return current != null;
+        return currentWeapon != null;
     }
 
     public void SetFiring(bool val) {

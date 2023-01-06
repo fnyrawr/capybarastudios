@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class spreadIndicator : MonoBehaviour
 {
     private GunScript _gunScript;
-    
+
     private Vector3 initialSpread;
     [CanBeNull] private RectTransform rt;
 
@@ -21,6 +22,15 @@ public class spreadIndicator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        rt.localScale = initialSpread * (1 + _gunScript.currentWeapon.currentSpread*100);
+        if (_gunScript.currentWeapon.getReloadStatus() < 1)
+        {
+            GetComponent<Image>().enabled = false;
+        }
+        else
+        {
+            GetComponent<Image>().enabled = true;
+        }
+
+        rt.localScale = initialSpread * (1 + _gunScript.currentWeapon.currentSpread * 100);
     }
 }

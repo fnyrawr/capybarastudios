@@ -37,6 +37,7 @@ public class PlayerInteract : MonoBehaviour
         //on E press
         if (inputManager.walking.Interact.triggered)
         {
+            print(interactable.name);
             interactable.BaseInteract(gameObject);
         }
     }
