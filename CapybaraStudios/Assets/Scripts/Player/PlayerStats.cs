@@ -22,6 +22,7 @@ public class PlayerStats : MonoBehaviour
     public int damage_done = 0;
     public int kills = 0;
     private Animator _animator;
+    public bool dead = false;
 
     //private Ragdoll ragdoll;
     private SkinnedMeshRenderer[] skinnedMeshRenderers;
@@ -147,6 +148,12 @@ public class PlayerStats : MonoBehaviour
 
     public void die()
     {
+        if (dead)
+        {
+            return;
+        }
+
+        dead = true;
         if (isAI)
         {
             GameManager.kills += 1;
