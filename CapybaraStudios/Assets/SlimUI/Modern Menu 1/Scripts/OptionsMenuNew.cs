@@ -50,7 +50,7 @@ namespace SlimUI.ModernMenu
 
         // sliders
         public GameObject musicSlider;
-        // public GameObject soundSlider;
+        public GameObject soundSlider;
         public GameObject sensitivityXSlider;
         public GameObject sensitivityYSlider;
         public GameObject mouseSmoothSlider;
@@ -77,7 +77,7 @@ namespace SlimUI.ModernMenu
 
             // check slider values
             musicSlider.GetComponent<Slider>().value = PlayerPrefs.GetFloat("MusicVolume");
-            // soundSlider.GetComponent<Slider>().value = PlayerPrefs.GetFloat("SFXVolume");
+            soundSlider.GetComponent<Slider>().value = PlayerPrefs.GetFloat("SFXVolume");
             sensitivityXSlider.GetComponent<Slider>().value = PlayerPrefs.GetFloat("XSensitivity");
             sensitivityYSlider.GetComponent<Slider>().value = PlayerPrefs.GetFloat("YSensitivity");
             mouseSmoothSlider.GetComponent<Slider>().value = PlayerPrefs.GetFloat("MouseSmoothing");
@@ -95,21 +95,33 @@ namespace SlimUI.ModernMenu
             // check hud value
             if (PlayerPrefs.GetInt("ShowHUD") == 0)
             {
-                showhudtext.GetComponent<TMP_Text>().text = "off";
+                if (showhudtext)
+                {
+                    showhudtext.GetComponent<TMP_Text>().text = "off";
+                }
             }
             else
             {
-                showhudtext.GetComponent<TMP_Text>().text = "on";
+                if (showhudtext)
+                {
+                    showhudtext.GetComponent<TMP_Text>().text = "on";
+                }
             }
 
             // check tool tip value
             if (PlayerPrefs.GetInt("ToolTips") == 0)
             {
-                tooltipstext.GetComponent<TMP_Text>().text = "off";
+                if (tooltipstext)
+                {
+                    tooltipstext.GetComponent<TMP_Text>().text = "off";
+                }
             }
             else
             {
-                tooltipstext.GetComponent<TMP_Text>().text = "on";
+                if (tooltipstext)
+                {
+                    tooltipstext.GetComponent<TMP_Text>().text = "on";
+                }
             }
 
             // check shadow distance/enabled
@@ -266,10 +278,10 @@ namespace SlimUI.ModernMenu
             PlayerPrefs.SetFloat("MusicVolume", musicSlider.GetComponent<Slider>().value);
         }
 
-        // public void SoundSlider()
-        // {
-        //     PlayerPrefs.SetFloat("SFXVolume", soundSlider.GetComponent<Slider>().value);
-        // }
+        public void SoundSlider()
+        {
+            PlayerPrefs.SetFloat("SFXVolume", soundSlider.GetComponent<Slider>().value);
+        }
 
         public void SensitivityXSlider()
         {
