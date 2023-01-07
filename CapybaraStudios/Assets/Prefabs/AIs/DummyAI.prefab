@@ -194,7 +194,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5265362129531757254}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -4.01, y: -1.45, z: 14.14}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 1
@@ -205,7 +205,7 @@ Transform:
   - {fileID: 5156727687279095698}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!195 &8873456944637746849
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -263,6 +263,7 @@ MonoBehaviour:
   healthIndicator: {fileID: 0}
   damage_done: 0
   kills: 0
+  dead: 0
   blinkDuration: 0.1
   blinkIntensity: 4
   volume: {fileID: 0}
@@ -380,7 +381,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20a9c707d370f814580dbe9823e4b689, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dummy: {fileID: 4780995798902552700}
 --- !u!1 &6783753736985541009
 GameObject:
   m_ObjectHideFlags: 0

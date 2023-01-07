@@ -71,6 +71,6 @@ public class GameManager : MonoBehaviour
 
     public static void triggerRespawn(Vector3 pos)
     {
-        Instantiate(_dummy, pos, Quaternion.identity);
+        Instantiate(_dummy, pos, Quaternion.Euler(0, 90, 0));
     }
 }
