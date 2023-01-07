@@ -7,7 +7,7 @@ Unity Version
 # TODOs bis zur Endpräsentation:
 - [ ] Multiplayer
   - [x] movement
-  - [ ] kamera
+  - [x] kamera
   - [ ] dmg
   - [ ] rocketlauncher
   - [ ] dying
@@ -25,7 +25,7 @@ Unity Version
 - [ ] Menüs
   - [ ] Namen ändern in Settings
   - [ ] alle Optionen im Menü funktionieren
-    - [ ] Soundmanager
+    - [x] Soundmanager
     - [ ] Controls 
       - [ ] mindestens Maussenstivität einstellbar
     - [ ] Video Funktionen einbauen
