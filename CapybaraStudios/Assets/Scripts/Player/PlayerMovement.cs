@@ -48,7 +48,9 @@ public class PlayerMovement : MonoBehaviour
     private float _velocityX = 0;
     private float _velocityZ = 0;
     private bool isJumping;
+
     public Transform torso;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -67,7 +69,8 @@ public class PlayerMovement : MonoBehaviour
         if (hooked)
         {
             playerVelocity = -2f;
-            if(_input.JumpInput) {
+            if (_input.JumpInput)
+            {
                 GetComponentInChildren<GrapplingGun>().StopHook();
                 playerVelocity = Mathf.Sqrt(jumpHeight * -3.0f * gravity);
             }
@@ -187,26 +190,34 @@ public class PlayerMovement : MonoBehaviour
 
     public void Crouch()
     {
-        if (crouching == _input.CrouchInput) return;
+        if (crouching == _input.CrouchInput)
+        {
+            return;
+        }
+
         if (!crouching && _input.CrouchInput)
         {
             if (sprinting)
             {
                 crouchingMomentum = 1.1f;
                 _animator.SetBool(_isSlidingHash, _input.CrouchInput);
-                if(!slidingSound.isPlaying) {
-                slidingSound.Play();
-            }
+                if (!slidingSound.isPlaying)
+                {
+                    slidingSound.Play();
+                }
             }
             else
             {
                 crouchingMomentum = 0.65f;
                 _animator.SetBool(_isCrouchingHash, _input.CrouchInput);
+                controller.center = new Vector3(0, 0.9f, 0);
+                controller.height = 1.8f;
             }
         }
-
-        if (crouching && !_input.CrouchInput)
+        else if (crouching && !_input.CrouchInput)
         {
+            controller.center = new Vector3(0, 1.225f, 0);
+            controller.height = 2.5f;
             crouchingMomentum = 1f;
             _animator.SetBool(_isCrouchingHash, _input.CrouchInput);
             _animator.SetBool(_isSlidingHash, _input.CrouchInput);
