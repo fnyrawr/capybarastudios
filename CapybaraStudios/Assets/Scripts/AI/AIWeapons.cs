@@ -50,15 +50,13 @@ public class AIWeapons : MonoBehaviour
     }
 
     public void DitchWeapon() {
-        if (gunSlot.GetChild(0))
-        {
-            var oldGun = gunSlot.GetChild(0);
-            oldGun.GetComponent<Weapon>().cancelReload();
-            oldGun.SetParent(null);
-            oldGun.GetComponent<Rigidbody>().isKinematic = false;
-            oldGun.GetComponent<BoxCollider>().enabled = true;
-            print(oldGun.name + " ditched");
-        }
+        if(!HasWeapon()) return;
+        var oldGun = gunSlot.GetChild(0);
+        oldGun.GetComponent<Weapon>().cancelReload();
+        oldGun.SetParent(null);
+        oldGun.GetComponent<Rigidbody>().isKinematic = false;
+        oldGun.GetComponent<BoxCollider>().enabled = true;
+        print(oldGun.name + " ditched");
         currentWeapon = null;
     }
 
