@@ -7058,6 +7058,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1773712427641389786, guid: 2cf95ac77bf71784ba860ab9aeac3a2d, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1773712427641389786, guid: 2cf95ac77bf71784ba860ab9aeac3a2d, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 1773712427641389786, guid: 2cf95ac77bf71784ba860ab9aeac3a2d, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1080
+      objectReference: {fileID: 0}
     - target: {fileID: 1773712428791678988, guid: 2cf95ac77bf71784ba860ab9aeac3a2d, type: 3}
       propertyPath: m_Name
       value: Sniper
