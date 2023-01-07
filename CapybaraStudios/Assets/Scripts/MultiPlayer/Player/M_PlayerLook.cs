@@ -6,7 +6,7 @@ using UnityEngine;
 public class M_PlayerLook : NetworkBehaviour
 {
     private float xRotation = 0f;
-    public Camera camera;
+    [HideInInspector] public Camera camera;
     public float xSensitivity = 30f;
     public float ySensitivity = 30f;
     public Transform target;
@@ -17,9 +17,11 @@ public class M_PlayerLook : NetworkBehaviour
     private float elapsedTime = 1f, elapsedcTime = 1f, elapsedzTime = 1f;
     [SerializeField] M_InputManager _input;
     private float zoom = 0f;
-
+    [SerializeField] private Transform head;
     void Start() {
         if(!IsOwner) return;
+        M_Camera.Instance.AttachToPlayer(head);
+        camera = M_Camera.Instance._camera;
         Cursor.lockState = CursorLockMode.Locked;
     }
 
