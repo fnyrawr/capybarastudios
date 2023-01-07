@@ -1239,6 +1239,7 @@ MonoBehaviour:
   healthIndicator: {fileID: 0}
   damage_done: 0
   kills: 0
+  dead: 0
   blinkDuration: 0
   blinkIntensity: 0
   volume: {fileID: 0}
@@ -2203,6 +2204,7 @@ MonoBehaviour:
   healthIndicator: {fileID: 0}
   damage_done: 0
   kills: 0
+  dead: 0
   blinkDuration: 0
   blinkIntensity: 0
   volume: {fileID: 0}
@@ -3373,6 +3375,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DummyAI
       objectReference: {fileID: 0}
+    - target: {fileID: 8873456944637746849, guid: 51e23f3c88c067f44a9b40e15acc8c0e, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 51e23f3c88c067f44a9b40e15acc8c0e, type: 3}
 --- !u!1001 &807846910
@@ -4522,6 +4528,7 @@ MonoBehaviour:
   healthIndicator: {fileID: 0}
   damage_done: 0
   kills: 0
+  dead: 0
   blinkDuration: 0
   blinkIntensity: 0
   volume: {fileID: 0}
@@ -6675,6 +6682,7 @@ MonoBehaviour:
   healthIndicator: {fileID: 0}
   damage_done: 0
   kills: 0
+  dead: 0
   blinkDuration: 0
   blinkIntensity: 0
   volume: {fileID: 0}
@@ -8249,6 +8257,7 @@ MonoBehaviour:
   healthIndicator: {fileID: 0}
   damage_done: 0
   kills: 0
+  dead: 0
   blinkDuration: 0
   blinkIntensity: 0
   volume: {fileID: 0}
@@ -8510,6 +8519,7 @@ MonoBehaviour:
   healthIndicator: {fileID: 0}
   damage_done: 0
   kills: 0
+  dead: 0
   blinkDuration: 0
   blinkIntensity: 0
   volume: {fileID: 0}

@@ -29,7 +29,7 @@ public class AIWeapons : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other) {
-        if(!HasWeapon() && other.gameObject.tag == "Weapon"&& !agent.playerStats.dead) {
+        if(!HasWeapon() && other.gameObject.tag == "Weapon" && !agent.playerStats.dead) {
             EquipWeapon(other.gameObject);
         }
     }
