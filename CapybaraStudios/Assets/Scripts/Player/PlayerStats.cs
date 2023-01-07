@@ -159,7 +159,7 @@ public class PlayerStats : MonoBehaviour
             GameManager.kills += 1;
             GetComponent<NavMeshAgent>().enabled = false;
             GetComponent<AiController>().enabled = false;
-            AIDeathState deathState = agent.stateMachine.GetState(AIStateId.Death) as AIDeathState;
+            GetComponent<AIAgent>().enabled = false;
             agent.stateMachine.ChangeState(AIStateId.Death);
             Destroy(agent.gameObject, 60f);
             if (GetComponent<DummyRespawn>())
