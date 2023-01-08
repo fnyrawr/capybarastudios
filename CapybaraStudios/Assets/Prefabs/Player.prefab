@@ -7881,6 +7881,7 @@ MonoBehaviour:
   healthIndicator: {fileID: 5142780579765735370}
   damage_done: 0
   kills: 0
+  dead: 0
   blinkDuration: 0
   blinkIntensity: 0
   volume: {fileID: 4319109925342848768}
@@ -10307,6 +10308,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e50cfeb74ac19c48a5755ff0ee9ebf5, type: 3}
+--- !u!1 &187309771548319198 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1469526436768380476, guid: 3e50cfeb74ac19c48a5755ff0ee9ebf5, type: 3}
+  m_PrefabInstance: {fileID: 1656686656478456802}
+  m_PrefabAsset: {fileID: 0}
+--- !u!225 &1828584323133714764
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 187309771548319198}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &3363140636194075363 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4058303102669838593, guid: 3e50cfeb74ac19c48a5755ff0ee9ebf5, type: 3}

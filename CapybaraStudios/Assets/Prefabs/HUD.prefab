@@ -1163,7 +1163,6 @@ GameObject:
   - component: {fileID: 7106900800683530056}
   - component: {fileID: 2174528921465987135}
   - component: {fileID: 7740002622468680714}
-  - component: {fileID: 6647842596838671518}
   m_Layer: 5
   m_Name: DeathUI
   m_TagString: Untagged
@@ -1233,18 +1232,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!225 &6647842596838671518
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1469526436768380476}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
 --- !u!1 &3376331394336612031
 GameObject:
   m_ObjectHideFlags: 0
