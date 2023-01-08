@@ -23,8 +23,17 @@ public class GameManager : MonoBehaviour
     private static Transform _dummy;
     public Transform dummy;
 
+    public AudioSource themeOne;
+    public AudioSource themeTwo;
+    public AudioSource themeOneIntense;
+    public AudioSource themeTwoIntense;
+    private PlayerStats playerStats;
+
+
     private void Start()
     {
+        themeOne.Play();
+
         _dummy = dummy;
 
         respawnPosition = respawnPoint.position;
@@ -44,6 +53,43 @@ public class GameManager : MonoBehaviour
     public void Update()
     {
         time = TimeSpan.FromSeconds(Time.timeSinceLevelLoad).ToString(@"hh\:mm\:ss");
+
+
+        playerStats = player.GetComponent<PlayerStats>();
+        if (playerStats.currentHealth < playerStats.maxHealth)
+        {
+            if (themeOne.isPlaying)
+            {
+                themeOneIntense.Play();
+                if (themeOneIntense.isPlaying)
+                {
+                    themeOne.Stop();
+                }
+            }
+
+            if (themeTwo.isPlaying)
+            {
+                themeTwoIntense.Play();
+                if (themeTwoIntense.isPlaying)
+                {
+                    themeTwo.Stop();
+                }
+            }
+        }
+        else
+        {
+            if (themeOneIntense.isPlaying)
+            {
+                themeOne.Play();
+                themeOneIntense.Stop();
+            }
+
+            if (themeTwoIntense.isPlaying)
+            {
+                themeTwo.Play();
+                themeTwoIntense.Stop();
+            }
+        }
     }
 
     public void Respawn()
@@ -72,5 +118,11 @@ public class GameManager : MonoBehaviour
     public static void triggerRespawn(Vector3 pos)
     {
         Instantiate(_dummy, pos, Quaternion.Euler(0, 90, 0));
+    }
+
+    public void teleport()
+    {
+        themeOne.Stop();
+        themeTwo.Play();
     }
 }

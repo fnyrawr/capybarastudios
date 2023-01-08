@@ -4379,6 +4379,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 393194567867878790}
+          m_TargetAssemblyTypeName: SlimUI.ModernMenu.MainMenuNew, Assembly-CSharp
+          m_MethodName: PlaySFXHover
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &352425326799509778
 GameObject:
   m_ObjectHideFlags: 0
@@ -5612,11 +5624,11 @@ AudioSource:
   m_GameObject: {fileID: 352471531661238868}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 35e0c0179d051e04f84ac3e04b705b65, type: 3}
+  OutputAudioMixerGroup: {fileID: 2859946949574841069, guid: e85546a977530b949a161b4ce431c5c4, type: 2}
+  m_audioClip: {fileID: 8300000, guid: 37c9133889e2bfc4296ead93a281acc2, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.02
-  m_Pitch: 3
+  m_Volume: 1
+  m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -30934,6 +30946,18 @@ MonoBehaviour:
         - m_Target: {fileID: 393905815672338038}
           m_TargetAssemblyTypeName: 
           m_MethodName: UpdateVolume
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 393194567867878790}
+          m_TargetAssemblyTypeName: SlimUI.ModernMenu.MainMenuNew, Assembly-CSharp
+          m_MethodName: PlaySFXHover
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
