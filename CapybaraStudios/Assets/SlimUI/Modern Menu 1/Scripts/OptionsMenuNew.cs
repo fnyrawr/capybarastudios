@@ -2,6 +2,8 @@
 using System.Collections;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Processors;
 using UnityEngine.SceneManagement;
 
 namespace SlimUI.ModernMenu
@@ -61,6 +63,8 @@ namespace SlimUI.ModernMenu
         private float sliderValueSmoothing = 0.0f;
 
 
+        [SerializeField] private InputActionAsset _inputActionAsset;
+
         public void Start()
         {
             // check difficulty
@@ -80,7 +84,9 @@ namespace SlimUI.ModernMenu
             soundSlider.GetComponent<Slider>().value = PlayerPrefs.GetFloat("SFXVolume");
             sensitivityXSlider.GetComponent<Slider>().value = PlayerPrefs.GetFloat("XSensitivity");
             sensitivityYSlider.GetComponent<Slider>().value = PlayerPrefs.GetFloat("YSensitivity");
-            mouseSmoothSlider.GetComponent<Slider>().value = PlayerPrefs.GetFloat("MouseSmoothing");
+            //mouseSmoothSlider.GetComponent<Slider>().value = PlayerPrefs.GetFloat("MouseSmoothing");
+            _inputActionAsset.FindAction("LookAround")
+                .ApplyParameterOverride("scaleVector2:x", (float)(0.1 * sensitivityXSlider.GetComponent<Slider>().value));
 
             // check full screen
             if (Screen.fullScreen == true)
@@ -250,7 +256,7 @@ namespace SlimUI.ModernMenu
             //sliderValue = musicSlider.GetComponent<Slider>().value;
             sliderValueXSensitivity = sensitivityXSlider.GetComponent<Slider>().value;
             sliderValueYSensitivity = sensitivityYSlider.GetComponent<Slider>().value;
-            sliderValueSmoothing = mouseSmoothSlider.GetComponent<Slider>().value;
+            //sliderValueSmoothing = mouseSmoothSlider.GetComponent<Slider>().value;
         }
 
         public void FullScreen()
