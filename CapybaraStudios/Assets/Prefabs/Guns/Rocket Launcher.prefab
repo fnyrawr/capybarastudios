@@ -131,6 +131,7 @@ MonoBehaviour:
   gunSound: {fileID: 8888644364764015516}
   reloadSound: {fileID: 8540068806897639622}
   pickupSound: {fileID: 7425526843762842009}
+  scopeSound: {fileID: 0}
   damage: 0
   initialSpread: 0
   maxSpread: 0
@@ -140,6 +141,7 @@ MonoBehaviour:
   timeBetweenShooting: 1
   distanceModifier: 0
   damageFalloffStart: 0
+  singleReload: 0
   maxAmmo: 10
   magazineSize: 1
   bulletsPerTap: 1
@@ -172,7 +174,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePoint: {fileID: 1773712427696635919}
   rocket: {fileID: 1559698944973560897, guid: 5cc65ce490fa87d4b88bdf20af43eced, type: 3}
-  range: 40
+  knockbackForce: 200
+  range: 50
 --- !u!54 &1773712428791678989
 Rigidbody:
   m_ObjectHideFlags: 0
