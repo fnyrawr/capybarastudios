@@ -12,6 +12,7 @@ public class HUDcontroller : MonoBehaviour
     public GameObject gameUI;
     public GameObject tabMenuUI;
 
+    private bool tab;
 
     void Start()
     {
@@ -35,6 +36,7 @@ public class HUDcontroller : MonoBehaviour
 
     public void Tab()
     {
+        print("aa");
         if (!_gameIsPaused)
         {
             tabMenuUI.SetActive(tabMenuUI.activeSelf);

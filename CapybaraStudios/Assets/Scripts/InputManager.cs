@@ -14,8 +14,11 @@ public class InputManager : MonoBehaviour
     private PlayerInput playerInput;
     public PlayerInput.WalkingActions walking;
     public PlayerInput.ShootingActions shooting;
+    public PlayerInput.UIActions ui;
     private PlayerMovement movement;
     private GunScript gun;
+    private HUDcontroller hud;
+
 
     void Awake()
     {
@@ -29,9 +32,10 @@ public class InputManager : MonoBehaviour
 
         walking = playerInput.Walking;
         shooting = playerInput.Shooting;
+        ui = playerInput.UI;
 
         gun = GetComponent<GunScript>();
-
+        hud = GetComponentInChildren<HUDcontroller>();
 
         shooting.Special.started += ctx => gun.StartSpecial();
         shooting.Special.canceled += ctx => gun.StopSpecial();
@@ -48,6 +52,10 @@ public class InputManager : MonoBehaviour
         shooting.EquipUtility.performed += ctx => equip(3);
 
         shooting.Drop.performed += ctx => gun.EjectGun();
+
+        ui.Tab.started += ctx => hud.Tab();
+        ui.Tab.canceled += ctx => hud.Tab();
+        //ui.Pause.performed += ctx => hud.DoPause();
     }
 
     private void OnEnable()
@@ -69,6 +77,7 @@ public class InputManager : MonoBehaviour
 
         walking.Enable();
         shooting.Enable();
+        ui.Enable();
     }
 
     private void OnDisable()
@@ -90,6 +99,7 @@ public class InputManager : MonoBehaviour
 
         walking.Disable();
         shooting.Disable();
+        ui.Disable();
     }
 
     private void SetMove(InputAction.CallbackContext ctx)
