@@ -11,8 +11,7 @@ public class HUDcontroller : MonoBehaviour
     public GameObject deathMenuUI;
     public GameObject gameUI;
     public GameObject tabMenuUI;
-
-
+    [SerializeField] InputManager _input;
     void Start()
     {
         InputSystem.settings.updateMode = InputSettings.UpdateMode.ProcessEventsInFixedUpdate;
@@ -23,7 +22,7 @@ public class HUDcontroller : MonoBehaviour
     public void DoPause()
     {
         if (_gameIsPaused)
-        {
+        {   
             Resume();
         }
         else
@@ -37,7 +36,7 @@ public class HUDcontroller : MonoBehaviour
     {
         if (!_gameIsPaused)
         {
-            tabMenuUI.SetActive(tabMenuUI.activeSelf);
+            tabMenuUI.SetActive(!tabMenuUI.activeSelf);
         }
     }
 
@@ -68,6 +67,7 @@ public class HUDcontroller : MonoBehaviour
 
     public void Resume()
     {
+        _input.Resume();
         Cursor.lockState = CursorLockMode.Locked;
         InputSystem.settings.updateMode = InputSettings.UpdateMode.ProcessEventsInFixedUpdate;
         //TODO if bedingung, nur wenn Singleplayer, dann timeScale

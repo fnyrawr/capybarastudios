@@ -10231,6 +10231,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6264766755546122309}
     m_Modifications:
+    - target: {fileID: 1573688541383256880, guid: 3e50cfeb74ac19c48a5755ff0ee9ebf5, type: 3}
+      propertyPath: _input
+      value: 
+      objectReference: {fileID: 7737243822893930890}
     - target: {fileID: 6200645919887426448, guid: 3e50cfeb74ac19c48a5755ff0ee9ebf5, type: 3}
       propertyPath: m_Name
       value: HUD
