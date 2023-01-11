@@ -20,6 +20,16 @@ public class InputManager : MonoBehaviour
     void Awake()
     {
         playerInput = new PlayerInput();
+        var rebinds = PlayerPrefs.GetString("rebinds", string.Empty);
+
+        if (!string.IsNullOrEmpty(rebinds))
+        {
+            //playerInput.LoadBindingOverridesFromJson(rebinds);
+        }
+        foreach (var inputBinding in playerInput.FindAction("LookAround").bindings)
+        {
+            print(inputBinding.effectivePath);
+        }
         walking = playerInput.Walking;
         shooting = playerInput.Shooting;
         gun = GetComponent<GunScript>();
