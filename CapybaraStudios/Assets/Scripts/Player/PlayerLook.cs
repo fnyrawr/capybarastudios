@@ -25,8 +25,8 @@ public class PlayerLook : MonoBehaviour
     {
         height = camera.transform.position.y;
         currheight = height;
-        xSensitivity *= PlayerPrefs.GetFloat("XSensitivity");
-        ySensitivity *= PlayerPrefs.GetFloat("XSensitivity");
+        xSensitivity *= PlayerPrefs.GetFloat("XSensitivity",1);
+        ySensitivity *= PlayerPrefs.GetFloat("XSensitivity",1);
     }
 
     void FixedUpdate()

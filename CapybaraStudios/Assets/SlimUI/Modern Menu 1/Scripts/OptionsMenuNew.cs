@@ -82,11 +82,12 @@ namespace SlimUI.ModernMenu
             // check slider values
             musicSlider.GetComponent<Slider>().value = PlayerPrefs.GetFloat("MusicVolume");
             soundSlider.GetComponent<Slider>().value = PlayerPrefs.GetFloat("SFXVolume");
-            sensitivityXSlider.GetComponent<Slider>().value = PlayerPrefs.GetFloat("XSensitivity");
-            sensitivityYSlider.GetComponent<Slider>().value = PlayerPrefs.GetFloat("YSensitivity");
+            sensitivityXSlider.GetComponent<Slider>().value = PlayerPrefs.GetFloat("XSensitivity", 1f);
+            sensitivityYSlider.GetComponent<Slider>().value = PlayerPrefs.GetFloat("YSensitivity", 1f);
             //mouseSmoothSlider.GetComponent<Slider>().value = PlayerPrefs.GetFloat("MouseSmoothing");
             _inputActionAsset.FindAction("LookAround")
-                .ApplyParameterOverride("scaleVector2:x", (float)(0.1 * sensitivityXSlider.GetComponent<Slider>().value));
+                .ApplyParameterOverride("scaleVector2:x",
+                    (float)(0.1 * sensitivityXSlider.GetComponent<Slider>().value));
 
             // check full screen
             if (Screen.fullScreen == true)
