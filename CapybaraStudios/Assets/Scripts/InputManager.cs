@@ -14,9 +14,9 @@ public class InputManager : MonoBehaviour
     private PlayerInput playerInput;
     public PlayerInput.WalkingActions walking;
     public PlayerInput.ShootingActions shooting;
-
     private PlayerMovement movement;
     private GunScript gun;
+
     void Awake()
     {
         playerInput = new PlayerInput();
@@ -24,15 +24,14 @@ public class InputManager : MonoBehaviour
 
         if (!string.IsNullOrEmpty(rebinds))
         {
-            //playerInput.LoadBindingOverridesFromJson(rebinds);
+            playerInput.LoadBindingOverridesFromJson(rebinds);
         }
-        foreach (var inputBinding in playerInput.FindAction("LookAround").bindings)
-        {
-            print(inputBinding.effectivePath);
-        }
+
         walking = playerInput.Walking;
         shooting = playerInput.Shooting;
+
         gun = GetComponent<GunScript>();
+
 
         shooting.Special.started += ctx => gun.StartSpecial();
         shooting.Special.canceled += ctx => gun.StopSpecial();

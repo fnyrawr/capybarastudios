@@ -1,13 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class HUDcontroller : MonoBehaviour
 {
-    public static bool GameIsPaused = false;
+    private static bool _gameIsPaused = false;
 
     public GameObject pauseMenuUI;
     public GameObject deathMenuUI;
@@ -21,28 +19,25 @@ public class HUDcontroller : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (GameIsPaused)
-            {
-                Resume();
-            }
-            else
-            {
-                Pause();
-            }
-        }
 
-        if (Input.GetKey(KeyCode.Tab))
+    public void DoPause()
+    {
+        if (_gameIsPaused)
         {
-            tabMenuUI.SetActive(true);
+            Resume();
         }
         else
         {
             tabMenuUI.SetActive(false);
+            Pause();
+        }
+    }
+
+    public void Tab()
+    {
+        if (!_gameIsPaused)
+        {
+            tabMenuUI.SetActive(tabMenuUI.activeSelf);
         }
     }
 
@@ -77,7 +72,7 @@ public class HUDcontroller : MonoBehaviour
         InputSystem.settings.updateMode = InputSettings.UpdateMode.ProcessEventsInFixedUpdate;
         //TODO if bedingung, nur wenn Singleplayer, dann timeScale
         Time.timeScale = 1;
-        GameIsPaused = false;
+        _gameIsPaused = false;
         pauseMenuUI.SetActive(false);
         gameUI.SetActive(true);
     }
@@ -90,7 +85,7 @@ public class HUDcontroller : MonoBehaviour
         //TODO if bedingung, nur wenn Singleplayer, dann timeScale
         InputSystem.settings.updateMode = InputSettings.UpdateMode.ProcessEventsInDynamicUpdate;
         Time.timeScale = 0f;
-        GameIsPaused = true;
+        _gameIsPaused = true;
     }
 
     public void LoadMenu()
