@@ -11,7 +11,7 @@ public class InputManager : MonoBehaviour
     public bool SprintInput { get; private set; } = false;
     public bool CrouchInput { get; private set; } = false;
 
-    private PlayerInput playerInput;
+    public PlayerInput playerInput;
     public PlayerInput.WalkingActions walking;
     public PlayerInput.ShootingActions shooting;
     public PlayerInput.UIActions ui;
@@ -138,5 +138,16 @@ public class InputManager : MonoBehaviour
     private void equip(int index)
     {
         gun.EquipWeapon(index);
+    }
+
+    public void RebindKey()
+    {
+        ui.Tab.started -= ctx => hud.Tab();
+        ui.Tab.canceled -= ctx => hud.Tab();
+        ui.Pause.performed -= ctx => Pause();
+        OnDisable();
+        
+        Awake();
+        OnEnable();
     }
 }

@@ -1,73 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class KeyLabeler : MonoBehaviour
 {
-    /**public InputActionAsset playerInput;
-    public string action;
-    public int index = 0;
-    public InputBinding ib;
-
-    public void Start()
-    {
-        getLabel();
-    }
-
-    public void OnEnable()
-    {
-        getLabel();
-    }
-
-
-    public static InputBinding getBinding(InputActionAsset actionAsset, string action, int index)
-    {
-        var tmp = 0;
-        foreach (var playerInputActionMap in actionAsset.actionMaps)
-        {
-            foreach (var inputBinding in playerInputActionMap.bindings)
-            {
-                //print(inputBinding);
-                if (inputBinding.ToString().Contains(action))
-                {
-                    if (tmp index)
-                    {
-                        tmp++;
-                        continue;
-                    }
-
-                    return inputBinding;
-                }
-            }
-        }
-
-        return new InputBinding();
-    }
-
-    public void getLabel()
-    {
-        var inputBinding = getBinding(playerInput, action, index);
-        GetComponentTextMeshPro>().text = inputBinding.path.Split("/")[1].ToUpper();
-        ib = inputBinding;
-    }**/
-    [SerializeField] private InputActionReference action = null;
-
+    [SerializeField] private InputActionReference action;
+    [SerializeField] private GameObject waitingForInputObject;
     [SerializeField] private int index;
-    private TMP_Text bindingDisplayNameText = null;
-
-    //[SerializeField] private GameObject startRebindObject = null;
-    [SerializeField] private GameObject waitingForInputObject = null;
-
-    private InputActionRebindingExtensions.RebindingOperation rebindingOperation;
-
-    private const string RebindsKey = "rebinds";
+    private TMP_Text _bindingDisplayNameText;
+    private InputActionRebindingExtensions.RebindingOperation _rebindingOperation;
 
     private void Start()
     {
-        bindingDisplayNameText = GetComponentInChildren<TMP_Text>();
+        _bindingDisplayNameText = GetComponentInChildren<TMP_Text>();
         Label();
     }
 
@@ -79,28 +24,42 @@ public class KeyLabeler : MonoBehaviour
     public void StartRebinding()
     {
         waitingForInputObject.SetActive(true);
-
-        rebindingOperation = KeyMapper.playerInput.FindAction(action.name).PerformInteractiveRebinding(index)
+        KeyMapper.playerInput.FindAction(action.name).Disable();
+        _rebindingOperation = KeyMapper.playerInput.FindAction(action.name).PerformInteractiveRebinding(index)
             .WithControlsExcluding("Mouse")
             .OnMatchWaitForAnother(0.1f)
-            .OnComplete(operation => RebindComplete())
+            .OnComplete(_ => RebindComplete())
             .Start();
     }
 
     private void RebindComplete()
     {
-        bindingDisplayNameText.text = InputControlPath.ToHumanReadableString(
+        _bindingDisplayNameText.text = InputControlPath.ToHumanReadableString(
             KeyMapper.playerInput.FindAction(action.name).bindings[index].effectivePath,
             InputControlPath.HumanReadableStringOptions.OmitDevice);
 
-        rebindingOperation.Dispose();
+        _rebindingOperation.Dispose();
         Save();
+        KeyMapper.playerInput.FindAction(action.name).Enable();
         waitingForInputObject.SetActive(false);
+        NotifyInputManager();
+    }
+
+    public void NotifyInputManager()
+    {
+        var inputManager = transform.root.GetComponent<InputManager>();
+        if (inputManager)
+        {
+            inputManager.RebindKey();
+        }
     }
 
     public void Label()
     {
-        bindingDisplayNameText.text = InputControlPath.ToHumanReadableString(
+        print(InputControlPath.ToHumanReadableString(
+            KeyMapper.playerInput.FindAction(action.name).bindings[index].effectivePath,
+            InputControlPath.HumanReadableStringOptions.OmitDevice));
+        _bindingDisplayNameText.text = InputControlPath.ToHumanReadableString(
             KeyMapper.playerInput.FindAction(action.name).bindings[index].effectivePath,
             InputControlPath.HumanReadableStringOptions.OmitDevice);
     }
