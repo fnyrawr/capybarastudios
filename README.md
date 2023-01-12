@@ -8,12 +8,12 @@ Unity Version
 - [ ] Multiplayer
   - [x] movement
   - [x] kamera
+  - [x] Players sollen unterschiedliche Farben haben
   - [ ] dmg
   - [ ] rocketlauncher
   - [ ] dying
   - [ ] respawning
   - [ ] Name aus Menü soll über dem Kopf angezeigt werden
-  - [ ] Players sollen unterschiedliche Farben haben 
   - [ ] connect to lobby by code with relay
   - [ ] TabMenü für den Multiplayer
   - [ ] Sounds
@@ -26,8 +26,8 @@ Unity Version
   - [ ] Namen ändern in Settings
   - [ ] alle Optionen im Menü funktionieren
     - [x] Soundmanager
-    - [ ] Controls 
-      - [ ] mindestens Maussenstivität einstellbar
+    - [x] Controls 
+      - [x] mindestens Maussenstivität einstellbar
     - [ ] Video Funktionen einbauen
 
 - [ ] Maps
@@ -40,6 +40,8 @@ Unity Version
 - [ ] Waffen
   - [ ] Granadelauncher
   - [ ] Rocketlauncher
+  - [ ] fliegender Geschützturm
+  - [ ] stehender Geschützturm
 
 - [ ] Sounds
   - [ ] Schritte
