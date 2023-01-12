@@ -23,9 +23,9 @@ public class KeyMapper : MonoBehaviour
         else
         {
             playerInput = new PlayerInput();   
+            var rebinds = PlayerPrefs.GetString("rebinds", string.Empty);
+            playerInput.LoadBindingOverridesFromJson(rebinds);
         }
-        var rebinds = PlayerPrefs.GetString("rebinds", string.Empty);
-        //playerInput.LoadBindingOverridesFromJson(rebinds);
     }
 
     public static void SaveRebinds()
