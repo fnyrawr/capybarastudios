@@ -1,4 +1,6 @@
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -11,18 +13,25 @@ public class HUDcontroller : MonoBehaviour
     public GameObject deathMenuUI;
     public GameObject gameUI;
     public GameObject tabMenuUI;
+    public GameObject settingsMenuUI;
     [SerializeField] InputManager _input;
+
     void Start()
     {
         InputSystem.settings.updateMode = InputSettings.UpdateMode.ProcessEventsInFixedUpdate;
         Cursor.lockState = CursorLockMode.Locked;
+        pauseMenuUI.SetActive(false);
+        deathMenuUI.SetActive(false);
+        gameUI.SetActive(true);
+        tabMenuUI.SetActive(false);
+        settingsMenuUI.SetActive(false);
     }
 
 
     public void DoPause()
     {
         if (_gameIsPaused)
-        {   
+        {
             Resume();
         }
         else
@@ -42,10 +51,11 @@ public class HUDcontroller : MonoBehaviour
 
     public void Death()
     {
-        deathMenuUI.GetComponent<CanvasGroup>().alpha = 0;
+        tabMenuUI.SetActive(false);
         deathMenuUI.SetActive(true);
         gameUI.SetActive(false);
-        StartCoroutine(DeathFadein(1500));
+        Cursor.lockState = CursorLockMode.None;
+        InputSystem.settings.updateMode = InputSettings.UpdateMode.ProcessEventsInDynamicUpdate;
     }
 
 
@@ -79,8 +89,9 @@ public class HUDcontroller : MonoBehaviour
 
     public void Pause()
     {
-        pauseMenuUI.SetActive(true);
+        tabMenuUI.SetActive(false);
         gameUI.SetActive(false);
+        pauseMenuUI.SetActive(true);
         Cursor.lockState = CursorLockMode.None;
         //TODO if bedingung, nur wenn Singleplayer, dann timeScale
         InputSystem.settings.updateMode = InputSettings.UpdateMode.ProcessEventsInDynamicUpdate;
@@ -98,7 +109,11 @@ public class HUDcontroller : MonoBehaviour
 
     public void QuitGame()
     {
-        Application.Quit();
+        #if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+        #else
+				Application.Quit();
+        #endif
     }
 
     public void Respawn()
