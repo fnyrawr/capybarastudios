@@ -8,16 +8,24 @@ public class KeyMapper : MonoBehaviour
 {
     public static PlayerInput playerInput;
 
-    private void Awake()
+    public void Awake()
     {
-        playerInput = new PlayerInput();
         LoadRebinds();
     }
 
     private static void LoadRebinds()
     {
-        var rebinds = PlayerPrefs.GetString("rebinds", string.Empty);
-        playerInput.LoadBindingOverridesFromJson(rebinds);
+        var tmp = FindObjectOfType<InputManager>();
+        if (tmp)
+        {
+            playerInput = tmp.playerInput;
+        }
+        else
+        {
+            playerInput = new PlayerInput();   
+            var rebinds = PlayerPrefs.GetString("rebinds", string.Empty);
+            playerInput.LoadBindingOverridesFromJson(rebinds);
+        }
     }
 
     public static void SaveRebinds()
@@ -34,6 +42,14 @@ public class KeyMapper : MonoBehaviour
         foreach (var keyLabeler in FindObjectsOfType<KeyLabeler>())
         {
             keyLabeler.Label();
+        }
+
+        try
+        {
+            FindObjectsOfType<KeyLabeler>()[0].NotifyInputManager();
+        }
+        catch (Exception _)
+        {
         }
     }
 }
